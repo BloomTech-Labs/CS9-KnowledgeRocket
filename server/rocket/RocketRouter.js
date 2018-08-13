@@ -11,7 +11,7 @@ router
             res.status(200).json(exp);
         })
         .catch(err => {
-            res.status(500).json({ errorMessage: "The Category information could not be retrieved." })
+            res.status(500).json({ errorMessage: "There was an error in GET" })
         });
     }
 
