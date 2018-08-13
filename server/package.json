@@ -4,7 +4,7 @@
   "description": "message-rocket-lab-project",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "cross-env NODE_ENV=test jest --watch --verbose"
   },
   "jest": {
