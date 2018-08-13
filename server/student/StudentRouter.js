@@ -16,6 +16,9 @@ router
     }
 
     function post(req, res) {
+        const email = req.body.email
+        let regVar = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (regVar.test(email)){
         const student = new Student(req.body);
         student
           .save()
@@ -24,7 +27,11 @@ router
           })
           .catch(err => {
               res.status(500).json({ message: 'There was an error in POST for Student'})
-          });  
+          });
+        }
+        else {
+            res.json({ errorMessage: 'email pattern incorrect' })
+        }  
     } 
 
 
