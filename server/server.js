@@ -1,6 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
 
+const StudentRouter = require('./student/StudentRouter');
+
 const mongoose = require('mongoose');
 mongoose 
   .connect('mongodb://localhost:27017/knrtestdb', {useNewUrlParser: true})//Whatever mongo db database we use will go here
@@ -15,6 +17,8 @@ const server = express();
 
 server.use(helmet());
 server.use(express.json());
+
+server.user('/api/Student', StudentRouter);
 
 server.get('/', (req, res) => {
     res.status(200).json({ api: 'running' });
