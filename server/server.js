@@ -3,7 +3,7 @@ const helmet = require('helmet');
 
 const mongoose = require('mongoose');
 mongoose 
-  .connect('f')//Whatever mongo db database we use will go here
+  .connect('mongodb://localhost:27017/knrtestdb', {useNewUrlParser: true})//Whatever mongo db database we use will go here
   .then(mongo => {
     console.log('mongo server working')
   })
