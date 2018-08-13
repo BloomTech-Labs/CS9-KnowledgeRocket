@@ -1,0 +1,35 @@
+<h1>Knowledge Rockets Front-End Specification</h1>
+
+<h2>Description</h2>
+
+<p>This is the specification for the Knowledge Rockets front-end client. Click here to see the specification for the back-end. Click here to see the project's general information.</p>
+
+<h2>Getting Started</h2>
+<p>These instructions will get you a copy of the project on your local machine for development and testing purposes.</p>
+
+<h3>Prerequisites</h3>
+<p>The following are the dependencies you will need: </p>
+
+```
+axios
+enzyme
+jest
+material-ui
+react
+react-dom
+react-redux
+react-router-dom
+react-scripts
+redux
+redux-promise
+redux-logger
+```
+
+<h3>Installation</h3>
+<p>Use yarn or npm to install all the development dependencies used in this project.</p>
+
+```yarn install``` or ```npm install```
+
+<h2>Tests</h2>
+
+<h2>Views</h2>
