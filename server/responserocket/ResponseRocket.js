@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const Email = mongoose.Schema({
+const ResponseRocket = mongoose.Schema({
     questionId: { type: ObjectId, ref: 'Question' },
     // By Default: Null value for each student.
     // Update it to an object with choice and date once submitted.
@@ -11,4 +11,4 @@ const Email = mongoose.Schema({
     sent: {type: Number, default: 0}
 });
 
-module.exports = mongoose.model('Email', Email);
+module.exports = mongoose.model('ResponseRocket', ResponseRocket);
