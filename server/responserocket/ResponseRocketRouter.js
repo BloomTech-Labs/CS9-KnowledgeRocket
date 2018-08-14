@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Question = require('./Question');
+const ResponseRocket = require('./ResponseRocket');
 
 router
     .route('/')
@@ -7,7 +7,7 @@ router
     .post(post)
 
     function get(req, res) {
-        Question.find().then(exp => {
+        ResponseRocket.find().then(exp => {
             res.status(200).json(exp);
         })
         .catch(err => {
@@ -17,8 +17,8 @@ router
 
 
     function post(req, res) {
-        const question = new Question(req.body);
-        question
+        const responseRocket = new ResponseRocket(req.body);
+        responseRocket
           .save()
           .then(stuff => {
               res.status(201).json(stuff);
