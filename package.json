@@ -21,10 +21,5 @@
   "bugs": {
     "url": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket/issues"
   },
-  "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme",
-  "dependencies": {
-    "passport-facebook": "^2.1.1",
-    "passport-google-auth": "^1.0.2",
-    "passport-twitter": "^1.0.4"
-  }
+  "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme"
 }

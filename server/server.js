@@ -11,9 +11,10 @@ const RocketRouter = require("./rocket/RocketRouter");
 const ResponseRocketRouter = require("./responserocket/ResponseRocketRouter");
 const QuestionRouter = require("./question/QuestionRouter");
 const CohortRouter = require("./cohort/CohortRouter");
-const RegisterRouter = require("./register/registerRouter");
-const LoginRouter = require("./login/loginRouter");
-const LogoutRouter = require("./logout/logoutRouter");
+const FacebookRouter = require("./auth/FacebookRouter");
+
+// Models
+const User = require("./user/User");
 
 mongoose
 	.connect(mongoURL, { useNewUrlParser: true }) //Whatever mongo db database we use will go here
@@ -30,15 +31,24 @@ server.use(helmet());
 server.use(express.json());
 server.use(express.static("../client/build/"));
 
+// used to serialize the user for the session
+passport.serializeUser(function(user, done) {
+	done(null, user.id);
+});
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+		done(err, user);
+	});
+});
+
 server.use("/api/student", StudentRouter);
 server.use("/api/rocket", RocketRouter);
 server.use("/api/user", UserRouter);
 server.use("/api/responserocket", ResponseRocketRouter);
 server.use("/api/question", QuestionRouter);
 server.use("/api/cohort", CohortRouter);
-server.use("/api/register", RegisterRouter);
-server.use("/api/login", LoginRouter);
-server.use("/api/logout", LogoutRouter);
 
 if (process.env.NODE_ENV !== "test") {
 	server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
