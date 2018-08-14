@@ -31,7 +31,6 @@ server.use(helmet());
 server.use(express.json());
 server.use(express.static("../client/build/"));
 
-<<<<<<< HEAD
 server.use('/api/student', StudentRouter);
 server.use('/api/auth/', AuthRouter);
 server.use('/api/rocket', RocketRouter);
@@ -39,14 +38,6 @@ server.use('/api/user', UserRouter);
 server.use('/api/responserocket', ResponseRocketRouter);
 server.use('/api/question', QuestionRouter);
 server.use('/api/cohort', CohortRouter);
-=======
-server.use("/api/student", StudentRouter);
-server.use("/api/rocket", RocketRouter);
-server.use("/api/user", UserRouter);
-server.use("/api/responserocket", ResponseRocketRouter);
-server.use("/api/question", QuestionRouter);
-server.use("/api/cohort", CohortRouter);
->>>>>>> 726f9e049c68bbaafaee0bc6336588c9bd14133b
 
 server.get("/", (req, res) => {
 	res.status(200).json({ api: "running" });
