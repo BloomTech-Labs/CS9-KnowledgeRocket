@@ -30,6 +30,20 @@ redux-logger
 
 ```yarn install``` or ```npm install```
 
+<p>Check to see the project has compiled successfully:</p>
+
+```yarn start```
+
+<p>Open the project locally with the url described as Local</p>
+
 <h2>Tests</h2>
+<p>This project uses the jest and enzyme testing suites. All client-side tests can be found in the tests directory.</p>
+
+<p>Run all tests within client/tests using: </p>
+
+```yarn test``` or ```jest```
 
 <h2>Views</h2>
+
+
+
