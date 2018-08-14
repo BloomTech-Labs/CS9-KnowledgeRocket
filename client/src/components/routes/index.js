@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import Dummy from '../dummy/dummy';
+import Home from '../Home/Home';
 import NavBar from '../NavBar/NavBar';
 import ControlPanel from '../ControlPanel/ControlPanel';
 
