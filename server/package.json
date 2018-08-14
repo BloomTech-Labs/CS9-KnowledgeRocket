@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "test:once": "cross-env NODE_ENV=test jest --verbose",
     "test": "cross-env NODE_ENV=test jest --watch --verbose"
   },
   "jest": {

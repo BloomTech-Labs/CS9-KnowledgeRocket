@@ -1,0 +1,24 @@
+.Home_Button {
+    background-color: rgb(135, 206, 235);
+    
+}
+
+.Home_ButtonDiv {
+    display: flex;
+    flex-flow: row-reverse;
+    background-color: rgba(255, 255, 255, 0);
+    margin-bottom: -18px;
+}
+
+.Home_Banner {
+    position: absolute;
+    z-index: -1;
+}
+
+.Home_Content {
+
+}
+
+.Home_Bottom {
+    
+}
