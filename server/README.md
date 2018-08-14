@@ -28,3 +28,4 @@ supertest,
 
 <h2>Tests</h2>
 <p>This project uses the jest and supertest testing suites. All server-side tests can be found in the tests directory.</p>
+```yarn test```
