@@ -11,7 +11,6 @@ const RocketRouter = require("./rocket/RocketRouter");
 const ResponseRocketRouter = require("./responserocket/ResponseRocketRouter");
 const QuestionRouter = require("./question/QuestionRouter");
 const CohortRouter = require("./cohort/CohortRouter");
-const FacebookRouter = require("./auth/FacebookRouter");
 
 mongoose
 	.connect(mongoURL, { useNewUrlParser: true }) //Whatever mongo db database we use will go here
