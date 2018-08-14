@@ -6,6 +6,11 @@ const port = process.env.PORT || 5000;
 const mongoURL = process.env.Database_Url;
 // Import Models Here
 const StudentRouter = require('./student/StudentRouter');
+const UserRouter = require('./user/UserRouter');
+const RocketRouter = require('./rocket/RocketRouter');
+const ResponseRocketRouter = require('./responserocket/ResponseRocketRouter');
+const QuestionRouter = require('./question/QuestionRouter');
+const CohortRouter = require('./cohort/CohortRouter');
 
 mongoose
   .connect(mongoURL, { useNewUrlParser: true })//Whatever mongo db database we use will go here
@@ -22,10 +27,17 @@ server.use(helmet());
 server.use(express.json());
 
 server.use('/api/student', StudentRouter);
+server.use('/api/rocket', RocketRouter);
+server.use('/api/user', UserRouter);
+server.use('/api/responserocket', ResponseRocketRouter);
+server.use('/api/question', QuestionRouter);
+server.use('/api/cohort', CohortRouter);
 
 server.get('/', (req, res) => {
   res.status(200).json({ api: 'running' });
 });
 
-
+if(process.env.NODE_ENV !== 'test') {
 server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
+}
+module.exports = server
