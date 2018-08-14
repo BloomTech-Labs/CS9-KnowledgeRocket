@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const port = process.env.PORT || 5000;
 //               process.env if it exists OR local version for testing offline.
 const mongoURL = process.env.Database_Url || 'mongodb://127.0.0.1/knowledgerocket';
@@ -25,6 +26,7 @@ mongoose
 
 const server = express();
 
+server.use(cors());
 server.use(helmet());
 server.use(express.json());
 server.use(express.static('../client/build/'));

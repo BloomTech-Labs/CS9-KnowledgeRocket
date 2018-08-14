@@ -2,7 +2,6 @@ const router = require('express').Router();
 const Firebase = require('firebase');
 const { FIREBASE_CONFIG } = require('../config');
 let init_firebase;
-const mongoose = require('mongoose');
 const UserModel = require('../user/User');
 
 // Init FB App if none exsists
@@ -28,7 +27,7 @@ function post(req, res) {
                 const email = response.user.email;             
                 response.user.getIdToken()
                     .then(token => {
-                        console.log('idToken:', token);
+                        // console.log('idToken:', token);
                         res.json({ email, uid, token });
                     })
                 //handleAuthenticated();
@@ -50,7 +49,7 @@ function post(req, res) {
                 const email = response.user.email;
                 response.user.getIdToken()
                     .then(token => {
-                        console.log('idToken:', token);
+                        // console.log('idToken:', token);
                         UserModel.create({ email, uid, token }).then(u => console.log(u));
                         res.json({ email, uid, token });
                     })

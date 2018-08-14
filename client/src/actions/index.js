@@ -10,6 +10,9 @@ export const GET_ROCKETS = 'GET_ROCKETS';
 export const REMOVE_ROCKET = 'REMOVE_ROCKET';
 export const UPDATE_ROCKET = 'UPDATE_ROCKET';
 
+// User Action Types
+export const ADD_USER = 'ADD_USER';
+
 // Dummy Action to Add Rockets
 export const addRocket = (rocket) => {
     let response = axios.post(`${url}/rocket/add`, rocket)
@@ -19,3 +22,11 @@ export const addRocket = (rocket) => {
     };
 };
 
+// User Actions
+export const addUser = (user) => {
+    let response = axios.post(`${url}/api/auth`, user)
+    return {
+        type: ADD_USER,
+        payload: user
+    }
+}

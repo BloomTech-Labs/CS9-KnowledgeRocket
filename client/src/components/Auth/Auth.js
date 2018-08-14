@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from "firebase";
+import { addUser } from '../../actions';
 
 // Initialize Firebase
 import { FIREBASE_CONFIG } from '../../config';
@@ -16,80 +17,24 @@ class Auth extends Component {
     state = {
         email: '',
         password: '',
-        authenticated: {
-
-        }
-    }
-
-    handleSignUp = (e) => {
-        // console.log(FIREBASE_CONFIG)
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(response => {
-                console.log('response after auth',response);
-                this.handleAuthenticated();
-            })
-            .catch(error => {
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ...
-            });
-    }
-
-    handleSignIn = (e) => {
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then(response => {
-                console.log('response after auth', response);
-                this.handleAuthenticated();
-            })
-            .catch(error => {
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ...
-            });
-    }
-
-    handleAuthenticated = () => {
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in.
-                const displayName = user.displayName;
-                const email = user.email;
-                const emailVerified = user.emailVerified;
-                const photoURL = user.photoURL;
-                const isAnonymous = user.isAnonymous;
-                const uid = user.uid;
-                const providerData = user.providerData;
-                this.setState({ authenticated: { displayName, email, emailVerified, photoURL, isAnonymous, uid, providerData } });
-                console.log('After authenticated User Object: ', user);
-                console.log('\n', 'LoggedInUser: ',
-                    '\n', displayName,
-                    '\n', email,
-                    '\n', emailVerified,
-                    '\n', photoURL,
-                    '\n', isAnonymous,
-                    '\n', uid,
-                    '\n', providerData)
-                // ...
-            } else {
-                // User is signed out.
-                // ...
-            }
-        });
+        authenticated: {}
     }
 
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
+    
+    handleSignUp = (e) => {
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
+            authType: "signup"
+        }
+        this.props.addUser(user);
+    }
 
     render() {
+        console.log(this.props.state)
         return (
             <div>
                 <div className='flex-column-centered'>
@@ -110,5 +55,5 @@ class Auth extends Component {
 }
 
 export default connect(
-    mapStateToProps,
+    mapStateToProps, {addUser}
 )(Auth);
