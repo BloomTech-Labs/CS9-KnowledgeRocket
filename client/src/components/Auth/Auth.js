@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from "firebase";
-import { addUser } from '../../actions';
+import { addUser, loginUser } from '../../actions';
 
 // Initialize Firebase
 import { FIREBASE_CONFIG } from '../../config';
@@ -20,6 +20,10 @@ class Auth extends Component {
         authenticated: {}
     }
 
+    componentDidMount() {
+        this.setState({authenticated: this.props.state.user})
+    }
+
     handleInput = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -33,8 +37,18 @@ class Auth extends Component {
         this.props.addUser(user);
     }
 
+    handleSignIn = (e) => {
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
+            authType: "signin"
+        }
+        this.props.loginUser(user);
+    }
+
     render() {
-        console.log(this.props.state)
+        console.log('props user',this.props.state.user)
+        console.log('state user', this.state.authenticated)
         return (
             <div>
                 <div className='flex-column-centered'>
@@ -55,5 +69,5 @@ class Auth extends Component {
 }
 
 export default connect(
-    mapStateToProps, {addUser}
+    mapStateToProps, { addUser, loginUser}
 )(Auth);

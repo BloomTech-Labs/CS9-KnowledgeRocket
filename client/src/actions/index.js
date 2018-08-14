@@ -12,6 +12,7 @@ export const UPDATE_ROCKET = 'UPDATE_ROCKET';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';
+export const LOGIN_USER = 'LOGIN_USER';
 
 // Dummy Action to Add Rockets
 export const addRocket = (rocket) => {
@@ -25,8 +26,20 @@ export const addRocket = (rocket) => {
 // User Actions
 export const addUser = (user) => {
     let response = axios.post(`${url}/api/auth`, user)
+    console.log(response)
     return {
         type: ADD_USER,
-        payload: user
+        payload: response
+    }
+}
+
+export const loginUser = (user) => async dispatch => {
+    try {
+        let response = axios.post(`${url}/api/auth`, user)
+        console.log('response in loginuser:', response.data)
+        dispatch({ type: LOGIN_USER, payload: response.data });
+    } catch (err) {
+        console.log(err);
+        //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
     }
 }
