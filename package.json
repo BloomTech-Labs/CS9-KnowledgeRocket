@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "test:client": "cd client && npm test && cd ..",
+    "test:client": "cd client && npm run test:once && cd ..",
     "test:server": "cd server && npm run test:once && cd ..",
     "test": "npm run test:client && npm run test:server",
     "install": "cd client && npm i && cd .. && cd server && npm i && cd ..",
