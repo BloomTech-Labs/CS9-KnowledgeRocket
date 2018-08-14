@@ -20,12 +20,13 @@ const server = express();
 
 server.use(helmet());
 server.use(express.json());
+server.use(express.static('../client/build/'));
 
 server.use('/api/student', StudentRouter);
 
-server.get('/', (req, res) => {
-  res.status(200).json({ api: 'running' });
-});
+// server.get('/', (req, res) => {
+//   res.status(200).json({ api: 'running' });
+// });
 
 
 server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
