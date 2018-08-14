@@ -24,7 +24,7 @@ router
               res.status(201).json(stuff);
           })
           .catch(err => {
-              res.status(500).json({ message: 'something happened.'})
+              res.status(500).json({ message: 'There was an error in POST'})
           });
   
     } 
