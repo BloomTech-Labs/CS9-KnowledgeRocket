@@ -9,7 +9,7 @@ export default () => (
         <div className='routeContainer'>
             <Route path='/rocket' component={NavBar} />
             <Route path='/rocket' component={ControlPanel}/>
-            <Route path='/' exact component={Dummy} />            
+            <Route path='/' exact component={Home} />            
         </div>
     </BrowserRouter>
 );
