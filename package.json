@@ -1,5 +1,24 @@
 {
-  "dependencies": {
-    "dotenv": "^6.0.0"
-  }
+  "name": "cs9-knowledgerocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:client": "cd client && npm test && cd ..",
+    "test:server": "cd server && npm test && cd ..",
+    "install": "cd client && npm i && cd .. && cd server && npm i && cd ..",
+    "build:client": "cd client && npm run build && cd ..",
+    "build": "npm run build:client",
+    "start": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket/issues"
+  },
+  "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme"
 }
