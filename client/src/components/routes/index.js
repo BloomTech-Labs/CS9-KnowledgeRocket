@@ -11,7 +11,7 @@ export default () => (
             <Route path='/rocket' component={NavBar} />
             <Route path='/rocket' component={ControlPanel}/>
             <Route path='/' exact component={Dummy} />
-            <Route path='/auth' exact component={Auth} />
+            <Route path='/rocket/auth' exact component={Auth} />
         </div>
     </BrowserRouter>
 );
