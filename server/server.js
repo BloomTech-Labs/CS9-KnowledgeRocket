@@ -13,9 +13,6 @@ const QuestionRouter = require("./question/QuestionRouter");
 const CohortRouter = require("./cohort/CohortRouter");
 const FacebookRouter = require("./auth/FacebookRouter");
 
-// Models
-const User = require("./user/User");
-
 mongoose
 	.connect(mongoURL, { useNewUrlParser: true }) //Whatever mongo db database we use will go here
 	.then(mongo => {
@@ -31,24 +28,16 @@ server.use(helmet());
 server.use(express.json());
 server.use(express.static("../client/build/"));
 
-// used to serialize the user for the session
-passport.serializeUser(function(user, done) {
-	done(null, user.id);
-});
-
-// used to deserialize the user
-passport.deserializeUser(function(id, done) {
-	User.findById(id, function(err, user) {
-		done(err, user);
-	});
-});
-
 server.use("/api/student", StudentRouter);
 server.use("/api/rocket", RocketRouter);
 server.use("/api/user", UserRouter);
 server.use("/api/responserocket", ResponseRocketRouter);
 server.use("/api/question", QuestionRouter);
 server.use("/api/cohort", CohortRouter);
+
+server.get("/", (req, res) => {
+	res.status(200).json({ api: "running" });
+});
 
 if (process.env.NODE_ENV !== "test") {
 	server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
