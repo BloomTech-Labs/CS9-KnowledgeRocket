@@ -3,5 +3,3 @@ node_js:
   - node
 before_script:
   - npm run build
-git:
-  - depth: 3
