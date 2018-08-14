@@ -7,7 +7,7 @@ router
     .post(post)
 
     function get(req, res) {
-        User.find().then(exp => {
+        ResponseRocket.find().then(exp => {
             res.status(200).json(exp);
         })
         .catch(err => {
