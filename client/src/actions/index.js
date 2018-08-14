@@ -24,18 +24,20 @@ export const addRocket = (rocket) => {
 };
 
 // User Actions
-export const addUser = (user) => {
-    let response = axios.post(`${url}/api/auth`, user)
-    console.log(response)
-    return {
-        type: ADD_USER,
-        payload: response
+export const addUser = (user) => async dispatch => {
+    try {
+        let response = await axios.post(`${url}/api/auth`, user)
+        console.log('response in loginuser:', response.data)
+        dispatch({ type: ADD_USER, payload: response.data });
+    } catch (err) {
+        console.log(err);
+        //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
     }
 }
 
 export const loginUser = (user) => async dispatch => {
     try {
-        let response = axios.post(`${url}/api/auth`, user)
+        let response = await axios.post(`${url}/api/auth`, user)
         console.log('response in loginuser:', response.data)
         dispatch({ type: LOGIN_USER, payload: response.data });
     } catch (err) {

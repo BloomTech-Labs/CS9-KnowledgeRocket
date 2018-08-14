@@ -19,7 +19,7 @@ export default (state = defaultState, action) => {
             StateCopy.authenticated = action.payload.true;
             return StateCopy
         case LOGIN_USER:
-            console.log(action.payload)
+            console.log('inside reducers payload',action.payload)
             StateCopy.uid = action.payload.uid;
             StateCopy.email = action.payload.email;
             StateCopy.token = action.payload.token;
