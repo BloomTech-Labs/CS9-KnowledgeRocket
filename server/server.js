@@ -8,6 +8,7 @@ const mongoURL = process.env.Database_Url || 'mongodb://127.0.0.1/knowledgerocke
 // Import Models Here
 const StudentRouter = require('./student/StudentRouter');
 const CohortRouter = require('./cohort/CohortRouter');
+const AuthRouter = require('./auth/AuthRouter');
 
 mongoose
   .connect(mongoURL, { useNewUrlParser: true })//Whatever mongo db database we use will go here
@@ -24,7 +25,8 @@ server.use(helmet());
 server.use(express.json());
 
 server.use('/api/student', StudentRouter);
-server.use('/api/cohort',CohortRouter);
+server.use('/api/cohort', CohortRouter);
+server.use('/api/auth/', AuthRouter);
 
 server.get('/', (req, res) => {
   res.status(200).json({ api: 'running' });

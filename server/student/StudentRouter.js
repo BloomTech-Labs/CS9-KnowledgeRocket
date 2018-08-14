@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Student = require('./Student');
+const Student = require('./Student.js');
 
 router
     .route('/')

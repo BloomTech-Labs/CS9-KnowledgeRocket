@@ -22,12 +22,12 @@ class Auth extends Component {
     }
 
     handleSignUp = (e) => {
-        console.log(FIREBASE_CONFIG)
+        // console.log(FIREBASE_CONFIG)
         firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(response => {
-                console.log(response);
+                console.log('response after auth',response);
                 this.handleAuthenticated();
             })
             .catch(error => {
@@ -44,7 +44,7 @@ class Auth extends Component {
             .auth()
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(response => {
-                console.log(response);
+                console.log('response after auth', response);
                 this.handleAuthenticated();
             })
             .catch(error => {
@@ -68,6 +68,7 @@ class Auth extends Component {
                 const uid = user.uid;
                 const providerData = user.providerData;
                 this.setState({ authenticated: { displayName, email, emailVerified, photoURL, isAnonymous, uid, providerData } });
+                console.log('After authenticated User Object: ', user);
                 console.log('\n', 'LoggedInUser: ',
                     '\n', displayName,
                     '\n', email,
