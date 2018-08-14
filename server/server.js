@@ -3,7 +3,8 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
-const mongoURL = process.env.Database_Url;
+//               process.env if it exists OR local version for testing offline.
+const mongoURL = process.env.Database_Url || 'mongodb://127.0.0.1/knowledgerocket';
 // Import Models Here
 const StudentRouter = require('./student/StudentRouter');
 const CohortRouter = require('./cohort/CohortRouter');
