@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 import "./index.css";
-import mainImg from "../../assets/HomeBanner.svg";
+// import mainImg from "../../assets/HomeBanner.svg";
 
 export default class Home extends Component {
     handleAuthRedirect = e => {
@@ -36,7 +37,7 @@ export default class Home extends Component {
                     <h1>What is a Knowledge Rocket?</h1>
                 </div>{" "}
                 {/* Main Content End */}
-                <div class="Home_Bottom">
+                <div className="Home_Bottom">
                     {" "}
                     {/* Bottom */}
                     <footer>{/* format holding text*/}</footer>
