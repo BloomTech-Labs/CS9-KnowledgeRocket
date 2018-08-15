@@ -1,9 +1,11 @@
 .Home_Button {
-    background-color: rgb(135, 206, 235);
-    
+    background-color: rgba(135, 207, 235, 0.541);
+    border: none;
+    margin-top: 6px;
+    margin-right: 6px;
 }
 
-.Home_ButtonDiv {
+.Home_Button-Div {
     display: flex;
     flex-flow: row-reverse;
     background-color: rgba(255, 255, 255, 0);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './index.css';
-import mainImg from '../../assets/HomeBanner.svg'
 
 export default class Home extends Component {
     handleAuthRedirect = (e) => {
@@ -10,7 +9,7 @@ export default class Home extends Component {
         return (
             <div> {/*container*/}
                 <div className='Home_Banner'> {/* Top */}
-                    <div className='Home_ButtonDiv'>
+                    <div className='Home_Button-Div'>
                         <button className='Home_Button' onClick={this.handleAuthRedirect}>Sign Up</button>
                         <button className='Home_Button' onClick={this.handleAuthRedirect}>Sign In</button>
                     </div>
