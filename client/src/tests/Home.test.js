@@ -46,4 +46,10 @@ describe("<Home />", () => {
 			expect(wrapper.exists(".Home_Content")).toBe(true);
 		});
 	});
+
+	describe("Home Bottom container", () => {
+		it("has a Home_Bottom container", () => {
+			expect(wrapper.exists(".Home_Bottom")).toBe(true);
+		});
+	});
 });
