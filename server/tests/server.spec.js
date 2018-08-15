@@ -25,8 +25,9 @@ describe("server", () => {
         const fakeMail = 'bobtodd@gmail.com';
         const mockUser = {email: 'bobtodd@gmail.com'};
         const createdUser = await User.create(mockUser);
-        const response = await request(server).get('/api/user');
+        const response = await request(server).post('/api/user').send(mockUser);
         expect(createdUser.email).toEqual(fakeMail);
+        expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('users');
         done();
     });
