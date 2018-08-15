@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from "firebase";
+import { Redirect } from 'react-router-dom';
 import { addUser, loginUser } from '../../actions';
+import { Button, Input } from '@material-ui/core';
+import './index.css';
 
 // Initialize Firebase
 import { FIREBASE_CONFIG } from '../../config';
@@ -9,7 +12,7 @@ firebase.initializeApp(FIREBASE_CONFIG);
 
 function mapStateToProps(state) {
     return {
-        state
+        user: state.user
     };
 }
 
@@ -21,7 +24,6 @@ class Auth extends Component {
     }
 
     componentDidMount() {
-        this.setState({authenticated: this.props.state.user})
     }
 
     handleInput = (e) => {
@@ -47,22 +49,20 @@ class Auth extends Component {
     }
 
     render() {
-        console.log('props user',this.props.state.user)
+        console.log('props user',this.props.user)
         console.log('state user', this.state.authenticated)
         return (
-            <div>
+            <div className='Main_container'>
+                <h1 className='Auth_header'>Please Sign-in or Sign-up.</h1>
                 <div className='flex-column-centered'>
-                    <input type='email' name='email' onChange={this.handleInput} />
-                    <input type='password' name='password' onChange={this.handleInput} />
-                    <button onClick={this.handleSignUp}>Sign-Up</button>
-                    <button onClick={this.handleSignIn}>Sign-In</button>
+                    <Input className='Auth_input' type='email' name='email' autoFocus={true} onChange={this.handleInput} />
+                    <Input className='Auth_input' type='password' name='password' onChange={this.handleInput} />
                 </div>
-                <div className='flex-column-centered'>
-                    <div>USER INFORMATION: </div>
-                    <div>email: {this.state.authenticated.email}</div>
-                    <div>uid: {this.state.authenticated.uid}</div>
-                    {/* <div>providerData: {this.state.authenticated.providerData}</div> */}
+                <div className='flex-row-centered'>
+                    <Button className='Auth_button' variant="contained" color="primary" onClick={this.handleSignUp}>Sign-Up</Button>
+                    <Button className='Auth_button' variant="contained" color="primary" onClick={this.handleSignIn}>Sign-In</Button>
                 </div>
+                {this.props.user.authenticated ? <Redirect to='/rocket' /> : null}
             </div>
         );
     }
