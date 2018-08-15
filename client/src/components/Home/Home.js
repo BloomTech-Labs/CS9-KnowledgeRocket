@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './index.css';
 import mainImg from '../../assets/HomeBanner.svg'
 
 export default class Home extends Component {
+    handleAuthRedirect = (e) => {
+        this.props.history.push('/rocket/auth');
+    }
     render() {
         return (
             <div> {/*container*/}
-                <div class='HomeBanner'> {/* Top */}
-                <div class='Home_ButtonDiv'>
-                    <button class='Home_Button'>Sign Up</button>
-                    <button class='Home_Button'>Sign In</button>
-                </div>
-                <img src={mainImg} alt='banner img' class='Home_Banner'></img>
+                <div className='HomeBanner'> {/* Top */}
+                    <div className='Home_ButtonDiv'>
+                        <button className='Home_Button' onClick={this.handleAuthRedirect}>Sign Up</button>
+                        <button className='Home_Button' onClick={this.handleAuthRedirect}>Sign In</button>
+                    </div>
+                    <img src={mainImg} alt='banner img' className='Home_Banner'></img>
                 </div> {/* Top End */}
-                <div class='Home_Content'> {/* Main Content*/}
+                <div className='Home_Content'> {/* Main Content*/}
                     <h1>What is a Knowledge Rocket?</h1>
                 </div> {/* Main Content End */}
                 <div class='Home_Bottom'> {/* Bottom */}
