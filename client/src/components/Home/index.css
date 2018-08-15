@@ -11,7 +11,9 @@
 }
 
 .Home_Banner {
-    position: absolute;
+    background: url('../../assets/HomeBanner.svg') no-repeat center center;
+    width: auto;
+    height: 623px;
     z-index: -1;
 }
 
@@ -20,5 +22,5 @@
 }
 
 .Home_Bottom {
-    
+
 }
