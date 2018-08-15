@@ -39,9 +39,10 @@ server.use('/api/responserocket', ResponseRocketRouter);
 server.use('/api/question', QuestionRouter);
 server.use('/api/cohort', CohortRouter);
 
-server.get("/", (req, res) => {
-	res.status(200).json({ api: "running" });
-});
+// Remove for Deployment
+// server.get("/", (req, res) => {
+// 	res.status(200).json({ api: "running" });
+// });
 
 if (process.env.NODE_ENV !== "test") {
 	server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
