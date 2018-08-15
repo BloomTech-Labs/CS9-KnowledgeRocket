@@ -9,7 +9,7 @@ describe("server", () => {
     beforeAll(() => {
         return mongoose
             .connect(testdb)
-            .then(console.log("connected to test db"));
+            .then(console.log("connected to test dbb"));
     });
 
     afterAll(() => {
