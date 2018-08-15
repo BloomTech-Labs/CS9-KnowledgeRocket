@@ -1,4 +1,4 @@
-import { LOGIN_USER, ADD_USER } from '../actions';
+import { LOGIN_USER, ADD_USER, LOGOUT_USER } from '../actions';
 
 const defaultState = {
     // Initialize Students Redux State/Store Portion Here
@@ -16,15 +16,16 @@ export default (state = defaultState, action) => {
             StateCopy.uid = action.payload.uid;
             StateCopy.email = action.payload.email;
             StateCopy.token = action.payload.token;
-            StateCopy.authenticated = action.payload.true;
-            return StateCopy
+            StateCopy.authenticated = true;
+            return StateCopy;
         case LOGIN_USER:
-            console.log('inside reducers payload',action.payload)
             StateCopy.uid = action.payload.uid;
             StateCopy.email = action.payload.email;
             StateCopy.token = action.payload.token;
-            StateCopy.authenticated = action.payload.true;
-            return StateCopy
+            StateCopy.authenticated = true;
+            return StateCopy;
+        case LOGOUT_USER:
+            return defaultState;
         default:
             return state;
     }

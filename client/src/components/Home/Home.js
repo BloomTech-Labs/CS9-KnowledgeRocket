@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from '@material-ui/core';
 import './index.css';
 
 export default class Home extends Component {
@@ -17,7 +18,7 @@ export default class Home extends Component {
                 <div className='Home_Content'> {/* Main Content*/}
                     <h1>What is a Knowledge Rocket?</h1>
                 </div> {/* Main Content End */}
-                <div class='Home_Bottom'> {/* Bottom */}
+                <div className='Home_Bottom'> {/* Bottom */}
                     <footer>
                         {/* format holding text*/}
                     </footer>
