@@ -40,4 +40,10 @@ describe("<Home />", () => {
 			).toBe("Sign In");
 		});
 	});
+
+	describe("Home Content container", () => {
+		it("has a Home_Content container", () => {
+			expect(wrapper.exists(".Home_Content")).toBe(true);
+		});
+	});
 });
