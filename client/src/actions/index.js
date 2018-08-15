@@ -13,6 +13,7 @@ export const UPDATE_ROCKET = 'UPDATE_ROCKET';
 // User Action Types
 export const ADD_USER = 'ADD_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Dummy Action to Add Rockets
 export const addRocket = (rocket) => {
@@ -43,5 +44,13 @@ export const loginUser = (user) => async dispatch => {
     } catch (err) {
         console.log(err);
         //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
+    }
+}
+
+export const logOutUser = () => async dispatch => {
+    try {
+        dispatch({type: LOGOUT_USER})
+    } catch (err) {
+        console.log(err);
     }
 }
