@@ -21,4 +21,13 @@ describe("server", () => {
         expect(response.status).toBe(200);
         done();
     });
+    test('should return 201', async (done) => {
+        const fakeMail = 'bobtodd@gmail.com';
+        const mockUser = {email: 'bobtodd@gmail.com'};
+        const createdUser = await User.create(mockUser);
+        const response = await request(server).get('/api/user');
+        expect(createdUser.email).toEqual(fakeMail);
+        mongoose.connection.db.dropCollection('users');
+        done();
+    });
 })
