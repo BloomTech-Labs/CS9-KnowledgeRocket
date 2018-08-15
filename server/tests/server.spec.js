@@ -74,4 +74,28 @@ describe("server", () => {
         mongoose.connection.db.dropCollection('responserockets');
         done();
     });
+    test('should return 200 and a response', async (done) => {
+        const response = await request(server).get('/api/question');
+        expect(response.status).toBe(200);
+        done();
+    });
+    test('should return 201', async (done) => {
+        const mockQuestion = {title: 'some title', explanation: 'some explanation', question: 'what is life when you write backend code?'};
+        const response = await request(server).post('/api/question').send(mockQuestion);
+        expect(response.status).toBe(201);
+        mongoose.connection.db.dropCollection('questions');
+        done();
+    });
+    test('should return 200 and a response', async (done) => {
+        const response = await request(server).get('/api/cohort');
+        expect(response.status).toBe(200);
+        done();
+    });
+    test('should return 201', async (done) => {
+        const mockCohort = {title: 'some title', rockets: [{startDate: '1995-12-17T03:24:00'}]};
+        const response = await request(server).post('/api/cohort').send(mockCohort);
+        expect(response.status).toBe(201);
+        mongoose.connection.db.dropCollection('cohorts');
+        done();
+    });
 })
