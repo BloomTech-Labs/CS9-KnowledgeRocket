@@ -21,8 +21,9 @@ react-redux
 react-router-dom
 react-scripts
 redux
-redux-promise
+redux-thunk
 redux-logger
+styled-components
 ```
 
 <h3>Installation</h3>
@@ -44,6 +45,8 @@ redux-logger
 ```yarn test``` or ```jest```
 
 <h2>Views</h2>
+
+<h2>Styled Components Notes</h2>
 
 
 

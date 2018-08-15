@@ -39,6 +39,10 @@ server.use('/api/responserocket', ResponseRocketRouter);
 server.use('/api/question', QuestionRouter);
 server.use('/api/cohort', CohortRouter);
 
+<<<<<<< HEAD
+=======
+// Remove for Deployment
+>>>>>>> af017641af90856cb20b40fb067aab776ecfa54b
 // server.get("/", (req, res) => {
 // 	res.status(200).json({ api: "running" });
 // });

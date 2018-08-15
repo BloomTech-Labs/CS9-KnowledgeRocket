@@ -11,11 +11,6 @@ import reducers from './reducers';
 import './index.css';
 import App from './App';
 
-// Apply Middleware to the Redux Store, to handle promises.
-// const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
-
-// // Create Store with Reducers and Redux Extention Support for Chrome Dev Tools.
-// const reduxStore = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const reduxStore = createStore(
     reducers,
     applyMiddleware(thunk)

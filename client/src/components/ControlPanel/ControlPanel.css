@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .box4cp {
     border: 3px solid black;
     width: 20%;
@@ -14,4 +15,17 @@
     padding-bottom: 5px;
     font-size: 1.5rem;
     font-weight: bold; 
+=======
+.ControlPanel_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    width: 10rem;
+    border: 1px solid rgb(119, 136, 153);
+    border-radius: .4rem;
+    height: 70vh;
+    min-height: 10rem;
+>>>>>>> af017641af90856cb20b40fb067aab776ecfa54b
 }
