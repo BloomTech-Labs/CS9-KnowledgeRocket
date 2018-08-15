@@ -10,9 +10,9 @@ export default class Home extends Component {
         return (
             <div> {/*container*/}
                 <div className='Home_Banner'> {/* Top */}
-                    <div className='Home_ButtonDiv'>
-                        <Button className='Home_Button' color="primary" onClick={this.handleAuthRedirect}>Sign Up</Button>
-                        <Button className='Home_Button' color="primary" onClick={this.handleAuthRedirect}>Sign In</Button>
+                    <div className='Home_Button-Div'>
+                        <button className='Home_Button' onClick={this.handleAuthRedirect}>Sign Up</button>
+                        <button className='Home_Button' onClick={this.handleAuthRedirect}>Sign In</button>
                     </div>
                 </div> {/* Top End */}
                 <div className='Home_Content'> {/* Main Content*/}

@@ -1,21 +1,23 @@
-.Home_ButtonDiv {
+.Home_Button {
+    background-color: rgba(135, 207, 235, 0.541);
+    border: none;
+    margin-top: 6px;
+    margin-right: 6px;
+}
+
+.Home_Button-Div {
     display: flex;
     justify-content: flex-end;
 }
 
 .Home_Banner {
-    background: url('/img/HomeBanner.svg') no-repeat center center fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 90vh;
+    background: url('../../assets/HomeBanner.svg') no-repeat center center;
+    width: auto;
+    height: 623px;
+    z-index: -1;
 }
 
 .Home_Content {
     display: flex;
     justify-content: center;
-}
-
-.Home_Button {
-    background-color: white !important;
-    margin: .4rem !important;
 }
