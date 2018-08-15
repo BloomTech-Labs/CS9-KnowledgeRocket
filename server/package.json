@@ -2,9 +2,9 @@
   "name": "messagerocket",
   "version": "1.0.0",
   "description": "message-rocket-lab-project",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "test:once": "cross-env NODE_ENV=test jest --verbose",
     "test": "cross-env NODE_ENV=test jest --watch --verbose"
   },
