@@ -6,6 +6,8 @@ const InfoCardContainer = Styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 `;
 const InfoCardImage = Styled.img.attrs({
   src: ({ img }) => (img ? img : "#"),
