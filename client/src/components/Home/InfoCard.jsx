@@ -2,9 +2,14 @@ import React from "react";
 import Styled from "styled-components";
 import PropTypes from "prop-types";
 
-const InfoCardContainer = Styled.div``;
+const InfoCardContainer = Styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+`;
 const InfoCardImage = Styled.img.attrs({
-  src: `${({ img }) => (img ? img : "#")}`
+  src: ({ img }) => (img ? img : "#"),
+  alt: ({ alt }) => (alt ? alt : "")
 })`
 `;
 const InfoCardTitle = Styled.h3``;
