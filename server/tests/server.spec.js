@@ -74,6 +74,7 @@ describe("server", () => {
         mongoose.connection.db.dropCollection('responserockets');
         done();
     });
+//Question Tests
     test('should return 200 and a response', async (done) => {
         const response = await request(server).get('/api/question');
         expect(response.status).toBe(200);
@@ -86,6 +87,7 @@ describe("server", () => {
         mongoose.connection.db.dropCollection('questions');
         done();
     });
+//Cohort Tests
     test('should return 200 and a response', async (done) => {
         const response = await request(server).get('/api/cohort');
         expect(response.status).toBe(200);
