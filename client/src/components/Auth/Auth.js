@@ -4,7 +4,7 @@ import firebase from "firebase";
 import { Redirect } from 'react-router-dom';
 import { addUser, loginUser } from '../../actions';
 import { Button, Input } from '@material-ui/core';
-import './index.css';
+import './Auth.css';
 
 // Initialize Firebase
 import { FIREBASE_CONFIG } from '../../config';
