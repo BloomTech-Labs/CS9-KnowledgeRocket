@@ -1,4 +1,3 @@
-// SET UP backend, and any other config options non auth related.
 exports.FIREBASE_CONFIG = {
     apiKey: "AIzaSyDaVJVHGmkIPKeJvqlaqWTMpwQFAAQnPig",
     authDomain: "knowledgerocket-e496b.firebaseapp.com",
