@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import './ControlPanel.css'; 
-=======
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Styled from 'styled-components';
 import './ControlPanel.css';
->>>>>>> af017641af90856cb20b40fb067aab776ecfa54b
 
 function mapStateToProps(state) {
     return {
@@ -37,21 +33,12 @@ const CPCButton = Styled(Button)`
 class ControlPanel extends Component {
     render() {
         return (
-<<<<<<< HEAD
-            <div className='box4cp'>
-                <a className="bobsize" href="">Rockets</a>
-                <a className="bobsize" href="">Classes</a>
-                <a className="bobsize" href="">Billing</a>
-                <a className="bobsize" href="">Settings</a>
-            </div>
-=======
             <CPCWithBorder>
                 <CPCButton><Link to='/rocket'>Rockets</Link></CPCButton>
                 <CPCButton><Link to='/rocket/classes'>Classes</Link></CPCButton>
                 <CPCButton><Link to='/rocket/billing'>Billing</Link></CPCButton>
                 <CPCButton><Link to='/rocket/settings'>Settings</Link></CPCButton>
             </CPCWithBorder>
->>>>>>> af017641af90856cb20b40fb067aab776ecfa54b
         );
     }
 }

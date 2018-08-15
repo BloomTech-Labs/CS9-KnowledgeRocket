@@ -15,14 +15,16 @@ const ResponseRocketRouter = require('./responserocket/ResponseRocketRouter');
 const QuestionRouter = require('./question/QuestionRouter');
 const CohortRouter = require('./cohort/CohortRouter');
 
-mongoose
-	.connect(mongoURL, { useNewUrlParser: true }) //Whatever mongo db database we use will go here
-	.then(mongo => {
-		console.log("mongo server working");
-	})
-	.catch(err => {
-		console.log("error", err);
-	});
+if(process.env.NODE_ENV !== 'test') {
+	mongoose
+		.connect(mongoURL, { useNewUrlParser: true }) //Whatever mongo db database we use will go here
+		.then(mongo => {
+			console.log("mongo server working");
+		})
+		.catch(err => {
+			console.log("error", err);
+		});
+}
 
 const server = express();
 
@@ -39,10 +41,6 @@ server.use('/api/responserocket', ResponseRocketRouter);
 server.use('/api/question', QuestionRouter);
 server.use('/api/cohort', CohortRouter);
 
-<<<<<<< HEAD
-=======
-// Remove for Deployment
->>>>>>> af017641af90856cb20b40fb067aab776ecfa54b
 // server.get("/", (req, res) => {
 // 	res.status(200).json({ api: "running" });
 // });
