@@ -1,15 +1,24 @@
+require('dotenv').config();
 const request = require('supertest');
+const server = require('../server');
+const User = require('../user/User');
+const mongoose = require('mongoose');
+const testdb = process.env.TestDB_Url
 
-// const server = require('../server');
+describe("server", () => {
+    beforeAll(() => {
+        return mongoose
+            .connect(testdb, { useNewUrlParser: true })
+            .then(console.log("connected to test db"));
+    });
 
-describe('server', () => {
-    // test('should return 200 and a response', async (done) => {
-    //     const expected ={ api: 'running' };
-    //     const response = await request(server).get('/');
-    //     expect(response.status).toBe(200);
-    //     expect(response.type).toBe('application/json');
-    //     expect(response.body).toEqual(expected);
-    //     done();
-    // });
-    it('passes', () => {expect(true).toBe(true)})
-});
+    afterAll(() => {
+        return mongoose.disconnect();
+    });
+
+    test('should return 200 and a response', async (done) => {
+        const response = await request(server).get('/api/user');
+        expect(response.status).toBe(200);
+        done();
+    });
+})
