@@ -3,6 +3,7 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
+    // let StateCopy = JSON.parse(JSON.stringify(state));
     switch (action.type) {
         default:
             return state;
