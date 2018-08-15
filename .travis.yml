@@ -8,10 +8,10 @@ script:
 install:
 - npm install
 deploy:
-  provider: 
-    heroku
   skip_clean: 
     true
+  provider: 
+    heroku
   app: 
     knowledge-rocket-v1
   on:
