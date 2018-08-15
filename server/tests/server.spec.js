@@ -16,7 +16,7 @@ describe("server", () => {
     afterAll(() => {
         return mongoose.disconnect();
     });
-
+//User Tests
     test('should return 200 and a response', async (done) => {
         const response = await request(server).get('/api/user');
         expect(response.status).toBe(200);
@@ -32,6 +32,7 @@ describe("server", () => {
         mongoose.connection.db.dropCollection('users');
         done();
     });
+//Student Tests
     test('should return 200 and a response', async (done) => {
         const response = await request(server).get('/api/student');
         expect(response.status).toBe(200);
@@ -45,6 +46,32 @@ describe("server", () => {
         expect(createdUser.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('students');
+        done();
+    });
+//Rocket Tests
+    test('should return 200 and a response', async (done) => {
+        const response = await request(server).get('/api/rocket');
+        expect(response.status).toBe(200);
+        done();
+    });
+    test('should return 201', async (done) => {
+        const mockTitle = {title: 'bob todd loves extra letters'};
+        const response = await request(server).post('/api/rocket').send(mockTitle);
+        expect(response.status).toBe(201);
+        mongoose.connection.db.dropCollection('rockets');
+        done();
+    });
+//Response Rocket Tests
+    test('should return 200 and a response', async (done) => {
+        const response = await request(server).get('/api/responserocket');
+        expect(response.status).toBe(200);
+        done();
+    });
+    test('should return 201', async (done) => {
+        const mockSent = {sent: 55};
+        const response = await request(server).post('/api/responserocket').send(mockSent);
+        expect(response.status).toBe(201);
+        mongoose.connection.db.dropCollection('responserockets');
         done();
     });
 })
