@@ -17,12 +17,11 @@ describe("server", () => {
         return mongoose.disconnect();
     });
 //User Tests
-    test('should return 200 and a response', async (done) => {
+    test('should return 200 and a response', async () => {
         const response = await request(server).get('/api/user');
         expect(response.status).toBe(200);
-        done();
     });
-    test('should return 201', async (done) => {
+    test('should return 201', async () => {
         const fakeMail = 'bobtodd@gmail.com';
         const mockUser = {email: 'bobtodd@gmail.com'};
         const createdUser = await User.create(mockUser);
@@ -30,15 +29,13 @@ describe("server", () => {
         expect(createdUser.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('users');
-        done();
     });
 //Student Tests
-    test('should return 200 and a response', async (done) => {
+    test('should return 200 and a response', async () => {
         const response = await request(server).get('/api/student');
         expect(response.status).toBe(200);
-        done();
     });
-    test('should return 201', async (done) => {
+    test('should return 201', async () => {
         const fakeMail = 'bobtodd@gmail.com';
         const mockUser = {firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com'};
         const createdUser = await Student.create(mockUser);
@@ -46,58 +43,49 @@ describe("server", () => {
         expect(createdUser.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('students');
-        done();
     });
 //Rocket Tests
-    test('should return 200 and a response', async (done) => {
+    test('should return 200 and a response', async () => {
         const response = await request(server).get('/api/rocket');
         expect(response.status).toBe(200);
-        done();
     });
-    test('should return 201', async (done) => {
+    test('should return 201', async () => {
         const mockTitle = {title: 'bob todd loves extra letters'};
         const response = await request(server).post('/api/rocket').send(mockTitle);
         expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('rockets');
-        done();
     });
 //Response Rocket Tests
-    test('should return 200 and a response', async (done) => {
+    test('should return 200 and a response', async () => {
         const response = await request(server).get('/api/responserocket');
         expect(response.status).toBe(200);
-        done();
     });
-    test('should return 201', async (done) => {
+    test('should return 201', async () => {
         const mockSent = {sent: 55};
         const response = await request(server).post('/api/responserocket').send(mockSent);
         expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('responserockets');
-        done();
     });
 //Question Tests
-    test('should return 200 and a response', async (done) => {
+    test('should return 200 and a response', async () => {
         const response = await request(server).get('/api/question');
         expect(response.status).toBe(200);
-        done();
     });
-    test('should return 201', async (done) => {
+    test('should return 201', async () => {
         const mockQuestion = {title: 'some title', explanation: 'some explanation', question: 'what is life when you write backend code?'};
         const response = await request(server).post('/api/question').send(mockQuestion);
         expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('questions');
-        done();
     });
 //Cohort Tests
-    test('should return 200 and a response', async (done) => {
+    test('should return 200 and a response', async () => {
         const response = await request(server).get('/api/cohort');
         expect(response.status).toBe(200);
-        done();
     });
-    test('should return 201', async (done) => {
+    test('should return 201', async () => {
         const mockCohort = {title: 'some title', rockets: [{startDate: '1995-12-17T03:24:00'}]};
         const response = await request(server).post('/api/cohort').send(mockCohort);
         expect(response.status).toBe(201);
         mongoose.connection.db.dropCollection('cohorts');
-        done();
     });
 })
