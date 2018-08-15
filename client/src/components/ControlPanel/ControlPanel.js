@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './ControlPanel.css'; 
 
 function mapStateToProps(state) {
     return {
@@ -10,11 +11,11 @@ function mapStateToProps(state) {
 class ControlPanel extends Component {
     render() {
         return (
-            <div>
-                <button>One</button>
-                <button>Two</button>
-                <button>Three</button>
-                <button>Four</button>
+            <div className='box4cp'>
+                <a className="bobsize" href="">Rockets</a>
+                <a className="bobsize" href="">Classes</a>
+                <a className="bobsize" href="">Billing</a>
+                <a className="bobsize" href="">Settings</a>
             </div>
         );
     }

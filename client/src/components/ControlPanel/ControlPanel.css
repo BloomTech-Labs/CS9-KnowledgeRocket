@@ -1,0 +1,17 @@
+.box4cp {
+    border: 3px solid black;
+    width: 20%;
+    margin-top: 3%;
+    min-height: 800px;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.bobsize{
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 5%;
+    padding-bottom: 5px;
+    font-size: 1.5rem;
+    font-weight: bold; 
+}
