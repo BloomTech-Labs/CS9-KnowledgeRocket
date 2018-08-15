@@ -11,26 +11,23 @@ export default class Home extends Component {
             <div>
                 {" "}
                 {/*container*/}
-                <div className="HomeBanner">
+                <div className="Home_Banner">
                     {" "}
                     {/* Top */}
                     <div className="Home_ButtonDiv">
-                        <button
+                        <Button
                             className="Home_Button"
+                            color="primary"
                             onClick={this.handleAuthRedirect}>
                             Sign Up
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             className="Home_Button"
+                            color="primary"
                             onClick={this.handleAuthRedirect}>
                             Sign In
-                        </button>
+                        </Button>
                     </div>
-                    <img
-                        src={mainImg}
-                        alt="banner img"
-                        className="Home_Banner"
-                    />
                 </div>{" "}
                 {/* Top End */}
                 <div className="Home_Content">
@@ -39,7 +36,7 @@ export default class Home extends Component {
                     <h1>What is a Knowledge Rocket?</h1>
                 </div>{" "}
                 {/* Main Content End */}
-                <div className="Home_Bottom">
+                <div class="Home_Bottom">
                     {" "}
                     {/* Bottom */}
                     <footer>{/* format holding text*/}</footer>
