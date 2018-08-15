@@ -8,7 +8,7 @@ const testdb = process.env.TestDB_Url
 describe("server", () => {
     beforeAll(() => {
         return mongoose
-            .connect(testdb)
+            .connect(testdb, { useNewUrlParser: true })
             .then(console.log("connected to test db"));
     });
 
