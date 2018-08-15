@@ -10,10 +10,8 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        {" "}
         {/*container*/}
         <div className="Home_Banner">
-          {" "}
           {/* Top */}
           <div className="Home_ButtonDiv">
             <Button
@@ -31,10 +29,9 @@ export default class Home extends Component {
               Sign In
             </Button>
           </div>
-        </div>{" "}
+        </div>
         {/* Top End */}
         <div className="Home_Content">
-          {" "}
           {/* Main Content*/}
           <InfoCard
             content={"lorem ipsum"}
@@ -43,13 +40,12 @@ export default class Home extends Component {
             toText="to Lorem"
             img="/path/to/img"
           />
-        </div>{" "}
+        </div>
         {/* Main Content End */}
         <div className="Home_Bottom">
-          {" "}
           {/* Bottom */}
           <footer>{/* format holding text*/}</footer>
-        </div>{" "}
+        </div>
         {/* Bottom End */}
       </div> /*container end*/
     );
