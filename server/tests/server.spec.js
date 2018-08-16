@@ -5,6 +5,7 @@ const User = require('../user/User');
 const mongoose = require('mongoose');
 const Student = require('../student/Student');
 const Rocket = require('../rocket/Rocket');
+const ResponseRocket = require('../responserocket/ResponseRocket');
 const testdb = process.env.TestDB_Url;
 
 describe('server', () => {
@@ -145,6 +146,29 @@ describe('server', () => {
             .post('/api/responserocket')
             .send(mockSent);
         expect(response.status).toBe(201);
+        await mongoose.connection.db.dropCollection('responserockets');
+    });
+    test('GET should return 200', async () => {
+        const mockUser = { title: 'bob todd loves extra letters' };
+        const newUser = await ResponseRocket.create(mockUser);
+        const response = await request(server).get(`/api/responserocket/${newUser._id}`);
+        expect(response.status).toBe(200);
+        await mongoose.connection.db.dropCollection('responserockets');
+    });
+    test('PUT should return 201', async () => {
+        const mockUser = { title: 'bob todd loves extra letters' };
+        const newUser = await ResponseRocket.create(mockUser);
+        const response = await request(server)
+            .put(`/api/responserocket/${newUser._id}`)
+            .send((newUser.title = 'bobtodd1@gmail.com'));
+        expect(response.status).toBe(201);
+        await mongoose.connection.db.dropCollection('responserockets');
+    });
+    test('DEL should return 204', async () => {
+        const mockUser = { title: 'bob todd loves extra letters' };
+        const newUser = await ResponseRocket.create(mockUser);
+        const response = await request(server).delete(`/api/responserocket/${newUser._id}`);
+        expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('responserockets');
     });
     //Question Tests
