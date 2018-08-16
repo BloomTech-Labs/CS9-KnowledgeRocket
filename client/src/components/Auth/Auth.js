@@ -97,6 +97,14 @@ class Auth extends Component {
                     >
                         Log In with Google
                     </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInFacebook}
+                    >
+                        Log In with Facebook
+                    </Button>
                 </div>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
             </div>
