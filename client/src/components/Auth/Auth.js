@@ -68,6 +68,18 @@ class Auth extends Component {
         this.props.loginUserTwitter();
     };
 
+    handleSignInGoogle = e => {
+        this.props.loginUserGoogle();
+    };
+
+    handleSignInFacebook = e => {
+        this.props.loginUserFacebook();
+    };
+
+    handleSignInTwitter = e => {
+        this.props.loginUserTwitter();
+    };
+
     render() {
         // console.log('props user', this.props.user);
         // console.log('state user', this.state.authenticated);
@@ -149,13 +161,10 @@ class Auth extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        addUser,
-        loginUser,
-        loginUserGoogle,
-        loginUserFacebook,
-        loginUserTwitter,
-    }
-)(Auth);
+export default connect(mapStateToProps, {
+    addUser,
+    loginUser,
+    loginUserGoogle,
+    loginUserFacebook,
+    loginUserTwitter,
+})(Auth);
