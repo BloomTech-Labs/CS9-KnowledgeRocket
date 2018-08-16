@@ -11,15 +11,13 @@ import reducers from './reducers';
 import './index.css';
 import App from './App';
 
-const reduxStore = createStore(
-    reducers,
-    applyMiddleware(thunk)
-);
+const reduxStore = createStore(reducers, applyMiddleware(thunk));
 
 // Wrapping our App with Redux Provider
 render(
     <Provider store={reduxStore}>
         <App />
-    </Provider>
-    , document.getElementById('root'));
+    </Provider>,
+    document.getElementById('root')
+);
 registerServiceWorker();
