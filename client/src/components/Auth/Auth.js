@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { addUser, loginUser } from '../../actions';
+import {
+    addUser,
+    loginUser,
+    loginUserGoogle,
+    loginUserFacebook,
+    loginUserTwitter,
+} from '../../actions';
 import { Button, Input } from '@material-ui/core';
 import Progress from '../Progress/Progress';
 import './Auth.css';
-
-// Initialize Firebase
 
 function mapStateToProps(state) {
     return {
@@ -52,6 +56,18 @@ class Auth extends Component {
         this.setState({ attempts: this.state.attempts + 1 });
     };
 
+    handleSignInGoogle = e => {
+        this.props.loginUserGoogle();
+    };
+
+    handleSignInFacebook = e => {
+        this.props.loginUserFacebook();
+    };
+
+    handleSignInTwitter = e => {
+        this.props.loginUserTwitter();
+    };
+
     render() {
         // console.log('props user', this.props.user);
         // console.log('state user', this.state.authenticated);
@@ -90,6 +106,30 @@ class Auth extends Component {
                     >
                         Sign-In
                     </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInGoogle}
+                    >
+                        Log In with Google
+                    </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInFacebook}
+                    >
+                        Log In with Facebook
+                    </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInTwitter}
+                    >
+                        Log In with Twitter
+                    </Button>
                 </div>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
@@ -111,5 +151,11 @@ class Auth extends Component {
 
 export default connect(
     mapStateToProps,
-    { addUser, loginUser }
+    {
+        addUser,
+        loginUser,
+        loginUserGoogle,
+        loginUserFacebook,
+        loginUserTwitter,
+    }
 )(Auth);
