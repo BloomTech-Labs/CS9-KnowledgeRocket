@@ -13,3 +13,11 @@
     font-size: 2rem;
     margin: 1rem;
 }
+
+.Auth_prompt-fail {
+    margin: 1rem;
+    color: red;
+    font-weight: bold;
+    width: 18rem;
+    text-justify: auto;
+}
