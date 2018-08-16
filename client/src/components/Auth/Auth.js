@@ -109,6 +109,14 @@ class Auth extends Component {
                     >
                         Log In with Facebook
                     </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInTwitter}
+                    >
+                        Log In with Twitter
+                    </Button>
                 </div>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
             </div>
