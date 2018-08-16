@@ -109,22 +109,32 @@ export const loginUserFacebook = user => async dispatch => {
   }
 };
 
-export const loginUserTwitter = user => async dispatch => {
+export const handleTwitterResponse = res => {
+  const token = res.credential.accessToken;
+  const { uid, email } = res.user;
+  console.log(`token ${token}`);
+  console.log(`user ${JSON.stringify(res.user)}`);
+  const user = {
+    uid: uid,
+    email: email,
+    token: token,
+    authType: '3rdParty',
+  };
+  return user;
+};
+
+export const loginUserTwitter = () => async dispatch => {
   const provider = new firebase.auth.TwitterAuthProvider();
 
   try {
     let response = await firebase.auth().signInWithPopup(provider);
-    console.log(`response ${JSON.stringify(response)}`);
-    const token = response.credential.accessToken;
-    const secret = response.credential.secret;
-    const { uid, email } = response.user;
-    console.log(`user ${JSON.stringify(response.user)}`);
+    const user = handleTwitterResponse(response);
     dispatch({
       type: LOGIN_USER,
       payload: {
-        uid: uid,
-        email: email,
-        token: token,
+        uid: user.uid,
+        email: user.email,
+        token: user.token,
       },
     });
   } catch (err) {
