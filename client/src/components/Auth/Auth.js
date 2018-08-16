@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { addUser, loginUser } from '../../actions';
+import {
+    addUser,
+    loginUser,
+    loginUserGoogle,
+    loginUserFacebook,
+    loginUserTwitter,
+} from '../../actions';
 import { Button, Input } from '@material-ui/core';
 import './Auth.css';
-
-// Initialize Firebase
 
 function mapStateToProps(state) {
     return {
@@ -42,6 +46,18 @@ class Auth extends Component {
             authType: 'signin',
         };
         this.props.loginUser(user);
+    };
+
+    handleSignInGoogle = e => {
+        this.props.loginUserGoogle();
+    };
+
+    handleSignInFacebook = e => {
+        this.props.loginUserFacebook();
+    };
+
+    handleSignInTwitter = e => {
+        this.props.loginUserTwitter();
     };
 
     render() {
@@ -82,14 +98,41 @@ class Auth extends Component {
                     >
                         Sign-In
                     </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInGoogle}
+                    >
+                        Log In with Google
+                    </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInFacebook}
+                    >
+                        Log In with Facebook
+                    </Button>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignInTwitter}
+                    >
+                        Log In with Twitter
+                    </Button>
                 </div>
-                {this.props.user.authenticated ? <Redirect to="/rocket" /> : null }
+                {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
             </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { addUser, loginUser }
-)(Auth);
+export default connect(mapStateToProps, {
+    addUser,
+    loginUser,
+    loginUserGoogle,
+    loginUserFacebook,
+    loginUserTwitter,
+})(Auth);
