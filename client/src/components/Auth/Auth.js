@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 import { Redirect } from 'react-router-dom';
 import {
     addUser,
@@ -11,8 +10,6 @@ import {
 } from '../../actions';
 import { Button, Input } from '@material-ui/core';
 import './Auth.css';
-
-// Initialize Firebase
 
 function mapStateToProps(state) {
     return {

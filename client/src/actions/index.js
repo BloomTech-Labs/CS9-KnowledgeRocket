@@ -1,5 +1,4 @@
 import axios from 'axios';
-import config from '../config';
 import firebase from 'firebase';
 // Set Up Back End URL: Change config for deployment or switch to ENV
 // process.env.server set to heroku deployment root, already set on deployed version.
