@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import renderer from 'react-test-renderer';
-import configureStore from 'redux-mock-store';
 // Actions
 import { handleGoogleResponse, handleTwitterResponse, handleFacebookResponse } from '../actions';
-
-const mockStore = configureStore();
-const store = mockStore();
 
 describe('action creators', () => {
 	describe('handleGoogleResponse', () => {
