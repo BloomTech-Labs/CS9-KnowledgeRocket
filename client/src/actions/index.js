@@ -52,10 +52,19 @@ export const loginUserGoogle = user => async dispatch => {
     try {
         let response = await firebase.auth().signInWithPopup(provider);
         console.log(`response ${JSON.stringify(response)}`);
+        // const uid =
         const token = response.credential.accessToken;
-        const user = response.user;
+        const { uuid, email } = response.user;
         console.log(`token ${token}`);
         console.log(`user ${JSON.stringify(user)}`);
+        dispatch({
+            type: LOGIN_USER,
+            payload: {
+                uid: uuid,
+                email: email,
+                token: token,
+            },
+        });
     } catch (err) {
         const errorCode = err.code;
         const errorMessage = err.message;
