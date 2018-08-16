@@ -4,7 +4,7 @@ import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 // Components
 import App from "../App";
-import Routes from "../components/Routes";
+import Routes from "../components/Routes/Routes.js";
 
 Enzyme.configure({ adapter: new Adapter() });
 
