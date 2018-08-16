@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from "firebase";
 import { Redirect } from 'react-router-dom';
 import { addUser, loginUser } from '../../actions';
 import { Button, Input } from '@material-ui/core';
 import './Auth.css';
 
 // Initialize Firebase
-import { FIREBASE_CONFIG } from '../../config';
-firebase.initializeApp(FIREBASE_CONFIG);
 
 function mapStateToProps(state) {
     return {
@@ -62,7 +59,7 @@ class Auth extends Component {
                     <Button className='Auth_button' variant="contained" color="primary" onClick={this.handleSignUp}>Sign-Up</Button>
                     <Button className='Auth_button' variant="contained" color="primary" onClick={this.handleSignIn}>Sign-In</Button>
                 </div>
-                {this.props.user.authenticated ? <Redirect to='/rocket' /> : null}
+                {this.props.user.authenticated ? <Redirect to='/rocket' /> : console.log(this.props.user)}
             </div>
         );
     }
