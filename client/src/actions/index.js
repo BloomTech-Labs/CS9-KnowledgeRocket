@@ -108,9 +108,9 @@ export const loginUserFacebook = () => async dispatch => {
     return dispatch({
       type: LOGIN_USER,
       payload: {
-        uid: uid,
-        email: email,
-        token: token,
+        uid: user.uid,
+        email: user.email,
+        token: user.token,
       },
     });
   } catch (err) {

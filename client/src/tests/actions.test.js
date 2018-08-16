@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 // Actions
-import { handleGoogleResponse } from '../actions';
+import { handleGoogleResponse, handleTwitterResponse, handleFacebookResponse } from '../actions';
 
 const mockStore = configureStore();
 const store = mockStore();
@@ -33,6 +33,50 @@ describe('action creators', () => {
 				},
 			};
 			expect(handleGoogleResponse(response)).toEqual(expected);
+		});
+
+		describe('handleTwitterResponse', () => {
+			it('should create a user object from a response object', async () => {
+				const expected = {
+					uid: 'def',
+					email: 'janedoe@yahoo.com',
+					token: '456def',
+					authType: '3rdParty',
+				};
+				// describes response object from async call to firebase.auth()
+				const response = {
+					credential: {
+						accessToken: '456def',
+					},
+					user: {
+						uid: 'def',
+						email: 'janedoe@yahoo.com',
+					},
+				};
+				expect(handleTwitterResponse(response)).toEqual(expected);
+			});
+		});
+
+		describe('handleFacebookResponse', () => {
+			it('should create a user object from a response object', async () => {
+				const expected = {
+					uid: 'jkl',
+					email: 'janedoe@lambda.com',
+					token: '789jkl',
+					authType: '3rdParty',
+				};
+				// describes response object from async call to firebase.auth()
+				const response = {
+					credential: {
+						accessToken: '789jkl',
+					},
+					user: {
+						uid: 'jkl',
+						email: 'janedoe@lambda.com',
+					},
+				};
+				expect(handleFacebookResponse(response)).toEqual(expected);
+			});
 		});
 	});
 });
