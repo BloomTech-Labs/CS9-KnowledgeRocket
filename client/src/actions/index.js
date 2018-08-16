@@ -24,7 +24,13 @@ export const UPDATE_ROCKET = 'UPDATE_ROCKET';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';
+export const ADDING_USER = 'ADDING_USER';
+export const ADD_USER_FAILURE = 'ADD_USER_FAILURE';
+
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGGING_IN_USER = 'LOGGING_IN_USER';
+export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
+
 export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Dummy Action to Add Rockets
@@ -38,25 +44,23 @@ export const addRocket = rocket => {
 
 // User Actions
 export const addUser = user => async dispatch => {
-  try {
-    let response = await axios.post(`${url}/api/auth`, user);
-    console.log('response in loginuser:', response.data);
-    dispatch({ type: ADD_USER, payload: response.data });
-  } catch (err) {
-    console.log(err);
-    //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
-  }
+    dispatch({ type: ADDING_USER });
+    try {
+        let response = await axios.post(`${url}/api/auth`, user);
+        dispatch({ type: ADD_USER, payload: response.data });
+    } catch (err) {
+        dispatch({ type: ADD_USER_FAILURE });
+    }
 };
 
 export const loginUser = user => async dispatch => {
-  try {
-    let response = await axios.post(`${url}/api/auth`, user);
-    console.log('response in loginuser:', response.data);
-    dispatch({ type: LOGIN_USER, payload: response.data });
-  } catch (err) {
-    console.log(err);
-    //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
-  }
+    dispatch({ type: LOGGING_IN_USER });
+    try {
+        let response = await axios.post(`${url}/api/auth`, user);
+        dispatch({ type: LOGIN_USER, payload: response.data });
+    } catch (err) {
+        dispatch({ type: LOGIN_USER_FAILURE });
+    }
 };
 
 // extract uid, email, token from response.user
