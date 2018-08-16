@@ -3,7 +3,7 @@ import config from '../config';
 
 // Set Up Back End URL: Change config for deployment or switch to ENV
 // process.env.server set to heroku deployment root, already set on deployed version.
-const url = process.env.server || config.backend || 'http://localhost:5000';
+const url = process.env.server || config.backend;
 
 // Dummy Action Types
 export const ADD_ROCKET = 'ADD_ROCKET';
@@ -29,18 +29,16 @@ export const addRocket = rocket => {
 export const addUser = user => async dispatch => {
     try {
         let response = await axios.post(`${url}/api/auth`, user);
-        console.log('response in loginuser:', response.data);
         dispatch({ type: ADD_USER, payload: response.data });
     } catch (err) {
         console.log(err);
-        //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
+        //dispatch({ type: ADD_USER_FAILURE, payload: err });
     }
 };
 
 export const loginUser = user => async dispatch => {
     try {
         let response = await axios.post(`${url}/api/auth`, user);
-        console.log('response in loginuser:', response.data);
         dispatch({ type: LOGIN_USER, payload: response.data });
     } catch (err) {
         console.log(err);
