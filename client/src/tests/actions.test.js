@@ -6,9 +6,6 @@ import { handleGoogleResponse, handleTwitterResponse, handleFacebookResponse } f
 describe('action creators', () => {
 	describe('handleGoogleResponse', () => {
 		// clear all actions from mock
-		beforeEach(() => {
-			store.clearActions();
-		});
 
 		it('should create a user object from a response object', async () => {
 			const expected = {
