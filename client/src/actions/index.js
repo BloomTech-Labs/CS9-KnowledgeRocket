@@ -88,6 +88,22 @@ export const loginUserFacebook = user => async dispatch => {
   }
 };
 
+export const loginUserTwitter = user => async dispatch => {
+  const provider = new firebase.auth.TwitterAuthProvider();
+
+  try {
+    let response = await firebase.auth().signInWithPopup(provider);
+    console.log(`response ${JSON.stringify(response)}`);
+    const token = response.credential.accessToken;
+    const secret = response.credential.secret;
+    const user = response.user;
+  } catch (err) {
+    const errorCode = err.code;
+    const errorMessage = err.message;
+    console.log(errorCode, errorMessage);
+  }
+};
+
 export const logOutUser = () => async dispatch => {
   try {
     dispatch({ type: LOGOUT_USER });
