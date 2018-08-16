@@ -15,7 +15,7 @@ describe('action creators', () => {
 			store.clearActions();
 		});
 
-		it('should dispatch the correct action and payload', async () => {
+		it('should create a user object from a response object', async () => {
 			const expected = {
 				uid: 'abc',
 				email: 'johndoe@yahoo.com',
