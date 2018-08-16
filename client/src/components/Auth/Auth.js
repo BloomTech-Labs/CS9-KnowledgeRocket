@@ -51,6 +51,10 @@ class Auth extends Component {
         this.props.loginUserGoogle();
     };
 
+    handleSignInFacebook = e => {
+        this.props.loginUserFacebook();
+    };
+
     render() {
         console.log('props user', this.props.user);
         console.log('state user', this.state.authenticated);
@@ -112,4 +116,4 @@ class Auth extends Component {
     }
 }
 
-export default connect(mapStateToProps, { addUser, loginUser, loginUserGoogle })(Auth);
+export default connect(mapStateToProps, { addUser, loginUser, loginUserGoogle, loginUserFacebook })(Auth);
