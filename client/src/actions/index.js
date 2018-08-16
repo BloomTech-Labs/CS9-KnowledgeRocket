@@ -17,65 +17,81 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Dummy Action to Add Rockets
 export const addRocket = rocket => {
-    let response = axios.post(`${url}/rocket/add`, rocket);
-    return {
-        type: ADD_ROCKET,
-        payload: response,
-    };
+  let response = axios.post(`${url}/rocket/add`, rocket);
+  return {
+    type: ADD_ROCKET,
+    payload: response,
+  };
 };
 
 // User Actions
 export const addUser = user => async dispatch => {
-    try {
-        let response = await axios.post(`${url}/api/auth`, user);
-        console.log('response in loginuser:', response.data);
-        dispatch({ type: ADD_USER, payload: response.data });
-    } catch (err) {
-        console.log(err);
-        //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
-    }
+  try {
+    let response = await axios.post(`${url}/api/auth`, user);
+    console.log('response in loginuser:', response.data);
+    dispatch({ type: ADD_USER, payload: response.data });
+  } catch (err) {
+    console.log(err);
+    //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
+  }
 };
 
 export const loginUser = user => async dispatch => {
-    try {
-        let response = await axios.post(`${url}/api/auth`, user);
-        console.log('response in loginuser:', response.data);
-        dispatch({ type: LOGIN_USER, payload: response.data });
-    } catch (err) {
-        console.log(err);
-        //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
-    }
+  try {
+    let response = await axios.post(`${url}/api/auth`, user);
+    console.log('response in loginuser:', response.data);
+    dispatch({ type: LOGIN_USER, payload: response.data });
+  } catch (err) {
+    console.log(err);
+    //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
+  }
 };
 
 export const loginUserGoogle = user => async dispatch => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-        let response = await firebase.auth().signInWithPopup(provider);
-        console.log(`response ${JSON.stringify(response)}`);
-        // const uid =
-        const token = response.credential.accessToken;
-        const { uuid, email } = response.user;
-        console.log(`token ${token}`);
-        console.log(`user ${JSON.stringify(user)}`);
-        dispatch({
-            type: LOGIN_USER,
-            payload: {
-                uid: uuid,
-                email: email,
-                token: token,
-            },
-        });
-    } catch (err) {
-        const errorCode = err.code;
-        const errorMessage = err.message;
-        console.log(errorCode, errorMessage);
-    }
+  const provider = new firebase.auth.GoogleAuthProvider();
+  try {
+    let response = await firebase.auth().signInWithPopup(provider);
+    console.log(`response ${JSON.stringify(response)}`);
+    const token = response.credential.accessToken;
+    const { uuid, email } = response.user;
+    console.log(`token ${token}`);
+    console.log(`user ${JSON.stringify(user)}`);
+    dispatch({
+      type: LOGIN_USER,
+      payload: {
+        uid: uuid,
+        email: email,
+        token: token,
+      },
+    });
+  } catch (err) {
+    const errorCode = err.code;
+    const errorMessage = err.message;
+    console.log(errorCode, errorMessage);
+  }
+};
+
+export const loginUserFacebook = user => async dispatch => {
+  const provider = new firebase.auth.FacebookAuthProvider();
+
+  try {
+    let response = await firebase.auth().signInWithPopup(provider);
+    console.log(`response ${JSON.stringify(response)}`);
+    const token = response.credential.accessToken;
+    const { uuid, email } = response.user;
+    console.log(`token ${token}`);
+    console.log(`user ${JSON.stringify(user)}`);
+  } catch (err) {
+    const errorCode = err.code;
+    const errorMessage = err.message;
+    console.log(errorCode, errorMessage);
+  }
 };
 
 export const logOutUser = () => async dispatch => {
-    try {
-        dispatch({ type: LOGOUT_USER });
-    } catch (err) {
-        console.log(err);
-    }
+  try {
+    dispatch({ type: LOGOUT_USER });
+  } catch (err) {
+    console.log(err);
+  }
 };
