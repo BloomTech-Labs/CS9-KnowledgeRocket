@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { Redirect } from 'react-router-dom';
-import { addUser, loginUser, loginUserGoogle } from '../../actions';
+import { addUser, loginUser, loginUserGoogle, loginUserFacebook } from '../../actions';
 import { Button, Input } from '@material-ui/core';
 import './Auth.css';
 
@@ -116,4 +116,6 @@ class Auth extends Component {
     }
 }
 
-export default connect(mapStateToProps, { addUser, loginUser, loginUserGoogle, loginUserFacebook })(Auth);
+export default connect(mapStateToProps, { addUser, loginUser, loginUserGoogle, loginUserFacebook })(
+    Auth
+);
