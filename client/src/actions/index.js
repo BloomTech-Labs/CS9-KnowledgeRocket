@@ -13,7 +13,7 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIRE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIRE_SENDER_ID,
 };
-console.log(firebaseConfig);
+
 Firebase.initializeApp(firebaseConfig);
 
 // Dummy Action Types
