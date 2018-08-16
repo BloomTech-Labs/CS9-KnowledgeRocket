@@ -84,17 +84,28 @@ export const loginUserGoogle = () => async dispatch => {
   }
 };
 
-export const loginUserFacebook = user => async dispatch => {
+export const handleFacebookResponse = res => {
+  const token = res.credential.accessToken;
+  const { uid, email } = res.user;
+  console.log(`token ${token}`);
+  console.log(`user ${JSON.stringify(res.user)}`);
+  const user = {
+    uid: uid,
+    email: email,
+    token: token,
+    authType: '3rdParty',
+  };
+  return user;
+};
+
+export const loginUserFacebook = () => async dispatch => {
   const provider = new firebase.auth.FacebookAuthProvider();
 
   try {
     let response = await firebase.auth().signInWithPopup(provider);
     console.log(`response ${JSON.stringify(response)}`);
-    const token = response.credential.accessToken;
-    const { uid, email } = response.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(response.user)}`);
-    dispatch({
+    const user = handleFacebookResponse(response);
+    return dispatch({
       type: LOGIN_USER,
       payload: {
         uid: uid,
@@ -129,7 +140,7 @@ export const loginUserTwitter = () => async dispatch => {
   try {
     let response = await firebase.auth().signInWithPopup(provider);
     const user = handleTwitterResponse(response);
-    dispatch({
+    return dispatch({
       type: LOGIN_USER,
       payload: {
         uid: user.uid,
