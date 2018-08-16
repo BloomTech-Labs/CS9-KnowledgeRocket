@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addUser, loginUser } from '../../actions';
 import { Button, Input } from '@material-ui/core';
+import Progress from '../Progress/Progress';
 import './Auth.css';
 
 // Initialize Firebase
@@ -54,26 +55,57 @@ class Auth extends Component {
     render() {
         // console.log('props user', this.props.user);
         // console.log('state user', this.state.authenticated);
-        return <div className="Main_container">
+        return (
+            <div className="Main_container">
                 <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
                 <div className="flex-column-centered">
-                    <Input className="Auth_input" type="email" name="email" autoFocus={true} onChange={this.handleInput} />
-                    <Input className="Auth_input" type="password" name="password" onChange={this.handleInput} />
+                    <Input
+                        className="Auth_input"
+                        type="email"
+                        name="email"
+                        autoFocus={true}
+                        onChange={this.handleInput}
+                    />
+                    <Input
+                        className="Auth_input"
+                        type="password"
+                        name="password"
+                        onChange={this.handleInput}
+                    />
                 </div>
                 <div className="flex-row-centered">
-                    <Button className="Auth_button" variant="contained" color="primary" onClick={this.handleSignUp}>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignUp}
+                    >
                         Sign-Up
                     </Button>
-                    <Button className="Auth_button" variant="contained" color="primary" onClick={this.handleSignIn}>
+                    <Button
+                        className="Auth_button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleSignIn}
+                    >
                         Sign-In
                     </Button>
                 </div>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
-                    {this.props.user.status === 'FAILED' ? <p>Authentication failed. Check your email and password and try again. Thank you.</p> : this.props.user.status === 'ADDING_USER' || this.props.user.status === 'LOGGING_IN_USER' ? <p>Processing Request...</p> : null}
+                    {this.props.user.status === 'FAILED' ? (
+                        <p>
+                            Authentication failed. Check your email and password and try again.
+                            Thank you.
+                        </p>
+                    ) : this.props.user.status === 'ADDING_USER' ||
+                    this.props.user.status === 'LOGGING_IN_USER' ? (
+                        <Progress />
+                    ) : null}
                 </div>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
-            </div>;
+            </div>
+        );
     }
 }
 
