@@ -47,6 +47,7 @@ export const loginUser = user => async dispatch => {
   }
 };
 
+// TODO SEND DATA TO AN ENDPOINT
 export const loginUserGoogle = user => async dispatch => {
   const provider = new firebase.auth.GoogleAuthProvider();
   try {
@@ -71,6 +72,7 @@ export const loginUserGoogle = user => async dispatch => {
   }
 };
 
+// TODO DISPATCH UUID EMAIL TOKEN
 export const loginUserFacebook = user => async dispatch => {
   const provider = new firebase.auth.FacebookAuthProvider();
 
@@ -81,6 +83,14 @@ export const loginUserFacebook = user => async dispatch => {
     const { uuid, email } = response.user;
     console.log(`token ${token}`);
     console.log(`user ${JSON.stringify(user)}`);
+    dispatch({
+      type: LOGIN_USER,
+      payload: {
+        uid: uuid,
+        email: email,
+        token: token,
+      },
+    });
   } catch (err) {
     const errorCode = err.code;
     const errorMessage = err.message;
@@ -88,6 +98,7 @@ export const loginUserFacebook = user => async dispatch => {
   }
 };
 
+// TODO DISPATCH UUID EMAIL TOKEN
 export const loginUserTwitter = user => async dispatch => {
   const provider = new firebase.auth.TwitterAuthProvider();
 
@@ -96,7 +107,15 @@ export const loginUserTwitter = user => async dispatch => {
     console.log(`response ${JSON.stringify(response)}`);
     const token = response.credential.accessToken;
     const secret = response.credential.secret;
-    const user = response.user;
+    const { uid, email } = response.user;
+    dispatch({
+      type: LOGIN_USER,
+      payload: {
+        uid: uid,
+        email: email,
+        token: token,
+      },
+    });
   } catch (err) {
     const errorCode = err.code;
     const errorMessage = err.message;
