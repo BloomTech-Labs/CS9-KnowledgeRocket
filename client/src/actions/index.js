@@ -1,8 +1,9 @@
 import axios from 'axios';
-import config from '../config';
 
 // Set Up Back End URL: Change config for deployment or switch to ENV
-const url = config.backend || 'http://localhost:5000';
+// process.env.server set to heroku deployment root, already set on deployed version.
+const url = process.env.REACT_APP_SERVER;
+
 
 // Dummy Action Types
 export const ADD_ROCKET = 'ADD_ROCKET';
@@ -16,41 +17,39 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Dummy Action to Add Rockets
-export const addRocket = (rocket) => {
-    let response = axios.post(`${url}/rocket/add`, rocket)
+export const addRocket = rocket => {
+    let response = axios.post(`${url}/rocket/add`, rocket);
     return {
         type: ADD_ROCKET,
-        payload: response
+        payload: response,
     };
 };
 
 // User Actions
-export const addUser = (user) => async dispatch => {
+export const addUser = user => async dispatch => {
     try {
-        let response = await axios.post(`${url}/api/auth`, user)
-        console.log('response in loginuser:', response.data)
+        let response = await axios.post(`${url}/api/auth`, user);
         dispatch({ type: ADD_USER, payload: response.data });
     } catch (err) {
         console.log(err);
-        //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
+        //dispatch({ type: ADD_USER_FAILURE, payload: err });
     }
-}
+};
 
-export const loginUser = (user) => async dispatch => {
+export const loginUser = user => async dispatch => {
     try {
-        let response = await axios.post(`${url}/api/auth`, user)
-        console.log('response in loginuser:', response.data)
+        let response = await axios.post(`${url}/api/auth`, user);
         dispatch({ type: LOGIN_USER, payload: response.data });
     } catch (err) {
         console.log(err);
         //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
     }
-}
+};
 
 export const logOutUser = () => async dispatch => {
     try {
-        dispatch({type: LOGOUT_USER})
+        dispatch({ type: LOGOUT_USER });
     } catch (err) {
         console.log(err);
     }
-}
+};
