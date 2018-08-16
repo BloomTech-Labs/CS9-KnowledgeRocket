@@ -28,7 +28,7 @@ describe("server", () => {
         const response = await request(server).post('/api/user').send(mockUser);
         expect(createdUser.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
-        mongoose.connection.db.dropCollection('users');
+        await mongoose.connection.db.dropCollection('users');
     });
 //Student Tests
     test('should return 200 and a response', async () => {
@@ -42,7 +42,7 @@ describe("server", () => {
         const response = await request(server).post('/api/student').send(mockUser);
         expect(createdUser.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
-        mongoose.connection.db.dropCollection('students');
+        await mongoose.connection.db.dropCollection('students');
     });
 //Rocket Tests
     test('should return 200 and a response', async () => {
@@ -53,7 +53,7 @@ describe("server", () => {
         const mockTitle = {title: 'bob todd loves extra letters'};
         const response = await request(server).post('/api/rocket').send(mockTitle);
         expect(response.status).toBe(201);
-        mongoose.connection.db.dropCollection('rockets');
+        await mongoose.connection.db.dropCollection('rockets');
     });
 //Response Rocket Tests
     test('should return 200 and a response', async () => {
@@ -64,7 +64,7 @@ describe("server", () => {
         const mockSent = {sent: 55};
         const response = await request(server).post('/api/responserocket').send(mockSent);
         expect(response.status).toBe(201);
-        mongoose.connection.db.dropCollection('responserockets');
+        await mongoose.connection.db.dropCollection('responserockets');
     });
 //Question Tests
     test('should return 200 and a response', async () => {
@@ -75,7 +75,7 @@ describe("server", () => {
         const mockQuestion = {title: 'some title', explanation: 'some explanation', question: 'what is life when you write backend code?'};
         const response = await request(server).post('/api/question').send(mockQuestion);
         expect(response.status).toBe(201);
-        mongoose.connection.db.dropCollection('questions');
+        await mongoose.connection.db.dropCollection('questions');
     });
 //Cohort Tests
     test('should return 200 and a response', async () => {
@@ -86,6 +86,6 @@ describe("server", () => {
         const mockCohort = {title: 'some title', rockets: [{startDate: '1995-12-17T03:24:00'}]};
         const response = await request(server).post('/api/cohort').send(mockCohort);
         expect(response.status).toBe(201);
-        mongoose.connection.db.dropCollection('cohorts');
+        await mongoose.connection.db.dropCollection('cohorts');
     });
 })
