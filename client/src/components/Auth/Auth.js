@@ -48,11 +48,6 @@ class Auth extends Component {
     };
 
     handleSignInGoogle = e => {
-        // const user = {
-        //     email: this.state.email,
-        //     password: this.state.password,
-        //     authType: 'signin',
-        // };
         this.props.loginUserGoogle();
     };
 
