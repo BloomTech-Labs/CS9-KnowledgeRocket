@@ -6,10 +6,12 @@ const Cohort = mongoose.Schema({
     teacher: { type: ObjectId, ref: 'User' },
     cc: { type: Boolean, default: false },
     students: [{ type: ObjectId, ref: 'Student' }],
-    rockets: [{
-        startDate: { type: Date },
-        rocketId: { type: ObjectId, ref: 'Rocket' }
-    }],
+    rockets: [
+        {
+            startDate: { type: Date },
+            rocketId: { type: ObjectId, ref: 'Rocket' },
+        },
+    ],
 });
 
 module.exports = mongoose.model('Cohort', Cohort);
