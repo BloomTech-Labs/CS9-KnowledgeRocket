@@ -49,19 +49,18 @@ export const loginUser = user => async dispatch => {
 
 export const loginUserGoogle = user => async dispatch => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(response => {
-            // console.log(`RESPONSE ${response}`);
-            const token = response.credential.accessToken;
-            const user = response.user;
-        })
-        .catch(err => {
-            const errorCode = err.code;
-            const errorMessage = err.message;
-            console.log(errorCode, errorMessage);
-        });
+    try {
+        let response = await firebase.auth().signInWithPopup(provider);
+        console.log(`response ${JSON.stringify(response)}`);
+        const token = response.credential.accessToken;
+        const user = response.user;
+        console.log(`token ${token}`);
+        console.log(`user ${JSON.stringify(user)}`);
+    } catch (err) {
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log(errorCode, errorMessage);
+    }
 };
 
 export const logOutUser = () => async dispatch => {
