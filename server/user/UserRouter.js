@@ -9,7 +9,8 @@ router
 router
     .route('/:id')
     .put(put)
-    .get(getid);
+    .get(getid)
+    .delete(deleteid);
 
 function get(req, res) {
     User.find()
@@ -55,5 +56,17 @@ function put(req, res) {
             res.status(500).json({ message: 'Error on PUT' });
         });
 }
-
+function deleteid(req, res) {
+    const id = req.params.id;
+    if (!User.findById(id)) {
+        res.status(404).json({ message: 'User not found' });
+    }
+    User.findByIdAndRemove(id)
+        .then(user => {
+            res.status(204).json(user);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Error on DEL' });
+        });
+}
 module.exports = router;
