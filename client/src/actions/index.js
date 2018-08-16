@@ -1,8 +1,20 @@
 import axios from 'axios';
-import firebase from 'firebase';
+import Firebase from 'firebase';
 // Set Up Back End URL: Change config for deployment or switch to ENV
 // process.env.server set to heroku deployment root, already set on deployed version.
 const url = process.env.REACT_APP_SERVER;
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIRE_API,
+  authDomain: process.env.REACT_APP_FIRE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIRE_DB_URL,
+  projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIRE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIRE_SENDER_ID,
+};
+console.log(firebaseConfig);
+Firebase.initializeApp(firebaseConfig);
 
 // Dummy Action Types
 export const ADD_ROCKET = 'ADD_ROCKET';
@@ -64,9 +76,9 @@ export const handleGoogleResponse = res => {
 
 // TODO SEND DATA TO AN ENDPOINT
 export const loginUserGoogle = () => async dispatch => {
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const provider = new Firebase.auth.GoogleAuthProvider();
   try {
-    let response = await firebase.auth().signInWithPopup(provider);
+    let response = await Firebase.auth().signInWithPopup(provider);
 
     const user = handleGoogleResponse(response);
     return dispatch({
@@ -99,10 +111,10 @@ export const handleFacebookResponse = res => {
 };
 
 export const loginUserFacebook = () => async dispatch => {
-  const provider = new firebase.auth.FacebookAuthProvider();
+  const provider = new Firebase.auth.FacebookAuthProvider();
 
   try {
-    let response = await firebase.auth().signInWithPopup(provider);
+    let response = await Firebase.auth().signInWithPopup(provider);
     console.log(`response ${JSON.stringify(response)}`);
     const user = handleFacebookResponse(response);
     return dispatch({
@@ -135,10 +147,10 @@ export const handleTwitterResponse = res => {
 };
 
 export const loginUserTwitter = () => async dispatch => {
-  const provider = new firebase.auth.TwitterAuthProvider();
+  const provider = new Firebase.auth.TwitterAuthProvider();
 
   try {
-    let response = await firebase.auth().signInWithPopup(provider);
+    let response = await Firebase.auth().signInWithPopup(provider);
     const user = handleTwitterResponse(response);
     return dispatch({
       type: LOGIN_USER,
