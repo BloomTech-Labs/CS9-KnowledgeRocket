@@ -54,13 +54,19 @@ export const loginUserGoogle = user => async dispatch => {
     let response = await firebase.auth().signInWithPopup(provider);
     console.log(`response ${JSON.stringify(response)}`);
     const token = response.credential.accessToken;
-    const { uuid, email } = response.user;
+    const { uid, email } = response.user;
     console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(user)}`);
+    console.log(`user ${JSON.stringify(response.user)}`);
+    const user = {
+      uid: uid,
+      email: email,
+      token: token,
+      authType: '3rdParty',
+    };
     dispatch({
       type: LOGIN_USER,
       payload: {
-        uid: uuid,
+        uid: uid,
         email: email,
         token: token,
       },
@@ -80,13 +86,13 @@ export const loginUserFacebook = user => async dispatch => {
     let response = await firebase.auth().signInWithPopup(provider);
     console.log(`response ${JSON.stringify(response)}`);
     const token = response.credential.accessToken;
-    const { uuid, email } = response.user;
+    const { uid, email } = response.user;
     console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(user)}`);
+    console.log(`user ${JSON.stringify(response.user)}`);
     dispatch({
       type: LOGIN_USER,
       payload: {
-        uid: uuid,
+        uid: uid,
         email: email,
         token: token,
       },
@@ -108,6 +114,7 @@ export const loginUserTwitter = user => async dispatch => {
     const token = response.credential.accessToken;
     const secret = response.credential.secret;
     const { uid, email } = response.user;
+    console.log(`user ${JSON.stringify(response.user)}`);
     dispatch({
       type: LOGIN_USER,
       payload: {
