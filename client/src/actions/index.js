@@ -4,7 +4,6 @@ import axios from 'axios';
 // process.env.server set to heroku deployment root, already set on deployed version.
 const url = process.env.REACT_APP_SERVER;
 
-
 // Dummy Action Types
 export const ADD_ROCKET = 'ADD_ROCKET';
 export const GET_ROCKETS = 'GET_ROCKETS';

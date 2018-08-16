@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Modal from '@material-ui/core/Modal';
 import './Billing.css';
+import CheckoutForm from './checkout';
+import { Elements, StripeProvider } from 'react-stripe-elements';
+<script src="https://js.stripe.com/v3/" />;
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
     };
 }
 
 class Billing extends Component {
+    state = {
+        open: false,
+    };
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -19,13 +26,16 @@ class Billing extends Component {
     }
     render() {
         return (
-            <div className='Main_container'>
-                BILLING PLACEHOLDER
-            </div>
+            <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
+                <div className="example">
+                    <h1>React Stripe Elements Example</h1>
+                    <Elements>
+                        <CheckoutForm />
+                    </Elements>
+                </div>
+            </StripeProvider>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(Billing);
+export default connect(mapStateToProps)(Billing);
