@@ -1,5 +1,9 @@
 <h1>Knowledge Rockets Front-End Specification</h1>
-
+```
+// REACT_APP_SERVER: Environment Variable for the Hosted Location of the server in heroku
+// Ensure there is no trailing '/' at the end of the URL.
+REACT_APP_SERVER=https://urlofserver.com
+```
 <h2>Description</h2>
 
 <p>This is the specification for the Knowledge Rockets front-end client. Click here to see the specification for the back-end. Click here to see the project's general information.</p>
@@ -29,11 +33,11 @@ styled-components
 <h3>Installation</h3>
 <p>Use yarn or npm to install all the development dependencies used in this project.</p>
 
-```yarn install``` or ```npm install```
+`yarn install` or `npm install`
 
 <p>Check to see the project has compiled successfully:</p>
 
-```yarn start```
+`yarn start`
 
 <p>Open the project locally with the url described as Local</p>
 
@@ -42,11 +46,8 @@ styled-components
 
 <p>Run all tests within client/tests using: </p>
 
-```yarn test``` or ```jest```
+`yarn test` or `jest`
 
 <h2>Views</h2>
 
 <h2>Styled Components Notes</h2>
-
-
-

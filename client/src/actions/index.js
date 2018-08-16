@@ -2,7 +2,8 @@ import axios from 'axios';
 import config from '../config';
 import firebase from 'firebase';
 // Set Up Back End URL: Change config for deployment or switch to ENV
-const url = config.backend || 'http://localhost:5000';
+// process.env.server set to heroku deployment root, already set on deployed version.
+const url = process.env.REACT_APP_SERVER;
 
 // Dummy Action Types
 export const ADD_ROCKET = 'ADD_ROCKET';

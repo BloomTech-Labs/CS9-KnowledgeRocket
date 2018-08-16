@@ -13,8 +13,6 @@ import { Button, Input } from '@material-ui/core';
 import './Auth.css';
 
 // Initialize Firebase
-import { FIREBASE_CONFIG } from '../../config';
-firebase.initializeApp(FIREBASE_CONFIG);
 
 function mapStateToProps(state) {
     return {
