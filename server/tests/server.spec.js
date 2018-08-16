@@ -7,6 +7,7 @@ const Student = require('../student/Student');
 const Rocket = require('../rocket/Rocket');
 const ResponseRocket = require('../responserocket/ResponseRocket');
 const Question = require('../question/Question');
+const Cohort = require('../cohort/Cohort');
 const testdb = process.env.TestDB_Url;
 
 describe('server', () => {
@@ -235,6 +236,29 @@ describe('server', () => {
             .post('/api/cohort')
             .send(mockCohort);
         expect(response.status).toBe(201);
+        await mongoose.connection.db.dropCollection('cohorts');
+    });
+    test('GET should return 200', async () => {
+        const mockUser = { title: 'bob' };
+        const newUser = await Cohort.create(mockUser);
+        const response = await request(server).get(`/api/cohort/${newUser._id}`);
+        expect(response.status).toBe(200);
+        await mongoose.connection.db.dropCollection('cohorts');
+    });
+    test('PUT should return 201', async () => {
+        const mockUser = { title: 'bob' };
+        const newUser = await Cohort.create(mockUser);
+        const response = await request(server)
+            .put(`/api/cohort/${newUser._id}`)
+            .send((newUser.title = 'bobtodd1@gmail.com'));
+        expect(response.status).toBe(201);
+        await mongoose.connection.db.dropCollection('cohorts');
+    });
+    test('DEL should return 204', async () => {
+        const mockUser = { title: 'bob' };
+        const newUser = await Cohort.create(mockUser);
+        const response = await request(server).delete(`/api/cohort/${newUser._id}`);
+        expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('cohorts');
     });
 });
