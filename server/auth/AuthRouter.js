@@ -11,9 +11,7 @@ if (!Firebase.apps.length) {
     init_firebase = Firebase.apps[0];
 }
 
-router
-    .route('/')
-    .post(post)
+router.route('/').post(post);
 
 function post(req, res) {
     const { email, password, authType } = req.body;
@@ -24,12 +22,11 @@ function post(req, res) {
             .signInWithEmailAndPassword(email, password)
             .then(response => {
                 const uid = response.user.uid;
-                const email = response.user.email;             
-                response.user.getIdToken()
-                    .then(token => {
-                        // console.log('idToken:', token);
-                        res.json({ email, uid, token });
-                    })
+                const email = response.user.email;
+                response.user.getIdToken().then(token => {
+                    // console.log('idToken:', token);
+                    res.json({ email, uid, token });
+                });
                 //handleAuthenticated();
             })
             .catch(error => {
@@ -47,12 +44,11 @@ function post(req, res) {
             .then(response => {
                 const uid = response.user.uid;
                 const email = response.user.email;
-                response.user.getIdToken()
-                    .then(token => {
-                        // console.log('idToken:', token);
-                        UserModel.create({ email, uid, token }).then(u => console.log(u));
-                        res.json({ email, uid, token });
-                    })
+                response.user.getIdToken().then(token => {
+                    // console.log('idToken:', token);
+                    UserModel.create({ email, uid, token }).then(u => console.log(u));
+                    res.json({ email, uid, token });
+                });
             })
             .catch(error => {
                 // Handle Errors here.
@@ -63,6 +59,5 @@ function post(req, res) {
             });
     }
 }
-
 
 module.exports = router;

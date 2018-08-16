@@ -7,7 +7,7 @@ const User = mongoose.Schema({
     token: { type: String },
     rockets: [{ type: ObjectId, ref: 'Rocket' }],
     cohorts: [{ type: ObjectId, ref: 'Cohort' }],
-    account: { type: String, default: 'Free' } // Options 'Free','Monthly', 'Yearly'
+    account: { type: String, default: 'Free' }, // Options 'Free','Monthly', 'Yearly'
 });
 
 module.exports = mongoose.model('User', User);
