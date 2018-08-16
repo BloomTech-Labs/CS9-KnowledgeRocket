@@ -47,28 +47,34 @@ export const loginUser = user => async dispatch => {
   }
 };
 
+// extract uid, email, token from response.user
+export const handleGoogleResponse = res => {
+  const token = res.credential.accessToken;
+  const { uid, email } = res.user;
+  console.log(`token ${token}`);
+  console.log(`user ${JSON.stringify(res.user)}`);
+  const user = {
+    uid: uid,
+    email: email,
+    token: token,
+    authType: '3rdParty',
+  };
+  return user;
+};
+
 // TODO SEND DATA TO AN ENDPOINT
-export const loginUserGoogle = user => async dispatch => {
+export const loginUserGoogle = () => async dispatch => {
   const provider = new firebase.auth.GoogleAuthProvider();
   try {
     let response = await firebase.auth().signInWithPopup(provider);
-    console.log(`response ${JSON.stringify(response)}`);
-    const token = response.credential.accessToken;
-    const { uid, email } = response.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(response.user)}`);
-    const user = {
-      uid: uid,
-      email: email,
-      token: token,
-      authType: '3rdParty',
-    };
-    dispatch({
+
+    const user = handleGoogleResponse(response);
+    return dispatch({
       type: LOGIN_USER,
       payload: {
-        uid: uid,
-        email: email,
-        token: token,
+        uid: user.uid,
+        email: user.email,
+        token: user.token,
       },
     });
   } catch (err) {
@@ -78,7 +84,6 @@ export const loginUserGoogle = user => async dispatch => {
   }
 };
 
-// TODO DISPATCH UUID EMAIL TOKEN
 export const loginUserFacebook = user => async dispatch => {
   const provider = new firebase.auth.FacebookAuthProvider();
 
@@ -104,7 +109,6 @@ export const loginUserFacebook = user => async dispatch => {
   }
 };
 
-// TODO DISPATCH UUID EMAIL TOKEN
 export const loginUserTwitter = user => async dispatch => {
   const provider = new firebase.auth.TwitterAuthProvider();
 
