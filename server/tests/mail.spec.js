@@ -18,4 +18,30 @@ describe('testing mail route and capabilities', () => {
     it('has a function to generate email object', () => {
         expect(mail.generateEmail).not.toBeUndefined();
     });
+
+    describe('.generateEmail', () => {
+        it('given a proper email object, returns api complaint email object', () => {
+            const properEmail = {
+                to: ['recipient@email.com'],
+                from: 'sender@email.com',
+                replyTo: 'noreply@email.com',
+                subject: 'sub',
+                text: 'not blank',
+                html: '<p>still not blank</p>',
+                cc: null,
+            };
+            const { generateEmail } = mail;
+            expect(
+                generateEmail(
+                    properEmail.to,
+                    properEmail.from,
+                    properEmail.replyTo,
+                    properEmail.subject,
+                    properEmail.text,
+                    properEmail.html,
+                    properEmail.cc
+                )
+            ).toMatchObject(expect.objectContaining(properEmail));
+        });
+    });
 });
