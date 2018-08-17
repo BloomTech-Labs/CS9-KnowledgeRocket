@@ -38,7 +38,7 @@ class Billing extends Component {
                     </Card>
                     <Card>
                         <Elements>
-                            <CheckoutForm />
+                            <CheckoutForm uid={this.props.state.user.uid} />
                         </Elements>
                     </Card>
                 </div>

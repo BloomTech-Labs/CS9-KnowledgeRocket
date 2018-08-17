@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
-const CORS = require('cors');
-const stripe = require('stripe')('sk_test_3Lvm44fVS3KeNWZ7sQARZfKx');
+const cors = require('cors');
+const stripe = require('stripe')(`${process.env.Secret_Key}`);
 // Import Models Here
 const StudentRouter = require('./student/StudentRouter');
 const AuthRouter = require('./auth/AuthRouter');
@@ -13,20 +13,9 @@ const QuestionRouter = require('./question/QuestionRouter');
 const CohortRouter = require('./cohort/CohortRouter');
 
 const server = express();
-const corsOptions = {
-    origin: '*',
-    methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-};
 
 // Begin code for cross-site allowances -------------------------------------
-server.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Cross Site Allowance
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
-server.use(CORS(corsOptions));
+server.use(cors());
 server.use(helmet());
 server.use(express.json());
 server.use(express.static('../client/build/'));
@@ -41,7 +30,6 @@ server.use('/api/cohort', CohortRouter);
 
 //Stripe Stuff
 server.post('/charge', async (req, res) => {
-    console.log(req.body);
     try {
         let { status } = await stripe.charges.create({
             amount: 999,
@@ -49,7 +37,7 @@ server.post('/charge', async (req, res) => {
             description: 'An example charge',
             source: req.body.token,
         });
-
+        //In here modify users to switch between pro and free
         res.json({ status });
     } catch (err) {
         res.status(500).json(err);
