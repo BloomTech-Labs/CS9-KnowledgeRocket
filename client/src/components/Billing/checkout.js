@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
+const mongoURL = process.env.REACT_APP_Db_Url || 'mongodb://127.0.0.1/knowledgerocket';
 
 class CheckoutForm extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class CheckoutForm extends Component {
 
     async submit(ev) {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
-        let response = await axios.post('http://localhost:5000/charge', {
+        let response = await axios.post(``, {
             token: token.id,
             uid: this.props.uid,
         });
