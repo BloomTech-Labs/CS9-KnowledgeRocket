@@ -16,6 +16,10 @@ function mapStateToProps(state) {
 
 // RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
+    state = {
+        cohorts: 0,
+    };
+
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -27,26 +31,39 @@ class CohortList extends Component {
     render() {
         return (
             <div className="CohortListContainer">
-                <Card className="CohortCard">
-                    <CardContent>THIS IS A COHORT</CardContent>
-                </Card>
-                <Card className="CohortCard">
-                    <CardContent>THIS IS A COHORT</CardContent>
-                </Card>
-                <Card className="CohortCard">
-                    <CardContent>THIS IS A COHORT</CardContent>
-                </Card>
-                <Card className="CohortCard">
-                    <CardContent>THIS IS A COHORT</CardContent>
-                </Card>
-                <Card className="AddButtonCard">
-                    <CardContent className="CohortCard_AddBtn">
-                        <p>New Class</p>
-                        <Button variant="fab" color="primary">
-                            <AddIcon />
-                        </Button>
-                    </CardContent>
-                </Card>
+                {this.state.cohorts > 0
+                    ? [
+                          <Card className="CohortCard">
+                              <CardContent>THIS IS A COHORT</CardContent>
+                          </Card>,
+                          <Card className="CohortCard">
+                              <CardContent>THIS IS A COHORT</CardContent>
+                          </Card>,
+                          <Card className="CohortCard">
+                              <CardContent>THIS IS A COHORT</CardContent>
+                          </Card>,
+                          <Card className="CohortCard">
+                              <CardContent>THIS IS A COHORT</CardContent>
+                          </Card>,
+                          <Card className="AddButtonCard">
+                              <CardContent className="CohortCard_AddBtn">
+                                  <p>New Class</p>
+                                  <Button variant="fab" color="primary">
+                                      <AddIcon />
+                                  </Button>
+                              </CardContent>
+                          </Card>,
+                      ]
+                    : [
+                          <Card className="AddButtonCard">
+                              <CardContent className="CohortCard_AddBtn">
+                                  <p>Add a new class</p>
+                                  <Button variant="fab" color="primary">
+                                      <AddIcon />
+                                  </Button>
+                              </CardContent>
+                          </Card>,
+                      ]}
             </div>
         );
     }
