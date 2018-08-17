@@ -3,18 +3,6 @@
     justify-content: flex-end;
 }
 
-.Home_Banner {
-    background: url('/img/HomeBanner.svg') no-repeat center center fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 90vh;
-}
-
-.Home_Content {
-    display: flex;
-    justify-content: center;
-}
-
 .Home_Button {
     background-color: white !important;
     margin: .4rem !important;
