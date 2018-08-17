@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "cross-env": "^5.2.0",
     "dotenv": "^6.0.0",
