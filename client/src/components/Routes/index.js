@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 // Components
 import Home from '../Home/Home';
 import NavBar from '../NavBar/NavBar';
@@ -8,7 +8,7 @@ import Auth from '../Auth/Auth';
 import Rocket from '../Rocket/Rocket';
 import RocketList from '../RocketList/RocketList';
 import Billing from '../Billing/Billing';
-import Cohort from '../Cohort/Cohort';
+import CohortList from '../CohortList/CohortList';
 import Settings from '../Settings/Settings';
 
 export default () => (
@@ -21,7 +21,7 @@ export default () => (
                 <Route path="/rocket" exact component={RocketList} />
                 <Route path="/rocket/single/:id" exact component={Rocket} />
                 <Route path="/rocket/billing" exact component={Billing} />
-                <Route path="/rocket/classes" exact component={Cohort} />
+                <Route path="/rocket/classes" exact component={CohortList} />
                 <Route path="/rocket/settings" exact component={Settings} />
                 <Route path="/rocket/auth" exact component={Auth} />
             </div>
