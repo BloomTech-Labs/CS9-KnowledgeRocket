@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Modal from '@material-ui/core/Modal';
 import './Billing.css';
 import CheckoutForm from './checkout';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import { Card } from '../../../node_modules/@material-ui/core';
-<script src="https://js.stripe.com/v3/" />;
 
 function mapStateToProps(state) {
     return {
