@@ -1,9 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // Actions
-import { handleGoogleResponse, handleTwitterResponse, handleFacebookResponse } from '../actions';
+import {
+	handleGoogleResponse,
+	handleTwitterResponse,
+	handleFacebookResponse,
+	addUser,
+} from '../actions';
 
 describe('action creators', () => {
+	describe('addUser', () => {
+		it('should accept a user object as an argument', () => {
+			const expected = {
+				email: expect.any(String),
+				password: expect.any(String),
+				authType: expect.any(String),
+			};
+
+			const user = {
+				email: 'knowledgerocket@gmail.com',
+				password: 'admin',
+				authType: 'add me to the db',
+			};
+
+			expect(user).toHaveProperty('email');
+			expect(user).toHaveProperty('password');
+			expect(user).toHaveProperty('authType');
+			expect(user).toMatchObject(expected);
+		});
+	});
+
 	describe('handleGoogleResponse', () => {
 		// clear all actions from mock
 
@@ -42,7 +68,7 @@ describe('action creators', () => {
 					},
 					user: {
 						uid: 'def',
-						email: 'janedoe@yahoo.com',
+						providerData: ['janedoe@yahoo.com'],
 					},
 				};
 				expect(handleTwitterResponse(response)).toEqual(expected);
