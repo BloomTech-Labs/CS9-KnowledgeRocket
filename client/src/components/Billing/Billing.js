@@ -22,7 +22,7 @@ class Billing extends Component {
     }
     render() {
         return (
-            <StripeProvider apiKey="pk_test_oydNlXkB96HkBeUCF7YjW7lK">
+            <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
                 <div className="example">
                     <Card className="Premium_Content">
                         <span className="title10">What does premium offer?</span>
