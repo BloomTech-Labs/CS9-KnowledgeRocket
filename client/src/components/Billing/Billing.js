@@ -24,7 +24,7 @@ class Billing extends Component {
     }
     render() {
         return (
-            <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
+            <StripeProvider apiKey="pk_test_oydNlXkB96HkBeUCF7YjW7lK">
                 <div className="example">
                     <Card className="Premium_Content">
                         <span className="title10">What does premium offer?</span>
