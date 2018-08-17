@@ -39,9 +39,6 @@ export default (state = defaultState, action) => {
             StateCopy.status = 'FAILED';
             return StateCopy;
         case LOGIN_USER:
-            // StateCopy.uid = action.payload.uid;
-            // StateCopy.email = action.payload.email;
-            // StateCopy.token = action.payload.token;
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = LOGIN_USER;
