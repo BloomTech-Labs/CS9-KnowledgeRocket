@@ -7,7 +7,9 @@ const User = mongoose.Schema({
     token: { type: String },
     rockets: [{ type: ObjectId, ref: 'Rocket' }],
     cohorts: [{ type: ObjectId, ref: 'Cohort' }],
+    // When Subs End: Disable Pro Functionality, but Do not Delete Stuff yet.
     account: { type: String, default: 'Free' }, // Options 'Free','Monthly', 'Yearly'
+    // authProvider: String 'Google'...
 });
 
 module.exports = mongoose.model('User', User);

@@ -5,7 +5,7 @@
 }
 
 .Auth_button {
-    margin: 0 .3rem !important;
+    margin: .3rem !important;
 }
 
 .Auth_header {
@@ -20,4 +20,12 @@
     font-weight: bold;
     width: 18rem;
     text-justify: auto;
+}
+
+.Auth_oauth_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 11.9rem;
 }

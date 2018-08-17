@@ -14,6 +14,7 @@ if (!Firebase.apps.length) {
 router.route('/').post(post);
 
 function post(req, res) {
+    console.log('post at AuthRouter', req.body)
     const { email, password, authType } = req.body;
     if (authType === 'signin') {
         // Sign In Handling
@@ -22,10 +23,18 @@ function post(req, res) {
             .signInWithEmailAndPassword(email, password)
             .then(response => {
                 const uid = response.user.uid;
-                const email = response.user.email;
+                // const email = response.user.email;
                 response.user.getIdToken().then(token => {
                     // console.log('idToken:', token);
-                    res.json({ email, uid, token });
+                    UserModel.findOne({ uid })
+                        .then(foundUser => {
+                            // Alternatively Replace Token Here and Send back Updated Token...
+                            res.json(foundUser);
+                        })
+                        .catch(errUser => {
+                            res.json({ errorMessage: errUser.message });
+                        });
+                    // res.json({ email, uid, token });
                 });
                 //handleAuthenticated();
             })
@@ -36,7 +45,7 @@ function post(req, res) {
                 console.log(errorCode, errorMessage);
                 // ...
             });
-    } else {
+    } else if (authType === 'signup') {
         // Sign Up Handling
         init_firebase
             .auth()
@@ -46,8 +55,16 @@ function post(req, res) {
                 const email = response.user.email;
                 response.user.getIdToken().then(token => {
                     // console.log('idToken:', token);
-                    UserModel.create({ email, uid, token }).then(u => console.log(u));
-                    res.json({ email, uid, token });
+                    UserModel.create({
+                        email,
+                        uid,
+                        token,
+                    })
+                        .then(createdUser => res.json(createdUser))
+                        .catch(errUser => {
+                            res.json({ errorMessage: errUser.message });
+                        });
+                    // res.json({ email, uid, token });
                 });
             })
             .catch(error => {
@@ -56,6 +73,30 @@ function post(req, res) {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
                 // ...
+            });
+    } else {
+        // Handle Oauth Here
+        const { uid } = req.body;
+        
+        // console.log('logged inside else',uid)
+        UserModel.findOne({uid})
+            .then(foundUser => {
+                if (foundUser === null) {
+                    UserModel.create({
+                        email: req.body.email,
+                        uid,
+                        token: req.body.token,
+                    })
+                        .then(createdUser => res.json(createdUser))
+                        .catch(errUser => {
+                            res.json({ errorMessage: errUser.message });
+                        });
+                } else {
+                    res.json(foundUser);
+                }                
+            })
+            .catch(errUser => {
+                res.json({ errorMessage: errUser.message });
             });
     }
 }

@@ -85,14 +85,14 @@ export const loginUserGoogle = () => async dispatch => {
         let response = await Firebase.auth().signInWithPopup(provider);
 
         const user = handleGoogleResponse(response);
-        return dispatch({
-            type: LOGIN_USER,
-            payload: {
-                uid: user.uid,
-                email: user.email,
-                token: user.token,
-            },
+        // This is where we send to the server the Oauth user Info to check against DB.
+        let serverResponse = await axios.post(`${url}/api/auth`, {
+            uid: user.uid,
+            email: user.email,
+            token: user.token,
         });
+        // console.log(serverResponse)
+        return dispatch({ type: LOGIN_USER, payload: serverResponse.data });
     } catch (err) {
         const errorCode = err.code;
         const errorMessage = err.message;
@@ -121,14 +121,15 @@ export const loginUserFacebook = () => async dispatch => {
         let response = await Firebase.auth().signInWithPopup(provider);
         console.log(`response ${JSON.stringify(response)}`);
         const user = handleFacebookResponse(response);
-        return dispatch({
-            type: LOGIN_USER,
-            payload: {
-                uid: user.uid,
-                email: user.email,
-                token: user.token,
-            },
+
+        // This is where we send to the server the Oauth user Info to check against DB.
+        let serverResponse = await axios.post(`${url}/api/auth`, {
+            uid: user.uid,
+            email: user.email,
+            token: user.token,
         });
+        // console.log(serverResponse)
+        return dispatch({ type: LOGIN_USER, payload: serverResponse.data });
     } catch (err) {
         const errorCode = err.code;
         const errorMessage = err.message;
@@ -156,14 +157,15 @@ export const loginUserTwitter = () => async dispatch => {
     try {
         let response = await Firebase.auth().signInWithPopup(provider);
         const user = handleTwitterResponse(response);
-        return dispatch({
-            type: LOGIN_USER,
-            payload: {
-                uid: user.uid,
-                email: user.email,
-                token: user.token,
-            },
+
+        // This is where we send to the server the Oauth user Info to check against DB.
+        let serverResponse = await axios.post(`${url}/api/auth`, {
+            uid: user.uid,
+            email: user.email,
+            token: user.token,
         });
+        // console.log(serverResponse)
+        return dispatch({ type: LOGIN_USER, payload: serverResponse.data });
     } catch (err) {
         const errorCode = err.code;
         const errorMessage = err.message;

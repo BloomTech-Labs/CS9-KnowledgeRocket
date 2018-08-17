@@ -22,6 +22,7 @@ class Rocket extends Component {
         }
     }
     render() {
+        console.log(this.props.state.user)
         return (
             <div className='Main_container'>
                 {`Welcome To your Rockets: ${this.props.state.user.email}`}

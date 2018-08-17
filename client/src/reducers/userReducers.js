@@ -25,9 +25,7 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADDING_USER;
             return StateCopy;
         case ADD_USER:
-            StateCopy.uid = action.payload.uid;
-            StateCopy.email = action.payload.email;
-            StateCopy.token = action.payload.token;
+            StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = ADD_USER;
             return StateCopy;
@@ -41,9 +39,10 @@ export default (state = defaultState, action) => {
             StateCopy.status = 'FAILED';
             return StateCopy;
         case LOGIN_USER:
-            StateCopy.uid = action.payload.uid;
-            StateCopy.email = action.payload.email;
-            StateCopy.token = action.payload.token;
+            // StateCopy.uid = action.payload.uid;
+            // StateCopy.email = action.payload.email;
+            // StateCopy.token = action.payload.token;
+            StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = LOGIN_USER;
             return StateCopy;
