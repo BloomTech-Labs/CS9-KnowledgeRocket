@@ -134,7 +134,8 @@ export const loginUserFacebook = () => async dispatch => {
 
 export const handleTwitterResponse = res => {
   const token = res.credential.accessToken;
-  const { uid, email } = res.user;
+  const { uid } = res.user;
+  const email = res.user.providerData[0];
   console.log(`token ${token}`);
   console.log(`user ${JSON.stringify(res.user)}`);
   const user = {
