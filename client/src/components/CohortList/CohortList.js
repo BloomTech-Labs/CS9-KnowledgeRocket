@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// Material Components
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+// Styles
+import './CohortList.css';
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
     };
 }
 
+// RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -18,13 +24,25 @@ class CohortList extends Component {
     }
     render() {
         return (
-            <div>
-                
+            <div className="CohortListContainer">
+                <Card className="CohortCard">
+                    <CardContent>THIS IS A COHORT</CardContent>
+                </Card>
+                <Card className="CohortCard">
+                    <CardContent>THIS IS A COHORT</CardContent>
+                </Card>
+                <Card className="CohortCard">
+                    <CardContent>THIS IS A COHORT</CardContent>
+                </Card>
+                <Card className="CohortCard">
+                    <CardContent>THIS IS A COHORT</CardContent>
+                </Card>
+                <Card className="AddButtonCard">
+                    <CardContent>Add A NEW COHORT</CardContent>
+                </Card>
             </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(CohortList);
+export default connect(mapStateToProps)(CohortList);
