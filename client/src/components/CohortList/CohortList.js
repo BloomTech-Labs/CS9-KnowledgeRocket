@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 // Material Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 // Styles
 import './CohortList.css';
 
@@ -38,7 +40,12 @@ class CohortList extends Component {
                     <CardContent>THIS IS A COHORT</CardContent>
                 </Card>
                 <Card className="AddButtonCard">
-                    <CardContent>Add A NEW COHORT</CardContent>
+                    <CardContent className="CohortCard_AddBtn">
+                        <p>New Class</p>
+                        <Button variant="fab" color="primary">
+                            <AddIcon />
+                        </Button>
+                    </CardContent>
                 </Card>
             </div>
         );

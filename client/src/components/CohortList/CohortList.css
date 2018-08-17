@@ -13,3 +13,7 @@
 .CohortCard {
 	/*margin: 0 1rem 0 1rem;*/
 }
+
+.CohortCard_AddBtn {
+	margin: 10px 0.5rem;
+}
