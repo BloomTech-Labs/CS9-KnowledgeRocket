@@ -15,7 +15,6 @@ class CheckoutForm extends Component {
             token: token.id,
             uid: this.props.uid,
         });
-        console.log(this.props.uid);
         if (response) this.setState({ complete: true });
     }
 
