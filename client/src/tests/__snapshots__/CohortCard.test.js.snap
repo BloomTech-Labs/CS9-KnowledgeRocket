@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CohortCard renders correctly 1`] = `
+<div
+  className="MuiCardContent-root-1"
+>
+  <div
+    className="MuiFormControl-root-2"
+  >
+    <div
+      className="MuiCardContent-root-1"
+    >
+      Name:
+    </div>
+    <div
+      className="MuiCardContent-root-1"
+    >
+      Number of Students:
+    </div>
+    <div
+      className="MuiCardContent-root-1"
+    >
+      Participation:
+    </div>
+    <div
+      className="MuiCardContent-root-1"
+    >
+      Rockets Sent:
+    </div>
+  </div>
+</div>
+`;

@@ -5,16 +5,144 @@ exports[`CohortList renders correctly 1`] = `
   className="CohortListContainer"
 >
   <div
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+  >
+    <div
+      className="MuiCardContent-root-29"
+    >
+      <div
+        className="MuiFormControl-root-30"
+      >
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Name:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Number of Students:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Participation:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Rockets Sent:
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+  >
+    <div
+      className="MuiCardContent-root-29"
+    >
+      <div
+        className="MuiFormControl-root-30"
+      >
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Name:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Number of Students:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Participation:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Rockets Sent:
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+  >
+    <div
+      className="MuiCardContent-root-29"
+    >
+      <div
+        className="MuiFormControl-root-30"
+      >
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Name:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Number of Students:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Participation:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Rockets Sent:
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+  >
+    <div
+      className="MuiCardContent-root-29"
+    >
+      <div
+        className="MuiFormControl-root-30"
+      >
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Name:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Number of Students:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Participation:
+        </div>
+        <div
+          className="MuiCardContent-root-29"
+        >
+          Rockets Sent:
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
     className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 AddButtonCard"
   >
     <div
       className="MuiCardContent-root-29 CohortCard_AddBtn"
     >
       <p>
-        Add a new class
+        New Class
       </p>
       <button
-        className="MuiButtonBase-root-56 MuiButton-root-30 MuiButton-fab-47 MuiButton-contained-41 MuiButton-containedPrimary-42 MuiButton-raised-44 MuiButton-raisedPrimary-45"
+        className="MuiButtonBase-root-60 MuiButton-root-34 MuiButton-fab-51 MuiButton-contained-45 MuiButton-containedPrimary-46 MuiButton-raised-48 MuiButton-raisedPrimary-49"
         disabled={false}
         onBlur={[Function]}
         onFocus={[Function]}
@@ -30,11 +158,11 @@ exports[`CohortList renders correctly 1`] = `
         type="button"
       >
         <span
-          className="MuiButton-label-31"
+          className="MuiButton-label-35"
         >
           <svg
             aria-hidden="true"
-            className="MuiSvgIcon-root-59"
+            className="MuiSvgIcon-root-63"
             color={undefined}
             focusable="false"
             viewBox="0 0 24 24"
@@ -49,7 +177,7 @@ exports[`CohortList renders correctly 1`] = `
           </svg>
         </span>
         <span
-          className="MuiTouchRipple-root-66"
+          className="MuiTouchRipple-root-70"
         />
       </button>
     </div>

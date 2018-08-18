@@ -36,19 +36,19 @@ class CohortList extends Component {
             <div className="CohortListContainer">
                 {this.state.cohorts.length > 0
                     ? [
-                          <Card className="CohortCard">
+                          <Card className="CohortCard" key={1}>
                               <CohortCard />
                           </Card>,
-                          <Card className="CohortCard">
+                          <Card className="CohortCard" key={2}>
                               <CohortCard />
                           </Card>,
-                          <Card className="CohortCard">
+                          <Card className="CohortCard" key={3}>
                               <CohortCard />
                           </Card>,
-                          <Card className="CohortCard">
+                          <Card className="CohortCard" key={4}>
                               <CohortCard />
                           </Card>,
-                          <Card className="AddButtonCard">
+                          <Card className="AddButtonCard" key={5}>
                               <CardContent className="CohortCard_AddBtn">
                                   <p>New Class</p>
                                   <Button variant="fab" color="primary">
