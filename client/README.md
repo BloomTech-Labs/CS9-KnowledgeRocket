@@ -1,9 +1,11 @@
 <h1>Knowledge Rockets Front-End Specification</h1>
-```
-// REACT_APP_SERVER: Environment Variable for the Hosted Location of the server in heroku
-// Ensure there is no trailing '/' at the end of the URL.
+
+```env
+# REACT_APP_SERVER: Environment Variable for the Hosted Location of the server in heroku
+# Ensure there is no trailing '/' at the end of the URL.
 REACT_APP_SERVER=https://urlofserver.com
 ```
+
 <h2>Description</h2>
 
 <p>This is the specification for the Knowledge Rockets front-end client. Click here to see the specification for the back-end. Click here to see the project's general information.</p>

@@ -6,12 +6,12 @@ const url = process.env.REACT_APP_SERVER;
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIRE_API,
-  authDomain: process.env.REACT_APP_FIRE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIRE_DB_URL,
-  projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIRE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIRE_SENDER_ID,
+    apiKey: process.env.REACT_APP_FIRE_API,
+    authDomain: process.env.REACT_APP_FIRE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIRE_DB_URL,
+    projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIRE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIRE_SENDER_ID,
 };
 
 Firebase.initializeApp(firebaseConfig);
@@ -24,154 +24,157 @@ export const UPDATE_ROCKET = 'UPDATE_ROCKET';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';
+export const ADDING_USER = 'ADDING_USER';
+export const ADD_USER_FAILURE = 'ADD_USER_FAILURE';
+
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGGING_IN_USER = 'LOGGING_IN_USER';
+export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
+
 export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Dummy Action to Add Rockets
 export const addRocket = rocket => {
-  let response = axios.post(`${url}/rocket/add`, rocket);
-  return {
-    type: ADD_ROCKET,
-    payload: response,
-  };
+    let response = axios.post(`${url}/rocket/add`, rocket);
+    return {
+        type: ADD_ROCKET,
+        payload: response,
+    };
 };
 
 // User Actions
 export const addUser = user => async dispatch => {
-  try {
-    let response = await axios.post(`${url}/api/auth`, user);
-    console.log('response in loginuser:', response.data);
-    dispatch({ type: ADD_USER, payload: response.data });
-  } catch (err) {
-    console.log(err);
-    //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
-  }
+    dispatch({ type: ADDING_USER });
+    try {
+        let response = await axios.post(`${url}/api/auth`, user);
+        dispatch({ type: ADD_USER, payload: response.data });
+    } catch (err) {
+        dispatch({ type: ADD_USER_FAILURE });
+    }
 };
 
 export const loginUser = user => async dispatch => {
-  try {
-    let response = await axios.post(`${url}/api/auth`, user);
-    console.log('response in loginuser:', response.data);
-    dispatch({ type: LOGIN_USER, payload: response.data });
-  } catch (err) {
-    console.log(err);
-    //dispatch({ type: LOGIN_USER_FAILURE, payload: err });
-  }
+    dispatch({ type: LOGGING_IN_USER });
+    try {
+        let response = await axios.post(`${url}/api/auth`, user);
+        dispatch({ type: LOGIN_USER, payload: response.data });
+    } catch (err) {
+        dispatch({ type: LOGIN_USER_FAILURE });
+    }
 };
 
 // extract uid, email, token from response.user
 export const handleGoogleResponse = res => {
-  const token = res.credential.accessToken;
-  const { uid, email } = res.user;
-  console.log(`token ${token}`);
-  console.log(`user ${JSON.stringify(res.user)}`);
-  const user = {
-    uid: uid,
-    email: email,
-    token: token,
-    authType: '3rdParty',
-  };
-  return user;
+    const token = res.credential.accessToken;
+    const { uid, email } = res.user;
+    console.log(`token ${token}`);
+    console.log(`user ${JSON.stringify(res.user)}`);
+    const user = {
+        uid: uid,
+        email: email,
+        token: token,
+        authType: '3rdParty',
+    };
+    return user;
 };
 
 // TODO SEND DATA TO AN ENDPOINT
 export const loginUserGoogle = () => async dispatch => {
-  const provider = new Firebase.auth.GoogleAuthProvider();
-  try {
-    let response = await Firebase.auth().signInWithPopup(provider);
+    const provider = new Firebase.auth.GoogleAuthProvider();
+    try {
+        let response = await Firebase.auth().signInWithPopup(provider);
 
-    const user = handleGoogleResponse(response);
-    return dispatch({
-      type: LOGIN_USER,
-      payload: {
-        uid: user.uid,
-        email: user.email,
-        token: user.token,
-      },
-    });
-  } catch (err) {
-    const errorCode = err.code;
-    const errorMessage = err.message;
-    console.log(errorCode, errorMessage);
-  }
+        const user = handleGoogleResponse(response);
+        return dispatch({
+            type: LOGIN_USER,
+            payload: {
+                uid: user.uid,
+                email: user.email,
+                token: user.token,
+            },
+        });
+    } catch (err) {
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log(errorCode, errorMessage);
+    }
 };
 
 export const handleFacebookResponse = res => {
-  const token = res.credential.accessToken;
-  const { uid, email } = res.user;
-  console.log(`token ${token}`);
-  console.log(`user ${JSON.stringify(res.user)}`);
-  const user = {
-    uid: uid,
-    email: email,
-    token: token,
-    authType: '3rdParty',
-  };
-  return user;
+    const token = res.credential.accessToken;
+    const { uid, email } = res.user;
+    console.log(`token ${token}`);
+    console.log(`user ${JSON.stringify(res.user)}`);
+    const user = {
+        uid: uid,
+        email: email,
+        token: token,
+        authType: '3rdParty',
+    };
+    return user;
 };
 
 export const loginUserFacebook = () => async dispatch => {
-  const provider = new Firebase.auth.FacebookAuthProvider();
+    const provider = new Firebase.auth.FacebookAuthProvider();
 
-  try {
-    let response = await Firebase.auth().signInWithPopup(provider);
-    console.log(`response ${JSON.stringify(response)}`);
-    const user = handleFacebookResponse(response);
-    return dispatch({
-      type: LOGIN_USER,
-      payload: {
-        uid: user.uid,
-        email: user.email,
-        token: user.token,
-      },
-    });
-  } catch (err) {
-    const errorCode = err.code;
-    const errorMessage = err.message;
-    console.log(errorCode, errorMessage);
-  }
+    try {
+        let response = await Firebase.auth().signInWithPopup(provider);
+        console.log(`response ${JSON.stringify(response)}`);
+        const user = handleFacebookResponse(response);
+        return dispatch({
+            type: LOGIN_USER,
+            payload: {
+                uid: user.uid,
+                email: user.email,
+                token: user.token,
+            },
+        });
+    } catch (err) {
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log(errorCode, errorMessage);
+    }
 };
 
 export const handleTwitterResponse = res => {
-  const token = res.credential.accessToken;
-  const { uid } = res.user;
-  const email = res.user.providerData[0];
-  console.log(`token ${token}`);
-  console.log(`user ${JSON.stringify(res.user)}`);
-  const user = {
-    uid: uid,
-    email: email,
-    token: token,
-    authType: '3rdParty',
-  };
-  return user;
+    const token = res.credential.accessToken;
+    const { uid, email } = res.user;
+    console.log(`token ${token}`);
+    console.log(`user ${JSON.stringify(res.user)}`);
+    const user = {
+        uid: uid,
+        email: email,
+        token: token,
+        authType: '3rdParty',
+    };
+    return user;
 };
 
 export const loginUserTwitter = () => async dispatch => {
-  const provider = new Firebase.auth.TwitterAuthProvider();
+    const provider = new Firebase.auth.TwitterAuthProvider();
 
-  try {
-    let response = await Firebase.auth().signInWithPopup(provider);
-    const user = handleTwitterResponse(response);
-    return dispatch({
-      type: LOGIN_USER,
-      payload: {
-        uid: user.uid,
-        email: user.email,
-        token: user.token,
-      },
-    });
-  } catch (err) {
-    const errorCode = err.code;
-    const errorMessage = err.message;
-    console.log(errorCode, errorMessage);
-  }
+    try {
+        let response = await Firebase.auth().signInWithPopup(provider);
+        const user = handleTwitterResponse(response);
+        return dispatch({
+            type: LOGIN_USER,
+            payload: {
+                uid: user.uid,
+                email: user.email,
+                token: user.token,
+            },
+        });
+    } catch (err) {
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log(errorCode, errorMessage);
+    }
 };
 
 export const logOutUser = () => async dispatch => {
-  try {
-    dispatch({ type: LOGOUT_USER });
-  } catch (err) {
-    console.log(err);
-  }
+    try {
+        dispatch({ type: LOGOUT_USER });
+    } catch (err) {
+        console.log(err);
+    }
 };
