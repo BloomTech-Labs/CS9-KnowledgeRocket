@@ -68,7 +68,7 @@ describe('action creators', () => {
 					},
 					user: {
 						uid: 'def',
-						providerData: ['janedoe@yahoo.com'],
+						email: 'janedoe@yahoo.com',
 					},
 				};
 				expect(handleTwitterResponse(response)).toEqual(expected);
