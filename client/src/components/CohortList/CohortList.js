@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 // Material Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,11 +10,11 @@ import CohortCard from '../CohortCard/CohortCard';
 // Styles
 import './CohortList.css';
 
-function mapStateToProps(state) {
-    return {
-        state,
-    };
-}
+// function mapStateToProps(state) {
+//     return {
+//         state,
+//     };
+// }
 
 // RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
