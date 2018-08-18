@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Home from "../components/Home/Home.js";
+import Home, { HomeContainer} from "../components/Home/Home.js";
 
 Enzyme.configure({ adapter: new Adapter() });
 
