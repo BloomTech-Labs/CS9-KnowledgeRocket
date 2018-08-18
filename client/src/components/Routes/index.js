@@ -16,7 +16,6 @@ export default () => (
         <div className="routeContainer">
             <Route path="/rocket" component={NavBar} />
             <div className="Content_container">
-                {/* <Route path="/" component={Home} /> */}
                 <Route path="/rocket" component={ControlPanel} />
                 <Route path="/rocket" exact component={RocketList} />
                 <Route path="/rocket/single/:id" exact component={Rocket} />
