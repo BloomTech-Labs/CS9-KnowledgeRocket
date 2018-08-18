@@ -5,6 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+// Components
+import CohortCard from '../CohortCard/CohortCard';
 // Styles
 import './CohortList.css';
 
@@ -17,9 +19,10 @@ function mapStateToProps(state) {
 // RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
     state = {
-        cohorts: 0,
+        cohorts: [{}],
     };
 
+    // pull cohort list for a user from state this.props.state.user.cohorts
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -31,19 +34,19 @@ class CohortList extends Component {
     render() {
         return (
             <div className="CohortListContainer">
-                {this.state.cohorts > 0
+                {this.state.cohorts.length > 0
                     ? [
                           <Card className="CohortCard">
-                              <CardContent>THIS IS A COHORT</CardContent>
+                              <CohortCard />
                           </Card>,
                           <Card className="CohortCard">
-                              <CardContent>THIS IS A COHORT</CardContent>
+                              <CohortCard />
                           </Card>,
                           <Card className="CohortCard">
-                              <CardContent>THIS IS A COHORT</CardContent>
+                              <CohortCard />
                           </Card>,
                           <Card className="CohortCard">
-                              <CardContent>THIS IS A COHORT</CardContent>
+                              <CohortCard />
                           </Card>,
                           <Card className="AddButtonCard">
                               <CardContent className="CohortCard_AddBtn">
