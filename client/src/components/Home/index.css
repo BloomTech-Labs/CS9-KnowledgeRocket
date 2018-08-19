@@ -1,9 +1,0 @@
-.Home_ButtonDiv {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.Home_Button {
-    background-color: white !important;
-    margin: .4rem !important;
-}
