@@ -67,8 +67,8 @@ export const loginUser = user => async dispatch => {
 export const handleGoogleResponse = res => {
     const token = res.credential.accessToken;
     const { uid, email } = res.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(res.user)}`);
+    // console.log(`token ${token}`);
+    // console.log(`user ${JSON.stringify(res.user)}`);
     const user = {
         uid: uid,
         email: email,
@@ -103,8 +103,8 @@ export const loginUserGoogle = () => async dispatch => {
 export const handleFacebookResponse = res => {
     const token = res.credential.accessToken;
     const { uid, email } = res.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(res.user)}`);
+    // console.log(`token ${token}`);
+    // console.log(`user ${JSON.stringify(res.user)}`);
     const user = {
         uid: uid,
         email: email,
@@ -119,7 +119,7 @@ export const loginUserFacebook = () => async dispatch => {
 
     try {
         let response = await Firebase.auth().signInWithPopup(provider);
-        console.log(`response ${JSON.stringify(response)}`);
+        // console.log(`response ${JSON.stringify(response)}`);
         const user = handleFacebookResponse(response);
 
         // This is where we send to the server the Oauth user Info to check against DB.
@@ -140,8 +140,8 @@ export const loginUserFacebook = () => async dispatch => {
 export const handleTwitterResponse = res => {
     const token = res.credential.accessToken;
     const { uid, email } = res.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(res.user)}`);
+    // console.log(`token ${token}`);
+    // console.log(`user ${JSON.stringify(res.user)}`);
     const user = {
         uid: uid,
         email: email,
