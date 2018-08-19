@@ -1,55 +1,183 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Enzyme, { shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import Home, { HomeContainer} from "../components/Home/Home.js";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import Home from '../components/Home/Home';
+import {
+    HomeContainer,
+    HomeCTA,
+    HomeNav,
+    NavLogo,
+    NavButton,
+    HomeHeader,
+    MidSection,
+    MidSectionWrapper,
+    MidColumn,
+    MidContainer,
+    MidHeader,
+    MidImg,
+    MidSectionText,
+    FooterSection,
+} from '../components/Home/HomeStyled';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("<Home />", () => {
-	const wrapper = shallow(<Home />);
-	const instance = wrapper.instance();
+describe('<Home />', () => {
+    const wrapper = shallow(<Home />);
 
-	it("renders without crashing", () => {
-		const div = document.createElement("div");
-		ReactDOM.render(<Home />, div);
-	});
+    it('renders without crashing', () => {
+        const div = document.createElement('div');
+        ReactDOM.render(<Home />, div);
+    });
 
-	describe("Home Banner container", () => {
-		it("has a Home_Banner container", () => {
-			expect(wrapper.exists(".Home_Banner")).toBe(true);
-		});
+    describe('HomeContainer', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<HomeContainer />, div);
+        });
 
-		it("renders a Sign Up button", () => {
-			expect(
-				wrapper
-					.find(".Home_Button")
-					.at(0)
-					.render()
-					.text()
-			).toBe("Sign Up");
-		});
+        it('renders a Sign Up button', () => {
+            expect(
+                wrapper
+                    .find(NavButton)
+                    .at(0)
+                    .render()
+                    .text()
+            ).toBe('Sign Up');
+        });
 
-		it("renders a Sign In button", () => {
-			expect(
-				wrapper
-					.find(".Home_Button")
-					.at(1)
-					.render()
-					.text()
-			).toBe("Sign In");
-		});
-	});
+        it('renders a Sign In button', () => {
+            expect(
+                wrapper
+                    .find(NavButton)
+                    .at(1)
+                    .render()
+                    .text()
+            ).toBe('Sign In');
+        });
 
-	describe("Home Content container", () => {
-		it("has a Home_Content container", () => {
-			expect(wrapper.exists(".Home_Content")).toBe(true);
-		});
-	});
+        it('Displays What is a Knowledge Rocket?', () => {
+            expect(
+                wrapper
+                    .find(HomeHeader)
+                    .at(0)
+                    .render()
+                    .text()
+            ).toBe('What is a Knowledge Rocket?');
+        });
 
-	describe("Home Bottom container", () => {
-		it("has a Home_Bottom container", () => {
-			expect(wrapper.exists(".Home_Bottom")).toBe(true);
-		});
-	});
+        it('Displays Implementation Text on Column', () => {
+            expect(
+                wrapper
+                    .find(MidHeader)
+                    .at(0)
+                    .render()
+                    .text()
+            ).toBe('Implementation');
+        });
+
+        it('Displays Practice Text on Column', () => {
+            expect(
+                wrapper
+                    .find(MidHeader)
+                    .at(1)
+                    .render()
+                    .text()
+            ).toBe('Practice');
+        });
+
+        it('Displays Results Text on Column', () => {
+            expect(
+                wrapper
+                    .find(MidHeader)
+                    .at(2)
+                    .render()
+                    .text()
+            ).toBe('Results');
+        });
+    });
+
+    describe('HomeCTA', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<HomeCTA />, div);
+        });
+    });
+
+    describe('NavLogo', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<NavLogo />, div);
+        });
+    });
+
+    describe('HomeNav', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<HomeNav />, div);
+        });
+    });
+
+    describe('HomeHeader', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<HomeHeader />, div);
+        });
+    });
+
+    describe('MidSection', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<MidSection />, div);
+        });
+    });
+
+    describe('MidSectionWrapper', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<MidSectionWrapper />, div);
+        });
+    });
+
+    describe('MidColumn', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<MidColumn />, div);
+        });
+    });
+
+    describe('MidContainer', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<MidContainer />, div);
+        });
+    });
+
+    describe('MidHeader', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<MidHeader />, div);
+        });
+    });
+
+    describe('MidImg', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<MidImg />, div);
+        });
+    });
+
+    describe('MidSectionText', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<MidSectionText />, div);
+        });
+    });
+
+    describe('FooterSection', () => {
+        it('renders without crashing', () => {
+            const div = document.createElement('div');
+            ReactDOM.render(<FooterSection />, div);
+        });
+    });
 });
