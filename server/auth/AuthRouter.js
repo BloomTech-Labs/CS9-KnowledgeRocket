@@ -23,7 +23,7 @@ let init_firebase;
 const serviceAccount = {
     projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
     clientEmail: process.env.SERVER_FIRE_CLIENT_EMAIL,
-    privateKey: process.env.SERVER_FIRE_PRIVATE_KEY
+    privateKey: process.env.SERVER_FIRE_PRIVATE_KEY.replace(/\\n/g, '\n'),
 };
 
 // Init FireBase App if none exists
