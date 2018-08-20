@@ -14,11 +14,8 @@ import FormControl from '@material-ui/core/FormControl';
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList
 class CohortCard extends Component {
 	render() {
-		// each card renders:
-		// Cohort name
-		// Number of students
-		// Participation(%)
-		// Rockets sent
+		console.log(`PROPS ${JSON.stringify(this.props)}`);
+
 		return (
 			<CardContent>
 				<FormControl>
