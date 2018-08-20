@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './Billing.css';
 import CheckoutForm from './checkout';
 import { Elements, StripeProvider } from 'react-stripe-elements';
-import { Card } from '../../../node_modules/@material-ui/core';
+import { Card, Modal } from '../../../node_modules/@material-ui/core';
 
 function mapStateToProps(state) {
     return {
@@ -12,6 +12,13 @@ function mapStateToProps(state) {
 }
 
 class Billing extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+        };
+    }
+
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -19,6 +26,9 @@ class Billing extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
+    }
+    handleOpen() {
+        this.setState({ open: !this.state.open });
     }
     render() {
         return (
@@ -32,13 +42,19 @@ class Billing extends Component {
                             every 10 students. You can have as many students and knowledge rockets
                             as you could ever want.
                         </p>
-                        <h1>Join the Premium Team For Only $9.99</h1>
                     </Card>
-                    <Card>
+                    <button className="ModalButtonStripe" onClick={this.handleOpen.bind(this)}>
+                        Join the Premium Team For Only $9.99
+                    </button>
+                    <Modal className="Stripe_Modal" open={this.state.open}>
                         <Elements>
-                            <CheckoutForm uid={this.props.state.user.uid} />
+                            <CheckoutForm
+                                className="Stripe_Modal"
+                                uid={this.props.state.user.uid}
+                                onClick={this.handleOpen}
+                            />
                         </Elements>
-                    </Card>
+                    </Modal>
                 </div>
             </StripeProvider>
         );
