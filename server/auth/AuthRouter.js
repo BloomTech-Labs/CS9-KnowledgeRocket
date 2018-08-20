@@ -31,7 +31,6 @@ router.route('/').post(post);
 // In the case a user is already authenticated on front end.
 
 function post(req, res) {
-    console.log('post at AuthRouter', req.body);
     const { email, password, authType } = req.body;
     if (authType === 'signin') {
         // Sign In Handling
@@ -68,7 +67,7 @@ function post(req, res) {
                     UserModel.create({
                         email,
                         uid,
-                        token,
+                        authProvider: 'email',
                     })
                         .then(createdUser => res.json(createdUser))
                         .catch(errUser => {
@@ -83,7 +82,7 @@ function post(req, res) {
             });
     } else {
         // Handle Oauth Here
-        const { uid, token, authType } = req.body;
+        const { uid, token, authType, email } = req.body;
         // If the token checks out continue
         // Else Break and Send Auth Error.
         admin
@@ -96,9 +95,8 @@ function post(req, res) {
                         .then(foundUser => {
                             if (foundUser === null) {
                                 UserModel.create({
-                                    email: req.body.email,
+                                    email,
                                     uid,
-                                    token,
                                     authProvider: authType,
                                 })
                                     .then(createdUser =>

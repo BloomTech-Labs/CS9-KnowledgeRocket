@@ -14,19 +14,28 @@ const CohortRouter = require('./cohort/CohortRouter');
 
 const server = express();
 
+const authMiddleware = (req, res, next) => {
+    // TODO: Implement Authentication and Authorization
+    // const {token, uid} = req.headers;
+    // Will require Front-End Caching of Data to save spot
+    // So data is back if user's token expires while they are not done.
+    next();
+};
+
 // Begin code for cross-site allowances -------------------------------------
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
 server.use(express.static('../client/build/'));
 
-server.use('/api/student', StudentRouter);
+// Back End Routes will User authMiddleware
+server.use('/api/student', authMiddleware, StudentRouter);
 server.use('/api/auth/', AuthRouter);
-server.use('/api/rocket', RocketRouter);
-server.use('/api/user', UserRouter);
-server.use('/api/responserocket', ResponseRocketRouter);
-server.use('/api/question', QuestionRouter);
-server.use('/api/cohort', CohortRouter);
+server.use('/api/rocket', authMiddleware, RocketRouter);
+server.use('/api/user', authMiddleware, UserRouter);
+server.use('/api/responserocket', authMiddleware, ResponseRocketRouter);
+server.use('/api/question', authMiddleware, QuestionRouter);
+server.use('/api/cohort', authMiddleware, CohortRouter);
 
 //Stripe Stuff
 server.post('/charge', async (req, res) => {
