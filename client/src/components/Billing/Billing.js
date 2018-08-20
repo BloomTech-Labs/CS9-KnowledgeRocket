@@ -35,7 +35,7 @@ class Billing extends Component {
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
                 <div className="example">
-                    <div className="Premium_Content">
+                    <Card className="Premium_Content">
                         <span className="title10">What does premium offer?</span>
                         <p className="pText">
                             It offers unlimited access to all your favorite features for a period of
@@ -44,7 +44,7 @@ class Billing extends Component {
                             as you could ever want.
                         </p>
                         <h3 className="premTeam">Join the Premium Team For Only $9.99</h3>
-                    </div>
+                    </Card>
                     <Elements>
                         <CheckoutForm
                             className="Stripe_Modal"
