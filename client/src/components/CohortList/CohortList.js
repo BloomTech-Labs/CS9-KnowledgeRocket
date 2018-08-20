@@ -75,7 +75,9 @@ class CohortList extends Component {
           ? [
               // user has at least one cohort, render a cohort card
               <CohortCardContainer>
-                {this.state.cohort.map((cohort, index) => <StyledCohortCard cohort={cohort} />)},
+                {this.state.cohort.map((cohort, index) => (
+                  <StyledCohortCard key={cohort.students[index]} cohort={cohort} />
+                ))},
               </CohortCardContainer>,
               <Card className="AddButtonCard" key={5}>
                 <StyledCardContent>
