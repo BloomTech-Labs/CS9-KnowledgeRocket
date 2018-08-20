@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { generateBreadCrumbs } from '../../actions';
+import { generateBreadCrumbs } from '../../actions';
 
 function mapStateToProps(state) {
     return {
