@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 // Material Components
+import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
@@ -15,14 +16,16 @@ import FormControl from '@material-ui/core/FormControl';
 const CohortCard = props => {
 	console.log(`PROPS ${JSON.stringify(props)}`);
 	return (
-		<CardContent>
-			<FormControl>
-				<Input>{props.cohort.title}</Input>
-				<Input>Students: {props.cohort.students.length}</Input>
-				<Input>Participation:</Input>
-				<Input>Rockets Sent:</Input>
-			</FormControl>
-		</CardContent>
+		<Card className={props.className}>
+			<CardContent>
+				<FormControl>
+					<Input>{props.cohort.title}</Input>
+					<Input>Students: {props.cohort.students.length}</Input>
+					<Input>Participation:</Input>
+					<Input>Rockets Sent:</Input>
+				</FormControl>
+			</CardContent>
+		</Card>
 	);
 };
 
