@@ -96,7 +96,7 @@ function post(req, res) {
             });
     } else {
         // Handle Oauth Here
-        const { uid, token } = req.body;
+        const { uid, token, authType } = req.body;
         // If the token checks out continue
         // Else Break and Send Auth Error.
         admin
@@ -111,11 +111,17 @@ function post(req, res) {
                                 UserModel.create({
                                     email: req.body.email,
                                     uid,
-                                    token: req.body.token,
+                                    token,
+                                    authProvider: authType,
                                 })
-                                    .then(createdUser => res.json(createdUser))
+                                    .then(createdUser =>
+                                        res.json(createdUser)
+                                    )
                                     .catch(errUser => {
-                                        res.json({ errorMessage: errUser.message });
+                                        res.json({
+                                            errorMessage:
+                                                errUser.message,
+                                        });
                                     });
                             } else {
                                 res.json(foundUser);
