@@ -11,15 +11,12 @@ describe('testing generateEmail internals', () => {
             html: '<p>still not blank</p>',
             cc: null,
         };
-        it('calls validator with validatee', () => {
-            const validator = jest.fn();
-            const validatee = {};
-            validate(validatee, validator);
-            expect(validator.mock.calls.length).toBe(1);
-        });
         describe('Validator', () => {
-            it('exists', async () => {
-                expect(Validator).toBeTruthy();
+            it('calls validator with validatee', () => {
+                const validator = jest.fn();
+                const validatee = {};
+                validate(validatee, validator);
+                expect(validator.mock.calls.length).toBe(1);
             });
 
             it('returns an object shaped {isValid, errors}', async () => {
