@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders without crashing 1`] = `
+<div>
+  <div
+    className="routeContainer"
+  >
+    <div
+      className="Content_container"
+    />
+    <div>
+       
+      <div
+        className="Home_Banner"
+      >
+         
+        <div
+          className="Home_ButtonDiv"
+        >
+          <button
+            className="MuiButtonBase-root-27 MuiButton-root-1 MuiButton-text-3 MuiButton-textPrimary-4 MuiButton-flat-6 MuiButton-flatPrimary-7 Home_Button"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiButton-label-2"
+            >
+              Sign Up
+            </span>
+            <span
+              className="MuiTouchRipple-root-30"
+            />
+          </button>
+          <button
+            className="MuiButtonBase-root-27 MuiButton-root-1 MuiButton-text-3 MuiButton-textPrimary-4 MuiButton-flat-6 MuiButton-flatPrimary-7 Home_Button"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiButton-label-2"
+            >
+              Sign In
+            </span>
+            <span
+              className="MuiTouchRipple-root-30"
+            />
+          </button>
+        </div>
+      </div>
+       
+      <div
+        className="Home_Content"
+      >
+         
+        <h1>
+          What is a Knowledge Rocket?
+        </h1>
+      </div>
+       
+      <div
+        className="Home_Bottom"
+      >
+         
+        <footer />
+      </div>
+       
+    </div>
+  </div>
+</div>
+`;
