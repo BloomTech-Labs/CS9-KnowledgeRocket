@@ -1,74 +1,75 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // Actions
-import { handleGoogleResponse, handleTwitterResponse, handleFacebookResponse } from '../actions';
+import {
+    handleGoogleResponse,
+    handleTwitterResponse,
+    handleFacebookResponse,
+    addUser,
+} from '../actions';
 
 describe('action creators', () => {
-	describe('handleGoogleResponse', () => {
-		// clear all actions from mock
+    describe('handleGoogleResponse', () => {
+        const correctToken = '123abc';
+        // clear all actions from mock
+        // NO longer able to mock token tests, because they are Checked by Auth System now.
+        const expected = {
+            uid: 'abc',
+            email: 'johndoe@yahoo.com',
+            authType: 'google',
+            token: correctToken,
+        };
 
-		it('should create a user object from a response object', async () => {
-			const expected = {
-				uid: 'abc',
-				email: 'johndoe@yahoo.com',
-				token: '123abc',
-				authType: '3rdParty',
-			};
+        const response = {
+            user: {
+                uid: 'abc',
+                email: 'johndoe@yahoo.com',
+            },
+        };
+        expect(handleGoogleResponse(response, correctToken)).toEqual(expected);
+    });
 
-			const response = {
-				credential: {
-					accessToken: '123abc',
-				},
-				user: {
-					uid: 'abc',
-					email: 'johndoe@yahoo.com',
-				},
-			};
-			expect(handleGoogleResponse(response)).toEqual(expected);
-		});
+    describe('handleTwitterResponse', () => {
+        it('should create a user object from a response object', async () => {
+            const correctToken = '123abc';
 
-		describe('handleTwitterResponse', () => {
-			it('should create a user object from a response object', async () => {
-				const expected = {
-					uid: 'def',
-					email: 'janedoe@yahoo.com',
-					token: '456def',
-					authType: '3rdParty',
-				};
-				// describes response object from async call to firebase.auth()
-				const response = {
-					credential: {
-						accessToken: '456def',
-					},
-					user: {
-						uid: 'def',
-						email: 'janedoe@yahoo.com',
-					},
-				};
-				expect(handleTwitterResponse(response)).toEqual(expected);
-			});
-		});
+            const expected = {
+                uid: 'abc',
+                email: 'johndoe@yahoo.com',
+                authType: 'twitter',
+                token: correctToken,
+            };
 
-		describe('handleFacebookResponse', () => {
-			it('should create a user object from a response object', async () => {
-				const expected = {
-					uid: 'jkl',
-					email: 'janedoe@lambda.com',
-					token: '789jkl',
-					authType: '3rdParty',
-				};
-				// describes response object from async call to firebase.auth()
-				const response = {
-					credential: {
-						accessToken: '789jkl',
-					},
-					user: {
-						uid: 'jkl',
-						email: 'janedoe@lambda.com',
-					},
-				};
-				expect(handleFacebookResponse(response)).toEqual(expected);
-			});
-		});
-	});
+            const response = {
+                user: {
+                    uid: 'abc',
+                    email: '',
+                },
+                additionalUserInfo: { profile: { email: 'johndoe@yahoo.com' } },
+            };
+            expect(handleTwitterResponse(response, correctToken)).toEqual(expected);
+        });
+    });
+
+    describe('handleFacebookResponse', () => {
+        it('should create a user object from a response object', async () => {
+            const correctToken = '789jkl';
+
+            const expected = {
+                uid: 'jkl',
+                email: 'janedoe@lambda.com',
+                authType: 'facebook',
+                token: correctToken,
+            };
+
+            // describes response object from async call to firebase.auth()
+            const response = {
+                user: {
+                    uid: 'jkl',
+                    email: 'janedoe@lambda.com',
+                },
+            };
+            expect(handleFacebookResponse(response, correctToken)).toEqual(expected);
+        });
+    });
 });

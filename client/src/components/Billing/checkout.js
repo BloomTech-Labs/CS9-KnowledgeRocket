@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 const serverURL = process.env.REACT_APP_Stripe_Url;
@@ -14,10 +15,19 @@ class CheckoutForm extends Component {
             token: token.id,
             uid: this.props.uid,
         });
-        if (response) this.setState({ complete: true });
+        if (response) {
+            //TODO ACTION FOR UPDATING ACCOUNT
+            this.setState({ complete: true });
+        }
     }
     render() {
-        if (this.state.complete) return <h1>Purchase Complete!!</h1>;
+        if (this.state.complete)
+            return (
+                <div>
+                    <h1>Transaction Complete! Thank you!</h1>
+                    <Link to="/rocket">Return To Rockets</Link>
+                </div>
+            );
         return (
             <div className="checkout">
                 <p>Would you like to complete the purchase?</p>

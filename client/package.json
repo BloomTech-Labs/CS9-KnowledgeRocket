@@ -1,34 +1,33 @@
 {
-    "name": "knowledgerocket",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "@material-ui/core": "^1.5.0",
-        "@material-ui/icons": "^2.0.2",
-        "axios": "^0.18.0",
-        "dotenv": "^6.0.0",
-        "enzyme": "^3.4.1",
-        "enzyme-adapter-react-16": "^1.2.0",
-        "firebase": "^5.3.1",
-        "jest": "^20.0.4",
-        "material-ui": "^0.20.2",
-        "react": "^16.4.2",
-        "react-dom": "^16.4.2",
-        "react-redux": "^5.0.7",
-        "react-router-dom": "^4.3.1",
-        "react-scripts": "1.1.4",
-        "react-stripe-elements": "^2.0.1",
-        "react-test-renderer": "^16.4.2",
-        "redux": "^4.0.0",
-        "redux-logger": "^3.0.6",
-        "redux-thunk": "^2.3.0",
-        "styled-components": "^3.4.2"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test --env=jsdom",
-        "test:once": "CI=true react-scripts test --env=jsdom",
-        "eject": "react-scripts eject"
-    }
+  "name": "knowledgerocket",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.5.0",
+    "@material-ui/icons": "^2.0.2",
+    "axios": "^0.18.0",
+    "dotenv": "^6.0.0",
+    "enzyme": "^3.4.1",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "firebase": "^5.3.1",
+    "material-ui": "^0.20.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "react-stripe-elements": "^2.0.1",
+    "react-test-renderer": "^16.4.2",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^3.4.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "test:once": "CI=true react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
