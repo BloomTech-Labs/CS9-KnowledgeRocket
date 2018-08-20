@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
     };
 }
 
@@ -17,14 +17,8 @@ class CohortList extends Component {
         }
     }
     render() {
-        return (
-            <div>
-                
-            </div>
-        );
+        return <div />;
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(CohortList);
+export default connect(mapStateToProps)(CohortList);

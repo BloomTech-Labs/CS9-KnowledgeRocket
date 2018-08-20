@@ -7,6 +7,7 @@ import {
     loginUserGoogle,
     loginUserFacebook,
     loginUserTwitter,
+    generateBreadCrumbs,
 } from '../../actions';
 import { Button, Input } from '@material-ui/core';
 import Progress from '../Progress/Progress';
@@ -30,6 +31,7 @@ class Auth extends Component {
         this.props.user.success === false
             ? this.setState({ success: false })
             : this.setState({ success: true });
+        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
 
     handleInput = e => {
@@ -173,5 +175,6 @@ export default connect(
         loginUserGoogle,
         loginUserFacebook,
         loginUserTwitter,
+        generateBreadCrumbs,
     }
 )(Auth);

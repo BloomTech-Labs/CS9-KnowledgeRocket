@@ -33,6 +33,9 @@ export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+// Breadcrumb Actions
+export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
+
 // Dummy Action to Add Rockets
 export const addRocket = rocket => {
     let response = axios.post(`${url}/rocket/add`, rocket);
@@ -143,3 +146,11 @@ export const logOutUser = () => async dispatch => {
         console.log(err);
     }
 };
+
+/* BREADCRUMBS GENERATION */
+export const generateBreadCrumbs = (path) => {
+    return {
+        type: UPDATE_BREADCRUMBS,
+        payload: path
+    }
+}
