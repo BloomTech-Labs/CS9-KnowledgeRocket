@@ -7,12 +7,8 @@
 .title10 {
     display: flex;
     font-size: 3rem;
-    background-color: beige;
     padding-left: 25%;
     font-weight: bold;
-}
-h1 {
-    font-size: 3rem;
 }
 .example {
     width: 100%;
@@ -24,9 +20,10 @@ h1 {
 .ModalButtonStripe {
     margin-left: 42%;
 }
-.pText {
-    background-color: beige;
-}
 .checkout {
     background-color: white;
+}
+.premTeam {
+    font-weight: bold;
+    text-align: center;
 }
