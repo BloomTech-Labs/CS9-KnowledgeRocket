@@ -30,7 +30,4 @@ class Rocket extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { generateBreadCrumbs }
-)(Rocket);
+export default connect(mapStateToProps, { generateBreadCrumbs })(Rocket);

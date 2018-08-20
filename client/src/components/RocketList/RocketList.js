@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
     };
 }
 
@@ -18,13 +18,11 @@ class RocketList extends Component {
     }
     render() {
         return (
-            <div>
-                
+            <div className="Main_container">
+                {`Welcome To your Rockets: ${this.props.state.user.email}`}
             </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(RocketList);
+export default connect(mapStateToProps)(RocketList);

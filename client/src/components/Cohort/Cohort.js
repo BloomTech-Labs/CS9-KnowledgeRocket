@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs } from '../../actions';
 import './Cohort.css';
+// Components
+import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 
-function mapStateToProps(state) {
-    return {
-        state,
-    };
-}
+// function mapStateToProps(state) {
+//     return {
+//         state
+//     };
+// }
 
 class Cohort extends Component {
     componentDidMount() {
@@ -20,11 +22,15 @@ class Cohort extends Component {
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
     render() {
-        return <div className="Main_container">COHORT PLACEHOLDER</div>;
+        return (
+            <div className="Main_container">
+                <CohortSettingForm />
+            </div>
+        );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { generateBreadCrumbs }
-)(Cohort);
+export default Cohort;
+// export default connect(
+//     mapStateToProps,
+// )(Cohort);
