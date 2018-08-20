@@ -9,29 +9,10 @@ import {
 } from '../actions';
 
 describe('action creators', () => {
-    describe('addUser', () => {
-        it('should accept a user object as an argument', () => {
-            const expected = {
-                email: expect.any(String),
-                password: expect.any(String),
-                authType: expect.any(String),
-            };
-
-            const user = {
-                email: 'knowledgerocket@gmail.com',
-                password: 'admin',
-                authType: 'add me to the db',
-            };
-
-            expect(user).toHaveProperty('email');
-            expect(user).toHaveProperty('password');
-            expect(user).toHaveProperty('authType');
-            expect(user).toMatchObject(expected);
-        });
-    });
-
     describe('handleGoogleResponse', () => {
+        const correctToken = '123abc';
         // clear all actions from mock
+        // NO longer able to mock token tests, because they are Checked by Auth System now.
         const expected = {
             uid: 'abc',
             email: 'johndoe@yahoo.com',
