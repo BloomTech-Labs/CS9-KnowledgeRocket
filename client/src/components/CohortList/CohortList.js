@@ -50,6 +50,11 @@ const StyledCardContent = styled(CardContent)`
   margin: 10px 0.5rem;
 `;
 
+const AddButtonCardTitle = styled.h3`
+  display: block;
+  margin-bottom: 20px;
+`;
+
 // RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
   state = {
@@ -85,7 +90,7 @@ class CohortList extends Component {
             ))}
             <AddButtonCard>
               <StyledCardContent>
-                <p>New Class</p>
+                <AddButtonCardTitle>New Class</AddButtonCardTitle>
                 <Button variant="fab" color="primary">
                   <AddIcon />
                 </Button>
@@ -95,14 +100,14 @@ class CohortList extends Component {
         ) : (
           // user has 0 cohorts, render add new class btn
           [
-            <Card>
+            <AddButtonCard>
               <StyledCardContent>
-                <p>Add a new class</p>
+                <AddButtonCardTitle>Add a new class</AddButtonCardTitle>
                 <Button variant="fab" color="primary">
                   <AddIcon />
                 </Button>
               </StyledCardContent>
-            </Card>,
+            </AddButtonCard>,
           ]
         )}
       </CohortListContainer>
