@@ -40,6 +40,12 @@ const StyledCohortCard = styled(CohortCard)`
   margin: 20px;
 `;
 
+const AddButtonCard = styled(Card)`
+  margin: 20px;
+  width: 150px;
+  text-align: center;
+`;
+
 const StyledCardContent = styled(CardContent)`
   margin: 10px 0.5rem;
 `;
@@ -67,7 +73,7 @@ class CohortList extends Component {
   };
 
   render() {
-    console.log(`STATE ${JSON.stringify(this.state.cohort)}`);
+    // console.log(`STATE ${JSON.stringify(this.state.cohort)}`);
 
     return (
       <CohortListContainer>
@@ -77,14 +83,14 @@ class CohortList extends Component {
             {this.state.cohort.map((cohort, index) => (
               <StyledCohortCard key={`${cohort.students[index]}`} cohort={cohort} />
             ))}
-            <Card className="AddButtonCard">
+            <AddButtonCard>
               <StyledCardContent>
                 <p>New Class</p>
                 <Button variant="fab" color="primary">
                   <AddIcon />
                 </Button>
               </StyledCardContent>
-            </Card>
+            </AddButtonCard>
           </CohortCardContainer>
         ) : (
           // user has 0 cohorts, render add new class btn
@@ -105,4 +111,3 @@ class CohortList extends Component {
 }
 
 export default connect(mapStateToProps)(CohortList);
-// export default CohortList;
