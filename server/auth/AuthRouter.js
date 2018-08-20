@@ -1,10 +1,24 @@
 const router = require('express').Router();
 const Firebase = require('firebase');
 const admin = require('firebase-admin');
-const serviceAccount = require('../serviceAccountKey.json');
-const { FIREBASE_CONFIG } = require('../config');
-let init_firebase;
 const UserModel = require('../user/User');
+const { FIREBASE_CONFIG } = require('../config');
+
+// Variable to Initialize Firebase Client App
+let init_firebase;
+// Variable to Initialize Firebase Admin App
+const serviceAccount = {
+    type: 'service_account',
+    project_id: process.env.REACT_APP_FIRE_PROJECT_ID,
+    private_key_id: process.env.SERVER_FIRE_PRIVATE_KEY_ID,
+    private_key: process.env.SERVER_FIRE_PRIVATE_KEY,
+    client_email: process.env.SERVER_FIRE_CLIENT_EMAIL,
+    client_id: process.env.SERVER_FIRE_CLIENT_ID,
+    auth_uri: process.env.SERVER_FIRE_AUTH_UIR,
+    token_uri: process.env.SERVER_FIRE_TOKEN_URI,
+    auth_provider_x509_cert_url: process.env.SERVER_FIRE_AUTH_PROVIDER_CERT_URL,
+    client_x509_cert_url: process.env.SERVER_FIRE_CLIENT_CERT_URL,
+};
 
 // Init FireBase App if none exists
 if (!Firebase.apps.length) {
