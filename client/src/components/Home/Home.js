@@ -1,51 +1,99 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import './index.css';
-// import mainImg from "../../assets/HomeBanner.svg";
+import Logo from '../../assets/Logo_BW_SML.svg';
+import {
+    HomeContainer,
+    HomeCTA,
+    HomeNav,
+    NavLogo,
+    NavButton,
+    HomeHeader,
+    MidSection,
+    MidSectionWrapper,
+    MidColumn,
+    MidContainer,
+    MidHeader,
+    MidImg,
+    MidSectionText,
+    FooterSection,
+} from './HomeStyled';
 
 export default class Home extends Component {
     handleAuthRedirect = e => {
         this.props.history.push('/rocket/auth');
     };
+
+    handleHome = e => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    };
+
+    handleContact = e => {
+        window.location.href = 'mailto:lambdaknowledgerocket@gmail.com';
+    };
+
     render() {
         return (
-            <div>
-                {' '}
-                {/*container*/}
-                <div className="Home_Banner">
-                    {' '}
-                    {/* Top */}
-                    <div className="Home_ButtonDiv">
-                        <Button
-                            className="Home_Button"
-                            color="primary"
-                            onClick={this.handleAuthRedirect}
-                        >
-                            Sign Up
-                        </Button>
-                        <Button
-                            className="Home_Button"
-                            color="primary"
-                            onClick={this.handleAuthRedirect}
-                        >
-                            Sign In
-                        </Button>
-                    </div>
-                </div>{' '}
-                {/* Top End */}
-                <div className="Home_Content">
-                    {' '}
-                    {/* Main Content*/}
-                    <h1>What is a Knowledge Rocket?</h1>
-                </div>{' '}
-                {/* Main Content End */}
-                <div className="Home_Bottom">
-                    {' '}
-                    {/* Bottom */}
-                    <footer>{/* format holding text*/}</footer>
-                </div>{' '}
-                {/* Bottom End */}
-            </div> /*container end*/
+            <HomeContainer>
+                <HomeCTA>
+                    <HomeNav>
+                        <div>
+                            <NavLogo src={Logo} onClick={this.handleHome} />
+                        </div>
+                        <div>
+                            <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
+                            <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
+                        </div>
+                    </HomeNav>
+                </HomeCTA>
+                <MidContainer>
+                    <HomeHeader>What is a Knowledge Rocket?</HomeHeader>
+
+                    <MidSectionWrapper>
+                        <MidColumn>
+                            <MidHeader>Implementation</MidHeader>
+                            <MidSection>
+                                <MidImg src="/img/amanda-sandlin-10508-unsplash.jpg" />
+                                <MidSectionText>
+                                    Text for mid section here should not be very length but should
+                                    contain enough information about this section.Text for mid
+                                    section here should not be very length but should contain enough
+                                    information about this section.
+                                </MidSectionText>
+                            </MidSection>
+                        </MidColumn>
+                        <MidColumn>
+                            <MidHeader>Practice</MidHeader>
+                            <MidSection>
+                                <MidImg src="/img/erik-nielsen-783260-unsplash.jpg" />
+                                <MidSectionText>
+                                    Text for mid section here should not be very length but should
+                                    contain enough information about this section.Text for mid
+                                    section here should not be very length but should contain enough
+                                    information about this section.Text for mid section here should
+                                    not be very length but should contain enough information about
+                                    this section.
+                                </MidSectionText>
+                            </MidSection>
+                        </MidColumn>
+                        <MidColumn>
+                            <MidHeader>Results</MidHeader>
+                            <MidSection>
+                                <MidImg src="/img/nasa-63029-unsplash.jpg" />
+                                <MidSectionText>
+                                    Text for mid section here should not be very length but should
+                                    contain enough information about this section.Text for mid
+                                    section here should not be very length but should contain enough
+                                    information about this section.
+                                </MidSectionText>
+                            </MidSection>
+                        </MidColumn>
+                    </MidSectionWrapper>
+                </MidContainer>
+                <FooterSection>
+                    <NavButton onClick={this.handleContact}>CONTACT US</NavButton>
+                    <NavButton onClick={this.handleAuthRedirect}>SIGN UP</NavButton>
+                    <NavButton onClick={this.handleAuthRedirect}>SIGN IN</NavButton>
+                </FooterSection>
+            </HomeContainer>
         );
     }
 }

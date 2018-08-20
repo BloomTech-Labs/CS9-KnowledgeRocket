@@ -33,6 +33,9 @@ export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+// Breadcrumb Actions
+export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
+
 // Dummy Action to Add Rockets
 export const addRocket = rocket => {
     let response = axios.post(`${url}/rocket/add`, rocket);
@@ -64,110 +67,75 @@ export const loginUser = user => async dispatch => {
 };
 
 // extract uid, email, token from response.user
-export const handleGoogleResponse = res => {
-    const token = res.credential.accessToken;
+export const handleGoogleResponse = (res, correctToken) => {
     const { uid, email } = res.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(res.user)}`);
-    const user = {
-        uid: uid,
-        email: email,
-        token: token,
-        authType: '3rdParty',
-    };
-    return user;
+    return { uid, email, token: correctToken, authType: 'google' };
 };
 
 // TODO SEND DATA TO AN ENDPOINT
 export const loginUserGoogle = () => async dispatch => {
+    dispatch({ type: LOGGING_IN_USER });
     const provider = new Firebase.auth.GoogleAuthProvider();
+
     try {
         let response = await Firebase.auth().signInWithPopup(provider);
-
-        const user = handleGoogleResponse(response);
-        return dispatch({
-            type: LOGIN_USER,
-            payload: {
-                uid: user.uid,
-                email: user.email,
-                token: user.token,
-            },
-        });
+        // Get the correct token for Auth Verification.
+        let correctToken = await Firebase.auth().currentUser.getIdToken();
+        const user = handleGoogleResponse(response, correctToken);
+        // This is where we send to the server the Oauth user Info to check against DB.
+        let serverResponse = await axios.post(`${url}/api/auth`, user);
+        return dispatch({ type: LOGIN_USER, payload: serverResponse.data });
     } catch (err) {
-        const errorCode = err.code;
-        const errorMessage = err.message;
-        console.log(errorCode, errorMessage);
+        dispatch({ type: LOGIN_USER_FAILURE });
     }
 };
 
-export const handleFacebookResponse = res => {
-    const token = res.credential.accessToken;
+export const handleFacebookResponse = (res, correctToken) => {
     const { uid, email } = res.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(res.user)}`);
-    const user = {
-        uid: uid,
-        email: email,
-        token: token,
-        authType: '3rdParty',
-    };
-    return user;
+    return { uid, email, token: correctToken, authType: 'facebook' };
 };
 
 export const loginUserFacebook = () => async dispatch => {
+    dispatch({ type: LOGGING_IN_USER });
     const provider = new Firebase.auth.FacebookAuthProvider();
 
     try {
         let response = await Firebase.auth().signInWithPopup(provider);
-        console.log(`response ${JSON.stringify(response)}`);
-        const user = handleFacebookResponse(response);
-        return dispatch({
-            type: LOGIN_USER,
-            payload: {
-                uid: user.uid,
-                email: user.email,
-                token: user.token,
-            },
-        });
+        // Get the correct token for Auth Verification.
+        let correctToken = await Firebase.auth().currentUser.getIdToken();
+        const user = handleFacebookResponse(response, correctToken);
+        // This is where we send to the server the Oauth user Info to check against DB.
+        let serverResponse = await axios.post(`${url}/api/auth`, user);
+        return dispatch({ type: LOGIN_USER, payload: serverResponse.data });
     } catch (err) {
-        const errorCode = err.code;
-        const errorMessage = err.message;
-        console.log(errorCode, errorMessage);
+        dispatch({ type: LOGIN_USER_FAILURE });
     }
 };
 
-export const handleTwitterResponse = res => {
-    const token = res.credential.accessToken;
-    const { uid, email } = res.user;
-    console.log(`token ${token}`);
-    console.log(`user ${JSON.stringify(res.user)}`);
-    const user = {
-        uid: uid,
-        email: email,
-        token: token,
-        authType: '3rdParty',
+export const handleTwitterResponse = (res, correctToken) => {
+    const { uid } = res.user;
+    return {
+        uid,
+        email: res.additionalUserInfo.profile.email,
+        token: correctToken,
+        authType: 'twitter',
     };
-    return user;
 };
 
 export const loginUserTwitter = () => async dispatch => {
+    dispatch({ type: LOGGING_IN_USER });
     const provider = new Firebase.auth.TwitterAuthProvider();
 
     try {
         let response = await Firebase.auth().signInWithPopup(provider);
-        const user = handleTwitterResponse(response);
-        return dispatch({
-            type: LOGIN_USER,
-            payload: {
-                uid: user.uid,
-                email: user.email,
-                token: user.token,
-            },
-        });
+        // Get the correct token for Auth Verification.
+        let correctToken = await Firebase.auth().currentUser.getIdToken();
+        const user = handleTwitterResponse(response, correctToken);
+        // This is where we send to the server the Oauth user Info to check against DB.
+        let serverResponse = await axios.post(`${url}/api/auth`, user);
+        return dispatch({ type: LOGIN_USER, payload: serverResponse.data });
     } catch (err) {
-        const errorCode = err.code;
-        const errorMessage = err.message;
-        console.log(errorCode, errorMessage);
+        dispatch({ type: LOGIN_USER_FAILURE });
     }
 };
 
@@ -178,3 +146,11 @@ export const logOutUser = () => async dispatch => {
         console.log(err);
     }
 };
+
+/* BREADCRUMBS GENERATION */
+export const generateBreadCrumbs = (path) => {
+    return {
+        type: UPDATE_BREADCRUMBS,
+        payload: path
+    }
+}
