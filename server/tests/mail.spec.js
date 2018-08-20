@@ -20,7 +20,7 @@ describe('testing mail route and capabilities', () => {
     });
 
     describe('.generateEmail', () => {
-        it('given a proper email object, returns api complaint email object', () => {
+        it('given a proper email object, returns api complaint email object', async () => {
             const properEmail = {
                 to: ['recipient@email.com'],
                 from: 'sender@email.com',
@@ -31,10 +31,12 @@ describe('testing mail route and capabilities', () => {
                 cc: null,
             };
             const { generateEmail } = mail;
-            expect(generateEmail(properEmail)).toMatchObject(expect.objectContaining(properEmail));
+            expect(await generateEmail(properEmail)).toMatchObject(
+                expect.objectContaining(properEmail)
+            );
         });
 
-        it('returns on object with an `errors` property when given invalid params', () => {
+        it('returns on object with an `errors` property when given invalid params', async () => {
             const improperEmail = {
                 to: ['email.com'],
                 from: 'sender@email.com',
@@ -45,7 +47,9 @@ describe('testing mail route and capabilities', () => {
                 cc: null,
             };
             const { generateEmail } = mail;
-            expect(generateEmail(improperEmail)).toMatchObject(
+            const result = await generateEmail(improperEmail);
+
+            expect(result).toMatchObject(
                 expect.objectContaining({
                     errors: expect.any(Object),
                 })

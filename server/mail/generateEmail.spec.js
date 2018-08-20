@@ -1,12 +1,35 @@
-const { validate } = require('./generateEmail');
+const { validate, Validator } = require('./generateEmail');
 
 describe('testing generateEmail internals', () => {
-    describe('validation', () => {
+    describe('validate', () => {
+        const properEmail = {
+            to: ['recipient@email.com'],
+            from: 'sender@email.com',
+            replyTo: 'noreply@email.com',
+            subject: 'sub',
+            text: 'not blank',
+            html: '<p>still not blank</p>',
+            cc: null,
+        };
         it('calls validator with validatee', () => {
             const validator = jest.fn();
             const validatee = {};
             validate(validatee, validator);
             expect(validator.mock.calls.length).toBe(1);
+        });
+        describe('Validator', () => {
+            it('exists', async () => {
+                expect(Validator).toBeTruthy();
+            });
+
+            it('returns an object shaped {isValid, errors}', async () => {
+                expect(await Validator(properEmail)).toMatchObject(
+                    expect.objectContaining({
+                        isValid: expect.any(Boolean),
+                        errors: expect.any(Object),
+                    })
+                );
+            });
         });
     });
 });
