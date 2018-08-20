@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './Billing.css';
 import CheckoutForm from './checkout';
 import { Elements, StripeProvider } from 'react-stripe-elements';
-import { Card, Modal } from '../../../node_modules/@material-ui/core';
+import { Card } from '../../../node_modules/@material-ui/core';
 import { generateBreadCrumbs } from '../../actions';
 function mapStateToProps(state) {
     return {
@@ -28,9 +28,6 @@ class Billing extends Component {
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
-    handleOpen() {
-        this.setState({ open: !this.state.open });
-    }
     render() {
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
@@ -43,19 +40,15 @@ class Billing extends Component {
                             every 10 students. You can have as many students and knowledge rockets
                             as you could ever want.
                         </p>
+                        <h3 className="premTeam">Join the Premium Team For Only $9.99</h3>
                     </Card>
-                    <button className="ModalButtonStripe" onClick={this.handleOpen.bind(this)}>
-                        Join the Premium Team For Only $9.99
-                    </button>
-                    <Modal className="Stripe_Modal" open={this.state.open}>
-                        <Elements>
-                            <CheckoutForm
-                                className="Stripe_Modal"
-                                uid={this.props.state.user.uid}
-                                onClick={this.handleOpen}
-                            />
-                        </Elements>
-                    </Modal>
+                    <Elements>
+                        <CheckoutForm
+                            className="Stripe_Modal"
+                            id={this.props.state.user._id}
+                            uid={this.props.state.user.uid}
+                        />
+                    </Elements>
                 </div>
             </StripeProvider>
         );
