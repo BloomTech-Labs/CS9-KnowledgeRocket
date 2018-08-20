@@ -28,10 +28,6 @@ class Billing extends Component {
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
-    updateUser() {
-        const edited = {};
-        this.props.updateUser(edited);
-    }
     render() {
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>

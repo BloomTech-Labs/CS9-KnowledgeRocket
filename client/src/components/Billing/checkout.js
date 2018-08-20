@@ -20,6 +20,10 @@ class CheckoutForm extends Component {
             this.setState({ complete: true });
         }
     }
+    updateUser() {
+        const edited = {};
+        this.props.updateUser(edited);
+    }
     render() {
         if (this.state.complete)
             return (
