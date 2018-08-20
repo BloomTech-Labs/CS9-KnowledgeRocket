@@ -17,8 +17,8 @@ const CohortCard = props => {
 	return (
 		<CardContent>
 			<FormControl>
-				<Input>Name:</Input>
-				<Input>Number of Students:</Input>
+				<Input>{props.cohort.title}</Input>
+				<Input>Students: {props.cohort.students.length}</Input>
 				<Input>Participation:</Input>
 				<Input>Rockets Sent:</Input>
 			</FormControl>
