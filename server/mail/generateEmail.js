@@ -63,10 +63,24 @@ const __generateEmail = ({ to, from, replyTo, subject, text, html, cc = null }) 
     };
 };
 
-const generateEmailIfValid = emailGenerator => validator => async emailProps => {
-    const { isValid, errors } = await validate(emailProps, validator);
-    return isValid ? emailGenerator(emailProps) : { errors };
-};
+const generateEmailIfValid = emailGenerator => validator =>
+    /**
+     * Promise that generates email when valid, and returns
+     * errors array when invalid.
+     * @param {object} emailProps
+     * @param {string[]} emailProps.to All the recipients of this email
+     * @param {string} emailProps.from Email address that will be included in the From field
+     * @param {string} emailProps.replyTo Email address that will be included in the Reply field
+     * @param {string} emailProps.subject Text that will be included in the Subject field
+     * @param {string} emailProps.text String depiction of email content that will be shown when html is disabled
+     * @param {string} emailProps.html Rendered HTML when email content allows for html
+     * @param {string|null} [email.cc=null] If the property is not null, the email address that should be included in the CC. Defaults to `null`
+     */
+    async emailProps => {
+        const { isValid, errors } = await validate(emailProps, validator);
+        return isValid ? emailGenerator(emailProps) : { errors };
+    };
+
 const generateEmail = generateEmailIfValid(__generateEmail)(Validator);
 
 module.exports = { generateEmail, validate, Validator };
