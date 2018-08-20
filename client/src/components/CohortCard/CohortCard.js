@@ -12,22 +12,19 @@ import FormControl from '@material-ui/core/FormControl';
 // }
 
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList
-class CohortCard extends Component {
-	render() {
-		console.log(`PROPS ${JSON.stringify(this.props)}`);
-
-		return (
-			<CardContent>
-				<FormControl>
-					<Input>Name:</Input>
-					<Input>Number of Students:</Input>
-					<Input>Participation:</Input>
-					<Input>Rockets Sent:</Input>
-				</FormControl>
-			</CardContent>
-		);
-	}
-}
+const CohortCard = props => {
+	console.log(`PROPS ${JSON.stringify(props)}`);
+	return (
+		<CardContent>
+			<FormControl>
+				<Input>Name:</Input>
+				<Input>Number of Students:</Input>
+				<Input>Participation:</Input>
+				<Input>Rockets Sent:</Input>
+			</FormControl>
+		</CardContent>
+	);
+};
 
 export default CohortCard;
 // export default connect(mapStateToProps)(CohortCard);
