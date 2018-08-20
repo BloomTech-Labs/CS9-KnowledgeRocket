@@ -28,8 +28,9 @@ class Billing extends Component {
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
-    handleOpen() {
-        this.setState({ open: !this.state.open });
+    updateUser() {
+        const edited = {};
+        this.props.updateUser(edited);
     }
     render() {
         return (
