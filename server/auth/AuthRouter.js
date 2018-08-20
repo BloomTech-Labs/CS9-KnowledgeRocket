@@ -30,7 +30,7 @@ if (!Firebase.apps.length) {
 // Initialize Firebase Admin App
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.REACT_APP_FIRE_DB_URL,
+    databaseURL: `${process.env.REACT_APP_FIRE_DB_URL}`,
 });
 router.route('/').post(post);
 
