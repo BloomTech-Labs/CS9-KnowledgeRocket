@@ -47,11 +47,7 @@ class Billing extends Component {
                         <h3 className="premTeam">Join the Premium Team For Only $9.99</h3>
                     </Card>
                     <Elements>
-                        <CheckoutForm
-                            className="Stripe_Modal"
-                            uid={this.props.state.user.uid}
-                            onClick={this.handleOpen}
-                        />
+                        <CheckoutForm className="Stripe_Modal" uid={this.props.state.user.uid} />
                     </Elements>
                 </div>
             </StripeProvider>
