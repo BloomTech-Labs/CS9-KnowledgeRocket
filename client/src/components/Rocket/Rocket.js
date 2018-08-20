@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { generateBreadCrumbs } from '../../actions';
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
     };
 }
 
 class Rocket extends Component {
     state = {
-        user: {
-
-        }
-    }
+        user: {},
+    };
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -20,10 +19,11 @@ class Rocket extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
+        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
     render() {
         return (
-            <div className='Main_container'>
+            <div className="Main_container">
                 {`Welcome To your Rockets: ${this.props.state.user.email}`}
             </div>
         );
@@ -32,4 +32,5 @@ class Rocket extends Component {
 
 export default connect(
     mapStateToProps,
+    { generateBreadCrumbs }
 )(Rocket);
