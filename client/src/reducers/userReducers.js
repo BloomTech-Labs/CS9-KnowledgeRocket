@@ -6,7 +6,7 @@ import {
     LOGOUT_USER,
     LOGIN_USER_FAILURE,
     ADD_USER_FAILURE,
-    UPDATE_USER,
+    UPGRADE_USER,
 } from '../actions';
 
 const defaultState = {
@@ -30,10 +30,10 @@ export default (state = defaultState, action) => {
             StateCopy.authenticated = true;
             StateCopy.status = ADD_USER;
             return StateCopy;
-        case UPDATE_USER:
+        case UPGRADE_USER:
             StateCopy = { ...StateCopy, user: [...action.payload] };
             StateCopy.authenticated = true;
-            StateCopy.status = UPDATE_USER;
+            StateCopy.status = UPGRADE_USER;
             return StateCopy;
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';

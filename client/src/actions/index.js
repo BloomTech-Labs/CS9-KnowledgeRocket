@@ -21,7 +21,7 @@ export const ADD_ROCKET = 'ADD_ROCKET';
 export const GET_ROCKETS = 'GET_ROCKETS';
 export const REMOVE_ROCKET = 'REMOVE_ROCKET';
 export const UPDATE_ROCKET = 'UPDATE_ROCKET';
-export const UPDATE_USER = 'UPDATE_USER';
+export const UPGRADE_USER = 'UPGRADE_USER';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';
@@ -56,11 +56,11 @@ export const addUser = user => async dispatch => {
         dispatch({ type: ADD_USER_FAILURE });
     }
 };
-export const updateUser = user => async dispatch => {
-    dispatch({ type: UPDATE_USER });
+export const upgradeUser = user => async dispatch => {
+    dispatch({ type: UPGRADE_USER });
     try {
         let response = await axios.put(`${url}/api/user/${user._id}`, user);
-        dispatch({ type: UPDATE_USER, payload: response.data });
+        dispatch({ type: UPGRADE_USER, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_USER_FAILURE });
     }

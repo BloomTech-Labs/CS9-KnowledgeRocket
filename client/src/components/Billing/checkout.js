@@ -3,27 +3,28 @@ import { Link } from 'react-router-dom';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 const serverURL = process.env.REACT_APP_Stripe_Url;
+const url = process.env.REACT_APP_SERVER;
 class CheckoutForm extends Component {
     constructor(props) {
         super(props);
         this.state = { complete: false };
-        this.submit = this.submit.bind(this);
     }
-    async submit(ev) {
+    upgradeUser = async type => {
+        try {
+            let response = await axios.post(`${url}/api/user/${this.props.id}`, { type });
+        } catch (err) {}
+    };
+    submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
         let response = await axios.post(`${serverURL}`, {
             token: token.id,
             uid: this.props.uid,
+            id: this.props.id,
         });
         if (response) {
-            //TODO ACTION FOR UPDATING ACCOUNT
             this.setState({ complete: true });
         }
-    }
-    updateUser() {
-        const edited = {};
-        this.props.updateUser(edited);
-    }
+    };
     render() {
         if (this.state.complete)
             return (
