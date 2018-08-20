@@ -45,18 +45,21 @@ class CohortList extends Component {
     // if (!this.props.state.user.authenticated) {
     //     this.props.history.push('/rocket/auth');
     // }
+    this.fetchCohortData();
+  }
 
+  fetchCohortData = () => {
     // FETCH COHORT DATA FOR A USER FROM SERVER
     axios
       .get('http://localhost:5000/api/cohort')
       .then(response => {
-        console.log(`RESPONSE: ${JSON.stringify(response)}`);
         this.setState(() => ({ cohort: response.data }));
       })
       .catch(error => {
         console.error('Server Error', error);
       });
-  }
+  };
+
   render() {
     console.log(`STATE ${JSON.stringify(this.state.cohort)}`);
 
