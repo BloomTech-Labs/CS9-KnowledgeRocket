@@ -69,7 +69,7 @@ export const loginUser = user => async dispatch => {
 // extract uid, email, token from response.user
 export const handleGoogleResponse = (res, correctToken) => {
     const { uid, email } = res.user;
-    return { uid, email, token: correctToken, authType: '3rdParty' };
+    return { uid, email, token: correctToken, authType: 'google' };
 };
 
 // TODO SEND DATA TO AN ENDPOINT
@@ -92,7 +92,7 @@ export const loginUserGoogle = () => async dispatch => {
 
 export const handleFacebookResponse = (res, correctToken) => {
     const { uid, email } = res.user;
-    return { uid, email, token: correctToken, authType: '3rdParty' };
+    return { uid, email, token: correctToken, authType: 'facebook' };
 };
 
 export const loginUserFacebook = () => async dispatch => {
@@ -118,7 +118,7 @@ export const handleTwitterResponse = (res, correctToken) => {
         uid,
         email: res.additionalUserInfo.profile.email,
         token: correctToken,
-        authType: '3rdParty',
+        authType: 'twitter',
     };
 };
 

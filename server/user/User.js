@@ -5,6 +5,7 @@ const Cohort = require('../cohort/Cohort');
 
 const User = mongoose.Schema({
     email: { type: String, required: true },
+    // ccEmail: { type: String, default: this.email},
     uid: { type: String },
     token: { type: String },
     rockets: [{ type: ObjectId, ref: 'Rocket' }],

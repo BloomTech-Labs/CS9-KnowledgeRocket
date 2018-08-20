@@ -13,7 +13,7 @@ describe('action creators', () => {
             const expected = {
                 uid: 'abc',
                 email: 'johndoe@yahoo.com',
-                authType: '3rdParty',
+                authType: 'google',
                 token: correctToken,
             };
 
@@ -33,7 +33,7 @@ describe('action creators', () => {
                 const expected = {
                     uid: 'abc',
                     email: 'johndoe@yahoo.com',
-                    authType: '3rdParty',
+                    authType: 'twitter',
                     token: correctToken,
                 };
 
@@ -55,7 +55,7 @@ describe('action creators', () => {
                 const expected = {
                     uid: 'jkl',
                     email: 'janedoe@lambda.com',
-					authType: '3rdParty',
+					authType: 'facebook',
 					token: correctToken,
                 };
                 
