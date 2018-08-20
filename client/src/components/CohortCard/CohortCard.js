@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
-// Styles
-import './CohortCard.css';
 
 // function mapStateToProps(state) {
 //     return {

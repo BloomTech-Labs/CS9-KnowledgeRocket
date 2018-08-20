@@ -8,8 +8,6 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 // Components
 import CohortCard from '../CohortCard/CohortCard';
-// Styles
-import './CohortList.css';
 
 // function mapStateToProps(state) {
 //     return {
@@ -27,6 +25,10 @@ const CohortListContainer = styled.div`
   width: 100%;
   border: 1px solid rgb(119, 136, 153);
   border-radius: 0.4rem;
+`;
+
+const StyledCardContent = styled(CardContent)`
+  margin: 10px 0.5rem;
 `;
 
 // RENDERS A LIST OF COHORT CARDS
@@ -49,35 +51,35 @@ class CohortList extends Component {
       <CohortListContainer>
         {this.state.cohorts.length > 0
           ? [
-              <Card className="CohortCard" key={1}>
+              <Card key={1}>
                 <CohortCard />
               </Card>,
-              <Card className="CohortCard" key={2}>
+              <Card key={2}>
                 <CohortCard />
               </Card>,
-              <Card className="CohortCard" key={3}>
+              <Card key={3}>
                 <CohortCard />
               </Card>,
-              <Card className="CohortCard" key={4}>
+              <Card key={4}>
                 <CohortCard />
               </Card>,
               <Card className="AddButtonCard" key={5}>
-                <CardContent className="CohortCard_AddBtn">
+                <StyledCardContent>
                   <p>New Class</p>
                   <Button variant="fab" color="primary">
                     <AddIcon />
                   </Button>
-                </CardContent>
+                </StyledCardContent>
               </Card>,
             ]
           : [
-              <Card className="AddButtonCard">
-                <CardContent className="CohortCard_AddBtn">
+              <Card>
+                <StyledCardContent>
                   <p>Add a new class</p>
                   <Button variant="fab" color="primary">
                     <AddIcon />
                   </Button>
-                </CardContent>
+                </StyledCardContent>
               </Card>,
             ]}
       </CohortListContainer>
