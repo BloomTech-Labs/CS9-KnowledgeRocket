@@ -29,9 +29,15 @@ const CohortListContainer = styled.div`
 `;
 
 const CohortCardContainer = styled.div`
-  border: 1px solid red:
-  width: 400px;
-  height: 400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 100%;
+`;
+
+const StyledCohortCard = styled(CohortCard)`
+  margin: 20px;
 `;
 
 const StyledCardContent = styled(CardContent)`
@@ -69,11 +75,7 @@ class CohortList extends Component {
           ? [
               // user has at least one cohort, render a cohort card
               <CohortCardContainer>
-                {this.state.cohort.map((cohort, index) => (
-                  <Card>
-                    <CohortCard cohort={cohort} />
-                  </Card>
-                ))},
+                {this.state.cohort.map((cohort, index) => <StyledCohortCard cohort={cohort} />)},
               </CohortCardContainer>,
               <Card className="AddButtonCard" key={5}>
                 <StyledCardContent>
