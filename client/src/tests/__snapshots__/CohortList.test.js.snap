@@ -2,10 +2,10 @@
 
 exports[`CohortList renders correctly 1`] = `
 <div
-  className="CohortListContainer"
+  className="sc-bdVaJa cjjvmq"
 >
   <div
-    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1"
   >
     <div
       className="MuiCardContent-root-29"
@@ -37,7 +37,7 @@ exports[`CohortList renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1"
   >
     <div
       className="MuiCardContent-root-29"
@@ -69,7 +69,7 @@ exports[`CohortList renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1"
   >
     <div
       className="MuiCardContent-root-29"
@@ -101,7 +101,7 @@ exports[`CohortList renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 CohortCard"
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1"
   >
     <div
       className="MuiCardContent-root-29"
@@ -136,7 +136,7 @@ exports[`CohortList renders correctly 1`] = `
     className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 AddButtonCard"
   >
     <div
-      className="MuiCardContent-root-29 CohortCard_AddBtn"
+      className="MuiCardContent-root-29 sc-bwzfXH boPGsI"
     >
       <p>
         New Class
