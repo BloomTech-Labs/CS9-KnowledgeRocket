@@ -7,6 +7,7 @@ import {
     loginUserGoogle,
     loginUserFacebook,
     loginUserTwitter,
+    generateBreadCrumbs,
 } from '../../actions';
 import { Button, Input } from '@material-ui/core';
 import Progress from '../Progress/Progress';
@@ -30,6 +31,7 @@ class Auth extends Component {
         this.props.user.success === false
             ? this.setState({ success: false })
             : this.setState({ success: true });
+        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
 
     handleInput = e => {
@@ -101,47 +103,51 @@ class Auth extends Component {
                         onChange={this.handleInput}
                     />
                 </div>
-                <div className="flex-row-centered">
-                    <Button
-                        className="Auth_button"
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleSignUp}
-                    >
-                        Sign-Up
-                    </Button>
-                    <Button
-                        className="Auth_button"
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleSignIn}
-                    >
-                        Sign-In
-                    </Button>
-                    <Button
-                        className="Auth_button"
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleSignInGoogle}
-                    >
-                        Log In with Google
-                    </Button>
-                    <Button
-                        className="Auth_button"
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleSignInFacebook}
-                    >
-                        Log In with Facebook
-                    </Button>
-                    <Button
-                        className="Auth_button"
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleSignInTwitter}
-                    >
-                        Log In with Twitter
-                    </Button>
+                <div className="flex-column-centered">
+                    <div className='flex-row-centered'>
+                        <Button
+                            className="Auth_button"
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSignUp}
+                        >
+                            Sign-Up
+                        </Button>
+                        <Button
+                            className="Auth_button"
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSignIn}
+                        >
+                            Sign-In
+                        </Button>
+                    </div>
+                    <div className="Auth_oauth_section">
+                        <Button
+                            className="Auth_button"
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSignInGoogle}
+                        >
+                            Google Log In
+                        </Button>
+                        <Button
+                            className="Auth_button"
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSignInFacebook}
+                        >
+                            Facebook Log In
+                        </Button>
+                        <Button
+                            className="Auth_button"
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSignInTwitter}
+                        >
+                            Twitter Log In
+                        </Button>
+                    </div>
                 </div>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
@@ -161,10 +167,14 @@ class Auth extends Component {
     }
 }
 
-export default connect(mapStateToProps, {
-    addUser,
-    loginUser,
-    loginUserGoogle,
-    loginUserFacebook,
-    loginUserTwitter,
-})(Auth);
+export default connect(
+    mapStateToProps,
+    {
+        addUser,
+        loginUser,
+        loginUserGoogle,
+        loginUserFacebook,
+        loginUserTwitter,
+        generateBreadCrumbs,
+    }
+)(Auth);
