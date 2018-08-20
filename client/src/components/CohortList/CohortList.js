@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 // import { connect } from 'react-redux';
 // Material Components
 import Card from '@material-ui/core/Card';
@@ -34,10 +35,9 @@ const StyledCardContent = styled(CardContent)`
 // RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
   state = {
-    cohorts: [{}],
+    cohort: {},
   };
 
-  // pull cohort list for a user from state this.props.state.user.cohorts
   componentDidMount() {
     // Checks for User to be Authenticated
     // If not authenticated it will send the user to <login/>
@@ -45,11 +45,24 @@ class CohortList extends Component {
     // if (!this.props.state.user.authenticated) {
     //     this.props.history.push('/rocket/auth');
     // }
+
+    // FETCH COHORT DATA FOR A USER FROM SERVER
+    axios
+      .get('http://localhost:5000/api/cohort')
+      .then(response => {
+        console.log(`RESPONSE: ${JSON.stringify(response)}`);
+        this.setState(() => ({ cohort: response.data }));
+      })
+      .catch(error => {
+        console.error('Server Error', error);
+      });
   }
   render() {
+    console.log(`STATE ${JSON.stringify(this.state.cohort)}`);
+
     return (
       <CohortListContainer>
-        {this.state.cohorts.length > 0
+        {this.state.cohorts
           ? [
               <Card key={1}>
                 <CohortCard />
