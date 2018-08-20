@@ -7,17 +7,23 @@ const { FIREBASE_CONFIG } = require('../config');
 // Variable to Initialize Firebase Client App
 let init_firebase;
 // Variable to Initialize Firebase Admin App
+// const serviceAccount = {
+//     type: 'service_account',
+//     project_id: process.env.REACT_APP_FIRE_PROJECT_ID,
+//     private_key_id: process.env.SERVER_FIRE_PRIVATE_KEY_ID,
+//     private_key: process.env.SERVER_FIRE_PRIVATE_KEY,
+//     client_email: process.env.SERVER_FIRE_CLIENT_EMAIL,
+//     client_id: process.env.SERVER_FIRE_CLIENT_ID,
+//     auth_uri: process.env.SERVER_FIRE_AUTH_UIR,
+//     token_uri: process.env.SERVER_FIRE_TOKEN_URI,
+//     auth_provider_x509_cert_url: process.env.SERVER_FIRE_AUTH_PROVIDER_CERT_URL,
+//     client_x509_cert_url: process.env.SERVER_FIRE_CLIENT_CERT_URL,
+// };
+
 const serviceAccount = {
-    type: 'service_account',
-    project_id: process.env.REACT_APP_FIRE_PROJECT_ID,
-    private_key_id: process.env.SERVER_FIRE_PRIVATE_KEY_ID,
-    private_key: process.env.SERVER_FIRE_PRIVATE_KEY,
-    client_email: process.env.SERVER_FIRE_CLIENT_EMAIL,
-    client_id: process.env.SERVER_FIRE_CLIENT_ID,
-    auth_uri: process.env.SERVER_FIRE_AUTH_UIR,
-    token_uri: process.env.SERVER_FIRE_TOKEN_URI,
-    auth_provider_x509_cert_url: process.env.SERVER_FIRE_AUTH_PROVIDER_CERT_URL,
-    client_x509_cert_url: process.env.SERVER_FIRE_CLIENT_CERT_URL,
+    projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
+    clientEmail: process.env.SERVER_FIRE_CLIENT_EMAIL,
+    privateKey: process.env.SERVER_FIRE_PRIVATE_KEY
 };
 
 // Init FireBase App if none exists
