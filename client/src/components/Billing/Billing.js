@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './Billing.css';
 import CheckoutForm from './checkout';
 import { Elements, StripeProvider } from 'react-stripe-elements';
-import { Card, Modal } from '../../../node_modules/@material-ui/core';
+import { Card } from '../../../node_modules/@material-ui/core';
 import { generateBreadCrumbs } from '../../actions';
 function mapStateToProps(state) {
     return {
@@ -35,7 +35,7 @@ class Billing extends Component {
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
                 <div className="example">
-                    <Card className="Premium_Content">
+                    <div className="Premium_Content">
                         <span className="title10">What does premium offer?</span>
                         <p className="pText">
                             It offers unlimited access to all your favorite features for a period of
@@ -43,19 +43,15 @@ class Billing extends Component {
                             every 10 students. You can have as many students and knowledge rockets
                             as you could ever want.
                         </p>
-                    </Card>
-                    <button className="ModalButtonStripe" onClick={this.handleOpen.bind(this)}>
-                        Join the Premium Team For Only $9.99
-                    </button>
-                    <Modal className="Stripe_Modal" open={this.state.open}>
-                        <Elements>
-                            <CheckoutForm
-                                className="Stripe_Modal"
-                                uid={this.props.state.user.uid}
-                                onClick={this.handleOpen}
-                            />
-                        </Elements>
-                    </Modal>
+                        <h3 className="premTeam">Join the Premium Team For Only $9.99</h3>
+                    </div>
+                    <Elements>
+                        <CheckoutForm
+                            className="Stripe_Modal"
+                            uid={this.props.state.user.uid}
+                            onClick={this.handleOpen}
+                        />
+                    </Elements>
                 </div>
             </StripeProvider>
         );
