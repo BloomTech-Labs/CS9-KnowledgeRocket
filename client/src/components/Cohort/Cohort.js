@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import './Cohort.css';
+// Components
+import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 
-function mapStateToProps(state) {
-    return {
-        state
-    };
-}
+// function mapStateToProps(state) {
+//     return {
+//         state
+//     };
+// }
 
 class Cohort extends Component {
     componentDidMount() {
-        // Checks for User to be Authenticated
-        // If not authenticated it will send the user to <login/>
-        // If authenticated it will set the state with the current user.
-        if (!this.props.state.user.authenticated) {
-            this.props.history.push('/rocket/auth');
-        }
+        // // Checks for User to be Authenticated
+        // // If not authenticated it will send the user to <login/>
+        // // If authenticated it will set the state with the current user.
+        // if (!this.props.state.user.authenticated) {
+        //     this.props.history.push('/rocket/auth');
+        // }
     }
     render() {
         return (
-            <div className='Main_container'>
-                COHORT PLACEHOLDER
+            <div className="Main_container">
+                <CohortSettingForm />
             </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(Cohort);
+export default Cohort;
+// export default connect(
+//     mapStateToProps,
+// )(Cohort);
