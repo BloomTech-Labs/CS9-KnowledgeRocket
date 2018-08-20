@@ -9,11 +9,6 @@ class CheckoutForm extends Component {
         super(props);
         this.state = { complete: false };
     }
-    upgradeUser = async type => {
-        try {
-            let response = await axios.post(`${url}/api/user/${this.props.id}`, { type });
-        } catch (err) {}
-    };
     submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
         let response = await axios.post(`${serverURL}`, {
