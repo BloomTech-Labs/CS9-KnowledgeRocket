@@ -65,39 +65,29 @@ class CohortList extends Component {
 
     return (
       <CohortListContainer>
-        {this.state.cohorts
-          ? [
-              <Card key={1}>
-                <CohortCard />
-              </Card>,
-              <Card key={2}>
-                <CohortCard />
-              </Card>,
-              <Card key={3}>
-                <CohortCard />
-              </Card>,
-              <Card key={4}>
-                <CohortCard />
-              </Card>,
-              <Card className="AddButtonCard" key={5}>
-                <StyledCardContent>
-                  <p>New Class</p>
-                  <Button variant="fab" color="primary">
-                    <AddIcon />
-                  </Button>
-                </StyledCardContent>
-              </Card>,
-            ]
-          : [
-              <Card>
-                <StyledCardContent>
-                  <p>Add a new class</p>
-                  <Button variant="fab" color="primary">
-                    <AddIcon />
-                  </Button>
-                </StyledCardContent>
-              </Card>,
-            ]}
+        {this.state.cohort ? (
+          // user has at least one cohort, render a cohort card
+          <Card className="AddButtonCard" key={5}>
+            <StyledCardContent>
+              <p>New Class</p>
+              <Button variant="fab" color="primary">
+                <AddIcon />
+              </Button>
+            </StyledCardContent>
+          </Card>
+        ) : (
+          // user has 0 cohorts, render add new class btn
+          [
+            <Card>
+              <StyledCardContent>
+                <p>Add a new class</p>
+                <Button variant="fab" color="primary">
+                  <AddIcon />
+                </Button>
+              </StyledCardContent>
+            </Card>,
+          ]
+        )}
       </CohortListContainer>
     );
   }
