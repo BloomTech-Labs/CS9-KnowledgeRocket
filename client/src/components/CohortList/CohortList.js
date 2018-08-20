@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 // Material Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,11 +10,11 @@ import AddIcon from '@material-ui/icons/Add';
 // Components
 import CohortCard from '../CohortCard/CohortCard';
 
-// function mapStateToProps(state) {
-//     return {
-//         state,
-//     };
-// }
+function mapStateToProps(state) {
+  return {
+    state,
+  };
+}
 
 const CohortListContainer = styled.div`
   margin-left: 1rem;
@@ -28,6 +28,12 @@ const CohortListContainer = styled.div`
   border-radius: 0.4rem;
 `;
 
+const CohortCardContainer = styled.div`
+  border: 1px solid red:
+  width: 400px;
+  height: 400px;
+`;
+
 const StyledCardContent = styled(CardContent)`
   margin: 10px 0.5rem;
 `;
@@ -35,16 +41,10 @@ const StyledCardContent = styled(CardContent)`
 // RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
   state = {
-    cohort: {},
+    cohort: [],
   };
 
   componentDidMount() {
-    // Checks for User to be Authenticated
-    // If not authenticated it will send the user to <login/>
-    // If authenticated it will set the state with the current user.
-    // if (!this.props.state.user.authenticated) {
-    //     this.props.history.push('/rocket/auth');
-    // }
     this.fetchCohortData();
   }
 
@@ -65,33 +65,40 @@ class CohortList extends Component {
 
     return (
       <CohortListContainer>
-        {this.state.cohort ? (
-          // user has at least one cohort, render a cohort card
-          <Card className="AddButtonCard" key={5}>
-            <StyledCardContent>
-              <p>New Class</p>
-              <Button variant="fab" color="primary">
-                <AddIcon />
-              </Button>
-            </StyledCardContent>
-          </Card>
-        ) : (
-          // user has 0 cohorts, render add new class btn
-          [
-            <Card>
-              <StyledCardContent>
-                <p>Add a new class</p>
-                <Button variant="fab" color="primary">
-                  <AddIcon />
-                </Button>
-              </StyledCardContent>
-            </Card>,
-          ]
-        )}
+        {this.state.cohort.length > 0
+          ? [
+              // user has at least one cohort, render a cohort card
+              <CohortCardContainer>
+                {this.state.cohort.map((cohort, index) => (
+                  <Card>
+                    <CohortCard cohort={cohort} />
+                  </Card>
+                ))},
+              </CohortCardContainer>,
+              <Card className="AddButtonCard" key={5}>
+                <StyledCardContent>
+                  <p>New Class</p>
+                  <Button variant="fab" color="primary">
+                    <AddIcon />
+                  </Button>
+                </StyledCardContent>
+              </Card>,
+            ]
+          : // user has 0 cohorts, render add new class btn
+            [
+              <Card>
+                <StyledCardContent>
+                  <p>Add a new class</p>
+                  <Button variant="fab" color="primary">
+                    <AddIcon />
+                  </Button>
+                </StyledCardContent>
+              </Card>,
+            ]}
       </CohortListContainer>
     );
   }
 }
 
-// export default connect(mapStateToProps)(CohortList);
-export default CohortList;
+export default connect(mapStateToProps)(CohortList);
+// export default CohortList;
