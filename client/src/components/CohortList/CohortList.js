@@ -71,34 +71,34 @@ class CohortList extends Component {
 
     return (
       <CohortListContainer>
-        {this.state.cohort.length > 0
-          ? [
-              // user has at least one cohort, render a cohort card
-              <CohortCardContainer>
-                {this.state.cohort.map((cohort, index) => (
-                  <StyledCohortCard key={`${cohort.students[index]}`} cohort={cohort} />
-                ))},
-              </CohortCardContainer>,
-              <Card className="AddButtonCard">
-                <StyledCardContent>
-                  <p>New Class</p>
-                  <Button variant="fab" color="primary">
-                    <AddIcon />
-                  </Button>
-                </StyledCardContent>
-              </Card>,
-            ]
-          : // user has 0 cohorts, render add new class btn
-            [
-              <Card>
-                <StyledCardContent>
-                  <p>Add a new class</p>
-                  <Button variant="fab" color="primary">
-                    <AddIcon />
-                  </Button>
-                </StyledCardContent>
-              </Card>,
-            ]}
+        {this.state.cohort.length > 0 ? (
+          // user has at least one cohort, render a cohort card
+          <CohortCardContainer>
+            {this.state.cohort.map((cohort, index) => (
+              <StyledCohortCard key={`${cohort.students[index]}`} cohort={cohort} />
+            ))}
+            <Card className="AddButtonCard">
+              <StyledCardContent>
+                <p>New Class</p>
+                <Button variant="fab" color="primary">
+                  <AddIcon />
+                </Button>
+              </StyledCardContent>
+            </Card>
+          </CohortCardContainer>
+        ) : (
+          // user has 0 cohorts, render add new class btn
+          [
+            <Card>
+              <StyledCardContent>
+                <p>Add a new class</p>
+                <Button variant="fab" color="primary">
+                  <AddIcon />
+                </Button>
+              </StyledCardContent>
+            </Card>,
+          ]
+        )}
       </CohortListContainer>
     );
   }
