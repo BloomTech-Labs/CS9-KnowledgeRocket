@@ -3,6 +3,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const Rocket = require('../rocket/Rocket');
 const Cohort = require('../cohort/Cohort');
 
+
 const User = mongoose.Schema({
     email: { type: String, required: true },
     // ccEmail: { type: String, default: this.email},
