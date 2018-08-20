@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 const serverURL = process.env.REACT_APP_Stripe_Url;
-const url = process.env.REACT_APP_SERVER;
 class CheckoutForm extends Component {
     constructor(props) {
         super(props);
