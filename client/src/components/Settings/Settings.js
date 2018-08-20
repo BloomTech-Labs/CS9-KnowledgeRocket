@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { generateBreadCrumbs } from '../../actions';
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
     };
 }
 
@@ -15,16 +16,14 @@ class Settings extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
+        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
     render() {
-        return (
-            <div className='Main_container'>
-                SETTINGS PLACEHOLDER
-            </div>
-        );
+        return <div className="Main_container">SETTINGS PLACEHOLDER</div>;
     }
 }
 
 export default connect(
     mapStateToProps,
+    { generateBreadCrumbs }
 )(Settings);

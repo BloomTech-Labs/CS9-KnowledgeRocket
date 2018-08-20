@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { generateBreadCrumbs } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -18,10 +19,15 @@ class Rocket extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
+        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
     render() {
-        return <div>this is the rocket form</div>;
+        return (
+            <div className="Main_container">
+                {`Welcome To your Rockets: ${this.props.state.user.email}`}
+            </div>
+        );
     }
 }
 
-export default connect(mapStateToProps)(Rocket);
+export default connect(mapStateToProps, { generateBreadCrumbs })(Rocket);

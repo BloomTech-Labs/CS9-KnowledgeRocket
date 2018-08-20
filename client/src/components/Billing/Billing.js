@@ -4,7 +4,7 @@ import './Billing.css';
 import CheckoutForm from './checkout';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import { Card } from '../../../node_modules/@material-ui/core';
-
+import { generateBreadCrumbs } from '../../actions';
 function mapStateToProps(state) {
     return {
         state,
@@ -19,6 +19,7 @@ class Billing extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
+        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
     render() {
         return (
@@ -45,4 +46,7 @@ class Billing extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Billing);
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs }
+)(Billing);
