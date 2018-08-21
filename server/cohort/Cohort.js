@@ -8,7 +8,7 @@ const Cohort = mongoose.Schema({
     students: [{ type: ObjectId, ref: 'Student' }],
     rockets: [
         {
-            startDate: { type: Date },
+            startDate: { type: Date, default: Date.now },
             rocketId: { type: ObjectId, ref: 'Rocket' },
         },
     ],
