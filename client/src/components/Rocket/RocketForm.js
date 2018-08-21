@@ -24,6 +24,7 @@ const RocketForm = withFormik({
     },
     mapPropsToValues: props => {
         console.log(props);
+        // if defaultState, set defaultState
         return {
             td: { ...props.td },
         };
