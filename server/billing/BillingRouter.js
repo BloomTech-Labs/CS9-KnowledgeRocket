@@ -1,3 +1,4 @@
+require('dotenv').config();
 const router = require('express').Router();
 const User = require('../user/User');
 const stripe = require('stripe')(`${process.env.Secret_Key}`);
