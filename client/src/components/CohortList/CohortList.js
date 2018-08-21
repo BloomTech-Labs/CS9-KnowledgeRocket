@@ -59,7 +59,7 @@ const AddButtonCardTitle = styled.h3`
 `;
 
 // RENDERS A LIST OF COHORT CARDS
-class CohortList extends Component {
+export class CohortList extends Component {
   state = {
     cohort: [],
   };

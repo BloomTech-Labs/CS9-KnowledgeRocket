@@ -6,13 +6,33 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../reducers';
 import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+// Action
+import { generateBreadCrumbs } from '../actions';
 // Component
 import CohortList from '../components/CohortList/CohortList';
+import { CohortList as UnWrapped } from '../components/CohortList/CohortList';
 import AddButtonCard from '../components/CohortList/CohortList';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 const mockStore = createStore(reducer);
+
+const mockUser = {
+	user: {
+		account: 'free',
+		authProvider: 'email',
+		authenticated: true,
+		cohorts: [],
+		email: 'teacher33@gmail.com',
+		uid: 'DpPGHzgGKoe5tkFbVoorkdipRdv2',
+	},
+};
+
+const mockHistory = {
+	location: {
+		pathname: '/rocket/classes',
+	},
+};
 
 describe('CohortList', () => {
 	const tree = renderer
@@ -31,20 +51,19 @@ describe('CohortList', () => {
 
 	it('should have initial state', () => {
 		const component = mount(
-			<Provider store={mockStore}>
-				<BrowserRouter>
-					<CohortList />
-				</BrowserRouter>
-			</Provider>
+			<UnWrapped
+				state={mockUser}
+				history={mockHistory}
+				store={mockStore}
+				generateBreadCrumbs={generateBreadCrumbs}
+			/>
 		);
 
-		expect(component.state()).toBe(null);
+		expect(component.instance().state.cohort).toBeInstanceOf(Array);
+		expect(component.instance().state.cohort.length).toBe(0);
 	});
 
-	it('should render an Add a new class btn when state is empty', () => {
-		// const component = mount(<CohortList store={mockStore} />);
-		// console.log(component);
-	});
+	it('should render an Add a new class btn when state is empty', () => {});
 
 	it('should render rocket cards when stateful', () => {});
 
