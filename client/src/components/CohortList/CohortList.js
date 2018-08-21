@@ -120,4 +120,4 @@ class CohortList extends Component {
   }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs })(CohortList);
+export default withRouter(connect(mapStateToProps, { generateBreadCrumbs })(CohortList));
