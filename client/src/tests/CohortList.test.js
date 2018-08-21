@@ -7,8 +7,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 // Component
 import CohortList from '../components/CohortList/CohortList';
 
-const mockState = {}
-
 const mockStore = createStore(reducer);
 
 describe('CohortList', () => {
