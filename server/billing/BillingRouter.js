@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../user/User');
+const stripe = require('stripe')(`${process.env.Secret_Key}`);
 router.route('/:type').post(post);
 
 async function post(req, res) {
