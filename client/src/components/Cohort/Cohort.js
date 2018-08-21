@@ -5,11 +5,11 @@ import './Cohort.css';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 
-// function mapStateToProps(state) {
-//     return {
-//         state
-//     };
-// }
+function mapStateToProps(state) {
+    return {
+        state
+    };
+}
 
 class Cohort extends Component {
     componentDidMount() {
@@ -30,7 +30,6 @@ class Cohort extends Component {
     }
 }
 
-export default Cohort;
-// export default connect(
-//     mapStateToProps,
-// )(Cohort);
+export default connect(
+    mapStateToProps,
+)(Cohort);
