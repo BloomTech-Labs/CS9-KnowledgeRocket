@@ -50,7 +50,7 @@ function post(req, res) {
                                 // Account has Expired Update account accordingly
                                 UserModel.findByIdAndUpdate(foundUser._id, {
                                     account: 'free',
-                                }).then(updatedUser => {
+                                }).populate().then(updatedUser => {
                                     res.status(201).json(updatedUser);
                                 });
                             } else {
