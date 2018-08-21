@@ -26,14 +26,12 @@ async function post(req, res) {
                     expirationDate > Date.now()
                         ? expirationDate + 30 * 24 * 60 * 60 * 1000
                         : Date.now() + 30 * 24 * 60 * 60 * 1000;
-                console.log(year, month);
                 const newExpiration = type === 'monthly' ? month : year;
                 User.findByIdAndUpdate(req.body.id, {
                     account: type,
                     expiration: newExpiration,
                 })
                     .then(found => {
-                        console.log(found);
                         res.status(201).json({ status });
                     })
                     .catch(err => {
