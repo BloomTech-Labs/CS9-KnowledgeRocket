@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../reducers';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter } from 'react-router-dom';
 // Component
 import CohortList from '../components/CohortList/CohortList';
 import AddButtonCard from '../components/CohortList/CohortList';
@@ -30,12 +30,15 @@ describe('CohortList', () => {
 	});
 
 	it('should have initial state', () => {
-		const component = shallow(<CohortList store={mockStore} />);
-		const state = component.state();
+		const component = mount(
+			<Provider store={mockStore}>
+				<BrowserRouter>
+					<CohortList />
+				</BrowserRouter>
+			</Provider>
+		);
 
-		expect(state).toBeInstanceOf(Object);
-		expect(state.cohort).toBeInstanceOf(Array);
-		expect(state.cohort.length).toBe(0);
+		expect(component.state()).toBe(null);
 	});
 
 	it('should render an Add a new class btn when state is empty', () => {
