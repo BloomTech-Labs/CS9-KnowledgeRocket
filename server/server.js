@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const stripe = require('stripe')(`${process.env.Secret_Key}`);
 // Import Models Here
 const StudentRouter = require('./student/StudentRouter');
 const AuthRouter = require('./auth/AuthRouter');
