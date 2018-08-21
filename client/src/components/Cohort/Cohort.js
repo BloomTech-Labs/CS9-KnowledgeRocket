@@ -24,6 +24,13 @@ const CohortFormMainContainer = styled(Card)`
     width: 100%;
 `;
 
+const StyledCohortSettingForm = styled(CohortSettingForm)`
+    border: 1px solid red;
+    width: 1000px;
+    height: 200px;
+    padding: 10px;
+`;
+
 class Cohort extends Component {
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -37,7 +44,7 @@ class Cohort extends Component {
     render() {
         return (
             <CohortFormMainContainer>
-                <CohortSettingForm />
+                <StyledCohortSettingForm />
             </CohortFormMainContainer>
         );
     }
