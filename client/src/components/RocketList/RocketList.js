@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { generateBreadCrumbs } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -50,6 +51,7 @@ class RocketList extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
+        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
     render() {
         return (
@@ -99,4 +101,4 @@ class RocketList extends Component {
     }
 }
 
-export default connect(mapStateToProps)(RocketList);
+export default connect(mapStateToProps, {generateBreadCrumbs})(RocketList);

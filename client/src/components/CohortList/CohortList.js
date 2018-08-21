@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { generateBreadCrumbs } from '../../actions';
 // Material Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -45,6 +46,7 @@ class CohortList extends Component {
     if (!this.props.state.user.authenticated) {
         this.props.history.push('/rocket/auth');
     }
+    this.props.generateBreadCrumbs(this.props.history.location.pathname);
   }
   render() {
     return (
@@ -87,4 +89,4 @@ class CohortList extends Component {
   }
 }
 
-export default connect(mapStateToProps)(CohortList);
+export default connect(mapStateToProps, { generateBreadCrumbs })(CohortList);
