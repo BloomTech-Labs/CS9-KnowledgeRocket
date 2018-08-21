@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
@@ -58,6 +58,10 @@ const AddButtonCardTitle = styled.h3`
   margin-bottom: 20px;
 `;
 
+const StyledAddButtonLink = styled(Link)`
+  text-decoration: none;
+`;
+
 // RENDERS A LIST OF COHORT CARDS
 export class CohortList extends Component {
   state = {
@@ -100,7 +104,9 @@ export class CohortList extends Component {
               <StyledCardContent>
                 <AddButtonCardTitle>New Class</AddButtonCardTitle>
                 <Button variant="fab" color="primary">
-                  <AddIcon />
+                  <StyledAddButtonLink to="/rocket/classForm">
+                    <AddIcon />
+                  </StyledAddButtonLink>
                 </Button>
               </StyledCardContent>
             </AddButtonCard>
@@ -111,7 +117,9 @@ export class CohortList extends Component {
             <StyledCardContent>
               <AddButtonCardTitle>Add a new class</AddButtonCardTitle>
               <Button variant="fab" color="primary">
-                <AddIcon />
+                <StyledAddButtonLink to="/rocket/classForm">
+                  <AddIcon />
+                </StyledAddButtonLink>
               </Button>
             </StyledCardContent>
           </AddButtonCard>
