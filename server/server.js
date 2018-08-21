@@ -11,6 +11,7 @@ const RocketRouter = require('./rocket/RocketRouter');
 const ResponseRocketRouter = require('./responserocket/ResponseRocketRouter');
 const QuestionRouter = require('./question/QuestionRouter');
 const CohortRouter = require('./cohort/CohortRouter');
+const BillingRouter = require('./billing/BillingRouter');
 
 const server = express();
 
@@ -36,5 +37,6 @@ server.use('/api/user', authMiddleware, UserRouter);
 server.use('/api/responserocket', authMiddleware, ResponseRocketRouter);
 server.use('/api/question', authMiddleware, QuestionRouter);
 server.use('/api/cohort', authMiddleware, CohortRouter);
+server.use('/charge', authMiddleware, BillingRouter);
 
 module.exports = server;
