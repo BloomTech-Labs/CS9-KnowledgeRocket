@@ -34,6 +34,9 @@ export const NavLogo = Styled.img`
     height: 3rem;
     width: 3rem;
     margin: 0 1rem;
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const HomeContainer = Styled.div`
