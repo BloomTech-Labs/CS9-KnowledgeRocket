@@ -25,9 +25,11 @@ const CohortFormMainContainer = styled(Card)`
 `;
 
 const StyledCohortSettingForm = styled(CohortSettingForm)`
-    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     width: 1000px;
-    height: 200px;
+    height: 60px;
     padding: 10px;
 `;
 
