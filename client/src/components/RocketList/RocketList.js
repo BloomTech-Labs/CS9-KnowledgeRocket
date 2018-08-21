@@ -19,7 +19,6 @@ const RocketListContainer = Styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    border: 1px solid red;
 `;
 
 const RocketAddCard = Styled(Card)`
@@ -40,7 +39,6 @@ const StyledCardContent = Styled(CardContent)`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    border: 1px solid red;
     height: 10rem;
 `;
 
@@ -50,7 +48,7 @@ class RocketList extends Component {
         // If not authenticated it will send the user to <login/>
         // If authenticated it will set the state with the current user.
         if (!this.props.state.user.authenticated) {
-            // this.props.history.push('/rocket/auth');
+            this.props.history.push('/rocket/auth');
         }
     }
     render() {
@@ -65,7 +63,7 @@ class RocketList extends Component {
                             <p>Mock Rocket 1</p>
                             <p>Total Classes {3}</p>
                             <Button variant="contained" color="primary">
-                                Edit
+                                View
                             </Button>
                         </StyledCardContent>
                     </RocketListCard>
@@ -74,7 +72,7 @@ class RocketList extends Component {
                             <p>Mock Rocket 2</p>
                             <p>Total Classes {3}</p>
                             <Button variant="contained" color="primary">
-                                Edit
+                                View
                             </Button>
                         </StyledCardContent>
                     </RocketListCard>
@@ -83,7 +81,7 @@ class RocketList extends Component {
                             <p>Last Rocket</p>
                             <p>Total Classes {3}</p>
                             <Button variant="contained" color="primary">
-                                Edit
+                                View
                             </Button>
                         </StyledCardContent>
                     </RocketListCard>
