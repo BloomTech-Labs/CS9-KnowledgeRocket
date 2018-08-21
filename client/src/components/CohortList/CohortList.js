@@ -67,14 +67,14 @@ class CohortList extends Component {
 
   fetchCohortData = () => {
     // FETCH COHORT DATA FOR A USER FROM SERVER
-    // axios
-    //   .get('http://localhost:5000/api/cohort')
-    //   .then(response => {
-    //     this.setState(() => ({ cohort: response.data }));
-    //   })
-    //   .catch(error => {
-    //     console.error('Server Error', error);
-    //   });
+    axios
+      .get('http://localhost:5000/api/cohort')
+      .then(response => {
+        this.setState(() => ({ cohort: response.data }));
+      })
+      .catch(error => {
+        console.error('Server Error', error);
+      });
   };
 
   render() {
