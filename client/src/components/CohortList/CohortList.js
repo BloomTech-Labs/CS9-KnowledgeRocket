@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { generateBreadCrumbs } from '../../actions';
 // Material Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,11 +10,11 @@ import AddIcon from '@material-ui/icons/Add';
 // Components
 import CohortCard from '../CohortCard/CohortCard';
 
-// function mapStateToProps(state) {
-//     return {
-//         state,
-//     };
-// }
+function mapStateToProps(state) {
+    return {
+        state,
+    };
+}
 
 const CohortListContainer = styled.div`
   margin-left: 1rem;
@@ -42,9 +43,10 @@ class CohortList extends Component {
     // Checks for User to be Authenticated
     // If not authenticated it will send the user to <login/>
     // If authenticated it will set the state with the current user.
-    // if (!this.props.state.user.authenticated) {
-    //     this.props.history.push('/rocket/auth');
-    // }
+    if (!this.props.state.user.authenticated) {
+        this.props.history.push('/rocket/auth');
+    }
+    this.props.generateBreadCrumbs(this.props.history.location.pathname);
   }
   render() {
     return (
@@ -87,5 +89,4 @@ class CohortList extends Component {
   }
 }
 
-// export default connect(mapStateToProps)(CohortList);
-export default CohortList;
+export default connect(mapStateToProps, { generateBreadCrumbs })(CohortList);

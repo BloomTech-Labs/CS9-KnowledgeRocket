@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Logo from '../../assets/Logo_BW_SML.svg';
 import {
     HomeContainer,
     HomeCTA,
@@ -31,12 +30,11 @@ export default class Home extends Component {
     };
 
     render() {
-        return (
-            <HomeContainer>
+        return <HomeContainer>
                 <HomeCTA>
                     <HomeNav>
                         <div>
-                            <NavLogo src={Logo} onClick={this.handleHome} />
+                            <NavLogo src="/img/Logo_BW_SML.svg" onClick={this.handleHome} />
                         </div>
                         <div>
                             <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
@@ -46,17 +44,17 @@ export default class Home extends Component {
                 </HomeCTA>
                 <MidContainer>
                     <HomeHeader>What is a Knowledge Rocket?</HomeHeader>
-
                     <MidSectionWrapper>
                         <MidColumn>
                             <MidHeader>Implementation</MidHeader>
                             <MidSection>
                                 <MidImg src="/img/amanda-sandlin-10508-unsplash.jpg" />
                                 <MidSectionText>
-                                    Text for mid section here should not be very length but should
-                                    contain enough information about this section.Text for mid
-                                    section here should not be very length but should contain enough
-                                    information about this section.
+                                    Text for mid section here should not be very length but
+                                    should contain enough information about this
+                                    section.Text for mid section here should not be very
+                                    length but should contain enough information about this
+                                    section.
                                 </MidSectionText>
                             </MidSection>
                         </MidColumn>
@@ -65,24 +63,26 @@ export default class Home extends Component {
                             <MidSection>
                                 <MidImg src="/img/erik-nielsen-783260-unsplash.jpg" />
                                 <MidSectionText>
-                                    Text for mid section here should not be very length but should
-                                    contain enough information about this section.Text for mid
-                                    section here should not be very length but should contain enough
-                                    information about this section.Text for mid section here should
-                                    not be very length but should contain enough information about
-                                    this section.
+                                    Text for mid section here should not be very length but
+                                    should contain enough information about this
+                                    section.Text for mid section here should not be very
+                                    length but should contain enough information about this
+                                    section.Text for mid section here should not be very
+                                    length but should contain enough information about this
+                                    section.
                                 </MidSectionText>
                             </MidSection>
                         </MidColumn>
                         <MidColumn>
                             <MidHeader>Results</MidHeader>
                             <MidSection>
-                                <MidImg src="/img/nasa-63029-unsplash.jpg" />
+                                <MidImg src="/img/bryan-minear-315814-unsplash.jpg" />
                                 <MidSectionText>
-                                    Text for mid section here should not be very length but should
-                                    contain enough information about this section.Text for mid
-                                    section here should not be very length but should contain enough
-                                    information about this section.
+                                    Text for mid section here should not be very length but
+                                    should contain enough information about this
+                                    section.Text for mid section here should not be very
+                                    length but should contain enough information about this
+                                    section.
                                 </MidSectionText>
                             </MidSection>
                         </MidColumn>
@@ -93,7 +93,6 @@ export default class Home extends Component {
                     <NavButton onClick={this.handleAuthRedirect}>SIGN UP</NavButton>
                     <NavButton onClick={this.handleAuthRedirect}>SIGN IN</NavButton>
                 </FooterSection>
-            </HomeContainer>
-        );
+            </HomeContainer>;
     }
 }

@@ -43,7 +43,19 @@ function post(req, res) {
                     UserModel.findOne({ uid })
                         .then(foundUser => {
                             // Alternatively Replace Token Here and Send back Updated Token...
-                            res.json(foundUser);
+                            if (
+                                foundUser.expiration <= Date.now() &&
+                                foundUser.account !== 'free'
+                            ) {
+                                // Account has Expired Update account accordingly
+                                UserModel.findByIdAndUpdate(foundUser._id, {
+                                    account: 'free',
+                                }).then(updatedUser => {
+                                    res.status(201).json(updatedUser);
+                                });
+                            } else {
+                                res.json(foundUser);
+                            }
                         })
                         .catch(errUser => {
                             res.json({ errorMessage: errUser.message });
