@@ -18,7 +18,8 @@ export default () => (
             <div className="Content_container">
                 <Route path="/rocket" component={ControlPanel} />
                 <Route path="/rocket" exact component={RocketList} />
-                <Route path="/rocket/single/:id" exact component={Rocket} />
+                <Route path="/rocket/new" exact component={Rocket} />
+                {/* <Route path="/rocket/single/:id" exact component={Rocket} /> */}
                 <Route path="/rocket/billing" exact component={Billing} />
                 <Route path="/rocket/classes" exact component={CohortList} />
                 <Route path="/rocket/settings" exact component={Settings} />

@@ -15,9 +15,6 @@ const firebaseConfig = {
 };
 
 Firebase.initializeApp(firebaseConfig);
-
-// Dummy Action Types
-export const ADD_ROCKET = 'ADD_ROCKET';
 export const GET_ROCKETS = 'GET_ROCKETS';
 export const REMOVE_ROCKET = 'REMOVE_ROCKET';
 export const UPDATE_ROCKET = 'UPDATE_ROCKET';
@@ -37,9 +34,12 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 // Breadcrumb Actions
 export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 
-// Dummy Action to Add Rockets
-export const addRocket = rocket => {
-    let response = axios.post(`${url}/rocket/add`, rocket);
+// Rocket Actions
+export const ADD_ROCKET = 'ADD_ROCKET';
+
+// Add Rocket Actions
+export const addRocket = rocket => async dispatch=> {
+    let response = axios.post(`${url}/api/rocket/add`, rocket);
     return {
         type: ADD_ROCKET,
         payload: response,

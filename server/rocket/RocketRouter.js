@@ -6,10 +6,22 @@ router
     .get(get)
     .post(post);
 router
+    .route('/add')
+    .post(postRocket);
+router
     .route('/:id')
     .put(put)
     .get(getid)
     .delete(deleteid);
+
+function postRocket(req, res) {
+    Rocket.create(req.body)
+        .then(createdRocket => {
+            res.status(201).json(createdRocket);
+        }).catch(createRocketError => {
+            res.status(500).json({ errorMessage: createRocketError.message })
+        })
+}
 
 function get(req, res) {
     Rocket.find()

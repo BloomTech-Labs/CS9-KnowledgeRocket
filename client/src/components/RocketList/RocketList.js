@@ -53,6 +53,9 @@ class RocketList extends Component {
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
+    handleNewRocket = e => {
+        this.props.history.push('/rocket/new');
+    };
     render() {
         return (
             <div className="Main_container">
@@ -91,7 +94,7 @@ class RocketList extends Component {
                         <StyledCardContent>
                             <p>Add a new Rocket</p>
                             <Button variant="fab" color="primary">
-                                <AddIcon />
+                                <AddIcon onClick={this.handleNewRocket} />
                             </Button>
                         </StyledCardContent>
                     </RocketAddCard>
@@ -101,4 +104,7 @@ class RocketList extends Component {
     }
 }
 
-export default connect(mapStateToProps, {generateBreadCrumbs})(RocketList);
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs }
+)(RocketList);
