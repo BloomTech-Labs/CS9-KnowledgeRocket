@@ -10,12 +10,6 @@ import AddIcon from '@material-ui/icons/Add';
 // Components
 import CohortCard from '../CohortCard/CohortCard';
 
-// function mapStateToProps(state) {
-//   return {
-//     state,
-//   };
-// }
-
 const CohortListContainer = styled.div`
   margin-left: 1rem;
   padding: 1rem;
