@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
@@ -28,17 +29,39 @@ const CohortListContainer = styled.div`
   border-radius: 0.4rem;
 `;
 
+const CohortCardContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 100%;
+`;
+
+const StyledCohortCard = styled(CohortCard)`
+  margin: 20px;
+`;
+
+const AddButtonCard = styled(Card)`
+  margin: 20px;
+  width: 150px;
+  text-align: center;
+`;
+
 const StyledCardContent = styled(CardContent)`
   margin: 10px 0.5rem;
+`;
+
+const AddButtonCardTitle = styled.h3`
+  display: block;
+  margin-bottom: 20px;
 `;
 
 // RENDERS A LIST OF COHORT CARDS
 class CohortList extends Component {
   state = {
-    cohorts: [{}],
+    cohort: [],
   };
 
-  // pull cohort list for a user from state this.props.state.user.cohorts
   componentDidMount() {
     // Checks for User to be Authenticated
     // If not authenticated it will send the user to <login/>
@@ -48,42 +71,48 @@ class CohortList extends Component {
     }
     this.props.generateBreadCrumbs(this.props.history.location.pathname);
   }
+
+  fetchCohortData = () => {
+    // FETCH COHORT DATA FOR A USER FROM SERVER
+    axios
+      .get('http://localhost:5000/api/cohort')
+      .then(response => {
+        this.setState(() => ({ cohort: response.data }));
+      })
+      .catch(error => {
+        console.error('Server Error', error);
+      });
+  };
+
   render() {
     return (
       <CohortListContainer>
-        {this.state.cohorts.length > 0
-          ? [
-              <Card key={1}>
-                <CohortCard />
-              </Card>,
-              <Card key={2}>
-                <CohortCard />
-              </Card>,
-              <Card key={3}>
-                <CohortCard />
-              </Card>,
-              <Card key={4}>
-                <CohortCard />
-              </Card>,
-              <Card className="AddButtonCard" key={5}>
-                <StyledCardContent>
-                  <p>New Class</p>
-                  <Button variant="fab" color="primary">
-                    <AddIcon />
-                  </Button>
-                </StyledCardContent>
-              </Card>,
-            ]
-          : [
-              <Card>
-                <StyledCardContent>
-                  <p>Add a new class</p>
-                  <Button variant="fab" color="primary">
-                    <AddIcon />
-                  </Button>
-                </StyledCardContent>
-              </Card>,
-            ]}
+        {this.state.cohort.length > 0 ? (
+          // user has at least one cohort, render a cohort card
+          <CohortCardContainer>
+            {this.state.cohort.map((cohort, index) => (
+              <StyledCohortCard key={`${cohort.students[index]}`} cohort={cohort} />
+            ))}
+            <AddButtonCard>
+              <StyledCardContent>
+                <AddButtonCardTitle>New Class</AddButtonCardTitle>
+                <Button variant="fab" color="primary">
+                  <AddIcon />
+                </Button>
+              </StyledCardContent>
+            </AddButtonCard>
+          </CohortCardContainer>
+        ) : (
+          // user has 0 cohorts, render add new class btn
+          <AddButtonCard>
+            <StyledCardContent>
+              <AddButtonCardTitle>Add a new class</AddButtonCardTitle>
+              <Button variant="fab" color="primary">
+                <AddIcon />
+              </Button>
+            </StyledCardContent>
+          </AddButtonCard>
+        )}
       </CohortListContainer>
     );
   }
