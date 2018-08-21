@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+const User = require('../user/User');
 router.route('/:type').post(post);
 
 async function post(req, res) {
