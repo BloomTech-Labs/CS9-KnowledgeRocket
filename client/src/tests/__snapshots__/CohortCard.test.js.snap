@@ -2,30 +2,35 @@
 
 exports[`CohortCard renders correctly 1`] = `
 <div
-  className="MuiCardContent-root-1"
+  className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1"
 >
   <div
-    className="MuiFormControl-root-2"
+    className="MuiCardContent-root-29"
   >
     <div
-      className="MuiCardContent-root-1"
+      className="MuiFormControl-root-30"
     >
-      Name:
-    </div>
-    <div
-      className="MuiCardContent-root-1"
-    >
-      Number of Students:
-    </div>
-    <div
-      className="MuiCardContent-root-1"
-    >
-      Participation:
-    </div>
-    <div
-      className="MuiCardContent-root-1"
-    >
-      Rockets Sent:
+      <div
+        className="MuiCardContent-root-29"
+      >
+        Calculus 101
+      </div>
+      <div
+        className="MuiCardContent-root-29"
+      >
+        Students: 
+        3
+      </div>
+      <div
+        className="MuiCardContent-root-29"
+      >
+        Participation:
+      </div>
+      <div
+        className="MuiCardContent-root-29"
+      >
+        Rockets Sent:
+      </div>
     </div>
   </div>
 </div>

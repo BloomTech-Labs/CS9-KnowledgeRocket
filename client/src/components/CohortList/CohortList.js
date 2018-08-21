@@ -67,14 +67,14 @@ class CohortList extends Component {
 
   fetchCohortData = () => {
     // FETCH COHORT DATA FOR A USER FROM SERVER
-    axios
-      .get('http://localhost:5000/api/cohort')
-      .then(response => {
-        this.setState(() => ({ cohort: response.data }));
-      })
-      .catch(error => {
-        console.error('Server Error', error);
-      });
+    // axios
+    //   .get('http://localhost:5000/api/cohort')
+    //   .then(response => {
+    //     this.setState(() => ({ cohort: response.data }));
+    //   })
+    //   .catch(error => {
+    //     console.error('Server Error', error);
+    //   });
   };
 
   render() {
@@ -99,20 +99,19 @@ class CohortList extends Component {
           </CohortCardContainer>
         ) : (
           // user has 0 cohorts, render add new class btn
-          [
-            <AddButtonCard>
-              <StyledCardContent>
-                <AddButtonCardTitle>Add a new class</AddButtonCardTitle>
-                <Button variant="fab" color="primary">
-                  <AddIcon />
-                </Button>
-              </StyledCardContent>
-            </AddButtonCard>,
-          ]
+          <AddButtonCard>
+            <StyledCardContent>
+              <AddButtonCardTitle>Add a new class</AddButtonCardTitle>
+              <Button variant="fab" color="primary">
+                <AddIcon />
+              </Button>
+            </StyledCardContent>
+          </AddButtonCard>
         )}
       </CohortListContainer>
     );
   }
 }
 
-export default connect(mapStateToProps)(CohortList);
+// export default connect(mapStateToProps)(CohortList);
+export default CohortList;
