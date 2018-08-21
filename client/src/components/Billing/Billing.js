@@ -7,7 +7,6 @@ import { Card } from '../../../node_modules/@material-ui/core';
 import { generateBreadCrumbs } from '../../actions';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -96,15 +95,16 @@ class Billing extends Component {
                                 </RadioGroup>
                                 <div>{`Total Cost: $${this.state.type === 'monthly' ? 9.99 : 29.99}`}</div>
                             </FormControl>
+                            <Elements>
+                                <CheckoutForm
+                                    className="Stripe_Modal"
+                                    id={this.props.state.user._id}
+                                    uid={this.props.state.user.uid}
+                                    type={this.state.type}
+                                />
+                            </Elements>
                         </Card>
-                        <Elements>
-                            <CheckoutForm
-                                className="Stripe_Modal"
-                                id={this.props.state.user._id}
-                                uid={this.props.state.user.uid}
-                                type={this.state.type}
-                            />
-                        </Elements>
+                        
                     </div>
                 </StripeProvider>
             </div>

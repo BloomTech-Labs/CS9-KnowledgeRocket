@@ -9,9 +9,14 @@ const Cohort = mongoose.Schema({
     rockets: [
         {
             startDate: { type: Date },
+            td: { type: Date },
+            tm: { type: Date },
+            tw: { type: Date },
             rocketId: { type: ObjectId, ref: 'Rocket' },
         },
     ],
 });
+
+//TODO: Pre Save Validator to Disable Duplicate Students per Cohort.
 
 module.exports = mongoose.model('Cohort', Cohort);
