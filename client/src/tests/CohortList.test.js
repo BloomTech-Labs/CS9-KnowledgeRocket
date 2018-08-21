@@ -63,11 +63,19 @@ describe('CohortList', () => {
 		expect(component.instance().state.cohort.length).toBe(0);
 	});
 
-	it('should render an Add a new class btn when state is empty', () => {});
+	it('calls componentDidMount', () => {
+		const spy = jest.spyOn(UnWrapped.prototype, 'componentDidMount');
+		const component = mount(
+			<UnWrapped
+				state={mockUser}
+				history={mockHistory}
+				store={mockStore}
+				generateBreadCrumbs={generateBreadCrumbs}
+			/>
+		);
 
-	it('should render rocket cards when stateful', () => {});
-
-	it('calls componentDidMount', () => {});
+		expect(spy).toHaveBeenCalled();
+	});
 
 	it('calls fetchData to update state', () => {});
 });
