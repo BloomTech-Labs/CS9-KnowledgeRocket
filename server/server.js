@@ -12,6 +12,7 @@ const ResponseRocketRouter = require('./responserocket/ResponseRocketRouter');
 const QuestionRouter = require('./question/QuestionRouter');
 const CohortRouter = require('./cohort/CohortRouter');
 const { Router: MailRouter } = require('./mail');
+const User = require('./user/User');
 
 const server = express();
 
@@ -51,7 +52,21 @@ server.post('/charge', async (req, res) => {
             source: req.body.token,
         });
         //In here modify users to switch between pro and free
-        res.json({ status });
+        if (status) {
+            console.log(Date.now() + 30 * 24 * 60 * 60 * 1000);
+            User.findByIdAndUpdate(req.body.id, {
+                account: 'monthly',
+                expiration: Date.now() + 30 * 24 * 60 * 60 * 1000,
+            })
+                .then(foundUser => {
+                    res.status(201).json({ status });
+                })
+                .catch(err => {
+                    res.status(500).json(err);
+                });
+        } else {
+            res.status(500).json({ status });
+        }
     } catch (err) {
         res.status(500).json(err);
     }

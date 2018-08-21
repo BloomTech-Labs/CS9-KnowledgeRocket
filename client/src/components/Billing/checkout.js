@@ -7,19 +7,18 @@ class CheckoutForm extends Component {
     constructor(props) {
         super(props);
         this.state = { complete: false };
-        this.submit = this.submit.bind(this);
     }
-    async submit(ev) {
+    submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
         let response = await axios.post(`${serverURL}`, {
             token: token.id,
             uid: this.props.uid,
+            id: this.props.id,
         });
         if (response) {
-            //TODO ACTION FOR UPDATING ACCOUNT
             this.setState({ complete: true });
         }
-    }
+    };
     render() {
         if (this.state.complete)
             return (

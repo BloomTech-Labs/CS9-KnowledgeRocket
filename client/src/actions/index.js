@@ -21,6 +21,7 @@ export const ADD_ROCKET = 'ADD_ROCKET';
 export const GET_ROCKETS = 'GET_ROCKETS';
 export const REMOVE_ROCKET = 'REMOVE_ROCKET';
 export const UPDATE_ROCKET = 'UPDATE_ROCKET';
+export const UPGRADE_USER = 'UPGRADE_USER';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';
@@ -51,6 +52,15 @@ export const addUser = user => async dispatch => {
     try {
         let response = await axios.post(`${url}/api/auth`, user);
         dispatch({ type: ADD_USER, payload: response.data });
+    } catch (err) {
+        dispatch({ type: ADD_USER_FAILURE });
+    }
+};
+export const upgradeUser = user => async dispatch => {
+    dispatch({ type: UPGRADE_USER });
+    try {
+        let response = await axios.put(`${url}/api/user/${user._id}`, user);
+        dispatch({ type: UPGRADE_USER, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_USER_FAILURE });
     }
@@ -148,9 +158,9 @@ export const logOutUser = () => async dispatch => {
 };
 
 /* BREADCRUMBS GENERATION */
-export const generateBreadCrumbs = (path) => {
+export const generateBreadCrumbs = path => {
     return {
         type: UPDATE_BREADCRUMBS,
-        payload: path
-    }
-}
+        payload: path,
+    };
+};
