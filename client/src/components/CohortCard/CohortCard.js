@@ -6,15 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 
-// function mapStateToProps(state) {
-//     return {
-
-//     };
-// }
-
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList
 const CohortCard = props => {
-	console.log(`PROPS ${JSON.stringify(props)}`);
 	return (
 		<Card className={props.className}>
 			<CardContent>
@@ -30,4 +23,3 @@ const CohortCard = props => {
 };
 
 export default CohortCard;
-// export default connect(mapStateToProps)(CohortCard);

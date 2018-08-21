@@ -72,8 +72,6 @@ class CohortList extends Component {
   };
 
   render() {
-    // console.log(`STATE ${JSON.stringify(this.state.cohort)}`);
-
     return (
       <CohortListContainer>
         {this.state.cohort.length > 0 ? (
@@ -107,5 +105,4 @@ class CohortList extends Component {
   }
 }
 
-// export default connect(mapStateToProps)(CohortList);
 export default CohortList;
