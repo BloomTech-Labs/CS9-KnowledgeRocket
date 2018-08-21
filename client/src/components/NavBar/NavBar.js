@@ -14,7 +14,7 @@ function mapStateToProps(state) {
 class NavBar extends Component {
     componentDidMount() {
         if (!this.props.state.user.authenticated) {
-            this.props.history.push('/rocket/auth');
+            // this.props.history.push('/rocket/auth');
         }
     }
 
