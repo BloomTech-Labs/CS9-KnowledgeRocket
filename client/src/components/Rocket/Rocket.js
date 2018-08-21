@@ -26,7 +26,7 @@ class Rocket extends Component {
         return (
             <div className="Main_container">
                 {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
-                <RocketForm handleSubmit={/* HANDLE SUBMIT ACTION HERE */}/>
+                <RocketForm handleSubmit={() => 'action'/* HANDLE SUBMIT ACTION HERE */}/>
             </div>
         );
     }
