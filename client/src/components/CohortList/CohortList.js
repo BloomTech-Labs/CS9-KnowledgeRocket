@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 // Material Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,11 +10,11 @@ import AddIcon from '@material-ui/icons/Add';
 // Components
 import CohortCard from '../CohortCard/CohortCard';
 
-function mapStateToProps(state) {
-  return {
-    state,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     state,
+//   };
+// }
 
 const CohortListContainer = styled.div`
   margin-left: 1rem;
