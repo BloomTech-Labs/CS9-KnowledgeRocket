@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -8,6 +8,7 @@ import reducer from '../reducers';
 import { BrowserRouter, Route } from 'react-router-dom';
 // Component
 import CohortList from '../components/CohortList/CohortList';
+import AddButtonCard from '../components/CohortList/CohortList';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -30,12 +31,17 @@ describe('CohortList', () => {
 
 	it('should have initial state', () => {
 		const component = shallow(<CohortList store={mockStore} />);
-		const state = component.state('cohort');
+		const state = component.state();
 
-		expect(state).toBe(undefined);
+		expect(state).toBeInstanceOf(Object);
+		expect(state.cohort).toBeInstanceOf(Array);
+		expect(state.cohort.length).toBe(0);
 	});
 
-	it('should render an Add a new class btn when state is empty', () => {});
+	it('should render an Add a new class btn when state is empty', () => {
+		// const component = mount(<CohortList store={mockStore} />);
+		// console.log(component);
+	});
 
 	it('should render rocket cards when stateful', () => {});
 
