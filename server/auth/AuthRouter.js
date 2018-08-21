@@ -99,13 +99,10 @@ function post(req, res) {
                                     uid,
                                     authProvider: authType,
                                 })
-                                    .then(createdUser =>
-                                        res.json(createdUser)
-                                    )
+                                    .then(createdUser => res.json(createdUser))
                                     .catch(errUser => {
                                         res.json({
-                                            errorMessage:
-                                                errUser.message,
+                                            errorMessage: errUser.message,
                                         });
                                     });
                             } else {
