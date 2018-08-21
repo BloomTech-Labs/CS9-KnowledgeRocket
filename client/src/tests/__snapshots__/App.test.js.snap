@@ -12,7 +12,7 @@ exports[`<App /> renders without crashing 1`] = `
       className="sc-ifAKCX iIzwFJ"
     >
       <div
-        className="sc-bdVaJa kvtMNi"
+        className="sc-bdVaJa hFzOOv"
       >
         <div
           className="sc-bwzfXH jBrGUa"
@@ -21,7 +21,7 @@ exports[`<App /> renders without crashing 1`] = `
             <img
               className="sc-bxivhb jiREkS"
               onClick={[Function]}
-              src="Logo_BW_SML.svg"
+              src="/img/Logo_BW_SML.svg"
             />
           </div>
           <div>
@@ -147,8 +147,8 @@ exports[`<App /> renders without crashing 1`] = `
               className="sc-iwsKbI klDIwE"
             >
               <img
-                className="sc-gZMcBi ldrsnT"
-                src="/img/nasa-63029-unsplash.jpg"
+                className="sc-gZMcBi cMjvs"
+                src="/img/bryan-minear-315814-unsplash.jpg"
               />
               <p
                 className="sc-gqjmRU faHvtT"

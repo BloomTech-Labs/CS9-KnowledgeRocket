@@ -104,7 +104,7 @@ class Auth extends Component {
                     />
                 </div>
                 <div className="flex-column-centered">
-                    <div className='flex-row-centered'>
+                    <div className="flex-row-centered">
                         <Button
                             className="Auth_button"
                             variant="contained"

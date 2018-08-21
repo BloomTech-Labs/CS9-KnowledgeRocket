@@ -10,7 +10,7 @@ class CheckoutForm extends Component {
     }
     submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
-        let response = await axios.post(`${serverURL}`, {
+        let response = await axios.post(`${serverURL}/${this.props.type}`, {
             token: token.id,
             uid: this.props.uid,
             id: this.props.id,
@@ -20,6 +20,7 @@ class CheckoutForm extends Component {
         }
     };
     render() {
+        // console.log(this.props.type)
         if (this.state.complete)
             return (
                 <div>
