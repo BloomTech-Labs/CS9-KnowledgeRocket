@@ -2,16 +2,16 @@
 
 exports[`CohortList renders correctly 1`] = `
 <div
-  className="sc-bdVaJa cjjvmq"
+  className="sc-bwzfXH fliMDs"
 >
   <div
-    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-bxivhb eMGzAp"
+    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-ifAKCX jzUTef"
   >
     <div
-      className="MuiCardContent-root-29 sc-ifAKCX kTCbOb"
+      className="MuiCardContent-root-29 sc-EHOje fhnXmt"
     >
       <h3
-        className="sc-EHOje eBBwHL"
+        className="sc-bZQynM hyWVmf"
       >
         Add a new class
       </h3>
@@ -34,21 +34,27 @@ exports[`CohortList renders correctly 1`] = `
         <span
           className="MuiButton-label-31"
         >
-          <svg
-            aria-hidden="true"
-            className="MuiSvgIcon-root-59"
-            color={undefined}
-            focusable="false"
-            viewBox="0 0 24 24"
+          <a
+            className="sc-gzVnrw frFvIN"
+            href="/rocket/classForm"
+            onClick={[Function]}
           >
-            <path
-              d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-            />
-            <path
-              d="M0 0h24v24H0z"
-              fill="none"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root-59"
+              color={undefined}
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+              />
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+            </svg>
+          </a>
         </span>
         <span
           className="MuiTouchRipple-root-66"

@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { BrowserRouter, Route } from 'react-router-dom';
 // Component
 import CohortCard from '../components/CohortCard/CohortCard';
 
@@ -15,7 +16,13 @@ describe('CohortCard', () => {
 	};
 
 	it('renders correctly', () => {
-		const tree = renderer.create(<CohortCard cohort={cohort} />).toJSON();
+		const tree = renderer
+			.create(
+				<BrowserRouter>
+					<CohortCard cohort={cohort} />
+				</BrowserRouter>
+			)
+			.toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 });

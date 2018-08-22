@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../reducers';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter, MemoryRouter } from 'react-router-dom';
 // Action
 import { generateBreadCrumbs } from '../actions';
 // Component
@@ -34,6 +34,10 @@ const mockHistory = {
 	},
 };
 
+const mockAxios = {
+	get: jest.fn(() => Promise.resolve({ data: {} })),
+};
+
 describe('CohortList', () => {
 	const tree = renderer
 		.create(
@@ -50,7 +54,7 @@ describe('CohortList', () => {
 	});
 
 	it('should have initial state', () => {
-		const component = mount(
+		const component = shallow(
 			<UnWrapped
 				state={mockUser}
 				history={mockHistory}
@@ -58,7 +62,6 @@ describe('CohortList', () => {
 				generateBreadCrumbs={generateBreadCrumbs}
 			/>
 		);
-
 		expect(component.instance().state.cohort).toBeInstanceOf(Array);
 		expect(component.instance().state.cohort.length).toBe(0);
 	});
@@ -66,19 +69,21 @@ describe('CohortList', () => {
 	it('calls componentDidMount', () => {
 		const spy = jest.spyOn(UnWrapped.prototype, 'componentDidMount');
 		const component = mount(
-			<UnWrapped
-				state={mockUser}
-				history={mockHistory}
-				store={mockStore}
-				generateBreadCrumbs={generateBreadCrumbs}
-			/>
+			<MemoryRouter>
+				<UnWrapped
+					state={mockUser}
+					history={mockHistory}
+					store={mockStore}
+					generateBreadCrumbs={generateBreadCrumbs}
+				/>
+			</MemoryRouter>
 		);
 
 		expect(spy).toHaveBeenCalled();
 	});
 
 	it('has a fetchCohortData function', () => {
-		const component = mount(
+		const component = shallow(
 			<UnWrapped
 				state={mockUser}
 				history={mockHistory}
@@ -90,5 +95,19 @@ describe('CohortList', () => {
 		expect(component.instance().fetchCohortData).toBeInstanceOf(Function);
 	});
 
-	it('calls fetchData to update state', () => {});
+	// it('calls fetchCohortData to update state', () => {
+	// 	const component = mount(
+	// 		<UnWrapped
+	// 			state={mockUser}
+	// 			history={mockHistory}
+	// 			store={mockStore}
+	// 			generateBreadCrumbs={generateBreadCrumbs}
+	// 		/>
+	// 	);
+
+	// 	const spy = jest.spyOn(UnWrapped.prototype, 'fetchCohortData');
+
+	// 	expect(spy).toHaveBeenCalledOnce()
+
+	// });
 });
