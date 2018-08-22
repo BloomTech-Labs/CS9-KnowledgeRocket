@@ -62,8 +62,9 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     width: 95%;
+    height: 800px;
     padding: 20px;
 `;
 
