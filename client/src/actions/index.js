@@ -52,10 +52,10 @@ export const addRocket = rocket => {
 };
 
 // COHORT ACTIONS
-export const addCohort = user => async dispatch => {
+export const addCohort = (cohort, id) => async dispatch => {
     dispatch({ type: ADDING_COHORT });
     try {
-        let response = await axios.post(`${url}/api/cohort`);
+        let response = await axios.post(`${url}/api/cohort`, { cohort, id });
         dispatch({ type: ADD_COHORT, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_COHORT_FAILURE });
