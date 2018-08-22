@@ -10,6 +10,7 @@ const RocketFormBase = props => {
         touched,
         handleSubmit,
         handleChange,
+        handleBlur,
         setFieldValue,
         isSubmitting,
     } = props;
@@ -32,48 +33,48 @@ const RocketFormBase = props => {
                 <div>chars/maxChars</div>
             </div>
             <fieldset>
-                <label htmlFor="td.choices[0].correct">
+                <label>
                     <input
-                        name="td.choices[0].correct"
+                        name="td.correct"
                         checked={values.td.choices[0].correct}
                         type="radio"
-                        onChange={e => {
-                            e.persist();
-                            console.log(e);
-                            handleChange(e);
-                        }}
+                        onChange={handleChange}
                     />
                     Choice 1
                 </label>
-                <label htmlFor="td.choices[1].correct">
+                <label>
                     <input
-                        name="td.choices[1].correct"
+                        name="td.correct"
                         checked={values.td.choices[1].correct}
                         type="radio"
                         onChange={handleChange}
                     />
                     Choice 2
                 </label>
-                <label htmlFor="td.choices[2].correct">
+                <label>
                     <input
-                        name="td.choices[2].correct"
+                        name="td.correct"
                         checked={values.td.choices[2].correct}
                         type="radio"
                         onChange={handleChange}
                     />
                     Choice 3
                 </label>
-                <label htmlFor="td.choices[3].correct">
+                <label>
                     <input
-                        name="td.choices[3].correct"
-                        checked={values.td.choices[3].correct}
+                        name="td.correct"
+                        checked={values.td.choices[3].text === values.td.correct}
+                        value={values.td.choices[3].text}
                         type="radio"
-                        onChange={e => {
-                            e.preventDefault();
-                            setFieldValue('td.choices[3].correct', !values.td.choices[3].correct);
-                        }}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                     />
-                    Choice 4
+                    <input
+                        name="td.choices[3].text"
+                        type="text"
+                        onChange={handleChange}
+                        value={values.td.choices[3].text}
+                    />
                 </label>
             </fieldset>
             <button type="submit" disabled={isSubmitting}>
@@ -89,22 +90,19 @@ const defaultProps = {
         question: '',
         choices: [
             {
-                text: '',
-                correct: false,
+                text: 'Answer 1',
             },
             {
-                text: '',
-                correct: false,
+                text: 'Answer 2',
             },
             {
-                text: '',
-                correct: false,
+                text: 'Answer 3',
             },
             {
-                text: '',
-                correct: false,
+                text: 'Answer 4',
             },
         ],
+        correct: '',
     },
     title: '',
 };
