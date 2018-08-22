@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 import reducer from '../reducers';
 import { BrowserRouter, Route, withRouter, MemoryRouter } from 'react-router-dom';
 // Action
-import { generateBreadCrumbs } from '../actions';
+// import { generateBreadCrumbs } from '../actions';
 // Component
 import CohortList from '../components/CohortList/CohortList';
 import { CohortList as UnWrapped } from '../components/CohortList/CohortList';
@@ -36,6 +36,10 @@ const mockHistory = {
 
 const mockAxios = {
 	get: jest.fn(() => Promise.resolve({ data: {} })),
+};
+
+const generateBreadCrumbs = () => {
+	return null;
 };
 
 describe('CohortList', () => {
