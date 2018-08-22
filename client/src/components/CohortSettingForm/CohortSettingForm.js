@@ -21,7 +21,9 @@ class CohortSettingForm extends Component {
 			<Card className={this.props.className}>
 				<StylizedInput defaultValue="Class Name" disableUnderline="true" />
 				<FormControlLabel control={<Checkbox />} label="CC Me on Rocket Emails" />
-				<Button variant="contained" color="primary">Import CSV</Button>
+				<Button variant="contained" color="primary">
+					Import CSV
+				</Button>
 			</Card>
 		);
 	}
