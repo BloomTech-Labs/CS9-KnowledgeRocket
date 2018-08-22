@@ -18,6 +18,9 @@ class CohortAddStudentsForm extends Component {
 				<StylizedInput defaultValue="Last Name" disableUnderline="true" />
 				<StylizedInput defaultValue="First Name" disableUnderline="true" />
 				<StylizedInput defaultValue="Email" disableUnderline="true" />
+				<Button variant="contained" color="primary">
+					Add
+				</Button>
 			</Card>
 		);
 	}
