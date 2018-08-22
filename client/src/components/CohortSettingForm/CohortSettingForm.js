@@ -22,7 +22,16 @@ class CohortSettingForm extends Component {
 					name="className"
 					onChange={this.props.handleNewInput}
 				/>
-				<FormControlLabel control={<Checkbox />} label="CC Me on Rocket Emails" />
+				<FormControlLabel
+					control={
+						<Checkbox
+							onChange={this.props.handleCheckBox}
+							name="ccEmail"
+							checked={this.props.ccStatus}
+						/>
+					}
+					label="CC Me on Rocket Emails"
+				/>
 				<Button variant="contained" color="primary">
 					Import CSV
 				</Button>

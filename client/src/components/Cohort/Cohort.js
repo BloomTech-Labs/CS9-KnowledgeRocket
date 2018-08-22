@@ -76,6 +76,7 @@ class Cohort extends Component {
         studentLastName: '',
         studentFirstName: '',
         studentEmail: '',
+        ccEmail: false,
     };
 
     componentDidMount() {
@@ -90,6 +91,10 @@ class Cohort extends Component {
 
     handleNewInput = e => {
         this.setState({ [e.target.name]: e.target.value });
+    };
+
+    handleCheckBox = e => {
+        this.setState({ [e.target.name]: !e.target.checked });
     };
 
     handleAddCohort = () => {
@@ -108,10 +113,15 @@ class Cohort extends Component {
         console.log(`last name: ${this.state.studentLastName}`);
         console.log(`first name: ${this.state.studentFirstName}`);
         console.log(`email: ${this.state.studentEmail}`);
+        console.log(`cc: ${this.state.ccEmail}`);
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
-                <StyledCohortAddStudentForm handleNewInput={this.handleNewInput} />
+                <StyledCohortAddStudentForm
+                    handleNewInput={this.handleNewInput}
+                    handleCheckBox={this.handleCheckBox}
+                    ccStatus={this.state.ccEmail}
+                />
                 <StyledCohortStudentList />
                 <StyledCohortRocketList />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
