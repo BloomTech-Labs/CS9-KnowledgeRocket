@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+// actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
 import Card from '@material-ui/core/Card';
@@ -12,9 +14,9 @@ import AddIcon from '@material-ui/icons/Add';
 import CohortCard from '../CohortCard/CohortCard';
 
 function mapStateToProps(state) {
-    return {
-        state,
-    };
+  return {
+    state,
+  };
 }
 
 const CohortListContainer = styled.div`
@@ -56,8 +58,12 @@ const AddButtonCardTitle = styled.h3`
   margin-bottom: 20px;
 `;
 
+const StyledAddButtonLink = styled(Link)`
+  text-decoration: none;
+`;
+
 // RENDERS A LIST OF COHORT CARDS
-class CohortList extends Component {
+export class CohortList extends Component {
   state = {
     cohort: [],
   };
@@ -67,14 +73,15 @@ class CohortList extends Component {
     // If not authenticated it will send the user to <login/>
     // If authenticated it will set the state with the current user.
     if (!this.props.state.user.authenticated) {
-        this.props.history.push('/rocket/auth');
+      this.props.history.push('/rocket/auth');
     }
     this.props.generateBreadCrumbs(this.props.history.location.pathname);
+    this.fetchCohortData();
   }
 
   fetchCohortData = () => {
     // FETCH COHORT DATA FOR A USER FROM SERVER
-    axios
+    return axios
       .get('http://localhost:5000/api/cohort')
       .then(response => {
         this.setState(() => ({ cohort: response.data }));
@@ -91,13 +98,15 @@ class CohortList extends Component {
           // user has at least one cohort, render a cohort card
           <CohortCardContainer>
             {this.state.cohort.map((cohort, index) => (
-              <StyledCohortCard key={`${cohort.students[index]}`} cohort={cohort} />
+              <StyledCohortCard key={`${cohort.students[index]}`} cohort={cohort} {...this.props} />
             ))}
             <AddButtonCard>
               <StyledCardContent>
                 <AddButtonCardTitle>New Class</AddButtonCardTitle>
                 <Button variant="fab" color="primary">
-                  <AddIcon />
+                  <StyledAddButtonLink to="/rocket/classForm">
+                    <AddIcon />
+                  </StyledAddButtonLink>
                 </Button>
               </StyledCardContent>
             </AddButtonCard>
@@ -108,7 +117,9 @@ class CohortList extends Component {
             <StyledCardContent>
               <AddButtonCardTitle>Add a new class</AddButtonCardTitle>
               <Button variant="fab" color="primary">
-                <AddIcon />
+                <StyledAddButtonLink to="/rocket/classForm">
+                  <AddIcon />
+                </StyledAddButtonLink>
               </Button>
             </StyledCardContent>
           </AddButtonCard>
@@ -118,4 +129,4 @@ class CohortList extends Component {
   }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs })(CohortList);
+export default withRouter(connect(mapStateToProps, { generateBreadCrumbs })(CohortList));

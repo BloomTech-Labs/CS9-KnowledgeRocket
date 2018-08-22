@@ -9,6 +9,7 @@ import Rocket from '../Rocket/Rocket';
 import RocketList from '../RocketList/RocketList';
 import Billing from '../Billing/Billing';
 import CohortList from '../CohortList/CohortList';
+import Cohort from '../Cohort/Cohort';
 import Settings from '../Settings/Settings';
 
 export default () => (
@@ -21,6 +22,7 @@ export default () => (
                 <Route path="/rocket/new" exact component={Rocket} />
                 {/* <Route path="/rocket/single/:id" exact component={Rocket} /> */}
                 <Route path="/rocket/billing" exact component={Billing} />
+                <Route path="/rocket/classForm" exact component={Cohort} />
                 <Route path="/rocket/classes" exact component={CohortList} />
                 <Route path="/rocket/settings" exact component={Settings} />
                 <Route path="/rocket/auth" exact component={Auth} />
