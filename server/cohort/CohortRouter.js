@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Cohort = require('./Cohort');
+const User = require('../user/User');
 
 router
     .route('/')
@@ -22,11 +23,32 @@ function get(req, res) {
 }
 
 function post(req, res) {
-    const cohort = new Cohort(req.body);
+    const cohort = new Cohort(req.body.cohort);
+    const id = req.body.id;
+    console.log(`cohort ${JSON.stringify(req.body.cohort)}`);
+
     cohort
         .save()
-        .then(stuff => {
-            res.status(201).json(stuff);
+        .then(savedCohort => {
+            console.log(`savedCohort ${savedCohort}`);
+            User.findOne({ _id: id })
+                .then(found => {
+                    console.log(`FOUND: ${found}`);
+                    found.cohorts.push(savedCohort._id);
+                    console.log(`after pushing ${found.cohorts}`);
+                    User.findByIdAndUpdate(id, { cohorts: found.cohorts })
+                        .then(() => {
+                            res.status(201).json(savedCohort);
+                        })
+                        .catch(err => {
+                            console.log('nested under find by id and update');
+                            res.status(500).json({ errorMessage: err.message });
+                        });
+                })
+                .catch(err => {
+                    console.log('nested uner find one');
+                    res.status(500).json({ errorMessage: err.message });
+                });
         })
         .catch(err => {
             res.status(500).json({ message: 'There was an error in POST' });
