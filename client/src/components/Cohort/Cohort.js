@@ -21,7 +21,7 @@ const CohortFormMainContainer = styled(Card)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     width: 100%;
 `;
 
@@ -32,6 +32,7 @@ const StyledCohortSettingForm = styled(CohortSettingForm)`
     width: 95%;
     height: 60px;
     padding: 10px;
+    margin-bottom: 20px;
 `;
 
 const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
@@ -39,7 +40,9 @@ const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
     flex-direction: row;
     justify-content: space-around;
     width: 95%;
+    height: 60px;
     padding: 10px;
+    margin-bottom: 20px;
 `;
 
 class Cohort extends Component {
