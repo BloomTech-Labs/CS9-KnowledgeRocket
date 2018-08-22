@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
+import CohortStudentList from '../CohortStudentList/CohortStudentList';
 
 function mapStateToProps(state) {
     return {
@@ -60,6 +61,7 @@ class Cohort extends Component {
             <CohortFormMainContainer>
                 <StyledCohortSettingForm />
                 <StyledCohortAddStudentForm />
+                <CohortStudentList />
             </CohortFormMainContainer>,
         ];
     }
