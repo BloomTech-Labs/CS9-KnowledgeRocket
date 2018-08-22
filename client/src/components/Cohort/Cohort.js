@@ -72,20 +72,16 @@ const StyledCohortRocketList = styled(CohortRocketList)`
 
 class Cohort extends Component {
     state = {
-        className: '',
-        studentLastName: '',
-        studentFirstName: '',
-        studentEmail: '',
-        ccEmail: false,
+        title: '',
     };
 
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
         // If authenticated it will set the state with the current user.
-        // if (!this.props.state.user.authenticated) {
-        //     this.props.history.push('/rocket/auth');
-        // }
+        if (!this.props.state.user.authenticated) {
+            this.props.history.push('/rocket/auth');
+        }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
 
@@ -99,21 +95,21 @@ class Cohort extends Component {
 
     handleAddCohort = () => {
         const cohort = {
-            title: 'CS101',
-            teacher: 'SERGAY',
-            cc: false,
-            rockets: [],
-            status: '',
+            title: this.state.title,
+            // teacher: this.props.
         };
-        this.props.addCohort(cohort);
+        this.props.addCohort(cohort, this.props.state.user._id);
+        this.setState({
+            title: '',
+            studentLastName: '',
+            studentFirstName: '',
+            studentEmail: '',
+            ccEmail: false,
+        });
     };
 
     render() {
-        console.log(`className: ${this.state.className}`);
-        console.log(`last name: ${this.state.studentLastName}`);
-        console.log(`first name: ${this.state.studentFirstName}`);
-        console.log(`email: ${this.state.studentEmail}`);
-        console.log(`cc: ${this.state.ccEmail}`);
+        console.log('WE NEED THIS', this.props.state.user._id);
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
@@ -130,4 +126,4 @@ class Cohort extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps, { generateBreadCrumbs, addCohort })(Cohort));
+export default connect(mapStateToProps, { generateBreadCrumbs, addCohort })(Cohort);
