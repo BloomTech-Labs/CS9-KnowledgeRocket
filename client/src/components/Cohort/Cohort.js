@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generateBreadCrumbs } from '../../actions';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 // Material Components
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
+// Actions
+import { generateBreadCrumbs, addCohort } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -78,6 +80,18 @@ class Cohort extends Component {
         // }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
+
+    handleAddCohort = () => {
+        const cohort = {
+            title: 'CS101',
+            teacher: 'SERGAY',
+            cc: false,
+            rockets: [],
+            status: '',
+        };
+        this.props.addCohort(cohort);
+    };
+
     render() {
         return [
             <CohortFormMainContainer>
@@ -85,9 +99,10 @@ class Cohort extends Component {
                 <StyledCohortAddStudentForm />
                 <StyledCohortStudentList />
                 <StyledCohortRocketList />
+                <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
             </CohortFormMainContainer>,
         ];
     }
 }
 
-export default withRouter(connect(mapStateToProps, { generateBreadCrumbs })(Cohort));
+export default withRouter(connect(mapStateToProps, { generateBreadCrumbs, addCohort })(Cohort));
