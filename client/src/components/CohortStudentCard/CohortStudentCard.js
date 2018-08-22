@@ -10,7 +10,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 // CONTAINS A STUDENT'S  NAME AND MENU WITH AN OPTION TO DELETE
 
 const StylizedCardContent = styled(CardContent)`
-	border: 1px solid red;
 	width: 200px;
 	display: flex;
 	flex-direction: row;
