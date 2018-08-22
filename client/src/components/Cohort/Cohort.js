@@ -111,7 +111,7 @@ class Cohort extends Component {
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
-                <StyledCohortAddStudentForm />
+                <StyledCohortAddStudentForm handleNewInput={this.handleNewInput} />
                 <StyledCohortStudentList />
                 <StyledCohortRocketList />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
