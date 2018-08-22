@@ -1,10 +1,15 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 // Material Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
+
+const StyledLink = styled(Link)`
+	text-decoration: none;
+`;
 
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList
 const CohortCard = props => {
@@ -12,7 +17,9 @@ const CohortCard = props => {
 		<Card className={props.className}>
 			<CardContent>
 				<FormControl>
-					<Input>{props.cohort.title}</Input>
+					<Input>
+						<StyledLink to="/rocket/classForm">{props.cohort.title}</StyledLink>
+					</Input>
 					<Input>Students: {props.cohort.students.length}</Input>
 					<Input>Participation:</Input>
 					<Input>Rockets Sent:</Input>
