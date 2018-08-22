@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
+import { Card } from '../../../node_modules/@material-ui/core';
+import FormLabel from '@material-ui/core/FormLabel';
 const serverURL = process.env.REACT_APP_Stripe_Url;
 class CheckoutForm extends Component {
     constructor(props) {
@@ -30,9 +32,13 @@ class CheckoutForm extends Component {
             );
         return (
             <div className="checkout">
-                <p>Would you like to complete the purchase?</p>
-                <CardElement />
-                <button onClick={this.submit}>Send</button>
+                <Card className="checkoutCard">
+                    <FormLabel component="legend">Payment Info</FormLabel>
+                    <CardElement className="checkoutBoxes" />
+                </Card>
+                <button className="submitButton" onClick={this.submit}>
+                    Buy Now
+                </button>
             </div>
         );
     }

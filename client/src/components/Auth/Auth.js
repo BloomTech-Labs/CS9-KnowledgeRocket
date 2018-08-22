@@ -95,12 +95,14 @@ class Auth extends Component {
                         name="email"
                         autoFocus={true}
                         onChange={this.handleInput}
+                        disableUnderline={true}
                     />
                     <Input
                         className="Auth_input"
                         type="password"
                         name="password"
                         onChange={this.handleInput}
+                        disableUnderline={true}
                     />
                 </div>
                 <div className="flex-column-centered">
