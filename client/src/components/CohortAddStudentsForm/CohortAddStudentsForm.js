@@ -14,9 +14,9 @@ class CohortAddStudentsForm extends Component {
 	render() {
 		return (
 			<Card className={this.props.className}>
-				<StylizedInput defaultValue="Last Name" disableUnderline="true" />
-				<StylizedInput defaultValue="First Name" disableUnderline="true" />
-				<StylizedInput defaultValue="Email" disableUnderline="true" />
+				<StylizedInput defaultValue="Last Name" disableUnderline="true" name="studentLastName"/>
+				<StylizedInput defaultValue="First Name" disableUnderline="true" name="studentFirstName"/>
+				<StylizedInput defaultValue="Email" disableUnderline="true" name="studentEmail"/>
 				<Button variant="contained" color="primary">
 					Add
 				</Button>
