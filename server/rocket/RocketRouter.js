@@ -1,3 +1,4 @@
+//@ts-check
 const router = require('express').Router();
 const Rocket = require('./Rocket');
 const User = require('../user/User');
@@ -15,7 +16,14 @@ router
 
 function postRocket(req, res) {
     // axios.post(`${url}/api/rocket/add`, {rocket, uid});
+    // twoDay: { type: ObjectId, ref: 'Question' },
+    // twoWeek: { type: ObjectId, ref: 'Question' },
+    // twoMonth: { type: ObjectId, ref: 'Question' },
     const { rocket, uid } = req.body;
+    const { twoDay, twoWeek, twoMonth } = rocket;
+    // Add questions to DB
+    // Use returned _id to replace rocket.twoDay, rocket.twoWeek, rocket.twoMonth with those IDs
+    // Afterwards create the rocket, but not before the promise fulfills.
     Rocket.create(rocket)
         .then(createdRocket => {
             // Add created rocket to the user's rocket array;
@@ -23,7 +31,7 @@ function postRocket(req, res) {
                 .then(foundUser => {
                     // append to foundUser's array of rockets...
                     if (foundUser) {
-                        rocketArray = foundUser.rockets;
+                        let rocketArray = foundUser.rockets;
                         rocketArray.push(createdRocket._id);
                         // Update currently found user's rocket's array..
                         User.findByIdAndUpdate(foundUser._id, { rockets: rocketArray }).then(

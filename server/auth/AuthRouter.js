@@ -1,3 +1,4 @@
+//@ts-check
 const router = require('express').Router();
 const Firebase = require('firebase');
 const admin = require('firebase-admin');
@@ -29,7 +30,6 @@ router.route('/').post(post);
 
 // TODO: Implement Token Verification from Firebase
 // In the case a user is already authenticated on front end.
-
 function post(req, res) {
     const { email, password, authType } = req.body;
     if (authType === 'signin') {
@@ -84,7 +84,7 @@ function post(req, res) {
                         uid,
                         authProvider: 'email',
                     })
-                        .populate('rockets')
+                        // .populate('rockets')
                         .then(createdUser => res.json(createdUser))
                         .catch(errUser => {
                             res.json({ errorMessage: errUser.message });
@@ -116,7 +116,7 @@ function post(req, res) {
                                     uid,
                                     authProvider: authType,
                                 })
-                                    .populate('rockets')
+                                    // .populate('rockets')
                                     .then(createdUser => res.json(createdUser))
                                     .catch(errUser => {
                                         res.json({
