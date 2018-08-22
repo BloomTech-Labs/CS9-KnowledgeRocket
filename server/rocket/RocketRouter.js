@@ -1,13 +1,12 @@
 const router = require('express').Router();
 const Rocket = require('./Rocket');
+const User = require('../user/User');
 
 router
     .route('/')
     .get(get)
     .post(post);
-router
-    .route('/add')
-    .post(postRocket);
+router.route('/add').post(postRocket);
 router
     .route('/:id')
     .put(put)
@@ -15,12 +14,36 @@ router
     .delete(deleteid);
 
 function postRocket(req, res) {
-    Rocket.create(req.body)
+    // axios.post(`${url}/api/rocket/add`, {rocket, uid});
+    const { rocket, uid } = req.body;
+    Rocket.create(rocket)
         .then(createdRocket => {
-            res.status(201).json(createdRocket);
-        }).catch(createRocketError => {
-            res.status(500).json({ errorMessage: createRocketError.message })
+            // Add created rocket to the user's rocket array;
+            User.findOne({ uid })
+                .then(foundUser => {
+                    // append to foundUser's array of rockets...
+                    if (foundUser) {
+                        rocketArray = foundUser.rockets;
+                        rocketArray.push(createdRocket._id);
+                        // Update currently found user's rocket's array..
+                        User.findByIdAndUpdate(foundUser._id, { rockets: rocketArray }).then(
+                            modifiedUser => {
+                                // Hopefully return the modified user with the new rocket's array to the front end.
+                                modifiedUser.rockets.push(createdRocket._id);
+                                res.status(201).json(modifiedUser);
+                            }
+                        );
+                    } else {
+                        res.status(404).json({ error: 'User not Found with that UID' });
+                    }
+                })
+                .catch(errUser => {
+                    res.status(404).json({ errorMessage: errUser.message });
+                });
         })
+        .catch(createRocketError => {
+            res.status(500).json({ errorMessage: createRocketError.message });
+        });
 }
 
 function get(req, res) {

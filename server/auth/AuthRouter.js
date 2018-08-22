@@ -41,6 +41,7 @@ function post(req, res) {
                 const uid = response.user.uid;
                 response.user.getIdToken().then(token => {
                     UserModel.findOne({ uid })
+                        .populate('rockets')
                         .then(foundUser => {
                             // Alternatively Replace Token Here and Send back Updated Token...
                             if (
@@ -50,9 +51,11 @@ function post(req, res) {
                                 // Account has Expired Update account accordingly
                                 UserModel.findByIdAndUpdate(foundUser._id, {
                                     account: 'free',
-                                }).then(updatedUser => {
-                                    res.status(201).json(updatedUser);
-                                });
+                                })
+                                    .populate('rockets')
+                                    .then(updatedUser => {
+                                        res.status(201).json(updatedUser);
+                                    });
                             } else {
                                 res.json(foundUser);
                             }
@@ -81,6 +84,7 @@ function post(req, res) {
                         uid,
                         authProvider: 'email',
                     })
+                        .populate('rockets')
                         .then(createdUser => res.json(createdUser))
                         .catch(errUser => {
                             res.json({ errorMessage: errUser.message });
@@ -104,6 +108,7 @@ function post(req, res) {
                 const decodedUid = decodedToken.uid;
                 if (uid === decodedUid) {
                     UserModel.findOne({ uid })
+                        .populate('rockets')
                         .then(foundUser => {
                             if (foundUser === null) {
                                 UserModel.create({
@@ -111,6 +116,7 @@ function post(req, res) {
                                     uid,
                                     authProvider: authType,
                                 })
+                                    .populate('rockets')
                                     .then(createdUser => res.json(createdUser))
                                     .catch(errUser => {
                                         res.json({
