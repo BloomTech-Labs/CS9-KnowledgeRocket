@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../reducers';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter, MemoryRouter } from 'react-router-dom';
 // Action
 import { generateBreadCrumbs } from '../actions';
 // Component
@@ -54,7 +54,7 @@ describe('CohortList', () => {
 	});
 
 	it('should have initial state', () => {
-		const component = mount(
+		const component = shallow(
 			<UnWrapped
 				state={mockUser}
 				history={mockHistory}
@@ -62,7 +62,6 @@ describe('CohortList', () => {
 				generateBreadCrumbs={generateBreadCrumbs}
 			/>
 		);
-
 		expect(component.instance().state.cohort).toBeInstanceOf(Array);
 		expect(component.instance().state.cohort.length).toBe(0);
 	});
@@ -70,19 +69,21 @@ describe('CohortList', () => {
 	it('calls componentDidMount', () => {
 		const spy = jest.spyOn(UnWrapped.prototype, 'componentDidMount');
 		const component = mount(
-			<UnWrapped
-				state={mockUser}
-				history={mockHistory}
-				store={mockStore}
-				generateBreadCrumbs={generateBreadCrumbs}
-			/>
+			<MemoryRouter>
+				<UnWrapped
+					state={mockUser}
+					history={mockHistory}
+					store={mockStore}
+					generateBreadCrumbs={generateBreadCrumbs}
+				/>
+			</MemoryRouter>
 		);
 
 		expect(spy).toHaveBeenCalled();
 	});
 
 	it('has a fetchCohortData function', () => {
-		const component = mount(
+		const component = shallow(
 			<UnWrapped
 				state={mockUser}
 				history={mockHistory}
