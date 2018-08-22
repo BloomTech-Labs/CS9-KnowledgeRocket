@@ -87,7 +87,7 @@ export class CohortList extends Component {
         this.setState(() => ({ cohort: response.data }));
       })
       .catch(error => {
-        console.error('Server Error', error);
+        // console.error('Server Error', error);
       });
   };
 
