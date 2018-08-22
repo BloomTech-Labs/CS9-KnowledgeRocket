@@ -48,12 +48,12 @@ const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
 
 const StyledCohortStudentList = styled(CohortStudentList)`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
     width: 95%;
-    height: 60px;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 20px;
 `;
 
 class Cohort extends Component {
