@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
+import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 
 function mapStateToProps(state) {
     return {
@@ -18,8 +19,8 @@ const CohortFormMainContainer = styled(Card)`
     margin-left: 1rem;
     padding: 1rem;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
     width: 100%;
 `;
@@ -28,8 +29,16 @@ const StyledCohortSettingForm = styled(CohortSettingForm)`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 1000px;
+    width: 95%;
     height: 60px;
+    padding: 10px;
+`;
+
+const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 95%;
     padding: 10px;
 `;
 
@@ -44,11 +53,12 @@ class Cohort extends Component {
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
     render() {
-        return (
+        return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm />
-            </CohortFormMainContainer>
-        );
+                <StyledCohortAddStudentForm />
+            </CohortFormMainContainer>,
+        ];
     }
 }
 
