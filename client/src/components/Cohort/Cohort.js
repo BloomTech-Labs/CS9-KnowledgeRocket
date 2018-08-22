@@ -100,10 +100,6 @@ class Cohort extends Component {
         this.props.addCohort(cohort, this.props.state.user._id);
         this.setState({
             title: '',
-            studentLastName: '',
-            studentFirstName: '',
-            studentEmail: '',
-            ccEmail: false,
         });
     };
 
