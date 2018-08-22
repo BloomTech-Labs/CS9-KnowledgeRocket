@@ -34,6 +34,10 @@ const mockHistory = {
 	},
 };
 
+const mockAxios = {
+	get: jest.fn(() => Promise.resolve({ data: {} })),
+};
+
 describe('CohortList', () => {
 	const tree = renderer
 		.create(
@@ -90,5 +94,19 @@ describe('CohortList', () => {
 		expect(component.instance().fetchCohortData).toBeInstanceOf(Function);
 	});
 
-	it('calls fetchData to update state', () => {});
+	// it('calls fetchCohortData to update state', () => {
+	// 	const component = mount(
+	// 		<UnWrapped
+	// 			state={mockUser}
+	// 			history={mockHistory}
+	// 			store={mockStore}
+	// 			generateBreadCrumbs={generateBreadCrumbs}
+	// 		/>
+	// 	);
+
+	// 	const spy = jest.spyOn(UnWrapped.prototype, 'fetchCohortData');
+
+	// 	expect(spy).toHaveBeenCalledOnce()
+
+	// });
 });
