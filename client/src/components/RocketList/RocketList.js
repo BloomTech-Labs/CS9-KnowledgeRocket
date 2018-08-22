@@ -1,3 +1,4 @@
+//@ts-check
 import React, { Component } from 'react';
 import Styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -44,6 +45,7 @@ const StyledCardContent = Styled(CardContent)`
 `;
 
 class RocketList extends Component {
+    state = {};
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -63,33 +65,19 @@ class RocketList extends Component {
                 {/* ROCKET CARDS IF ANY ROCKETS ON THE USERS ARAY */}
                 {/* ROCKET CARD WITH A + SIGN TO ADD MORE */}
                 <RocketListContainer>
-                    <RocketListCard>
-                        <StyledCardContent>
-                            <p>Mock Rocket 1</p>
-                            <p>Total Classes {3}</p>
-                            <Button variant="contained" color="primary">
-                                View
-                            </Button>
-                        </StyledCardContent>
-                    </RocketListCard>
-                    <RocketListCard>
-                        <StyledCardContent>
-                            <p>Mock Rocket 2</p>
-                            <p>Total Classes {3}</p>
-                            <Button variant="contained" color="primary">
-                                View
-                            </Button>
-                        </StyledCardContent>
-                    </RocketListCard>
-                    <RocketListCard>
-                        <StyledCardContent>
-                            <p>Last Rocket</p>
-                            <p>Total Classes {3}</p>
-                            <Button variant="contained" color="primary">
-                                View
-                            </Button>
-                        </StyledCardContent>
-                    </RocketListCard>
+                    {this.props.state.user.rockets.map(rocket => {
+                        return (
+                            <RocketListCard>
+                                <StyledCardContent>
+                                    <p>{rocket.title}</p>
+                                    <p>Total Classes {3}</p>
+                                    <Button variant="contained" color="primary">
+                                        View
+                                    </Button>
+                                </StyledCardContent>
+                            </RocketListCard>
+                        );
+                    })}
                     <RocketAddCard>
                         <StyledCardContent>
                             <p>Add a new Rocket</p>

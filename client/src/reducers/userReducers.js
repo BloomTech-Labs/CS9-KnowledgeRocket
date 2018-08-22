@@ -7,6 +7,8 @@ import {
     LOGIN_USER_FAILURE,
     ADD_USER_FAILURE,
     UPGRADE_USER,
+    ADDING_ROCKET,
+    ADD_ROCKET,
 } from '../actions';
 
 const defaultState = {
@@ -17,11 +19,20 @@ const defaultState = {
     account: 'Free',
     authenticated: false,
     status: '',
+    rockets: [{}],
+    cohorts: [{}],
 };
 
 export default (state = defaultState, action) => {
     let StateCopy = JSON.parse(JSON.stringify(state));
     switch (action.type) {
+        case ADDING_ROCKET:
+            StateCopy.status = ADDING_ROCKET;
+            return StateCopy;
+        case ADD_ROCKET:
+            StateCopy.status = ADD_ROCKET;
+            StateCopy = { ...StateCopy, ...action.payload };
+            return StateCopy;
         case ADDING_USER:
             StateCopy.status = ADDING_USER;
             return StateCopy;

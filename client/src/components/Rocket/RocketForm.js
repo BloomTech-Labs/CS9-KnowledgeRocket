@@ -1,6 +1,10 @@
 import React from 'react';
 import { withFormik } from 'formik';
 import { object, string } from 'yup';
+import './RocketForm.css';
+
+const rocketBlurb =
+    'Knowledge rockets are short paragraphs followed by a multiple choice question. These are automatically sent two days, two weeks, and two months after a lesson is taught and are intended to cause the student to recall what they have learned. The rockets should not be used to provide exhaustive review. Instead, they ask the student to "reload" the mental maps that acquired during the lesson.';
 
 const RocketFormBase = props => {
     const {
@@ -17,20 +21,219 @@ const RocketFormBase = props => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="title">Title</label>
-                <input name="title" value={values.title} onChange={handleChange} />
-                <div>chars/maxChars</div>
+            <div className="RocketForm_wrapper">
+                <label htmlFor="title" />
+                <input
+                    name="title"
+                    value={values.td.title}
+                    placeholder="Title"
+                    onChange={handleChange}
+                />
             </div>
-            <div>
-                <label htmlFor="tdexplanation">Two Days - Review Text</label>
-                <input name="tdexplanation" value={values.td.explanation} onChange={handleChange} />
-                <div>chars/maxChars</div>
+            <div className="RocketForm_wrapper">
+                <p>{rocketBlurb}</p>
             </div>
-            <div>
-                <label htmlFor="tdquestion">Two Weeks - Review Text</label>
-                <input name="tdquestion" value={values.td.question} onChange={handleChange} />
-                <div>chars/maxChars</div>
+
+            {/* ROCKET QUESTION SECTION 1*/}
+            <div className="RocketForm_wrapper">
+                <label htmlFor="explanation">{'Two Days - Review Text'}</label>
+                <textarea
+                    name="explanation"
+                    value={values.td.explanation}
+                    placeholder="Two Day Review Text"
+                    onChange={handleChange}
+                    style={{ width: '100%', height: '4rem' }}
+                />
+            </div>
+            <div className="RocketForm_wrapper">
+                <label htmlFor="td.question">{'Two Days - Review Question'}</label>
+                <textarea
+                    name="td.question"
+                    value={values.td.question}
+                    placeholder="Two Day Review Text"
+                    onChange={handleChange}
+                    style={{ width: '100%', height: '4rem' }}
+                />
+            </div>
+            <div className="RocketForm_questions_section">
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 1"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 2"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="Answer 2"
+                        value={values.td.title}
+                        placeholder="Answer 3"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 4"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+            </div>
+            {/* ROCKET QUESTION SECTION 2*/}
+            <div className="RocketForm_wrapper">
+                <label htmlFor="title">{'Two Weeks - Review Text'}</label>
+                <textarea
+                    name="title"
+                    value={values.td.title}
+                    placeholder="Two Weeks Review Text"
+                    onChange={handleChange}
+                    style={{ width: '100%', height: '4rem' }}
+                />
+            </div>
+            <div className="RocketForm_wrapper">
+                <label htmlFor="title">{'Two Weeks - Review Question'}</label>
+                <textarea
+                    name="title"
+                    value={values.td.title}
+                    placeholder="Two Weeks Review Text"
+                    onChange={handleChange}
+                    style={{ width: '100%', height: '4rem' }}
+                />
+            </div>
+            <div className="RocketForm_questions_section">
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 1"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 2"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="Answer 2"
+                        value={values.td.title}
+                        placeholder="Answer 3"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 4"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+            </div>
+            {/* ROCKET QUESTION SECTION 3*/}
+            <div className="RocketForm_wrapper">
+                <label htmlFor="title">{'Two Months - Review Text'}</label>
+                <textarea
+                    name="title"
+                    value={values.td.title}
+                    placeholder="Two Months Review Text"
+                    onChange={handleChange}
+                    style={{ width: '100%', height: '4rem' }}
+                />
+            </div>
+            <div className="RocketForm_wrapper">
+                <label htmlFor="title">{'Two Months - Review Question'}</label>
+                <textarea
+                    name="title"
+                    value={values.td.title}
+                    placeholder="Two Months Review Text"
+                    onChange={handleChange}
+                    style={{ width: '100%', height: '4rem' }}
+                />
+            </div>
+            <div className="RocketForm_questions_section">
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 1"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 2"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="Answer 2"
+                        value={values.td.title}
+                        placeholder="Answer 3"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
+                <div className="RocketForm_question_wrapper">
+                    <input type="radio" />
+                    <label htmlFor="title" />
+                    <input
+                        name="title"
+                        value={values.td.title}
+                        placeholder="Answer 4"
+                        onChange={handleChange}
+                        className="questionField"
+                    />
+                </div>
             </div>
             <fieldset>
                 <label>

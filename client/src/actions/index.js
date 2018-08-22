@@ -36,14 +36,21 @@ export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 
 // Rocket Actions
 export const ADD_ROCKET = 'ADD_ROCKET';
+export const ADDING_ROCKET = 'ADDING_ROCKET';
 
 // Add Rocket Actions
-export const addRocket = rocket => async dispatch=> {
-    let response = axios.post(`${url}/api/rocket/add`, rocket);
-    return {
-        type: ADD_ROCKET,
-        payload: response,
-    };
+export const addRocket = (rocket, uid) => async dispatch=> {
+    dispatch({type: ADDING_ROCKET});
+    try {
+        // Make sure Server gives the updated user with the rocket in it as response.
+        // Remember in Server to add this rocket to current user's array.
+        let response = axios.post(`${url}/api/rocket/add`, {rocket, uid});
+        dispatch({type: ADD_ROCKET, payload: response.data})
+    } catch (err) {
+
+    }
+    
+    
 };
 
 // User Actions

@@ -1,0 +1,36 @@
+.RocketForm_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.RocketForm_wrapper p {
+    margin: 1rem 0;
+    text-align: justify;
+}
+
+.RocketForm_wrapper textarea {
+    margin: 1rem 0;
+    text-align: justify;
+}
+
+.RocketForm_questions_section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.RocketForm_question_wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+    margin: 0 0 1rem 0;
+}
+
+.questionField {
+    width: 100%;
+}
