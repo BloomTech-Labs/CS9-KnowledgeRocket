@@ -7,6 +7,7 @@ import {
     LOGIN_USER_FAILURE,
     ADD_USER_FAILURE,
     UPGRADE_USER,
+    ADD_COHORT,
 } from '../actions';
 
 const defaultState = {
@@ -17,6 +18,8 @@ const defaultState = {
     account: 'Free',
     authenticated: false,
     status: '',
+    rockets: [],
+    cohorts: [],
 };
 
 export default (state = defaultState, action) => {
@@ -34,6 +37,11 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, user: [...action.payload] };
             StateCopy.authenticated = true;
             StateCopy.status = UPGRADE_USER;
+            return StateCopy;
+        case ADD_COHORT:
+            StateCopy.cohorts.push(action.payload);
+            StateCopy.authenticated = true;
+            StateCopy.status = ADD_COHORT;
             return StateCopy;
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
