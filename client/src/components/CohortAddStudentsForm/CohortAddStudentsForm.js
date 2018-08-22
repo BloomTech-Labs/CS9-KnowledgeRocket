@@ -16,19 +16,19 @@ class CohortAddStudentsForm extends Component {
 			<Card className={this.props.className}>
 				<StylizedInput
 					placeholder="Last Name"
-					disableUnderline="true"
+					disableUnderline={true}
 					name="studentLastName"
 					onChange={this.props.handleNewInput}
 				/>
 				<StylizedInput
 					placeholder="First Name"
-					disableUnderline="true"
+					disableUnderline={true}
 					name="studentFirstName"
 					onChange={this.props.handleNewInput}
 				/>
 				<StylizedInput
 					placeholder="Email"
-					disableUnderline="true"
+					disableUnderline={true}
 					name="studentEmail"
 					onChange={this.props.handleNewInput}
 				/>
