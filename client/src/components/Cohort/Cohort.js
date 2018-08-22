@@ -9,6 +9,7 @@ import Card from '@material-ui/core/Card';
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
+import CohortRocketList from '../CohortRocketList/CohortRocketList';
 
 function mapStateToProps(state) {
     return {
@@ -56,6 +57,16 @@ const StyledCohortStudentList = styled(CohortStudentList)`
     padding: 20px;
 `;
 
+const StyledCohortRocketList = styled(CohortRocketList)`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 95%;
+    padding: 20px;
+`;
+
 class Cohort extends Component {
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -72,6 +83,7 @@ class Cohort extends Component {
                 <StyledCohortSettingForm />
                 <StyledCohortAddStudentForm />
                 <StyledCohortStudentList />
+                <StyledCohortRocketList />
             </CohortFormMainContainer>,
         ];
     }
