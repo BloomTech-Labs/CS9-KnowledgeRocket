@@ -16,7 +16,12 @@ class CohortSettingForm extends Component {
 	render() {
 		return (
 			<Card className={this.props.className}>
-				<StylizedInput defaultValue="Class Name" disableUnderline="true" name="className"/>
+				<StylizedInput
+					placeholder="Class Name"
+					disableUnderline="true"
+					name="className"
+					onChange={this.props.handleNewInput}
+				/>
 				<FormControlLabel control={<Checkbox />} label="CC Me on Rocket Emails" />
 				<Button variant="contained" color="primary">
 					Import CSV

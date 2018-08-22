@@ -104,9 +104,13 @@ class Cohort extends Component {
     };
 
     render() {
+        console.log(`className: ${this.state.className}`);
+        console.log(`last name: ${this.state.studentLastName}`);
+        console.log(`first name: ${this.state.studentFirstName}`);
+        console.log(`email: ${this.state.studentEmail}`);
         return [
             <CohortFormMainContainer>
-                <StyledCohortSettingForm />
+                <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
                 <StyledCohortAddStudentForm />
                 <StyledCohortStudentList />
                 <StyledCohortRocketList />
