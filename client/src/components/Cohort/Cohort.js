@@ -71,6 +71,13 @@ const StyledCohortRocketList = styled(CohortRocketList)`
 `;
 
 class Cohort extends Component {
+    state = {
+        className: '',
+        studentLastName: '',
+        studentFirstName: '',
+        studentEmail: '',
+    };
+
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -80,6 +87,10 @@ class Cohort extends Component {
         // }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
+
+    handleNewInput = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
 
     handleAddCohort = () => {
         const cohort = {
