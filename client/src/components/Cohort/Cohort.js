@@ -46,6 +46,16 @@ const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
     margin-bottom: 20px;
 `;
 
+const StyledCohortStudentList = styled(CohortStudentList)`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 95%;
+    height: 60px;
+    padding: 10px;
+    margin-bottom: 20px;
+`;
+
 class Cohort extends Component {
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -61,7 +71,7 @@ class Cohort extends Component {
             <CohortFormMainContainer>
                 <StyledCohortSettingForm />
                 <StyledCohortAddStudentForm />
-                <CohortStudentList />
+                <StyledCohortStudentList />
             </CohortFormMainContainer>,
         ];
     }
