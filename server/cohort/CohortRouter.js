@@ -1,6 +1,7 @@
 //@ts-check
 const router = require('express').Router();
 const Cohort = require('./Cohort');
+const User = require('../user/User');
 
 router
     .route('/')
@@ -23,11 +24,32 @@ function get(req, res) {
 }
 
 function post(req, res) {
-    const cohort = new Cohort(req.body);
+    const cohort = new Cohort(req.body.cohort);
+    const id = req.body.id;
+
     cohort
         .save()
-        .then(stuff => {
-            res.status(201).json(stuff);
+        .then(savedCohort => {
+            User.findOne({ _id: id })
+                .then(found => {
+                    found.cohorts.push(savedCohort._id);
+                    User.findByIdAndUpdate(id, { cohorts: found.cohorts })
+                        .then(() => {
+                            User.findOne({ _id: id })
+                                .populate('cohorts')
+                                .populate('rockets')
+                                .then(user => {
+                                    res.status(201).json(user); // sends user w/ populated cohorts
+                                })
+                                .catch();
+                        })
+                        .catch(err => {
+                            res.status(500).json({ errorMessage: err.message });
+                        });
+                })
+                .catch(err => {
+                    res.status(500).json({ errorMessage: err.message });
+                });
         })
         .catch(err => {
             res.status(500).json({ message: 'There was an error in POST' });
@@ -35,6 +57,7 @@ function post(req, res) {
 }
 function getid(req, res) {
     const id = req.params.id;
+
     Cohort.findById(id)
         .then(thing => {
             res.status(200).json(thing);

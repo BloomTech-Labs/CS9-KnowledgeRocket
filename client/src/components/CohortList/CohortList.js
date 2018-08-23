@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 // actions
@@ -76,29 +75,16 @@ export class CohortList extends Component {
       this.props.history.push('/rocket/auth');
     }
     this.props.generateBreadCrumbs(this.props.history.location.pathname);
-    this.fetchCohortData();
   }
-
-  fetchCohortData = () => {
-    // FETCH COHORT DATA FOR A USER FROM SERVER
-    return axios
-      .get('http://localhost:5000/api/cohort')
-      .then(response => {
-        this.setState(() => ({ cohort: response.data }));
-      })
-      .catch(error => {
-        console.error('Server Error', error);
-      });
-  };
 
   render() {
     return (
       <CohortListContainer>
-        {this.state.cohort.length > 0 ? (
+        {this.state.cohort ? (
           // user has at least one cohort, render a cohort card
           <CohortCardContainer>
-            {this.state.cohort.map((cohort, index) => (
-              <StyledCohortCard key={`${cohort.students[index]}`} cohort={cohort} {...this.props} />
+            {this.props.state.user.cohorts.map((cohort, index) => (
+              <StyledCohortCard key={`${index}`} cohort={cohort} {...this.props} />
             ))}
             <AddButtonCard>
               <StyledCardContent>
