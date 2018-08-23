@@ -41,6 +41,8 @@ function post(req, res) {
                 const uid = response.user.uid;
                 response.user.getIdToken().then(token => {
                     UserModel.findOne({ uid })
+                        .populate('cohorts')
+                        .populate('rockets')
                         .then(foundUser => {
                             // Alternatively Replace Token Here and Send back Updated Token...
                             if (
@@ -104,6 +106,8 @@ function post(req, res) {
                 const decodedUid = decodedToken.uid;
                 if (uid === decodedUid) {
                     UserModel.findOne({ uid })
+                        .populate('cohorts')
+                        .populate('rockets')
                         .then(foundUser => {
                             if (foundUser === null) {
                                 UserModel.create({
