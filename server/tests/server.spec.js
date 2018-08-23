@@ -183,6 +183,7 @@ describe('server', () => {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}'
         };
         const response = await request(server)
             .post('/api/question')
@@ -191,23 +192,25 @@ describe('server', () => {
         await mongoose.connection.db.dropCollection('questions');
     });
     test('GET should return 200', async () => {
-        const mockUser = {
+        const mockQuestion = {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}'
         };
-        const newUser = await Question.create(mockUser);
+        const newUser = await Question.create(mockQuestion);
         const response = await request(server).get(`/api/question/${newUser._id}`);
         expect(response.status).toBe(200);
         await mongoose.connection.db.dropCollection('questions');
     });
     test('PUT should return 201', async () => {
-        const mockUser = {
+        const mockQuestion = {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}'
         };
-        const newUser = await Question.create(mockUser);
+        const newUser = await Question.create(mockQuestion);
         const response = await request(server)
             .put(`/api/question/${newUser._id}`)
             .send((newUser.title = 'bobtodd1@gmail.com'));
@@ -215,12 +218,13 @@ describe('server', () => {
         await mongoose.connection.db.dropCollection('questions');
     });
     test('DEL should return 204', async () => {
-        const mockUser = {
+        const mockQuestion = {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}'
         };
-        const newUser = await Question.create(mockUser);
+        const newUser = await Question.create(mockQuestion);
         const response = await request(server).delete(`/api/question/${newUser._id}`);
         expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('questions');
