@@ -95,12 +95,8 @@ class Cohort extends Component {
     handleAddCohort = () => {
         const cohort = {
             title: this.state.title,
-            // teacher: this.props.
         };
         this.props.addCohort(cohort, this.props.state.user._id);
-        this.setState({
-            title: '',
-        });
     };
 
     render() {
