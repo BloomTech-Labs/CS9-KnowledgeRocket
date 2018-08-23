@@ -78,6 +78,20 @@ export const addStudent = (student, teacherID, cohortID) => async dispatch => {
     }
 };
 
+export const deleteStudent = (studentID, teacherID, cohortID) => async dispatch => {
+    dispatch({ type: DELETING_STUDENT });
+    try {
+        let response = await axios.delete(`${url}/api/student/${studentID}`, {
+            studentID,
+            teacherID,
+            cohortID,
+        });
+        dispatch({ type: DELETE_STUDENT, payload: response.data });
+    } catch (err) {
+        dispatch({ type: DELETING_STUDENT_FAILURE });
+    }
+};
+
 // User Actions
 export const addUser = user => async dispatch => {
     dispatch({ type: ADDING_USER });
