@@ -23,6 +23,11 @@ export const REMOVE_ROCKET = 'REMOVE_ROCKET';
 export const UPDATE_ROCKET = 'UPDATE_ROCKET';
 export const UPGRADE_USER = 'UPGRADE_USER';
 
+// Cohort Action Types
+export const ADD_COHORT = 'ADD_COHORT';
+export const ADDING_COHORT = 'ADDING_COHORT';
+export const ADD_COHORT_FAILURE = 'ADD_COHORT_FAILURE';
+
 // User Action Types
 export const ADD_USER = 'ADD_USER';
 export const ADDING_USER = 'ADDING_USER';
@@ -44,6 +49,17 @@ export const addRocket = rocket => {
         type: ADD_ROCKET,
         payload: response,
     };
+};
+
+// COHORT ACTIONS
+export const addCohort = (cohort, id) => async dispatch => {
+    dispatch({ type: ADDING_COHORT });
+    try {
+        let response = await axios.post(`${url}/api/cohort`, { cohort, id });
+        dispatch({ type: ADD_COHORT, payload: response.data });
+    } catch (err) {
+        dispatch({ type: ADD_COHORT_FAILURE });
+    }
 };
 
 // User Actions

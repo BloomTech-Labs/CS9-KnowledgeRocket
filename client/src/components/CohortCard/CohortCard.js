@@ -20,7 +20,10 @@ const CohortCard = props => {
 					<Input>
 						<StyledLink to="/rocket/classForm">{props.cohort.title}</StyledLink>
 					</Input>
-					<Input>Students: {props.cohort.students.length}</Input>
+					<Input>
+						Students:{' '}
+						{typeof props.cohort.students.length === 'object' ? props.cohort.students.length : 0}
+					</Input>
 					<Input>Participation:</Input>
 					<Input>Rockets Sent:</Input>
 				</FormControl>

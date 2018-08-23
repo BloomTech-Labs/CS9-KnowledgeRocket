@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generateBreadCrumbs } from '../../actions';
-import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 // Material Components
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
+// Actions
+import { generateBreadCrumbs, addCohort } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -69,25 +70,51 @@ const StyledCohortRocketList = styled(CohortRocketList)`
 `;
 
 class Cohort extends Component {
+    state = {
+        title: '',
+    };
+
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
         // If authenticated it will set the state with the current user.
-        // if (!this.props.state.user.authenticated) {
-        //     this.props.history.push('/rocket/auth');
-        // }
+        if (!this.props.state.user.authenticated) {
+            this.props.history.push('/rocket/auth');
+        }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
+
+    handleNewInput = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+
+    handleCheckBox = e => {
+        this.setState({ [e.target.name]: !e.target.checked });
+    };
+
+    handleAddCohort = () => {
+        const cohort = {
+            title: this.state.title,
+        };
+        this.props.addCohort(cohort, this.props.state.user._id);
+    };
+
     render() {
+        console.log('WE NEED THIS', this.props.state.user._id);
         return [
             <CohortFormMainContainer>
-                <StyledCohortSettingForm />
-                <StyledCohortAddStudentForm />
+                <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
+                <StyledCohortAddStudentForm
+                    handleNewInput={this.handleNewInput}
+                    handleCheckBox={this.handleCheckBox}
+                    ccStatus={this.state.ccEmail}
+                />
                 <StyledCohortStudentList />
                 <StyledCohortRocketList />
+                <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
             </CohortFormMainContainer>,
         ];
     }
 }
 
-export default withRouter(connect(mapStateToProps, { generateBreadCrumbs })(Cohort));
+export default connect(mapStateToProps, { generateBreadCrumbs, addCohort })(Cohort);
