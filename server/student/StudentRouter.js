@@ -24,80 +24,54 @@ function get(req, res) {
 }
 
 function post(req, res) {
-    // const email = req.body.email;
-    // let regVar = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // if (regVar.test(email)) {
-    //     const student = new Student(req.body);
-    //     student
-    //         .save()
-    //         .then(stuff => {
-    //             res.status(201).json(stuff);
-    //         })
-    //         .catch(err => {
-    //             res.status(500).json({ message: 'There was an error in POST for Student' });
-    //         });
-    // } else {
-    //     res.json({ errorMessage: 'email pattern incorrect' });
-    // }
-
-    const { email } = req.body;
-
+    const { email } = req.body.student;
     // validate student email
-    let regVar = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     if (regVar.test(email)) {
         // email is valid
         const student = new Student(req.body.student); // instantiate a new student
-        const { id } = req.body;
+        const { teacherID, cohortID } = req.body;
 
         student
             .save()
             .then(newStudent => {
                 // find the user who is currently signed in
-                User.findByOne({ _id: id })
-                    .then(user => {
-                        // find the user's cohorts using the unique teacher's id
-                        const cohorts = user.cohorts;
-                        let cohortID;
-                        for (let cohort of cohorts) {
-                            if ((cohort.teacher = id)) {
-                                // find the cohort's students
-                                cohortID = cohort._id;
-                                break; // stop searching as soon as the matching cohort is found
-                            }
-                        }
-                        // use the cohortID to add the new student to the cohort's students
+                Cohort.findOne({ _id: cohortID })
+                    .then(cohort => {
+                        // add new student id to the cohort.students array
                         cohort.students.push(newStudent._id);
-                        // update the cohort with the new array of students
+                        // update cohort with new list of students
                         Cohort.findByIdAndUpdate(cohortID, { students: cohort.students })
                             .populate('students')
                             .then(() => {
-                                User.findById({ _id: id }).then(user => {
-                                    res.status(201).json(user);
-                                });
+                                // find user and populate their data
+                                User.findOne({ _id: teacherID })
+                                    .populate('cohorts')
+                                    .populate('rockets')
+                                    .then(user => {
+                                        res.status(201).json(user);
+                                    })
+                                    .catch(err => {
+                                        res.status(500).json({
+                                            errorMessage: 'There was an error finding the user',
+                                        });
+                                    });
                             })
                             .catch(err => {
                                 res.status(500).json({
-                                    errorMessage: 'There was an error finding this cohort',
+                                    errorMessage: 'There was an error updating the cohort',
                                 });
                             });
                     })
                     .catch(err => {
                         res
                             .status(500)
-                            .json({ errorMessage: 'There was an error finding this user.' });
+                            .json({ errorMessage: 'There was an error saving the student' });
                     });
-
-                // return the new student after saving to the db
-                res.status(201).json(newStudent);
             })
             .catch(err => {
-                res.status(500).json({
-                    errorMessage: 'There was an error in saving the student to the database',
-                });
+                res.status(500).json({ errorMessage: 'There was an error saving the student' });
             });
-    } else {
-        // invalid email - do nothing else
-        res.json({ errorMessage: 'The provided email is not valid.' });
     }
 }
 function getid(req, res) {
@@ -110,6 +84,7 @@ function getid(req, res) {
             res.status(500).json({ message: 'Error on GETID' });
         });
 }
+
 function put(req, res) {
     const id = req.params.id;
     const { email, firstName, lastName } = req.body;
