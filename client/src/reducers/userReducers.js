@@ -21,6 +21,7 @@ const defaultState = {
     account: 'Free',
     authenticated: false,
     status: '',
+    students: [],
     rockets: [],
     cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{}] }],
 };
