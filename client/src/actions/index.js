@@ -65,10 +65,10 @@ export const addCohort = (cohort, id) => async dispatch => {
     }
 };
 
-export const addStudent = (cohort, id) => async dispatch => {
+export const addStudent = (student, id) => async dispatch => {
     dispatch({ type: ADDING_STUDENT });
     try {
-        let response = await axios.post(`${url}/api/`);
+        let response = await axios.post(`${url}/api/student`, { student, id });
         dispatch({ type: ADD_STUDENT, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_STUDENT_FAILURE });
