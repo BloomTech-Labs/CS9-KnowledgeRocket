@@ -25,28 +25,28 @@ function get(req, res) {
 function post(req, res) {
     const cohort = new Cohort(req.body.cohort);
     const id = req.body.id;
-    console.log(`cohort ${JSON.stringify(req.body.cohort)}`);
 
     cohort
         .save()
         .then(savedCohort => {
-            console.log(`savedCohort ${savedCohort}`);
             User.findOne({ _id: id })
                 .then(found => {
-                    console.log(`FOUND: ${found}`);
                     found.cohorts.push(savedCohort._id);
-                    console.log(`after pushing ${found.cohorts}`);
                     User.findByIdAndUpdate(id, { cohorts: found.cohorts })
                         .then(() => {
-                            res.status(201).json(savedCohort);
+                            User.findOne({ _id: id })
+                                .populate('cohorts')
+                                .populate('rockets')
+                                .then(user => {
+                                    res.status(201).json(user); // sends user w/ populated cohorts
+                                })
+                                .catch();
                         })
                         .catch(err => {
-                            console.log('nested under find by id and update');
                             res.status(500).json({ errorMessage: err.message });
                         });
                 })
                 .catch(err => {
-                    console.log('nested uner find one');
                     res.status(500).json({ errorMessage: err.message });
                 });
         })
@@ -56,6 +56,7 @@ function post(req, res) {
 }
 function getid(req, res) {
     const id = req.params.id;
+
     Cohort.findById(id)
         .then(thing => {
             res.status(200).json(thing);
