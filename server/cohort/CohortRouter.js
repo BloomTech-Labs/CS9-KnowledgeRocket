@@ -25,11 +25,13 @@ function get(req, res) {
 function post(req, res) {
     const cohort = new Cohort(req.body.cohort);
     const id = req.body.id;
-
+    console.log(`COHORT BEING POSTED: ${cohort}`);
     cohort
         .save()
         .then(savedCohort => {
             User.findOne({ _id: id })
+                .populate('cohorts')
+                .populate('rockets')
                 .then(found => {
                     found.cohorts.push(savedCohort._id);
                     User.findByIdAndUpdate(id, { cohorts: found.cohorts })
