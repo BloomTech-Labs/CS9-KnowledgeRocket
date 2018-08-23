@@ -8,6 +8,9 @@ import {
     ADD_USER_FAILURE,
     UPGRADE_USER,
     ADD_COHORT,
+    ADDING_STUDENT,
+    ADD_STUDENT,
+    ADD_STUDENT_FAILURE,
 } from '../actions';
 
 const defaultState = {
@@ -42,6 +45,10 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
+            return StateCopy;
+        case ADD_STUDENT:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
