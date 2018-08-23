@@ -1,12 +1,3 @@
-.RocketForm_questions_section {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
 .RocketForm_question_wrapper {
     display: flex;
     justify-content: flex-start;

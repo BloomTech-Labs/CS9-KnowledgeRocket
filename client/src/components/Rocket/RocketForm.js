@@ -21,6 +21,15 @@ const Blurb = Styled.p`
 
 const TextArea = Blurb.extend``.withComponent('textarea');
 
+const QuestionsSection = Styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+`;
+
 const RocketFormBase = props => {
     const { values, handleSubmit, handleChange, handleBlur } = props;
 
@@ -61,7 +70,7 @@ const RocketFormBase = props => {
                         style={{ width: '100%', height: '4rem' }}
                     />
                 </FormGroup>
-                <div className="RocketForm_questions_section">
+                <QuestionsSection>
                     <fieldset>
                         <label>
                             <input
@@ -107,7 +116,7 @@ const RocketFormBase = props => {
                             />
                         </label>
                     </fieldset>
-                </div>
+                </QuestionsSection>
             </section>
 
             {/* ROCKET QUESTION SECTION 2*/}
@@ -131,7 +140,7 @@ const RocketFormBase = props => {
                     style={{ width: '100%', height: '4rem' }}
                 />
             </FormGroup>
-            <div className="RocketForm_questions_section">
+            <QuestionsSection>
                 <div className="RocketForm_question_wrapper">
                     <input type="radio" />
                     <label htmlFor="title" />
@@ -176,7 +185,7 @@ const RocketFormBase = props => {
                         className="questionField"
                     />
                 </div>
-            </div>
+            </QuestionsSection>
             {/* ROCKET QUESTION SECTION 3*/}
             <FormGroup>
                 <label htmlFor="title">{'Two Months - Review Text'}</label>
@@ -198,7 +207,7 @@ const RocketFormBase = props => {
                     style={{ width: '100%', height: '4rem' }}
                 />
             </FormGroup>
-            <div className="RocketForm_questions_section">
+            <QuestionsSection>
                 <div className="RocketForm_question_wrapper">
                     <input type="radio" />
                     <label htmlFor="title" />
@@ -243,7 +252,7 @@ const RocketFormBase = props => {
                         className="questionField"
                     />
                 </div>
-            </div>
+            </QuestionsSection>
 
             <button type="submit">submit</button>
         </form>
