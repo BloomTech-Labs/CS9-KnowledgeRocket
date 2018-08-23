@@ -10,7 +10,7 @@ import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsFor
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
-import { generateBreadCrumbs, addCohort } from '../../actions';
+import { generateBreadCrumbs, addCohort, addStudent } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -72,6 +72,9 @@ const StyledCohortRocketList = styled(CohortRocketList)`
 class Cohort extends Component {
     state = {
         title: '',
+        firstName: '',
+        lastName: '',
+        email: '',
     };
 
     componentDidMount() {
@@ -96,11 +99,22 @@ class Cohort extends Component {
         const cohort = {
             title: this.state.title,
         };
+        console.log(`adding this cohort ${JSON.stringify(cohort)}`);
         this.props.addCohort(cohort, this.props.state.user._id);
     };
 
+    handleAddStudent = () => {
+        const { firstName, lastName, email } = this.state;
+        const student = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+        };
+        console.log(`adding this student to the cohort ${JSON.stringify(student)}`);
+        this.props.addStudent(student, this.props.state.user._id);
+    };
+
     render() {
-        console.log('WE NEED THIS', this.props.state.user._id);
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
@@ -117,4 +131,4 @@ class Cohort extends Component {
     }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs, addCohort })(Cohort);
+export default connect(mapStateToProps, { generateBreadCrumbs, addCohort, addStudent })(Cohort);
