@@ -19,7 +19,7 @@ const defaultState = {
     authenticated: false,
     status: '',
     rockets: [],
-    cohorts: [],
+    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{}] }],
 };
 
 export default (state = defaultState, action) => {
@@ -39,7 +39,7 @@ export default (state = defaultState, action) => {
             StateCopy.status = UPGRADE_USER;
             return StateCopy;
         case ADD_COHORT:
-            StateCopy.cohorts.push(action.payload);
+            StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
             return StateCopy;
