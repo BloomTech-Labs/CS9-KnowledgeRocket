@@ -22,7 +22,7 @@ const CohortCard = props => {
 					</Input>
 					<Input>
 						Students:{' '}
-						{typeof props.cohort.students.length == 'object' ? props.cohort.students.length : 0}
+						{typeof props.cohort.students.length === 'object' ? props.cohort.students.length : 0}
 					</Input>
 					<Input>Participation:</Input>
 					<Input>Rockets Sent:</Input>

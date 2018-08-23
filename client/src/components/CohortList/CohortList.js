@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 // actions
