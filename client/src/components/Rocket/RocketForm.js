@@ -12,7 +12,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
             <label htmlFor="title" />
             <input
                 name="title"
-                value={values.td.title}
+                value={values.title}
                 placeholder="Title"
                 onChange={handleChange}
             />
@@ -67,7 +67,7 @@ const RocketForm = withFormik({
     },
     mapPropsToValues: props => {
         // overwrite defaults with props
-        Object.assign(defaultProps, props);
+        Object.assign(defaultProps, {...props});
         return defaultProps;
     },
     validationSchema: object().shape({}),
