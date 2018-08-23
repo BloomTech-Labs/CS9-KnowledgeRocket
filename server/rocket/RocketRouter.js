@@ -27,7 +27,8 @@ function postRocket(req, res) {
         question.choices.forEach(choice => {
             if (choice.text === question.correct) {
                 choice.correct = true;
-                return;
+            } else {
+                choice.correct = false;
             }
         });
         // checking correct console.log(question.choices)
@@ -39,20 +40,32 @@ function postRocket(req, res) {
             correct: question.correct,
         };
     };
+
+    // const tdResult = Question.create(updateAndSaveFormattedQuestions(td))
+    // const twResult = Question.create(updateAndSaveFormattedQuestions(tw))
+    // const tmResult = Question.create(updateAndSaveFormattedQuestions(tm))
+
+    // const promiseArray = [tdResult,twResult,tmResult];
+    // Promise.all(promiseArray).then(response=>{
+    //     console.log(response)
+    // })
+
     let td_id, tw_id, tm_id;
     Question.create(updateAndSaveFormattedQuestions(td)).then(tdQuestion => {
-        tdQuestion._id = td_id;
+        td_id = tdQuestion._id;
         Question.create(updateAndSaveFormattedQuestions(tw)).then(twQuestion => {
-            twQuestion._id = tw_id;
+            tw_id = twQuestion._id;
             Question.create(updateAndSaveFormattedQuestions(tm)).then(tmQuestion => {
-                tmQuestion._id = tm_id;
+                tm_id = tmQuestion._id;
                 // Format Rocket
+                // console.log('ids', td_id, tw_id, tm_id)
                 const rocketToSave = {
                     title: postRocket.title,
                     twoDay: td_id,
                     twoWeek: tw_id,
                     twoMonth: tm_id,
                 };
+                // console.log('rocket to save', rocketToSave)
                 // Save Rocket to MongoDB
                 Rocket.create(rocketToSave)
                     .then(createdRocket => {
@@ -69,11 +82,14 @@ function postRocket(req, res) {
                                     User.findByIdAndUpdate(foundUser._id, {
                                         rockets: rocketArray,
                                     }).then(afterUpdate => {
-                                        User.findById(foundUser._id).populate('rockets').populate('cohorts').then(modifiedUser => {
-                                            // Hopefully return the modified user with the new rocket's array to the front end.
-                                            // console.log(JSON.stringify(modifiedUser))
-                                            res.status(201).json(modifiedUser);
-                                        });
+                                        User.findById(foundUser._id)
+                                            .populate('rockets')
+                                            .populate('cohorts')
+                                            .then(modifiedUser => {
+                                                // Hopefully return the modified user with the new rocket's array to the front end.
+                                                // console.log(JSON.stringify(modifiedUser))
+                                                res.status(201).json(modifiedUser);
+                                            });
                                     });
                                 } else {
                                     res.status(404).json({ error: 'User not Found with that UID' });
@@ -93,6 +109,7 @@ function postRocket(req, res) {
 
 function get(req, res) {
     Rocket.find()
+        .populate('questions')
         .then(expected => {
             res.status(200).json(expected);
         })
@@ -115,6 +132,9 @@ function post(req, res) {
 function getid(req, res) {
     const id = req.params.id;
     Rocket.findById(id)
+        .populate('twoDay')
+        .populate('twoWeek')
+        .populate('twoMonth')
         .then(expected => {
             res.status(200).json(expected);
         })

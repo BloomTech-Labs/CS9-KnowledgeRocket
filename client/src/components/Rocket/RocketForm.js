@@ -62,6 +62,7 @@ const defaultProps = {
 const RocketForm = withFormik({
     handleSubmit: (values, actions) => {
         actions.props.handleSubmit(values)
+        actions.props.history.push('/rocket')
         console.log(values, actions);
     },
     mapPropsToValues: props => {
