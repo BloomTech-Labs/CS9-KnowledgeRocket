@@ -8,9 +8,7 @@ import {
     ADD_USER_FAILURE,
     UPGRADE_USER,
     ADD_COHORT,
-    ADDING_STUDENT,
     ADD_STUDENT,
-    ADD_STUDENT_FAILURE,
 } from '../actions';
 
 const defaultState = {
