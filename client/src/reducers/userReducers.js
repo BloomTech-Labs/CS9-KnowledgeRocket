@@ -9,6 +9,7 @@ import {
     UPGRADE_USER,
     ADD_COHORT,
     ADD_STUDENT,
+    DELETE_STUDENT,
 } from '../actions';
 
 const defaultState = {
@@ -48,6 +49,10 @@ export default (state = defaultState, action) => {
         case ADD_STUDENT:
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.status = ADD_STUDENT;
+            return StateCopy;
+        case DELETE_STUDENT:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.status = DELETE_STUDENT;
             return StateCopy;
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
