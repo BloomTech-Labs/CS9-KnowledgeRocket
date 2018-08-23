@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generateBreadCrumbs } from '../../actions';
+import { generateBreadCrumbs, addRocket } from '../../actions';
 import RocketForm from './RocketForm';
 
 function mapStateToProps(state) {
@@ -12,6 +12,9 @@ function mapStateToProps(state) {
 class Rocket extends Component {
     state = {
         user: {},
+    };
+    handleAddRocket = rocket => {
+        this.props.addRocket(rocket, this.props.state.user.uid);
     };
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -26,7 +29,7 @@ class Rocket extends Component {
         return (
             <div className="Main_container">
                 {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
-                <RocketForm handleSubmit={() => 'action'/* HANDLE SUBMIT ACTION HERE */}/>
+                <RocketForm handleSubmit={this.handleAddRocket} />
             </div>
         );
     }
@@ -34,5 +37,5 @@ class Rocket extends Component {
 
 export default connect(
     mapStateToProps,
-    { generateBreadCrumbs }
+    { generateBreadCrumbs, addRocket }
 )(Rocket);

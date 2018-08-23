@@ -19,10 +19,35 @@ function postRocket(req, res) {
     // twoDay: { type: ObjectId, ref: 'Question' },
     // twoWeek: { type: ObjectId, ref: 'Question' },
     // twoMonth: { type: ObjectId, ref: 'Question' },
+    // RocketSchema from Front End: title, td, tw, tm
+        // THIS IS WHAT td, tm, tw look like
+            // explanation: '',
+            // question: '',
+            // choices: [
+            //     {
+            //         text: 'Answer 1',
+            //     },
+            //     {
+            //         text: 'Answer 2',
+            //     },
+            //     {
+            //         text: 'Answer 3',
+            //     },
+            //     {
+            //         text: 'Answer 4',
+            //     },
+            // ],
+            // correct: '',       
+    
 
     const { rocket, uid } = req.body;
     const { twoDay, twoWeek, twoMonth } = rocket;
-    // Add questions to DB
+    // Add questions to DB.. get returned _id fro each question
+        // Create a Rocket with rocket info
+            // Add to rocket the title
+            // Add to rocket twoDay: the td:_id
+            // Add to rocket twoDay: the td:_id
+            // Add to rocket twoDay: the td:_id
     // Use returned _id to replace rocket.twoDay, rocket.twoWeek, rocket.twoMonth with those IDs
     // Afterwards create the rocket, but not before the promise fulfills.
     Rocket.create(rocket)
