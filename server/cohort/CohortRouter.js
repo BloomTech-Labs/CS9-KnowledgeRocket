@@ -30,6 +30,8 @@ function post(req, res) {
         .save()
         .then(savedCohort => {
             User.findOne({ _id: id })
+                .populate('cohorts')
+                .populate('rockets')
                 .then(found => {
                     found.cohorts.push(savedCohort._id);
                     User.findByIdAndUpdate(id, { cohorts: found.cohorts })
