@@ -8,6 +8,8 @@ import {
     ADD_USER_FAILURE,
     UPGRADE_USER,
     ADD_COHORT,
+    ADD_ROCKET,
+    ADDING_ROCKET,
 } from '../actions';
 
 const defaultState = {
