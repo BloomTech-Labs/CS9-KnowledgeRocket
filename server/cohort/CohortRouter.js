@@ -15,8 +15,8 @@ router
 
 function get(req, res) {
     Cohort.find()
-        .then(exp => {
-            res.status(200).json(exp);
+        .then(expected => {
+            res.status(200).json(expected);
         })
         .catch(err => {
             res.status(500).json({ errorMessage: 'There was an error in GET' });
@@ -31,6 +31,8 @@ function post(req, res) {
         .save()
         .then(savedCohort => {
             User.findOne({ _id: id })
+                .populate('cohorts')
+                .populate('rockets')
                 .then(found => {
                     found.cohorts.push(savedCohort._id);
                     User.findByIdAndUpdate(id, { cohorts: found.cohorts })
@@ -59,8 +61,8 @@ function getid(req, res) {
     const id = req.params.id;
 
     Cohort.findById(id)
-        .then(thing => {
-            res.status(200).json(thing);
+        .then(expected => {
+            res.status(200).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on GETID' });
@@ -73,8 +75,8 @@ function put(req, res) {
         res.status(404).json({ message: 'Cohort not found' });
     }
     Cohort.findByIdAndUpdate(id, req.body)
-        .then(thing => {
-            res.status(201).json(thing);
+        .then(expected => {
+            res.status(201).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on PUT' });
@@ -86,8 +88,8 @@ function deleteid(req, res) {
         res.status(404).json({ message: 'Cohort not found' });
     }
     Cohort.findByIdAndRemove(id)
-        .then(thing => {
-            res.status(204).json(thing);
+        .then(expected => {
+            res.status(204).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on DEL' });
