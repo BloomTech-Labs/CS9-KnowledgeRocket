@@ -2,6 +2,7 @@
 const router = require('express').Router();
 const Rocket = require('./Rocket');
 const User = require('../user/User');
+const Question = require('../question/Question');
 
 router
     .route('/')
@@ -15,71 +16,77 @@ router
     .delete(deleteid);
 
 function postRocket(req, res) {
-    console.log(req.body)
-    res.json({success: true})
-    // axios.post(`${url}/api/rocket/add`, {rocket, uid});
-    // twoDay: { type: ObjectId, ref: 'Question' },
-    // twoWeek: { type: ObjectId, ref: 'Question' },
-    // twoMonth: { type: ObjectId, ref: 'Question' },
-    // RocketSchema from Front End: title, td, tw, tm
-        // THIS IS WHAT td, tm, tw look like
-            // explanation: '',
-            // question: '',
-            // choices: [
-            //     {
-            //         text: 'Answer 1',
-            //     },
-            //     {
-            //         text: 'Answer 2',
-            //     },
-            //     {
-            //         text: 'Answer 3',
-            //     },
-            //     {
-            //         text: 'Answer 4',
-            //     },
-            // ],
-            // correct: '',       
-    
+    // console.log(req.body);
 
-    // const { rocket, uid } = req.body;
-    // const { twoDay, twoWeek, twoMonth } = rocket;
-    // // Add questions to DB.. get returned _id fro each question
-    //     // Create a Rocket with rocket info
-    //         // Add to rocket the title
-    //         // Add to rocket twoDay: the td:_id
-    //         // Add to rocket twoDay: the td:_id
-    //         // Add to rocket twoDay: the td:_id
-    // // Use returned _id to replace rocket.twoDay, rocket.twoWeek, rocket.twoMonth with those IDs
-    // // Afterwards create the rocket, but not before the promise fulfills.
-    // Rocket.create(rocket)
-    //     .then(createdRocket => {
-    //         // Add created rocket to the user's rocket array;
-    //         User.findOne({ uid })
-    //             .then(foundUser => {
-    //                 // append to foundUser's array of rockets...
-    //                 if (foundUser) {
-    //                     let rocketArray = foundUser.rockets;
-    //                     rocketArray.push(createdRocket._id);
-    //                     // Update currently found user's rocket's array..
-    //                     User.findByIdAndUpdate(foundUser._id, { rockets: rocketArray }).then(
-    //                         modifiedUser => {
-    //                             // Hopefully return the modified user with the new rocket's array to the front end.
-    //                             modifiedUser.rockets.push(createdRocket._id);
-    //                             res.status(201).json(modifiedUser);
-    //                         }
-    //                     );
-    //                 } else {
-    //                     res.status(404).json({ error: 'User not Found with that UID' });
-    //                 }
-    //             })
-    //             .catch(errUser => {
-    //                 res.status(404).json({ errorMessage: errUser.message });
-    //             });
-    //     })
-    //     .catch(createRocketError => {
-    //         res.status(500).json({ errorMessage: createRocketError.message });
-    //     });
+    const { rocket, uid } = req.body;
+    const postRocket = rocket;
+    let { td, tw, tm } = rocket;
+
+    // Update Correct Choices
+    const updateAndSaveFormattedQuestions = question => {
+        question.choices.forEach(choice => {
+            if (choice.text === question.correct) {
+                choice.correct = true;
+                return;
+            }
+        });
+        // checking correct console.log(question.choices)
+        return {
+            title: postRocket.title,
+            explanation: question.explanation,
+            question: question.question,
+            choices: question.choices,
+            correct: question.correct,
+        };
+    };
+    let td_id, tw_id, tm_id;
+    Question.create(updateAndSaveFormattedQuestions(td)).then(tdQuestion => {
+        tdQuestion._id = td_id;
+        Question.create(updateAndSaveFormattedQuestions(tw)).then(twQuestion => {
+            twQuestion._id = tw_id;
+            Question.create(updateAndSaveFormattedQuestions(tm)).then(tmQuestion => {
+                tmQuestion._id = tm_id;
+                // Format Rocket
+                const rocketToSave = {
+                    title: postRocket.title,
+                    twoDay: td_id,
+                    twoWeek: tw_id,
+                    twoMonth: tm_id,
+                };
+                // Save Rocket to MongoDB
+                Rocket.create(rocketToSave)
+                    .then(createdRocket => {
+                        // Add created rocket to the user's rocket array;
+                        User.findOne({ uid })
+                            .populate('rockets')
+                            .then(foundUser => {
+                                // append to foundUser's array of rockets...
+                                if (foundUser) {
+                                    let rocketArray = foundUser.rockets;
+                                    rocketArray.push(createdRocket._id);
+                                    // Update currently found user's rocket's array..
+                                    User.findByIdAndUpdate(foundUser._id, {
+                                        rockets: rocketArray,
+                                    }).then(modifiedUser => {
+                                        // Hopefully return the modified user with the new rocket's array to the front end.
+                                        modifiedUser.rockets.push(createdRocket._id);
+                                        // console.log(JSON.stringify(modifiedUser))
+                                        res.status(201).json(modifiedUser);
+                                    });
+                                } else {
+                                    res.status(404).json({ error: 'User not Found with that UID' });
+                                }
+                            })
+                            .catch(errUser => {
+                                res.status(404).json({ errorMessage: errUser.message });
+                            });
+                    })
+                    .catch(createRocketError => {
+                        res.status(500).json({ errorMessage: createRocketError.message });
+                    });
+            });
+        });
+    });
 }
 
 function get(req, res) {
