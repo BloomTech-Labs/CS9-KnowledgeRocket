@@ -22,7 +22,7 @@ const CohortCard = props => {
 						<StyledLink
 							to={{
 								pathname: '/rocket/classForm',
-								state: { cohortID: props.cohort._id, studentID: props.cohort.students },
+								state: { cohortID: props.cohort._id, students: props.cohort.students },
 							}}
 						>
 							{props.cohort.title}
