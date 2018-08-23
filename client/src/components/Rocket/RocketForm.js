@@ -61,7 +61,8 @@ const defaultProps = {
 
 const RocketForm = withFormik({
     handleSubmit: (values, actions) => {
-        console.log(JSON.stringify(values), actions);
+        actions.props.handleSubmit(values)
+        console.log(values, actions);
     },
     mapPropsToValues: props => {
         // overwrite defaults with props

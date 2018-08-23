@@ -15,6 +15,8 @@ router
     .delete(deleteid);
 
 function postRocket(req, res) {
+    console.log(req.body)
+    res.json({success: true})
     // axios.post(`${url}/api/rocket/add`, {rocket, uid});
     // twoDay: { type: ObjectId, ref: 'Question' },
     // twoWeek: { type: ObjectId, ref: 'Question' },
@@ -40,44 +42,44 @@ function postRocket(req, res) {
             // correct: '',       
     
 
-    const { rocket, uid } = req.body;
-    const { twoDay, twoWeek, twoMonth } = rocket;
-    // Add questions to DB.. get returned _id fro each question
-        // Create a Rocket with rocket info
-            // Add to rocket the title
-            // Add to rocket twoDay: the td:_id
-            // Add to rocket twoDay: the td:_id
-            // Add to rocket twoDay: the td:_id
-    // Use returned _id to replace rocket.twoDay, rocket.twoWeek, rocket.twoMonth with those IDs
-    // Afterwards create the rocket, but not before the promise fulfills.
-    Rocket.create(rocket)
-        .then(createdRocket => {
-            // Add created rocket to the user's rocket array;
-            User.findOne({ uid })
-                .then(foundUser => {
-                    // append to foundUser's array of rockets...
-                    if (foundUser) {
-                        let rocketArray = foundUser.rockets;
-                        rocketArray.push(createdRocket._id);
-                        // Update currently found user's rocket's array..
-                        User.findByIdAndUpdate(foundUser._id, { rockets: rocketArray }).then(
-                            modifiedUser => {
-                                // Hopefully return the modified user with the new rocket's array to the front end.
-                                modifiedUser.rockets.push(createdRocket._id);
-                                res.status(201).json(modifiedUser);
-                            }
-                        );
-                    } else {
-                        res.status(404).json({ error: 'User not Found with that UID' });
-                    }
-                })
-                .catch(errUser => {
-                    res.status(404).json({ errorMessage: errUser.message });
-                });
-        })
-        .catch(createRocketError => {
-            res.status(500).json({ errorMessage: createRocketError.message });
-        });
+    // const { rocket, uid } = req.body;
+    // const { twoDay, twoWeek, twoMonth } = rocket;
+    // // Add questions to DB.. get returned _id fro each question
+    //     // Create a Rocket with rocket info
+    //         // Add to rocket the title
+    //         // Add to rocket twoDay: the td:_id
+    //         // Add to rocket twoDay: the td:_id
+    //         // Add to rocket twoDay: the td:_id
+    // // Use returned _id to replace rocket.twoDay, rocket.twoWeek, rocket.twoMonth with those IDs
+    // // Afterwards create the rocket, but not before the promise fulfills.
+    // Rocket.create(rocket)
+    //     .then(createdRocket => {
+    //         // Add created rocket to the user's rocket array;
+    //         User.findOne({ uid })
+    //             .then(foundUser => {
+    //                 // append to foundUser's array of rockets...
+    //                 if (foundUser) {
+    //                     let rocketArray = foundUser.rockets;
+    //                     rocketArray.push(createdRocket._id);
+    //                     // Update currently found user's rocket's array..
+    //                     User.findByIdAndUpdate(foundUser._id, { rockets: rocketArray }).then(
+    //                         modifiedUser => {
+    //                             // Hopefully return the modified user with the new rocket's array to the front end.
+    //                             modifiedUser.rockets.push(createdRocket._id);
+    //                             res.status(201).json(modifiedUser);
+    //                         }
+    //                     );
+    //                 } else {
+    //                     res.status(404).json({ error: 'User not Found with that UID' });
+    //                 }
+    //             })
+    //             .catch(errUser => {
+    //                 res.status(404).json({ errorMessage: errUser.message });
+    //             });
+    //     })
+    //     .catch(createRocketError => {
+    //         res.status(500).json({ errorMessage: createRocketError.message });
+    //     });
 }
 
 function get(req, res) {
