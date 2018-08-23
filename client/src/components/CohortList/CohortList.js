@@ -78,7 +78,6 @@ export class CohortList extends Component {
   }
 
   render() {
-    console.log(`STATE: ${JSON.stringify(this.props.state.user.cohorts)}`);
     return (
       <CohortListContainer>
         {this.state.cohort ? (
