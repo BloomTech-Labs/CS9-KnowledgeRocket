@@ -85,33 +85,4 @@ describe('CohortList', () => {
 
 		expect(spy).toHaveBeenCalled();
 	});
-
-	it('has a fetchCohortData function', () => {
-		const component = shallow(
-			<UnWrapped
-				state={mockUser}
-				history={mockHistory}
-				store={mockStore}
-				generateBreadCrumbs={generateBreadCrumbs}
-			/>
-		);
-
-		expect(component.instance().fetchCohortData).toBeInstanceOf(Function);
-	});
-
-	// it('calls fetchCohortData to update state', () => {
-	// 	const component = mount(
-	// 		<UnWrapped
-	// 			state={mockUser}
-	// 			history={mockHistory}
-	// 			store={mockStore}
-	// 			generateBreadCrumbs={generateBreadCrumbs}
-	// 		/>
-	// 	);
-
-	// 	const spy = jest.spyOn(UnWrapped.prototype, 'fetchCohortData');
-
-	// 	expect(spy).toHaveBeenCalledOnce()
-
-	// });
 });
