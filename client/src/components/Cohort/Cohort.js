@@ -99,7 +99,6 @@ class Cohort extends Component {
         const cohort = {
             title: this.state.title,
         };
-        console.log(`adding this cohort ${JSON.stringify(cohort)}`);
         this.props.addCohort(cohort, this.props.state.user._id);
     };
 
