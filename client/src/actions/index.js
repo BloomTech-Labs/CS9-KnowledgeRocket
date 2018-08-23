@@ -27,6 +27,9 @@ export const UPGRADE_USER = 'UPGRADE_USER';
 export const ADD_COHORT = 'ADD_COHORT';
 export const ADDING_COHORT = 'ADDING_COHORT';
 export const ADD_COHORT_FAILURE = 'ADD_COHORT_FAILURE';
+export const ADDING_STUDENT = 'ADDING_STUDENT';
+export const ADD_STUDENT = 'ADD_STUDENT';
+export const ADD_STUDENT_FAILURE = 'ADD_STUDENT_FAILURE';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';
@@ -59,6 +62,16 @@ export const addCohort = (cohort, id) => async dispatch => {
         dispatch({ type: ADD_COHORT, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_COHORT_FAILURE });
+    }
+};
+
+export const addStudent = (cohort, id) => async dispatch => {
+    dispatch({ type: ADDING_STUDENT });
+    try {
+        let response = await axios.post(`${url}/api/`);
+        dispatch({ type: ADD_STUDENT, payload: response.data });
+    } catch (err) {
+        dispatch({ type: ADD_STUDENT_FAILURE });
     }
 };
 
