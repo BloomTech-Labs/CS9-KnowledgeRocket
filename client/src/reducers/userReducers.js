@@ -32,6 +32,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
+            console.log('Payload inside ADD_Rocket Reducer',action.payload)
             StateCopy = { ...StateCopy, ...action.payload };
             return StateCopy;
         case ADDING_USER:

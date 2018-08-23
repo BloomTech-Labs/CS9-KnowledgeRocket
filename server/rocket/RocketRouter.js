@@ -62,16 +62,18 @@ function postRocket(req, res) {
                             .then(foundUser => {
                                 // append to foundUser's array of rockets...
                                 if (foundUser) {
+                                    // console.log(foundUser)
                                     let rocketArray = foundUser.rockets;
                                     rocketArray.push(createdRocket._id);
                                     // Update currently found user's rocket's array..
                                     User.findByIdAndUpdate(foundUser._id, {
                                         rockets: rocketArray,
-                                    }).then(modifiedUser => {
-                                        // Hopefully return the modified user with the new rocket's array to the front end.
-                                        modifiedUser.rockets.push(createdRocket._id);
-                                        // console.log(JSON.stringify(modifiedUser))
-                                        res.status(201).json(modifiedUser);
+                                    }).then(afterUpdate => {
+                                        User.findById(foundUser._id).populate('rockets').populate('cohorts').then(modifiedUser => {
+                                            // Hopefully return the modified user with the new rocket's array to the front end.
+                                            // console.log(JSON.stringify(modifiedUser))
+                                            res.status(201).json(modifiedUser);
+                                        });
                                     });
                                 } else {
                                     res.status(404).json({ error: 'User not Found with that UID' });

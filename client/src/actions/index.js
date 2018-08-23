@@ -44,18 +44,14 @@ export const ADD_ROCKET = 'ADD_ROCKET';
 export const ADDING_ROCKET = 'ADDING_ROCKET';
 
 // Add Rocket Actions
-export const addRocket = (rocket, uid) => async dispatch=> {
-    dispatch({type: ADDING_ROCKET});
+export const addRocket = (rocket, uid) => async dispatch => {
+    dispatch({ type: ADDING_ROCKET });
     try {
         // Make sure Server gives the updated user with the rocket in it as response.
         // Remember in Server to add this rocket to current user's array.
-        let response = axios.post(`${url}/api/rocket/add`, {rocket, uid});
-        dispatch({type: ADD_ROCKET, payload: response.data})
-    } catch (err) {
-
-    }
-    
-    
+        let response = await axios.post(`${url}/api/rocket/add`, { rocket, uid });
+        dispatch({ type: ADD_ROCKET, payload: response.data });
+    } catch (err) {}
 };
 
 // COHORT ACTIONS
