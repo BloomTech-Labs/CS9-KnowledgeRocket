@@ -13,12 +13,18 @@ const StyledLink = styled(Link)`
 
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList
 const CohortCard = props => {
+	console.log(`COHORT CARD students ${JSON.stringify(props.cohort.students)}`);
 	return (
 		<Card className={props.className}>
 			<CardContent>
 				<FormControl>
 					<Input>
-						<StyledLink to={{ pathname: '/rocket/classForm', state: props.cohort._id }}>
+						<StyledLink
+							to={{
+								pathname: '/rocket/classForm',
+								state: { cohortID: props.cohort._id, studentID: props.cohort.students },
+							}}
+						>
 							{props.cohort.title}
 						</StyledLink>
 					</Input>
