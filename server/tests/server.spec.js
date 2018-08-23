@@ -13,7 +13,10 @@ const testdb = process.env.TestDB_Url;
 describe('server', () => {
     beforeAll(() => {
         return mongoose
-            .connect(testdb, { useNewUrlParser: true })
+            .connect(
+                testdb,
+                { useNewUrlParser: true }
+            )
             .then(console.log('connected to test db'));
     });
 
@@ -227,14 +230,20 @@ describe('server', () => {
         const response = await request(server).get('/api/cohort');
         expect(response.status).toBe(200);
     });
-    // test('should return 201', async () => {
-    //     const mockCohort = { title: 'some title', rockets: [{ startDate: '1995-12-17T03:24:00' }] };
-    //     const response = await request(server)
-    //         .post('/api/cohort')
-    //         .send(mockCohort);
-    //     expect(response.status).toBe(201);
-    //     await mongoose.connection.db.dropCollection('cohorts');
-    // });
+    test('should return 201', async () => {
+        const mockUser = { email: 'bobtodd@gmail.com' };
+        const newUser = await User.create(mockUser);
+        const id = newUser._id;
+        const mockCohort = { title: 'some title' };
+        const response = await request(server)
+            .post('/api/cohort')
+            // const cohort = new Cohort(req.body.cohort);
+            // const id = req.body.id;
+            // You have to pass in an object and with prop cohort and just id
+            .send({ cohort: mockCohort, id });
+        expect(response.status).toBe(201);
+        await mongoose.connection.db.dropCollection('cohorts');
+    });
     test('GET should return 200', async () => {
         const mockUser = { title: 'bob' };
         const newUser = await Cohort.create(mockUser);

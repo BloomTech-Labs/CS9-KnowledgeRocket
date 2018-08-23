@@ -13,8 +13,8 @@ router
 
 function get(req, res) {
     Rocket.find()
-        .then(exp => {
-            res.status(200).json(exp);
+        .then(expected => {
+            res.status(200).json(expected);
         })
         .catch(err => {
             res.status(500).json({ errorMessage: 'There was an error in GET' });
@@ -25,8 +25,8 @@ function post(req, res) {
     const rocket = new Rocket(req.body);
     rocket
         .save()
-        .then(stuff => {
-            res.status(201).json(stuff);
+        .then(expected => {
+            res.status(201).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'There was an error in POST' });
@@ -35,8 +35,8 @@ function post(req, res) {
 function getid(req, res) {
     const id = req.params.id;
     Rocket.findById(id)
-        .then(rocket => {
-            res.status(200).json(rocket);
+        .then(expected => {
+            res.status(200).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on GETID' });
@@ -49,8 +49,8 @@ function put(req, res) {
         res.status(404).json({ message: 'Rocket not found' });
     }
     Rocket.findByIdAndUpdate(id, req.body)
-        .then(rocket => {
-            res.status(201).json(rocket);
+        .then(expected => {
+            res.status(201).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on PUT' });
@@ -62,8 +62,8 @@ function deleteid(req, res) {
         res.status(404).json({ message: 'Rocket not found' });
     }
     Rocket.findByIdAndRemove(id)
-        .then(rocket => {
-            res.status(204).json(rocket);
+        .then(expected => {
+            res.status(204).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on DEL' });
