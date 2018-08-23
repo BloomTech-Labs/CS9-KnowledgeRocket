@@ -10,12 +10,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
     <form onSubmit={handleSubmit}>
         <FormGroup>
             <label htmlFor="title" />
-            <input
-                name="title"
-                value={values.title}
-                placeholder="Title"
-                onChange={handleChange}
-            />
+            <input name="title" value={values.title} placeholder="Title" onChange={handleChange} />
         </FormGroup>
         <FormGroup>
             <Blurb>{rocketBlurb}</Blurb>
@@ -61,13 +56,12 @@ const defaultProps = {
 
 const RocketForm = withFormik({
     handleSubmit: (values, actions) => {
-        actions.props.handleSubmit(values)
-        actions.props.history.push('/rocket')
-        console.log(values, actions);
+        actions.props.handleSubmit(values);
+        actions.props.history.push('/rocket');
     },
     mapPropsToValues: props => {
         // overwrite defaults with props
-        Object.assign(defaultProps, {...props});
+        Object.assign(defaultProps, { ...props });
         return defaultProps;
     },
     validationSchema: object().shape({}),
