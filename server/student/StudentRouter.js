@@ -42,11 +42,14 @@ function post(req, res) {
                         cohort.students.push(newStudent._id);
                         // update cohort with new list of students
                         Cohort.findByIdAndUpdate(cohortID, { students: cohort.students })
-                            .populate('students')
+                            // .populate('students')
                             .then(() => {
                                 // find user and populate their data
                                 User.findOne({ _id: teacherID })
-                                    .populate('cohorts')
+                                    .populate({
+                                        path: 'cohorts',
+                                        populate: { path: 'students' },
+                                    })
                                     .populate('rockets')
                                     .then(user => {
                                         res.status(201).json(user);
