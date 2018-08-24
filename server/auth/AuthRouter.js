@@ -1,4 +1,3 @@
-//@ts-check
 const router = require('express').Router();
 const Firebase = require('firebase');
 const admin = require('firebase-admin');
