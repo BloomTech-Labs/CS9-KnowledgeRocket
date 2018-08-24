@@ -6,9 +6,6 @@
     flex-direction: column;
     align-items: center;
 }
-.Main_container {
-    background-color: #7ebfff;
-}
 .title10 {
     display: flex;
     font-size: 3rem;
