@@ -57,6 +57,10 @@ function post(req, res) {
                                     account: 'free',
                                 })
                                     .populate('rockets')
+                                    .populate('cohorts')
+                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                     .then(updatedUser => {
                                         res.status(201).json(updatedUser);
                                     });
@@ -88,7 +92,10 @@ function post(req, res) {
                         uid,
                         authProvider: 'email',
                     })
-                        // .populate('rockets')
+                        .populate('cohorts')
+                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                         .then(createdUser => res.json(createdUser))
                         .catch(errUser => {
                             res.json({ errorMessage: errUser.message });
@@ -125,7 +132,10 @@ function post(req, res) {
                                     uid,
                                     authProvider: authType,
                                 })
-                                    // .populate('rockets')
+                                    .populate('cohorts')
+                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                     .then(createdUser => res.json(createdUser))
                                     .catch(errUser => {
                                         res.json({
