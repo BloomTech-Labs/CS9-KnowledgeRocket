@@ -9,6 +9,7 @@ router
     .get(get)
     .post(post);
 router.route('/add').post(postRocket);
+router.route('/update').post(updateRocket);
 router
     .route('/:id')
     .put(put)
@@ -71,6 +72,7 @@ function postRocket(req, res) {
                     .then(createdRocket => {
                         // Add created rocket to the user's rocket array;
                         User.findOne({ uid })
+                            .populate('cohorts')
                             .populate('rockets')
                             .then(foundUser => {
                                 // append to foundUser's array of rockets...
@@ -83,8 +85,19 @@ function postRocket(req, res) {
                                         rockets: rocketArray,
                                     }).then(afterUpdate => {
                                         User.findById(foundUser._id)
-                                            .populate('rockets')
                                             .populate('cohorts')
+                                            .populate({
+                                                path: 'rockets',
+                                                populate: { path: 'twoDay' },
+                                            })
+                                            .populate({
+                                                path: 'rockets',
+                                                populate: { path: 'twoWeek' },
+                                            })
+                                            .populate({
+                                                path: 'rockets',
+                                                populate: { path: 'twoMonth' },
+                                            })
                                             .then(modifiedUser => {
                                                 // Hopefully return the modified user with the new rocket's array to the front end.
                                                 // console.log(JSON.stringify(modifiedUser))
@@ -103,6 +116,73 @@ function postRocket(req, res) {
                         res.status(500).json({ errorMessage: createRocketError.message });
                     });
             });
+        });
+    });
+}
+
+function updateRocket(req, res) {
+    const { rocket, uid } = req.body;
+    const postRocket = rocket;
+    let { td, tw, tm } = rocket;
+
+    // Update Correct Choices
+    const updateAndSaveFormattedQuestions = question => {
+        question.choices.forEach(choice => {
+            if (choice.text === question.correct) {
+                choice.correct = true;
+            } else {
+                choice.correct = false;
+            }
+        });
+        // checking correct console.log(question.choices)
+        return {
+            title: postRocket.title,
+            explanation: question.explanation,
+            question: question.question,
+            choices: question.choices,
+            correct: question.correct,
+        };
+    };
+
+    let td_id, tw_id, tm_id;
+    Question.findByIdAndUpdate(td._id, updateAndSaveFormattedQuestions(td)).then(tdQuestion => {
+        td_id = tdQuestion._id;
+        Question.findByIdAndUpdate(tw._id, updateAndSaveFormattedQuestions(tw)).then(twQuestion => {
+            tw_id = twQuestion._id;
+            Question.findByIdAndUpdate(tm._id, updateAndSaveFormattedQuestions(tm)).then(
+                tmQuestion => {
+                    tm_id = tmQuestion._id;
+                    // Format Rocket
+                    // console.log('ids', td_id, tw_id, tm_id)
+                    const rocketToSave = {
+                        title: postRocket.title,
+                        twoDay: td_id,
+                        twoWeek: tw_id,
+                        twoMonth: tm_id,
+                    };
+                    // console.log('rocket to save', rocketToSave)
+                    // Save Rocket to MongoDB
+                    Rocket.findByIdAndUpdate(rocket._id, rocketToSave)
+                        .then(createdRocket => {
+                            // Add created rocket to the user's rocket array;
+                            User.findOne({ uid })
+                                .populate('cohorts')
+                                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                                .then(foundUser => {
+                                    // append to foundUser's array of rockets...
+                                    res.status(201).json(foundUser);
+                                })
+                                .catch(errUser => {
+                                    res.status(404).json({ errorMessage: errUser.message });
+                                });
+                        })
+                        .catch(createRocketError => {
+                            res.status(500).json({ errorMessage: createRocketError.message });
+                        });
+                }
+            );
         });
     });
 }
