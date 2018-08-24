@@ -15,9 +15,6 @@ const firebaseConfig = {
 };
 
 Firebase.initializeApp(firebaseConfig);
-
-// Dummy Action Types
-export const ADD_ROCKET = 'ADD_ROCKET';
 export const GET_ROCKETS = 'GET_ROCKETS';
 export const REMOVE_ROCKET = 'REMOVE_ROCKET';
 export const UPDATE_ROCKET = 'UPDATE_ROCKET';
@@ -48,13 +45,42 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 // Breadcrumb Actions
 export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 
-// Dummy Action to Add Rockets
-export const addRocket = rocket => {
-    let response = axios.post(`${url}/rocket/add`, rocket);
-    return {
-        type: ADD_ROCKET,
-        payload: response,
-    };
+// Rocket Actions
+export const ADD_ROCKET = 'ADD_ROCKET';
+export const ADDING_ROCKET = 'ADDING_ROCKET';
+export const DELETING_ROCKET = 'DELETING_ROCKET';
+export const DELETE_ROCKET = 'DELETE_ROCKET';
+
+// Add Rocket Actions
+export const addRocket = (rocket, uid) => async dispatch => {
+    dispatch({ type: ADDING_ROCKET });
+    try {
+        // Make sure Server gives the updated user with the rocket in it as response.
+        // Remember in Server to add this rocket to current user's array.
+        let response = await axios.post(`${url}/api/rocket/add`, { rocket, uid });
+        dispatch({ type: ADD_ROCKET, payload: response.data });
+    } catch (err) {}
+};
+
+export const updateRocket = (rocket, uid) => async dispatch => {
+    dispatch({ type: ADDING_ROCKET });
+    try {
+        // Make sure Server gives the updated user with the rocket in it as response.
+        // Remember in Server to add this rocket to current user's array.
+        let response = await axios.post(`${url}/api/rocket/update`, { rocket, uid });
+        dispatch({ type: ADD_ROCKET, payload: response.data });
+    } catch (err) {}
+};
+
+export const deleteRocket = (rocketId) => async dispatch => {
+    console.log('rocket id in question', rocketId)
+    dispatch({ type: DELETING_ROCKET });
+    try {
+        // Make sure Server gives the updated user with the rocket in it as response.
+        // Remember in Server to add this rocket to current user's array.
+        let response = await axios.delete(`${url}/api/rocket/${rocketId}`);
+        dispatch({ type: DELETE_ROCKET, payload: {response, rocketId} });
+    } catch (err) {}
 };
 
 // COHORT ACTIONS

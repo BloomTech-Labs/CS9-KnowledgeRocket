@@ -1,3 +1,4 @@
+//@ts-check
 const router = require('express').Router();
 const Student = require('./Student.js');
 const User = require('../user/User');
