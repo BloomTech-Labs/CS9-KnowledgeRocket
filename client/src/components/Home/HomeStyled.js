@@ -41,6 +41,12 @@ export const NavLogo = Styled.img`
 
 export const HomeContainer = Styled.div`
     font-family: 'Roboto', sans-serif;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    &::-webkit-scrollbar {display:none;}
+    height: 100vh;
+    width: 100%;
 `;
 
 export const MidContainer = Styled.div`
