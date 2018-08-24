@@ -72,14 +72,14 @@ export const updateRocket = (rocket, uid) => async dispatch => {
     } catch (err) {}
 };
 
-export const deleteRocket = (rocketId) => async dispatch => {
-    console.log('rocket id in question', rocketId)
+export const deleteRocket = rocketId => async dispatch => {
+    console.log('rocket id in question', rocketId);
     dispatch({ type: DELETING_ROCKET });
     try {
         // Make sure Server gives the updated user with the rocket in it as response.
         // Remember in Server to add this rocket to current user's array.
         let response = await axios.delete(`${url}/api/rocket/${rocketId}`);
-        dispatch({ type: DELETE_ROCKET, payload: {response, rocketId} });
+        dispatch({ type: DELETE_ROCKET, payload: { response, rocketId } });
     } catch (err) {}
 };
 
@@ -100,8 +100,10 @@ export const addStudent = (student, teacherID, cohortID) => async dispatch => {
     dispatch({ type: ADDING_STUDENT });
     try {
         let response = await axios.post(`${url}/api/student`, { student, teacherID, cohortID });
+        console.log(`RESPONSE DATA ${response.data}`);
         dispatch({ type: ADD_STUDENT, payload: response.data });
     } catch (err) {
+        console.log(`ERROR ${err}`);
         dispatch({ type: ADD_STUDENT_FAILURE });
     }
 };
