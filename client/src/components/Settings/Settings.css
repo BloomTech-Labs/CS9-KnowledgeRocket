@@ -1,8 +1,11 @@
 .title10 {
-    display: flex;
-    font-size: 3rem;
+    font-family: roboto;
     font-weight: 400;
-    font-family: 'Roboto', serif;
+    font-size: 2rem;
+    margin: 1rem;
+    color: ghostwhite;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+        0px 0px 8px #000000dd;
 }
 .radioGroup {
     padding: 1rem;
@@ -18,7 +21,7 @@
     height: 2.5rem;
     margin: 1rem 0 0 0;
     background-color: rgb(198, 235, 253) !important;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 .submitButton {
     font-size: 2rem;

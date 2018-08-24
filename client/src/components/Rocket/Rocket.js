@@ -10,6 +10,26 @@ function mapStateToProps(state) {
     };
 }
 
+const questionTemplate = {
+    explanation: '',
+    question: '',
+    choices: [
+        {
+            text: 'Answer 1',
+        },
+        {
+            text: 'Answer 2',
+        },
+        {
+            text: 'Answer 3',
+        },
+        {
+            text: 'Answer 4',
+        },
+    ],
+    correct: '',
+};
+
 const MainContainer = Styled.div`
     padding: 0 1.2rem;
     display: flex;
@@ -64,7 +84,12 @@ class Rocket extends Component {
             <div className="Main_container">
                 <MainContainer height={this.state.height}>
                     {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
-                    <RocketForm handleSubmit={this.handleAddRocket} history={this.props.history} />
+                    <RocketForm handleSubmit={this.handleAddRocket} history={this.props.history}
+                    history={this.props.history}
+                    title={''}
+                    td={questionTemplate}
+                    tw={questionTemplate}
+                    tm={questionTemplate} />
                 </MainContainer>
             </div>
         );

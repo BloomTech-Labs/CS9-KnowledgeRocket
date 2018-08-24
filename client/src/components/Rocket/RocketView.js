@@ -83,6 +83,7 @@ class RocketView extends Component {
     }
 
     componentWillUnmount() {
+        this.setState({})
         window.removeEventListener('resize', this.updateDimensions.bind(this));
     }
 
