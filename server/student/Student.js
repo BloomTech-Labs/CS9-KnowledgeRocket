@@ -16,4 +16,4 @@ const Student = mongoose.Schema({
 // 	this.model('User').update({}, { $pull: { students: this._id } }, { multi: true }, next);
 // });
 
-module.exports = mongoose.model('Cohorts', Student);
+module.exports = mongoose.model('Students', Student);
