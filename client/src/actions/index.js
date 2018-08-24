@@ -24,6 +24,12 @@ export const UPGRADE_USER = 'UPGRADE_USER';
 export const ADD_COHORT = 'ADD_COHORT';
 export const ADDING_COHORT = 'ADDING_COHORT';
 export const ADD_COHORT_FAILURE = 'ADD_COHORT_FAILURE';
+export const ADDING_STUDENT = 'ADDING_STUDENT';
+export const ADD_STUDENT = 'ADD_STUDENT';
+export const ADD_STUDENT_FAILURE = 'ADD_STUDENT_FAILURE';
+export const DELETING_STUDENT = 'DELETING_STUDENT';
+export const DELETE_STUDENT = 'DELETE_STUDENT';
+export const DELETING_STUDENT_FAILURE = 'DELETING_STUDENT_FAILURE';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';
@@ -42,6 +48,8 @@ export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 // Rocket Actions
 export const ADD_ROCKET = 'ADD_ROCKET';
 export const ADDING_ROCKET = 'ADDING_ROCKET';
+export const DELETING_ROCKET = 'DELETING_ROCKET';
+export const DELETE_ROCKET = 'DELETE_ROCKET';
 
 // Add Rocket Actions
 export const addRocket = (rocket, uid) => async dispatch => {
@@ -54,6 +62,27 @@ export const addRocket = (rocket, uid) => async dispatch => {
     } catch (err) {}
 };
 
+export const updateRocket = (rocket, uid) => async dispatch => {
+    dispatch({ type: ADDING_ROCKET });
+    try {
+        // Make sure Server gives the updated user with the rocket in it as response.
+        // Remember in Server to add this rocket to current user's array.
+        let response = await axios.post(`${url}/api/rocket/update`, { rocket, uid });
+        dispatch({ type: ADD_ROCKET, payload: response.data });
+    } catch (err) {}
+};
+
+export const deleteRocket = (rocketId) => async dispatch => {
+    console.log('rocket id in question', rocketId)
+    dispatch({ type: DELETING_ROCKET });
+    try {
+        // Make sure Server gives the updated user with the rocket in it as response.
+        // Remember in Server to add this rocket to current user's array.
+        let response = await axios.delete(`${url}/api/rocket/${rocketId}`);
+        dispatch({ type: DELETE_ROCKET, payload: {response, rocketId} });
+    } catch (err) {}
+};
+
 // COHORT ACTIONS
 export const addCohort = (cohort, id) => async dispatch => {
     dispatch({ type: ADDING_COHORT });
@@ -62,6 +91,30 @@ export const addCohort = (cohort, id) => async dispatch => {
         dispatch({ type: ADD_COHORT, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_COHORT_FAILURE });
+    }
+};
+
+export const addStudent = (student, teacherID, cohortID) => async dispatch => {
+    dispatch({ type: ADDING_STUDENT });
+    try {
+        let response = await axios.post(`${url}/api/student`, { student, teacherID, cohortID });
+        dispatch({ type: ADD_STUDENT, payload: response.data });
+    } catch (err) {
+        dispatch({ type: ADD_STUDENT_FAILURE });
+    }
+};
+
+export const deleteStudent = (studentID, teacherID, cohortID) => async dispatch => {
+    dispatch({ type: DELETING_STUDENT });
+    try {
+        let response = await axios.delete(`${url}/api/student/${studentID}`, {
+            studentID,
+            teacherID,
+            cohortID,
+        });
+        dispatch({ type: DELETE_STUDENT, payload: response.data });
+    } catch (err) {
+        dispatch({ type: DELETING_STUDENT_FAILURE });
     }
 };
 

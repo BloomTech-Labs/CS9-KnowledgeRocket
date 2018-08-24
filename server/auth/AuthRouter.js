@@ -1,4 +1,3 @@
-//@ts-check
 const router = require('express').Router();
 const Firebase = require('firebase');
 const admin = require('firebase-admin');
@@ -41,8 +40,11 @@ function post(req, res) {
                 const uid = response.user.uid;
                 response.user.getIdToken().then(token => {
                     UserModel.findOne({ uid })
+                        // https://mongoosejs.com/docs/populate.html Populating across multi levels
                         .populate('cohorts')
-                        .populate('rockets')
+                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                         .then(foundUser => {
                             // Alternatively Replace Token Here and Send back Updated Token...
                             if (
@@ -54,6 +56,10 @@ function post(req, res) {
                                     account: 'free',
                                 })
                                     .populate('rockets')
+                                    .populate('cohorts')
+                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                     .then(updatedUser => {
                                         res.status(201).json(updatedUser);
                                     });
@@ -85,7 +91,10 @@ function post(req, res) {
                         uid,
                         authProvider: 'email',
                     })
-                        // .populate('rockets')
+                        .populate('cohorts')
+                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                         .then(createdUser => res.json(createdUser))
                         .catch(errUser => {
                             res.json({ errorMessage: errUser.message });
@@ -111,6 +120,10 @@ function post(req, res) {
                     UserModel.findOne({ uid })
                         .populate('cohorts')
                         .populate('rockets')
+                        .populate('questions')
+                        .populate('rockets.questions.twoDay')
+                        .populate('rockets.questions.twoWeek')
+                        .populate('rockets.questions.twoMonth')
                         .then(foundUser => {
                             if (foundUser === null) {
                                 UserModel.create({
@@ -118,7 +131,10 @@ function post(req, res) {
                                     uid,
                                     authProvider: authType,
                                 })
-                                    // .populate('rockets')
+                                    .populate('cohorts')
+                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                     .then(createdUser => res.json(createdUser))
                                     .catch(errUser => {
                                         res.json({
