@@ -4,7 +4,7 @@ import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 import { Card } from '../../../node_modules/@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
-import {CPCButton} from '../ControlPanel/ControlPanel';
+import { CPCButton } from '../ControlPanel/ControlPanel';
 
 const serverURL = process.env.REACT_APP_Stripe_Url;
 class CheckoutForm extends Component {
@@ -35,7 +35,9 @@ class CheckoutForm extends Component {
         return (
             <div className="checkout">
                 <Card className="checkoutCard">
-                    <FormLabel component="legend" className='legend'>Payment Info</FormLabel>
+                    <FormLabel component="legend" className="legend">
+                        Payment Info
+                    </FormLabel>
                     <CardElement className="checkoutBoxes" />
                 </Card>
                 <CPCButton className="submitButton" onClick={this.submit}>

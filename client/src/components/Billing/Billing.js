@@ -48,10 +48,12 @@ class Billing extends Component {
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
                 <div className="Main_container">
-                    <FormControl component="fieldset" className={`fieldset`} >
-                        <header className='title10'>Billing and Subscriptions</header>
+                    <FormControl component="fieldset" className={`fieldset`}>
+                        <header className="title10">Billing and Subscriptions</header>
                         <Card className="radioGroup">
-                            <FormLabel component="legend" className='legend'>Please Pick a Subscription</FormLabel>
+                            <FormLabel component="legend" className="legend">
+                                Please Pick a Subscription
+                            </FormLabel>
                             <RadioGroup
                                 aria-label="gender"
                                 name="gender2"
@@ -96,4 +98,4 @@ Billing.propTypes = {
 export default connect(
     mapStateToProps,
     { generateBreadCrumbs }
-)(Billing);s
+)(Billing);
