@@ -10,7 +10,7 @@ import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsFor
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
-import { generateBreadCrumbs, addCohort, addStudent, deleteStudent } from '../../actions';
+import { generateBreadCrumbs, addCohort, addStudent } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -114,10 +114,6 @@ class Cohort extends Component {
         this.props.addStudent(student, teacherID, cohortID);
     };
 
-    // handleDeleteStudent = () => {
-
-    // }
-
     render() {
         const { students } = this.props.location.state;
         return [
@@ -140,6 +136,5 @@ class Cohort extends Component {
 export default connect(mapStateToProps, {
     generateBreadCrumbs,
     addCohort,
-    addStudent,
-    deleteStudent,
+    addStudent
 })(Cohort);
