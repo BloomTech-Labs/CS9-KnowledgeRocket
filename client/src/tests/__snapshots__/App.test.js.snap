@@ -12,14 +12,14 @@ exports[`<App /> renders without crashing 1`] = `
       className="sc-ifAKCX iIzwFJ"
     >
       <div
-        className="sc-bdVaJa hFzOOv"
+        className="sc-bdVaJa jMGXWU"
       >
         <div
           className="sc-bwzfXH jBrGUa"
         >
           <div>
             <img
-              className="sc-bxivhb jiREkS"
+              className="sc-bxivhb ibqIMi"
               onClick={[Function]}
               src="/img/Logo_BW_SML.svg"
             />
