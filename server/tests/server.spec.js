@@ -79,11 +79,7 @@ describe('server', () => {
         const response = await request(server)
             .post('/api/student')
             .send({
-                student: {
-                    firstName: mockStudent.firstName,
-                    lastName: mockStudent.lastName,
-                    email: mockStudent.email,
-                },
+                student: mockStudent,
                 teacherID: id,
                 cohortID: cohortID,
             });
