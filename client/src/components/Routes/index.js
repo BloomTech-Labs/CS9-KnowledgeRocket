@@ -22,7 +22,6 @@ export default () => (
                 <Route path="/rocket" exact component={RocketList} />
                 <Route path="/rocket/new" exact component={Rocket} />
                 <Route path="/rocket/view/:id" exact component={RocketView} />
-                {/* <Route path="/rocket/single/:id" exact component={Rocket} /> */}
                 <Route path="/rocket/billing" exact component={Billing} />
                 <Route path="/rocket/classForm" exact component={Cohort} />
                 <Route path="/rocket/classes" exact component={CohortList} />

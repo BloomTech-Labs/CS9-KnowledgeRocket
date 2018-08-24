@@ -11,7 +11,10 @@ export const Blurb = Styled.p`
     margin: 1rem 0;
     text-align: justify;
 `;
-export const TextArea = Blurb.extend``.withComponent('textarea');
+export const TextArea = Blurb.extend`
+    width: 100%;
+    height: 4rem;
+`.withComponent('textarea');
 
 export const QuestionWrapper = Styled.div`
     display: grid;
@@ -20,6 +23,15 @@ export const QuestionWrapper = Styled.div`
     grid-template-rows: 1fr 1fr;
     width: 100%;
 `;
+
+export const ErrorText = Styled.span`
+    color: red;
+    font-size: .8rem;
+    height: 1rem;
+`;
+
+export const errorHelper = (error, touched) => property =>
+    touched && touched[property] && error && error[property];
 
 const verbageDictionary = {
     td: 'Two Days',
@@ -34,8 +46,18 @@ const verbageDictionary = {
  * @param {Function} props.handleChange
  * @param {object} props.values
  * @param {string} props.increment
+ * @param {object=} props.errors
+ * @param {object=} props.touched
  */
-export const QuestionChoices = ({ handleBlur, handleChange, values, increment, errors }) => {
+export const QuestionChoices = ({
+    handleBlur,
+    handleChange,
+    values,
+    increment,
+    errors,
+    touched,
+}) => {
+    const displayError = errorHelper(errors, touched);
     return (
         <section>
             <FormGroup>
@@ -47,8 +69,8 @@ export const QuestionChoices = ({ handleBlur, handleChange, values, increment, e
                     value={values[increment].explanation}
                     placeholder="Two Day Review Text"
                     onChange={handleChange}
-                    style={{ width: '100%', height: '4rem' }}
                 />
+                <ErrorText>{displayError('explanation')}</ErrorText>
             </FormGroup>
             <FormGroup>
                 <label htmlFor={`${increment}.question`}>{`${
@@ -59,8 +81,8 @@ export const QuestionChoices = ({ handleBlur, handleChange, values, increment, e
                     value={values[increment].question}
                     placeholder="Two Day Review Text"
                     onChange={handleChange}
-                    style={{ width: '100%', height: '4rem' }}
                 />
+                <ErrorText>{displayError('question')}</ErrorText>
             </FormGroup>
             <QuestionWrapper>
                 <label>
@@ -128,6 +150,7 @@ export const QuestionChoices = ({ handleBlur, handleChange, values, increment, e
                     />
                 </label>
             </QuestionWrapper>
+            <ErrorText>{displayError('correct')}</ErrorText>
         </section>
     );
 };
