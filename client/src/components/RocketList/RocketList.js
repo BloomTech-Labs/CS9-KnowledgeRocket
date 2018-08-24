@@ -1,3 +1,4 @@
+//@ts-check
 import React, { Component } from 'react';
 import Styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -5,7 +6,10 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import { generateBreadCrumbs } from '../../actions';
+import { generateBreadCrumbs, deleteRocket } from '../../actions';
+import { Link } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function mapStateToProps(state) {
     return {
@@ -35,15 +39,16 @@ const RocketListCard = Styled(Card)`
 `;
 
 const StyledCardContent = Styled(CardContent)`
-    margin: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    height: 10rem;
+    width: 100%;
+    height: 12rem;
 `;
 
 class RocketList extends Component {
+    state = {};
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -53,6 +58,14 @@ class RocketList extends Component {
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
+    handleNewRocket = e => {
+        this.props.history.push('/rocket/new');
+    };
+
+    handleDeleteRocket = e => {
+        // console.log('targets value', e.target.parentElement.id);
+        this.props.deleteRocket(e.target.parentElement.id);
+    };
     render() {
         return (
             <div className="Main_container">
@@ -60,38 +73,42 @@ class RocketList extends Component {
                 {/* ROCKET CARDS IF ANY ROCKETS ON THE USERS ARAY */}
                 {/* ROCKET CARD WITH A + SIGN TO ADD MORE */}
                 <RocketListContainer>
-                    <RocketListCard>
-                        <StyledCardContent>
-                            <p>Mock Rocket 1</p>
-                            <p>Total Classes {3}</p>
-                            <Button variant="contained" color="primary">
-                                View
-                            </Button>
-                        </StyledCardContent>
-                    </RocketListCard>
-                    <RocketListCard>
-                        <StyledCardContent>
-                            <p>Mock Rocket 2</p>
-                            <p>Total Classes {3}</p>
-                            <Button variant="contained" color="primary">
-                                View
-                            </Button>
-                        </StyledCardContent>
-                    </RocketListCard>
-                    <RocketListCard>
-                        <StyledCardContent>
-                            <p>Last Rocket</p>
-                            <p>Total Classes {3}</p>
-                            <Button variant="contained" color="primary">
-                                View
-                            </Button>
-                        </StyledCardContent>
-                    </RocketListCard>
+                    {this.props.state.user.rockets.map(rocket => {
+                        return (
+                            <RocketListCard key={rocket._id} id={rocket._id}>
+                                <StyledCardContent>
+                                    <div style={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+                                        <Tooltip title="Delete Rocket Permanently">
+                                            <Button
+                                                variant="fab"
+                                                color="secondary"
+                                                onClick={this.handleDeleteRocket}
+                                                id={rocket._id}
+                                                mini
+                                            >
+                                                <DeleteIcon />
+                                            </Button>
+                                        </Tooltip>
+                                    </div>
+
+                                    <div className="RocketCard_content">
+                                        <p>{rocket.title}</p>
+                                        <p>Total Classes {3}</p>
+                                    </div>
+                                    <Link to={`/rocket/view/${rocket._id}`} style={{textDecoration: 'none'}}>
+                                        <Button variant="contained" color="primary">
+                                            View
+                                        </Button>
+                                    </Link>
+                                </StyledCardContent>
+                            </RocketListCard>
+                        );
+                    })}
                     <RocketAddCard>
                         <StyledCardContent>
                             <p>Add a new Rocket</p>
                             <Button variant="fab" color="primary">
-                                <AddIcon />
+                                <AddIcon onClick={this.handleNewRocket} />
                             </Button>
                         </StyledCardContent>
                     </RocketAddCard>
@@ -101,4 +118,7 @@ class RocketList extends Component {
     }
 }
 
-export default connect(mapStateToProps, {generateBreadCrumbs})(RocketList);
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs, deleteRocket }
+)(RocketList);

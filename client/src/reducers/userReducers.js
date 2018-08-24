@@ -1,3 +1,4 @@
+//@ts-check
 import {
     LOGIN_USER,
     LOGGING_IN_USER,
@@ -8,6 +9,10 @@ import {
     ADD_USER_FAILURE,
     UPGRADE_USER,
     ADD_COHORT,
+    ADD_ROCKET,
+    ADDING_ROCKET,
+    DELETE_ROCKET,
+    DELETING_ROCKET,
     ADD_STUDENT,
     DELETE_STUDENT,
 } from '../actions';
@@ -28,6 +33,26 @@ const defaultState = {
 export default (state = defaultState, action) => {
     let StateCopy = JSON.parse(JSON.stringify(state));
     switch (action.type) {
+        case ADDING_ROCKET:
+            StateCopy.status = ADDING_ROCKET;
+            return StateCopy;
+        case DELETING_ROCKET:
+            StateCopy.status = DELETING_ROCKET;
+            return StateCopy;
+        case DELETE_ROCKET:
+            console.log('User reducer hit', action.payload)
+            StateCopy.status = ADD_ROCKET;
+            StateCopy.rockets.forEach((rocket, index)=>{
+                if(rocket._id === action.payload.rocketId) {
+                    StateCopy.rockets.splice(index, 1)
+                }
+            })
+            return StateCopy;
+        case ADD_ROCKET:
+            StateCopy.status = ADD_ROCKET;
+            // console.log('Payload inside ADD_Rocket Reducer', action.payload)
+            StateCopy = { ...StateCopy, ...action.payload };
+            return StateCopy;
         case ADDING_USER:
             StateCopy.status = ADDING_USER;
             return StateCopy;
