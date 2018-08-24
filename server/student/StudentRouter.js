@@ -47,31 +47,45 @@ function post(req, res) {
                     .then(cohort => {
                         // add new student id to the cohort.students array
                         cohort.students.push(newStudent._id);
-                        console.log(`new student ${newStudent}`);
+                        console.log(`made it to cohort and new student ${newStudent} ${cohort}`);
                         // update cohort with new list of students
-                        Cohort.findOneAndUpdate({ _id: cohortID })
+                        Cohort.findByIdAndUpdate(cohortID, cohort)
                             // .populate('students')
-                            .then(cohort => {
+                            .then(() => {
                                 // find user and populate their data
-                                console.log(`found ${found}`);
-                                User.findOne({ _id: teacherID })
+                                console.log('MADE IT TO THE COHORT UPDATE');
+                                User.findById(teacherID)
+                                    .populate('cohorts')
                                     .populate({
                                         path: 'cohorts',
-                                        populate: { path: 'students' },
+                                        populate: { path: 'students', model: 'Cohorts' },
                                     })
                                     .populate('rockets')
-                                    .then(user => {
-                                        res.status(201).json(user);
+                                    .populate({
+                                        path: 'rockets',
+                                        populate: { path: 'twoDay' },
+                                    })
+                                    .populate({
+                                        path: 'rockets',
+                                        populate: { path: 'twoWeek' },
+                                    })
+                                    .populate({
+                                        path: 'rockets',
+                                        populate: { path: 'twoMonth' },
+                                    })
+                                    .then(teacher => {
+                                        console.log(`FOUND TEACHER ${teacher}`);
+                                        res.status(201).json(teacher);
                                     })
                                     .catch(err => {
                                         res.status(500).json({
-                                            errorMessage: 'There was an error finding the user',
+                                            errorMessage: err.message,
                                         });
                                     });
                             })
                             .catch(err => {
                                 res.status(500).json({
-                                    errorMessage: 'There was an error updating the cohort',
+                                    errorMessage: err.message,
                                 });
                             });
                     })
