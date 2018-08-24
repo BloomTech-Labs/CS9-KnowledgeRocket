@@ -119,7 +119,7 @@ class Cohort extends Component {
     // }
 
     render() {
-        // const {} = this.state.user.
+        const { students } = this.props.location.state;
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
@@ -129,7 +129,7 @@ class Cohort extends Component {
                     handleAddStudent={this.handleAddStudent}
                     ccStatus={this.state.ccEmail}
                 />
-                <StyledCohortStudentList students={this.props.location.state.students} />
+                <StyledCohortStudentList students={students} />
                 <StyledCohortRocketList />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
             </CohortFormMainContainer>,
