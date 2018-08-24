@@ -13,7 +13,10 @@ const testdb = process.env.TestDB_Url;
 describe('server', () => {
     beforeAll(() => {
         return mongoose
-            .connect(testdb, { useNewUrlParser: true })
+            .connect(
+                testdb,
+                { useNewUrlParser: true }
+            )
             .then(console.log('connected to test db'));
     });
 
@@ -64,40 +67,57 @@ describe('server', () => {
         const response = await request(server).get('/api/student');
         expect(response.status).toBe(200);
     });
-    // test('should return 201', async () => {
-    //     const fakeMail = 'bobtodd@gmail.com';
-    //     const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
-    //     const createdUser = await Student.create(mockUser);
-    //     const response = await request(server)
-    //         .post('/api/student')
-    //         .send(mockUser);
-    //     expect(createdUser.email).toEqual(fakeMail);
-    //     expect(response.status).toBe(201);
-    //     await mongoose.connection.db.dropCollection('students');
-    // });
-    // test('GET should return 200', async () => {
-    //     const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
-    //     const newUser = await Student.create(mockUser);
-    //     const response = await request(server).get(`/api/student/${newUser._id}`);
-    //     expect(response.status).toBe(200);
-    //     await mongoose.connection.db.dropCollection('students');
-    // });
-    // test('PUT should return 201', async () => {
-    //     const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
-    //     const newUser = await Student.create(mockUser);
-    //     const response = await request(server)
-    //         .put(`/api/student/${newUser._id}`)
-    //         .send((newUser.email = 'bobtodd1@gmail.com'));
-    //     expect(response.status).toBe(201);
-    //     await mongoose.connection.db.dropCollection('students');
-    // });
-    // test('DEL should return 204', async () => {
-    //     const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
-    //     const newUser = await Student.create(mockUser);
-    //     const response = await request(server).delete(`/api/student/${newUser._id}`);
-    //     expect(response.status).toBe(204);
-    //     await mongoose.connection.db.dropCollection('students');
-    // });
+    test('should return 201', async () => {
+        const mockUser = { email: 'bobtodd@gmail.com' };
+        const newUser = await User.create(mockUser);
+        const id = newUser._id;
+        const mockCohort = { title: 'bob', teacher: id };
+        const newCohort = await Cohort.create(mockCohort);
+        const cohortID = newCohort._id;
+        const fakeMail = 'bobtod@gmail.com';
+        const mockStudent = { firstName: 'bob', lastName: 'todd', email: 'bobtod@gmail.com' };
+        const response = await request(server)
+            .post('/api/student')
+            .send({
+                student: {
+                    firstName: mockStudent.firstName,
+                    lastName: mockStudent.lastName,
+                    email: mockStudent.email,
+                },
+                teacherID: id,
+                cohortID: cohortID,
+            });
+        console.log(newCohort);
+        console.log(mockStudent);
+
+        console.log(mockStudent);
+        expect(mockStudent.email).toEqual(fakeMail);
+        expect(response.status).toBe(201);
+        await mongoose.connection.db.dropCollection('students');
+    });
+    test('GET should return 200', async () => {
+        const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
+        const newUser = await Student.create(mockUser);
+        const response = await request(server).get(`/api/student/${newUser._id}`);
+        expect(response.status).toBe(200);
+        await mongoose.connection.db.dropCollection('students');
+    });
+    test('PUT should return 201', async () => {
+        const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
+        const newUser = await Student.create(mockUser);
+        const response = await request(server)
+            .put(`/api/student/${newUser._id}`)
+            .send((newUser.email = 'bobtodd1@gmail.com'));
+        expect(response.status).toBe(201);
+        await mongoose.connection.db.dropCollection('students');
+    });
+    test('DEL should return 204', async () => {
+        const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
+        const newUser = await Student.create(mockUser);
+        const response = await request(server).delete(`/api/student/${newUser._id}`);
+        expect(response.status).toBe(204);
+        await mongoose.connection.db.dropCollection('students');
+    });
     //Rocket Tests
     test('should return 200 and a response', async () => {
         const response = await request(server).get('/api/rocket');
