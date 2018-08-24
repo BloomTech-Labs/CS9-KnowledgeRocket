@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RocketFormGroup testing styled components render <Blurb /> renders correctly 1`] = `
+.c0 {
+  margin: 1rem 0;
+  text-align: justify;
+}
+
+<p
+  className="c0"
+/>
+`;
+
+exports[`RocketFormGroup testing styled components render <ErrorText /> renders correctly 1`] = `
+.c0 {
+  color: red;
+  font-size: .8rem;
+  height: 1rem;
+}
+
+<span
+  className="c0"
+/>
+`;
+
+exports[`RocketFormGroup testing styled components render <FormGroup /> renders correctly 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`RocketFormGroup testing styled components render <QuestionWrapper /> renders correctly 1`] = `
+.c0 {
+  display: grid;
+  margin: 0 0 1rem 0;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`RocketFormGroup testing styled components render <TextArea /> renders correctly 1`] = `
+.c0 {
+  margin: 1rem 0;
+  text-align: justify;
+  width: 100%;
+  height: 4rem;
+}
+
+<textarea
+  className="c0"
+/>
+`;
