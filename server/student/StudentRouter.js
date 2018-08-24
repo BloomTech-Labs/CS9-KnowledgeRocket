@@ -49,7 +49,7 @@ function post(req, res) {
                                     .populate('cohorts')
                                     .populate({
                                         path: 'cohorts',
-                                        populate: { path: 'students', model: 'Cohorts' },
+                                        populate: { path: 'students', model: 'Students' },
                                     })
                                     .populate('rockets')
                                     .populate({
@@ -122,8 +122,9 @@ function deleteid(req, res) {
         res.status(404).json({ message: 'Student not found' });
     }
     Student.findByIdAndRemove(id)
-        .then(expected => {
-            res.status(204).json(expected);
+        .then(deleted => {
+            console.log(`DELETED STUDENT ${JSON.stringify(deleted)}`);
+            res.send(deleted);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on DEL' });
