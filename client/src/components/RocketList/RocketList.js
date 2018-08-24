@@ -1,4 +1,3 @@
-//@ts-check
 import React, { Component } from 'react';
 import Styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -18,24 +17,20 @@ function mapStateToProps(state) {
 }
 
 const RocketListContainer = Styled.div`
+    padding: 0 1.2rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-`;
-
-const RocketAddCard = Styled(Card)`
-    margin: 1rem 1rem 0 0;
-    width: 16rem;
-    height: 12rem;
+    max-height: ${props => props.height};
 `;
 
 const RocketListCard = Styled(Card)`
     margin: 1rem 1rem 0 0;
-    width: 16rem;
-    height: 12rem;
+    width: 20rem;
+    height: 16rem;
 `;
 
 const StyledCardContent = Styled(CardContent)`
@@ -44,11 +39,51 @@ const StyledCardContent = Styled(CardContent)`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 12rem;
+    height: 16rem;
+`;
+
+const RocketCardTop = Styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+`;
+
+const RocketCardMid = Styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 10rem;
+`;
+
+// const RocketCardMidAdd = Styled(RocketCardMid)`
+//     margin: 1.7rem 0 0 0;
+//     height: 6.9rem;
+// `;
+
+const RocketCardHeader = Styled.div`
+    font-size: 2rem;
+`;
+
+const HorizontalDivider = Styled.hr`
+    border: 1px solid black;
+`;
+
+const FloatingAdd = Styled.div`
+    width: 3rem; 
+    height: inherit;
+    position: absolute;
+    right: 2.5rem;
+    bottom: 2.5rem;
+    text-align: center;
+    color: white;
+    text-shadow: -1px -1px 0 #000 , 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 8px #000000dd;
 `;
 
 class RocketList extends Component {
-    state = {};
+    state = {
+        height: '0px',
+    };
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -57,62 +92,83 @@ class RocketList extends Component {
             this.props.history.push('/rocket/auth');
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
+        this.updateDimensions();
+        window.addEventListener('resize', this.updateDimensions.bind(this));
     }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions.bind(this));
+    }
+
+    updateDimensions = () => {
+        if (window.windowState === 1) {
+            this.setState({
+                height: window.innerHeight - 124 + 'px',
+            });
+        } else {
+            this.setState({
+                height: document.documentElement.clientHeight - 124 + 'px',
+            });
+        }
+    };
     handleNewRocket = e => {
         this.props.history.push('/rocket/new');
     };
 
-    handleDeleteRocket = e => {
+    handleDeleteRocket = id => {
         // console.log('targets value', e.target.parentElement.id);
-        this.props.deleteRocket(e.target.parentElement.id);
+        this.props.deleteRocket(id);
     };
     render() {
+        console.log(this.state.innerWidth, this.myElement);
         return (
             <div className="Main_container">
-                {/* {`Welcome To your Rockets: ${this.props.state.user.email}`} */}
-                {/* ROCKET CARDS IF ANY ROCKETS ON THE USERS ARAY */}
-                {/* ROCKET CARD WITH A + SIGN TO ADD MORE */}
-                <RocketListContainer>
-                    {this.props.state.user.rockets.map(rocket => {
-                        return (
-                            <RocketListCard key={rocket._id} id={rocket._id}>
-                                <StyledCardContent>
-                                    <div style={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
-                                        <Tooltip title="Delete Rocket Permanently">
-                                            <Button
-                                                variant="fab"
-                                                color="secondary"
-                                                onClick={this.handleDeleteRocket}
-                                                id={rocket._id}
-                                                mini
-                                            >
-                                                <DeleteIcon />
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                    <RocketListContainer height={this.state.height}>
+                        {this.props.state.user.rockets.map(rocket => {
+                            return (
+                                <RocketListCard key={rocket._id}>
+                                    <StyledCardContent>
+                                        <RocketCardTop>
+                                            <Tooltip title="Delete Rocket Permanently">
+                                                <Button
+                                                    variant="fab"
+                                                    color="secondary"
+                                                    onClick={() =>
+                                                        this.handleDeleteRocket(rocket._id)
+                                                    }
+                                                    mini
+                                                >
+                                                    <DeleteIcon />
+                                                </Button>
+                                            </Tooltip>
+                                        </RocketCardTop>
+                                        <RocketCardMid>
+                                            <div>
+                                                <RocketCardHeader>{rocket.title}</RocketCardHeader>
+                                                <HorizontalDivider />
+                                                <p>Hard Coded Classes {3}</p>
+                                            </div>
+                                        </RocketCardMid>
+                                        <Link
+                                            to={`/rocket/view/${rocket._id}`}
+                                            style={{ textDecoration: 'none' }}
+                                        >
+                                            <Button variant="contained" color="primary">
+                                                View
                                             </Button>
-                                        </Tooltip>
-                                    </div>
-
-                                    <div className="RocketCard_content">
-                                        <p>{rocket.title}</p>
-                                        <p>Total Classes {3}</p>
-                                    </div>
-                                    <Link to={`/rocket/view/${rocket._id}`} style={{textDecoration: 'none'}}>
-                                        <Button variant="contained" color="primary">
-                                            View
-                                        </Button>
-                                    </Link>
-                                </StyledCardContent>
-                            </RocketListCard>
-                        );
-                    })}
-                    <RocketAddCard>
-                        <StyledCardContent>
-                            <p>Add a new Rocket</p>
-                            <Button variant="fab" color="primary">
-                                <AddIcon onClick={this.handleNewRocket} />
-                            </Button>
-                        </StyledCardContent>
-                    </RocketAddCard>
-                </RocketListContainer>
+                                        </Link>
+                                    </StyledCardContent>
+                                </RocketListCard>
+                            );
+                        })}
+                    </RocketListContainer>
+                    <FloatingAdd>
+                        <p style={{ marginBottom: '0.5rem' }}>Add Rocket</p>
+                        <Button variant="fab" color="primary" mini onClick={this.handleNewRocket}>
+                            <AddIcon />
+                        </Button>
+                    </FloatingAdd>
+                </div>
             </div>
         );
     }
