@@ -69,6 +69,10 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     padding: 20px;
 `;
 
+const StyledAddCohortBtn = styled(Button)`
+    width: 95%;
+`;
+
 class Cohort extends Component {
     state = {
         title: '',
@@ -134,7 +138,13 @@ class Cohort extends Component {
                 )}
 
                 <StyledCohortRocketList />
-                <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
+                <StyledAddCohortBtn
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleAddCohort}
+                >
+                    Add this Cohort
+                </StyledAddCohortBtn>
             </CohortFormMainContainer>,
         ];
     }
