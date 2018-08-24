@@ -44,7 +44,7 @@ function post(req, res) {
                         .populate('cohorts')
                         .populate({
                             path: 'cohorts',
-                            populate: { path: 'students', model: 'Cohorts' },
+                            populate: { path: 'students', model: 'Students' },
                         })
                         .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                         .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
@@ -63,7 +63,7 @@ function post(req, res) {
                                     .populate('cohorts')
                                     .populate({
                                         path: 'cohorts',
-                                        populate: { path: 'students', model: 'Cohorts' },
+                                        populate: { path: 'students', model: 'Students' },
                                     })
                                     .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                                     .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
@@ -102,7 +102,7 @@ function post(req, res) {
                         .populate('cohorts')
                         .populate({
                             path: 'cohorts',
-                            populate: { path: 'students', model: 'Cohorts' },
+                            populate: { path: 'students', model: 'Students' },
                         })
                         .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                         .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
@@ -133,7 +133,7 @@ function post(req, res) {
                         .populate('cohorts')
                         .populate({
                             path: 'cohorts',
-                            populate: { path: 'students', model: 'Cohorts' },
+                            populate: { path: 'students', model: 'Students' },
                         })
                         .populate('rockets')
                         .populate('questions')
@@ -150,7 +150,7 @@ function post(req, res) {
                                     .populate('cohorts')
                                     .populate({
                                         path: 'cohorts',
-                                        populate: { path: 'students', model: 'Cohorts' },
+                                        populate: { path: 'students', model: 'Students' },
                                     })
                                     .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                                     .populate({ path: 'rockets', populate: { path: 'twoWeek' } })

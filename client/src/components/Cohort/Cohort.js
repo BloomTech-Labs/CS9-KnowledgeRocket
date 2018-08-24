@@ -113,6 +113,7 @@ class Cohort extends Component {
         };
 
         this.props.addStudent(student, teacherID, cohortID);
+        this.props.history.push('/rocket/classes');
     };
 
     render() {
@@ -139,8 +140,11 @@ class Cohort extends Component {
     }
 }
 
-export default connect(mapStateToProps, {
-    generateBreadCrumbs,
-    addCohort,
-    addStudent,
-})(Cohort);
+export default connect(
+    mapStateToProps,
+    {
+        generateBreadCrumbs,
+        addCohort,
+        addStudent,
+    }
+)(Cohort);
