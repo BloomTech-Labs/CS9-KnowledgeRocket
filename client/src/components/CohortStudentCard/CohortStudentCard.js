@@ -50,8 +50,6 @@ class CohortStudentCard extends Component {
 	};
 
 	render() {
-		// console.log('PROPS IN CohortStudentCard', this.props.student);
-		// console.log(`STUDENT ${JSON.stringify(this.state.student)}`);
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
 

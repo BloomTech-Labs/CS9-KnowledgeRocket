@@ -7,7 +7,6 @@ import CohortStudentCard from '../CohortStudentCard/CohortStudentCard';
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortStudentList extends Component {
 	render() {
-		console.log(`COHORT LIST PROPS ${JSON.stringify(this.props)}`);
 		return (
 			<Card className={this.props.className}>
 				{/* Render all students added */}
