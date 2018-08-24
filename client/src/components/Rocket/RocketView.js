@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generateBreadCrumbs, addRocket } from '../../actions';
+import { generateBreadCrumbs, updateRocket } from '../../actions';
 import RocketForm from './RocketForm';
 const url = process.env.REACT_APP_SERVER;
 
@@ -37,7 +37,11 @@ class RocketView extends Component {
 },
     };
     handleUpdateRocket = rocket => {
-        this.props.addRocket(rocket, this.props.state.user.uid);
+        rocket._id = this.state.rocketData._id;
+        rocket.td._id = this.state.rocketData.twoDay._id;
+        rocket.tw._id = this.state.rocketData.twoWeek._id;
+        rocket.tm._id = this.state.rocketData.twoMonth._id;
+        this.props.updateRocket(rocket, this.props.state.user.uid);
     };
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -75,5 +79,5 @@ class RocketView extends Component {
 
 export default connect(
     mapStateToProps,
-    { generateBreadCrumbs, addRocket }
+    { generateBreadCrumbs, updateRocket }
 )(RocketView);

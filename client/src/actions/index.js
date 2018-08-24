@@ -56,6 +56,16 @@ export const addRocket = (rocket, uid) => async dispatch => {
     } catch (err) {}
 };
 
+export const updateRocket = (rocket, uid) => async dispatch => {
+    dispatch({ type: ADDING_ROCKET });
+    try {
+        // Make sure Server gives the updated user with the rocket in it as response.
+        // Remember in Server to add this rocket to current user's array.
+        let response = await axios.post(`${url}/api/rocket/update`, { rocket, uid });
+        dispatch({ type: ADD_ROCKET, payload: response.data });
+    } catch (err) {}
+};
+
 export const deleteRocket = (rocketId) => async dispatch => {
     console.log('rocket id in question', rocketId)
     dispatch({ type: DELETING_ROCKET });
