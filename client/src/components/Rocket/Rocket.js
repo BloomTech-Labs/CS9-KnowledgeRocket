@@ -84,7 +84,7 @@ class Rocket extends Component {
             <div className="Main_container">
                 <MainContainer height={this.state.height}>
                     {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
-                    <RocketForm handleSubmit={this.handleAddRocket} history={this.props.history}
+                    <RocketForm handleSubmit={this.handleAddRocket} 
                     history={this.props.history}
                     title={''}
                     td={questionTemplate}
