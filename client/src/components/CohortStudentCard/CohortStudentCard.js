@@ -39,14 +39,14 @@ class CohortStudentCard extends Component {
 
 	fetchStudentData = () => {
 		const { student } = this.props;
-		return axios
-			.get(`http://localhost:5000/api/student/${student}`)
-			.then(response => {
-				this.setState({ student: response.data });
-			})
-			.catch(err => {
-				console.log(err);
-			});
+		// return axios
+		// 	.get(`http://localhost:5000/api/student/${student}`)
+		// 	.then(response => {
+		// 		this.setState({ student: response.data });
+		// 	})
+		// 	.catch(err => {
+		// 		console.log(err);
+		// 	});
 	};
 
 	handleClick = event => {
@@ -58,8 +58,8 @@ class CohortStudentCard extends Component {
 	};
 
 	handleDeleteStudent = () => {
-		const { studentID } = this.state.student._id;
-
+		const studentID = this.state.student._id;
+		console.log(`STUDENT ID ${this.state.student._id}`);
 		this.props.deleteStudent(studentID);
 	};
 
@@ -69,13 +69,12 @@ class CohortStudentCard extends Component {
 	};
 
 	render() {
-		console.log(this.state.student);
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
 
 		return (
 			<StylizedCardContent>
-				<h3>{this.state.student.firstName + ' ' + this.state.student.lastName}</h3>
+				<h3>Welcome</h3>
 				<IconButton
 					aria-label="More"
 					aria-owns={open ? 'long-menu' : null}

@@ -47,13 +47,24 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_COHORT;
             return StateCopy;
         case ADD_STUDENT:
+            console.log(`payload ${action.payload}`);
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
-            StateCopy = { ...StateCopy, ...action.payload };
-            StateCopy.status = DELETE_STUDENT;
-            return StateCopy;
+            // StateCopy = { ...StateCopy, ...action.payload };
+            // StateCopy.status = DELETE_STUDENT;
+            // return StateCopy;
+
+            return Object.assign({}, StateCopy, {
+                user: {
+                    cohorts: state.cohorts.filter((cohort, index) => {
+                        return cohort[index] !== action.payload;
+                    }),
+                },
+                status: DELETE_STUDENT,
+            });
+
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
             return StateCopy;

@@ -13,6 +13,7 @@ const StyledLink = styled(Link)`
 
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList
 const CohortCard = props => {
+	console.log(`COHORT CARD PROPS ${JSON.stringify(props)}`);
 	return (
 		<Card className={props.className}>
 			<CardContent>
@@ -28,8 +29,7 @@ const CohortCard = props => {
 						</StyledLink>
 					</Input>
 					<Input>
-						Students:{' '}
-						{typeof props.cohort.students.length === 'object' ? props.cohort.students.length : 0}
+						Students: {props.cohort.students.length > 0 ? props.cohort.students.length : 0}
 					</Input>
 					<Input>Participation:</Input>
 					<Input>Rockets Sent:</Input>

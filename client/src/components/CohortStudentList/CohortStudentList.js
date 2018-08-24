@@ -10,7 +10,11 @@ class CohortStudentList extends Component {
 		return (
 			<Card className={this.props.className}>
 				{/* Render all students added */}
-				{this.props.students.map((student, index) => <CohortStudentCard student={student} />)}
+				{/*this.props.students.map((student, index) => <CohortStudentCard student={student} />)*/}
+
+				<CohortStudentCard />
+				<CohortStudentCard />
+				<CohortStudentCard />
 			</Card>
 		);
 	}
