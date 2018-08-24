@@ -12,7 +12,7 @@ export default (state = defaultState, action) => {
         case UPDATE_BREADCRUMBS:
             let path = action.payload;
             const crumbs = path.split('/');
-            console.log(crumbs);
+            // console.log(crumbs);
             const currentLabels = [...defaultState.labels];
             const currentPaths = [...defaultState.paths];
             crumbs.forEach(item => {
