@@ -1,36 +1,41 @@
-import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 // Material Components
+import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 
-// function mapStateToProps(state) {
-//     return {
-
-//     };
-// }
+const StyledLink = styled(Link)`
+	text-decoration: none;
+`;
 
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList
-class CohortCard extends Component {
-	render() {
-		// each card renders:
-		// Cohort name
-		// Number of students
-		// Participation(%)
-		// Rockets sent
-		return (
+const CohortCard = props => {
+	return (
+		<Card className={props.className}>
 			<CardContent>
 				<FormControl>
-					<Input>Name:</Input>
-					<Input>Number of Students:</Input>
+					<Input>
+						<StyledLink
+							to={{
+								pathname: '/rocket/classForm',
+								state: { cohortID: props.cohort._id, students: props.cohort.students },
+							}}
+						>
+							{props.cohort.title}
+						</StyledLink>
+					</Input>
+					<Input>
+						Students: {props.cohort.students.length > 0 ? props.cohort.students.length : 0}
+					</Input>
 					<Input>Participation:</Input>
 					<Input>Rockets Sent:</Input>
 				</FormControl>
 			</CardContent>
-		);
-	}
-}
+		</Card>
+	);
+};
 
 export default CohortCard;
-// export default connect(mapStateToProps)(CohortCard);
