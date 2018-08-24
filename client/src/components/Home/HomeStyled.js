@@ -45,7 +45,6 @@ export const HomeContainer = Styled.div`
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     &::-webkit-scrollbar {display:none;}
-    height: 100vh;
     width: 100%;
 `;
 
