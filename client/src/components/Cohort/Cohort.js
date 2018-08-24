@@ -10,8 +10,7 @@ import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsFor
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
-import { generateBreadCrumbs, addCohort, addStudent } from '../../actions';
-
+import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
 function mapStateToProps(state) {
     return {
         state,
@@ -75,6 +74,10 @@ class Cohort extends Component {
         firstName: '',
         lastName: '',
         email: '',
+        startDate: {
+            /* objectID : date*/
+            objectID: 0,
+        },
     };
 
     componentDidMount() {
@@ -85,6 +88,9 @@ class Cohort extends Component {
             this.props.history.push('/rocket/auth');
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
+        this.setState({
+            startDate: { objectID: Date.now() },
+        });
     }
 
     handleNewInput = e => {
@@ -101,7 +107,22 @@ class Cohort extends Component {
         };
         this.props.addCohort(cohort, this.props.state.user._id);
     };
-
+    handleAppendRocket = (rocketID, startDate) => {
+        //startDate:
+        this.setState({
+            startDate: { [rocketID]: startDate },
+        });
+        this.props.appendRocket(
+            rocketID,
+            startDate,
+            this.props.state.user._id,
+            this.props.location.state.cohortID
+        );
+        //rocketID, startDate, userID, cohortID
+    };
+    handlePickRocket = rocketID => {
+        this.handleAppendRocket(rocketID, Date.now());
+    };
     handleAddStudent = () => {
         const { firstName, lastName, email } = this.state;
         const teacherID = this.props.state.user._id;
@@ -133,7 +154,7 @@ class Cohort extends Component {
                     <h3>Looks like you don't have any students</h3>
                 )}
 
-                <StyledCohortRocketList />
+                <StyledCohortRocketList handlePickRocket={this.handlePickRocket} />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
             </CohortFormMainContainer>,
         ];
@@ -146,5 +167,6 @@ export default connect(
         generateBreadCrumbs,
         addCohort,
         addStudent,
+        appendRocket,
     }
 )(Cohort);
