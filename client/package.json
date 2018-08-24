@@ -33,6 +33,7 @@
         "eject": "react-scripts eject"
     },
     "devDependencies": {
-        "@types/yup": "^0.24.9"
+        "@types/yup": "^0.24.9",
+        "jest-styled-components": "^6.1.1"
     }
 }
