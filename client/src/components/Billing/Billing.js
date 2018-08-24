@@ -19,12 +19,6 @@ function mapStateToProps(state) {
         state,
     };
 }
-const styles = theme => ({
-    root: {
-        display: 'flex',
-    },
-});
-
 
 
 class Billing extends Component {
@@ -52,7 +46,6 @@ class Billing extends Component {
     };
     render() {
         console.log('Subscription type:', this.state.type);
-        const { classes } = this.props;
 
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
