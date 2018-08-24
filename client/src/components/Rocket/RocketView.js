@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs, updateRocket } from '../../actions';
 import RocketForm from './RocketForm';
-const url = process.env.REACT_APP_SERVER;
 
 function mapStateToProps(state) {
     return {
