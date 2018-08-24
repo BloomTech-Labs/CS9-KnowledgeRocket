@@ -10,7 +10,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 // import Styled from 'styled-components';
 
@@ -19,7 +18,6 @@ function mapStateToProps(state) {
         state,
     };
 }
-
 
 class Billing extends Component {
     constructor(props) {
@@ -98,4 +96,4 @@ Billing.propTypes = {
 export default connect(
     mapStateToProps,
     { generateBreadCrumbs }
-)(withStyles(styles)(Billing));
+)(Billing);s
