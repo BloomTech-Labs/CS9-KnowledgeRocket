@@ -113,6 +113,7 @@ class Cohort extends Component {
         };
 
         this.props.addStudent(student, teacherID, cohortID);
+        this.props.history.push('/rocket/classes');
     };
 
     render() {
