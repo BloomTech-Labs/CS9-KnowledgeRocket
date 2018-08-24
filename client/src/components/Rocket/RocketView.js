@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs, addRocket } from '../../actions';
 import RocketForm from './RocketForm';
-import axios from 'axios';
 const url = process.env.REACT_APP_SERVER;
 
 function mapStateToProps(state) {
@@ -37,7 +36,7 @@ class RocketView extends Component {
         twoDay: questionTemplate, twoWeek: questionTemplate, twoMonth: questionTemplate
 },
     };
-    handleAddRocket = rocket => {
+    handleUpdateRocket = rocket => {
         this.props.addRocket(rocket, this.props.state.user.uid);
     };
     componentDidMount() {
@@ -62,7 +61,7 @@ class RocketView extends Component {
             <div className="Main_container">
                 {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
                 <RocketForm
-                    handleSubmit={this.handleAddRocket}
+                    handleSubmit={this.handleUpdateRocket}
                     history={this.props.history}
                     title={this.state.rocketData.title}
                     td={this.state.rocketData.twoDay}

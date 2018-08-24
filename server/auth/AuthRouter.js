@@ -41,8 +41,11 @@ function post(req, res) {
                 const uid = response.user.uid;
                 response.user.getIdToken().then(token => {
                     UserModel.findOne({ uid })
+                        // https://mongoosejs.com/docs/populate.html Populating across multi levels
                         .populate('cohorts')
-                        .populate('rockets')
+                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                         .then(foundUser => {
                             // Alternatively Replace Token Here and Send back Updated Token...
                             if (
@@ -111,6 +114,10 @@ function post(req, res) {
                     UserModel.findOne({ uid })
                         .populate('cohorts')
                         .populate('rockets')
+                        .populate('questions')
+                        .populate('rockets.questions.twoDay')
+                        .populate('rockets.questions.twoWeek')
+                        .populate('rockets.questions.twoMonth')
                         .then(foundUser => {
                             if (foundUser === null) {
                                 UserModel.create({
