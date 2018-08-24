@@ -30,9 +30,8 @@ exports[`CohortList renders correctly 1`] = `
           <div
             className="MuiCardContent-root-29"
           >
-            Students:
-             
-            0
+            Students: 
+            1
           </div>
           <div
             className="MuiCardContent-root-29"
