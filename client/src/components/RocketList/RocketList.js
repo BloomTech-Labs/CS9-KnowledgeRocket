@@ -6,7 +6,10 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import { generateBreadCrumbs } from '../../actions';
+import { generateBreadCrumbs, deleteRocket } from '../../actions';
+import { Link } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function mapStateToProps(state) {
     return {
@@ -36,12 +39,12 @@ const RocketListCard = Styled(Card)`
 `;
 
 const StyledCardContent = Styled(CardContent)`
-    margin: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    height: 10rem;
+    width: 100%;
+    height: 12rem;
 `;
 
 class RocketList extends Component {
@@ -58,6 +61,11 @@ class RocketList extends Component {
     handleNewRocket = e => {
         this.props.history.push('/rocket/new');
     };
+
+    handleDeleteRocket = e => {
+        // console.log('targets value', e.target.parentElement.id);
+        this.props.deleteRocket(e.target.parentElement.id);
+    };
     render() {
         return (
             <div className="Main_container">
@@ -67,13 +75,31 @@ class RocketList extends Component {
                 <RocketListContainer>
                     {this.props.state.user.rockets.map(rocket => {
                         return (
-                            <RocketListCard>
+                            <RocketListCard key={rocket._id} id={rocket._id}>
                                 <StyledCardContent>
-                                    <p>{rocket.title}</p>
-                                    <p>Total Classes {3}</p>
-                                    <Button variant="contained" color="primary">
-                                        View
-                                    </Button>
+                                    <div style={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+                                        <Tooltip title="Delete Rocket Permanently">
+                                            <Button
+                                                variant="fab"
+                                                color="secondary"
+                                                onClick={this.handleDeleteRocket}
+                                                id={rocket._id}
+                                                mini
+                                            >
+                                                <DeleteIcon />
+                                            </Button>
+                                        </Tooltip>
+                                    </div>
+
+                                    <div className="RocketCard_content">
+                                        <p>{rocket.title}</p>
+                                        <p>Total Classes {3}</p>
+                                    </div>
+                                    <Link to={`/rocket/view/${rocket._id}`} style={{textDecoration: 'none'}}>
+                                        <Button variant="contained" color="primary">
+                                            View
+                                        </Button>
+                                    </Link>
                                 </StyledCardContent>
                             </RocketListCard>
                         );
@@ -94,5 +120,5 @@ class RocketList extends Component {
 
 export default connect(
     mapStateToProps,
-    { generateBreadCrumbs }
+    { generateBreadCrumbs, deleteRocket }
 )(RocketList);
