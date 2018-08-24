@@ -55,38 +55,35 @@ class RocketView extends Component {
             height: '0px',
         },
     };
-    handleUpdateRocket = rocket => {
-        rocket._id = this.state.rocketData._id;
-        rocket.td._id = this.state.rocketData.twoDay._id;
-        rocket.tw._id = this.state.rocketData.twoWeek._id;
-        rocket.tm._id = this.state.rocketData.twoMonth._id;
-        this.props.updateRocket(rocket, this.props.state.user.uid);
-    };
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateDimensions.bind(this));
-    }
 
     componentDidMount() {
-        // Checks for User to be Authenticated
-        // If not authenticated it will send the user to <login/>
-        // If authenticated it will set the state with the current user.
-        // if (!this.props.state.user.authenticated) {
-        //     this.props.history.push('/rocket/auth');
-        // }
+        let rocketId = this.props.match.params.id;
+
+        // Checks for Authenticated Users before showing information.
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
-        this.props.generateBreadCrumbs(this.props.history.location.pathname);
-        let rocketId = this.props.match.params.id;
+        // Breadcrumb Generation Routine
+        // console.log(this.props.history.location.pathname)
+        // Hard Coded the Path for the Breadcrumbs
+        this.props.generateBreadCrumbs('/rocket/');
+
+        // Updates the dimension of the page hight based on window sizing and maximized window.
         this.updateDimensions();
         window.addEventListener('resize', this.updateDimensions.bind(this));
+
+        // Filter through the user's Rocket's and find the correct one to display.
         this.props.state.user.rockets.forEach((rocket, index) => {
             if (rocket._id === rocketId) {
                 this.setState({ rocketData: rocket });
             } else {
+                // TODO: Implement functionality to display error if ID is not found in user's rockets.
             }
         });
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions.bind(this));
     }
 
     updateDimensions = () => {
@@ -99,6 +96,14 @@ class RocketView extends Component {
                 height: document.documentElement.clientHeight - 124 + 'px',
             });
         }
+    };
+
+    handleUpdateRocket = rocket => {
+        rocket._id = this.state.rocketData._id;
+        rocket.td._id = this.state.rocketData.twoDay._id;
+        rocket.tw._id = this.state.rocketData.twoWeek._id;
+        rocket.tm._id = this.state.rocketData.twoMonth._id;
+        this.props.updateRocket(rocket, this.props.state.user.uid);
     };
 
     render() {
