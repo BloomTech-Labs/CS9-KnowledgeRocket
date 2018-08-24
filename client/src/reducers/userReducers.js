@@ -74,6 +74,7 @@ export default (state = defaultState, action) => {
         case ADD_STUDENT:
             console.log(`payload ${action.payload}`);
             StateCopy = action.payload;
+            StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
