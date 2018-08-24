@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 // Material Components
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,6 +22,23 @@ const StylizedCardContent = styled(CardContent)`
 class CohortStudentCard extends Component {
 	state = {
 		anchorEl: null,
+		student: {},
+	};
+
+	componentDidMount() {
+		this.fetchStudentData();
+	}
+
+	fetchStudentData = () => {
+		const { student } = this.props;
+		return axios
+			.get(`http://localhost:5000/api/student/${student}`)
+			.then(response => {
+				this.setState({ student: response.data });
+			})
+			.catch(err => {
+				console.log(err);
+			});
 	};
 
 	handleClick = event => {
@@ -32,12 +50,14 @@ class CohortStudentCard extends Component {
 	};
 
 	render() {
+		// console.log('PROPS IN CohortStudentCard', this.props.student);
+		// console.log(`STUDENT ${JSON.stringify(this.state.student)}`);
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
 
 		return (
 			<StylizedCardContent>
-				<h3>Pat Smith</h3>
+				<h3>{this.state.student.firstName + ' ' + this.state.student.lastName}</h3>
 				<IconButton
 					aria-label="More"
 					aria-owns={open ? 'long-menu' : null}
