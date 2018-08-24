@@ -33,12 +33,13 @@ class CohortStudentCard extends Component {
 		student: {},
 	};
 
-	componentDidMount() {
+	componentWillMount() {
 		this.fetchStudentData();
 	}
 
 	fetchStudentData = () => {
 		const { student } = this.props;
+
 		// return axios
 		// 	.get(`http://localhost:5000/api/student/${student}`)
 		// 	.then(response => {
@@ -65,16 +66,16 @@ class CohortStudentCard extends Component {
 
 	handleOnClick = () => {
 		this.handleClose();
-		this.handleDeleteStudent();
 	};
 
 	render() {
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
-
+		let user = this.props.state.user.cohorts;
+		console.log(`PROPS ${this.props.student}`);
 		return (
 			<StylizedCardContent>
-				<h3>Welcome</h3>
+				<h3>{this.props.student.firstName}</h3>
 				<IconButton
 					aria-label="More"
 					aria-owns={open ? 'long-menu' : null}
