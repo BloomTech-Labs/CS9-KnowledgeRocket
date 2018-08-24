@@ -63,6 +63,11 @@ class CohortStudentCard extends Component {
 		this.props.deleteStudent(studentID);
 	};
 
+	handleOnClick = () => {
+		this.handleClose();
+		this.handleDeleteStudent();
+	};
+
 	render() {
 		console.log(this.state.student);
 		const { anchorEl } = this.state;
@@ -91,7 +96,7 @@ class CohortStudentCard extends Component {
 						},
 					}}
 				>
-					<MenuItem onClick={this.handleClose}>Remove Student</MenuItem>
+					<MenuItem onClick={this.handleOnClick}>Remove Student</MenuItem>
 				</Menu>
 			</StylizedCardContent>
 		);
