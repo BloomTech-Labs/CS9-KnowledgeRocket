@@ -95,21 +95,16 @@ export const addCohort = (cohort, id) => async dispatch => {
 };
 
 export const addStudent = (student, teacherID, cohortID) => async dispatch => {
-    console.log(`MADE IT TO ADDSTUDENT`);
-    console.log('student', student, teacherID, cohortID);
     dispatch({ type: ADDING_STUDENT });
     try {
         let response = await axios.post(`${url}/api/student`, { student, teacherID, cohortID });
-        console.log(`RESPONSE DATA ${response.data}`);
         dispatch({ type: ADD_STUDENT, payload: response.data });
     } catch (err) {
-        console.log(`ERROR ${err}`);
         dispatch({ type: ADD_STUDENT_FAILURE });
     }
 };
 
 export const deleteStudent = studentID => async dispatch => {
-    console.log(`inside deleteStudent ${studentID}`);
     dispatch({ type: DELETING_STUDENT });
     try {
         let response = await axios.delete(`${url}/api/student/${studentID}`, {

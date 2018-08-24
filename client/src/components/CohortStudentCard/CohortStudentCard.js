@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { connect } from 'react-redux';
 // Material Components
 import CardContent from '@material-ui/core/CardContent';
@@ -33,23 +32,6 @@ class CohortStudentCard extends Component {
 		student: {},
 	};
 
-	componentWillMount() {
-		this.fetchStudentData();
-	}
-
-	fetchStudentData = () => {
-		const { student } = this.props;
-
-		// return axios
-		// 	.get(`http://localhost:5000/api/student/${student}`)
-		// 	.then(response => {
-		// 		this.setState({ student: response.data });
-		// 	})
-		// 	.catch(err => {
-		// 		console.log(err);
-		// 	});
-	};
-
 	handleClick = event => {
 		this.setState({ anchorEl: event.currentTarget });
 	};
@@ -60,7 +42,6 @@ class CohortStudentCard extends Component {
 
 	handleDeleteStudent = () => {
 		const studentID = this.state.student._id;
-		console.log(`STUDENT ID ${this.state.student._id}`);
 		this.props.deleteStudent(studentID);
 	};
 
@@ -71,8 +52,6 @@ class CohortStudentCard extends Component {
 	render() {
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
-		let user = this.props.state.user.cohorts;
-		console.log(`PROPS ${this.props.student}`);
 		return (
 			<StylizedCardContent>
 				<h3>{this.props.student.firstName}</h3>

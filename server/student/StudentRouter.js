@@ -25,35 +25,26 @@ function get(req, res) {
 }
 
 function post(req, res) {
-    console.log(`REQ.BODY ${JSON.stringify(req.body)}`);
     const email = req.body.student.email;
-    console.log(`EMAIL ${email}`);
     // validate student email
     let regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     if (regVar.test(email)) {
         // email is valid
         const student = new Student(req.body.student); // instantiate a new student
         const { teacherID, cohortID } = req.body;
-
-        console.log('EMAIL IS VALID');
-        console.log(`STUDENT ${student}`);
-
         student
             .save()
             .then(newStudent => {
-                console.log(`NEW STUDENT ${newStudent}`);
                 // find the user who is currently signed in
                 Cohort.findOne({ _id: cohortID })
                     .then(cohort => {
                         // add new student id to the cohort.students array
                         cohort.students.push(newStudent._id);
-                        console.log(`made it to cohort and new student ${newStudent} ${cohort}`);
                         // update cohort with new list of students
                         Cohort.findByIdAndUpdate(cohortID, cohort)
                             // .populate('students')
                             .then(() => {
                                 // find user and populate their data
-                                console.log('MADE IT TO THE COHORT UPDATE');
                                 User.findById(teacherID)
                                     .populate('cohorts')
                                     .populate({
@@ -74,7 +65,6 @@ function post(req, res) {
                                         populate: { path: 'twoMonth' },
                                     })
                                     .then(teacher => {
-                                        console.log(`FOUND TEACHER ${teacher}`);
                                         res.status(201).json(teacher);
                                     })
                                     .catch(err => {
@@ -133,7 +123,6 @@ function deleteid(req, res) {
     }
     Student.findByIdAndRemove(id)
         .then(expected => {
-            console.log(`expected ${expected}`);
             res.status(204).json(expected);
         })
         .catch(err => {

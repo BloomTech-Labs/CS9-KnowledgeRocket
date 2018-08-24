@@ -112,15 +112,10 @@ class Cohort extends Component {
             email: email,
         };
 
-        console.log(`TEACHER ID ${teacherID}`);
-        console.log(`COHORT ID ${cohortID}`);
-        console.log(`STUDENT ${JSON.stringify(student)}`);
-        // console.log(this.props.location.state);
         this.props.addStudent(student, teacherID, cohortID);
     };
 
     render() {
-        console.log(`COHORT ID ${this.props.location.state.cohortID}`);
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
