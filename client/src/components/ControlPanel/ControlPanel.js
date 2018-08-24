@@ -20,21 +20,24 @@ const ControlPanelContainer = Styled.div`
     width: 10rem;
     border-radius: .4rem;
     min-height: 10rem;
+    background-color: #0088CC;
 `;
 const CPCWithBorder = ControlPanelContainer.extend`
     border: 1px solid rgb(119, 136, 153);
     height: ${props => props.height};
 `;
 
-const CPCButton = Styled(Button)`
+export const CPCButton = Styled(Button)`
+    color: #EEEEEE !important;
     border: 1px solid rgb(119, 136, 153);
-    background-color: ${props => (props.warning ? 'orange' : '')} !important;
+    background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
     width: 100%;
+    margin-bottom: 1rem !important;
 `;
 
 const CPLink = Styled(Link)`
-  text-decoration: none;
-  width: 100%;
+    text-decoration: none;
+    width: 100%;
 `;
 class ControlPanel extends Component {
     state = {
@@ -59,16 +62,16 @@ class ControlPanel extends Component {
         return (
             <CPCWithBorder height={this.state.height}>
                 <CPLink to="/rocket">
-                    <CPCButton>Rockets</CPCButton>
+                    <CPCButton variant="outlined">Rockets</CPCButton>
                 </CPLink>
                 <CPLink to="/rocket/classes">
-                    <CPCButton>Classes</CPCButton>
+                    <CPCButton variant="outlined">Classes</CPCButton>
                 </CPLink>
                 <CPLink to="/rocket/billing">
-                    <CPCButton>Billing</CPCButton>
+                    <CPCButton variant="outlined">Billing</CPCButton>
                 </CPLink>
                 <CPLink to="/rocket/settings">
-                    <CPCButton>Settings</CPCButton>
+                    <CPCButton variant="outlined">Settings</CPCButton>
                 </CPLink>
             </CPCWithBorder>
         );

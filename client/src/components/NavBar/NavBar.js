@@ -31,7 +31,7 @@ class NavBar extends Component {
                     {this.props.state.breadcrumb.labels.map((item, index) => {
                         return (
                             <div className="NavBar_breadcrumb" key={item + index}>
-                                <Link to={this.props.state.breadcrumb.paths[index]}>
+                                <Link to={this.props.state.breadcrumb.paths[index]} style={{textDecoration: 'none'}}>
                                     <Button> {item} </Button>
                                 </Link>
                                 <SvgIcon color="primary">

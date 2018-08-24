@@ -1,18 +1,12 @@
 .title10 {
-    font-family: roboto;
+    display: flex;
+    font-size: 3rem;
     font-weight: 400;
-    font-size: 2rem;
-    margin: 1rem;
-    color: ghostwhite;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
-        0px 0px 8px #000000dd;
+    font-family: 'Roboto', serif;
 }
 .radioGroup {
     padding: 1rem;
     border: 1px solid black;
-}
-.checkout {
-    width: 25rem;
 }
 .legend {
     margin-bottom: 10px;
@@ -23,10 +17,8 @@
     flex-direction: column;
     height: 2.5rem;
     margin: 1rem 0 0 0;
-    padding: .5rem;
-    background-color: rgb(220, 253, 198) !important;
+    background-color: rgb(198, 235, 253) !important;
     border-radius: .5rem;
-    border: 2px solid rgb(116, 167, 82) !important;
 }
 .submitButton {
     font-size: 2rem;
