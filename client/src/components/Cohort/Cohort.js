@@ -140,11 +140,8 @@ class Cohort extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        generateBreadCrumbs,
-        addCohort,
-        addStudent,
-    }
-)(Cohort);
+export default connect(mapStateToProps, {
+    generateBreadCrumbs,
+    addCohort,
+    addStudent,
+})(Cohort);
