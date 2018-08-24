@@ -18,7 +18,9 @@ const CohortCard = props => {
 			<CardContent>
 				<FormControl>
 					<Input>
-						<StyledLink to="/rocket/classForm">{props.cohort.title}</StyledLink>
+						<StyledLink to={{ pathname: '/rocket/classForm', state: props.cohort._id }}>
+							{props.cohort.title}
+						</StyledLink>
 					</Input>
 					<Input>
 						Students:{' '}

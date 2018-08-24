@@ -12,7 +12,9 @@ import {
     ADD_ROCKET,
     ADDING_ROCKET,
     DELETE_ROCKET,
-    DELETING_ROCKET
+    DELETING_ROCKET,
+    ADD_STUDENT,
+    DELETE_STUDENT,
 } from '../actions';
 
 const defaultState = {
@@ -23,6 +25,7 @@ const defaultState = {
     account: 'Free',
     authenticated: false,
     status: '',
+    students: [],
     rockets: [],
     cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{}] }],
 };
@@ -67,6 +70,14 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
+            return StateCopy;
+        case ADD_STUDENT:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.status = ADD_STUDENT;
+            return StateCopy;
+        case DELETE_STUDENT:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.status = DELETE_STUDENT;
             return StateCopy;
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
