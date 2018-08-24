@@ -105,12 +105,13 @@ class Cohort extends Component {
     handleAddStudent = () => {
         const { firstName, lastName, email } = this.state;
         const teacherID = this.props.state.user._id;
-        const cohortID = this.props.location.state;
+        const cohortID = this.props.location.state.cohortID;
         const student = {
             firstName: firstName,
             lastName: lastName,
             email: email,
         };
+
         this.props.addStudent(student, teacherID, cohortID);
     };
 
@@ -124,7 +125,13 @@ class Cohort extends Component {
                     handleAddStudent={this.handleAddStudent}
                     ccStatus={this.state.ccEmail}
                 />
-                <StyledCohortStudentList />
+
+                {this.props.location.state ? (
+                    <StyledCohortStudentList students={this.props.location.state.students} />
+                ) : (
+                    <h3>Looks like you don't have any students</h3>
+                )}
+
                 <StyledCohortRocketList />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
             </CohortFormMainContainer>,
@@ -132,4 +139,8 @@ class Cohort extends Component {
     }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs, addCohort, addStudent })(Cohort);
+export default connect(mapStateToProps, {
+    generateBreadCrumbs,
+    addCohort,
+    addStudent,
+})(Cohort);

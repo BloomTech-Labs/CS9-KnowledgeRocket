@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 // Material Components
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-// CONTAINS A STUDENT'S  NAME AND MENU WITH AN OPTION TO DELETE
+// Actions
+import { deleteStudent } from '../../actions';
+
+function mapStateToProps(state) {
+	return {
+		state,
+	};
+}
 
 const StylizedCardContent = styled(CardContent)`
 	width: 200px;
@@ -21,6 +29,7 @@ const StylizedCardContent = styled(CardContent)`
 class CohortStudentCard extends Component {
 	state = {
 		anchorEl: null,
+		student: {},
 	};
 
 	handleClick = event => {
@@ -31,13 +40,21 @@ class CohortStudentCard extends Component {
 		this.setState({ anchorEl: null });
 	};
 
+	handleDeleteStudent = () => {
+		const studentID = this.state.student._id;
+		this.props.deleteStudent(studentID);
+	};
+
+	handleOnClick = () => {
+		this.handleClose();
+	};
+
 	render() {
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
-
 		return (
 			<StylizedCardContent>
-				<h3>Pat Smith</h3>
+				<h3>{this.props.student.firstName}</h3>
 				<IconButton
 					aria-label="More"
 					aria-owns={open ? 'long-menu' : null}
@@ -58,11 +75,13 @@ class CohortStudentCard extends Component {
 						},
 					}}
 				>
-					<MenuItem onClick={this.handleClose}>Remove Student</MenuItem>
+					<MenuItem onClick={this.handleOnClick}>Remove Student</MenuItem>
 				</Menu>
 			</StylizedCardContent>
 		);
 	}
 }
 
-export default CohortStudentCard;
+export default connect(mapStateToProps, {
+	deleteStudent,
+})(CohortStudentCard);

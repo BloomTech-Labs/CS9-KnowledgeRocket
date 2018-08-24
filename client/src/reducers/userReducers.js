@@ -40,13 +40,13 @@ export default (state = defaultState, action) => {
             StateCopy.status = DELETING_ROCKET;
             return StateCopy;
         case DELETE_ROCKET:
-            console.log('User reducer hit', action.payload)
+            console.log('User reducer hit', action.payload);
             StateCopy.status = ADD_ROCKET;
-            StateCopy.rockets.forEach((rocket, index)=>{
-                if(rocket._id === action.payload.rocketId) {
-                    StateCopy.rockets.splice(index, 1)
+            StateCopy.rockets.forEach((rocket, index) => {
+                if (rocket._id === action.payload.rocketId) {
+                    StateCopy.rockets.splice(index, 1);
                 }
-            })
+            });
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
@@ -72,13 +72,24 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_COHORT;
             return StateCopy;
         case ADD_STUDENT:
-            StateCopy = { ...StateCopy, ...action.payload };
+            console.log(`payload ${action.payload}`);
+            StateCopy = action.payload;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
-            StateCopy = { ...StateCopy, ...action.payload };
-            StateCopy.status = DELETE_STUDENT;
-            return StateCopy;
+            // StateCopy = { ...StateCopy, ...action.payload };
+            // StateCopy.status = DELETE_STUDENT;
+            // return StateCopy;
+
+            return Object.assign({}, StateCopy, {
+                user: {
+                    cohorts: state.cohorts.filter((cohort, index) => {
+                        return cohort[index] !== action.payload;
+                    }),
+                },
+                status: DELETE_STUDENT,
+            });
+
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
             return StateCopy;

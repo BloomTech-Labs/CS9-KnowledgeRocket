@@ -25,14 +25,13 @@ function get(req, res) {
 }
 
 function post(req, res) {
-    const { email } = req.body.student;
+    const email = req.body.student.email;
     // validate student email
     let regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     if (regVar.test(email)) {
         // email is valid
         const student = new Student(req.body.student); // instantiate a new student
         const { teacherID, cohortID } = req.body;
-
         student
             .save()
             .then(newStudent => {
@@ -42,28 +41,41 @@ function post(req, res) {
                         // add new student id to the cohort.students array
                         cohort.students.push(newStudent._id);
                         // update cohort with new list of students
-                        Cohort.findByIdAndUpdate(cohortID, { students: cohort.students })
+                        Cohort.findByIdAndUpdate(cohortID, cohort)
                             // .populate('students')
                             .then(() => {
                                 // find user and populate their data
-                                User.findOne({ _id: teacherID })
+                                User.findById(teacherID)
+                                    .populate('cohorts')
                                     .populate({
                                         path: 'cohorts',
-                                        populate: { path: 'students' },
+                                        populate: { path: 'students', model: 'Cohorts' },
                                     })
                                     .populate('rockets')
-                                    .then(user => {
-                                        res.status(201).json(user);
+                                    .populate({
+                                        path: 'rockets',
+                                        populate: { path: 'twoDay' },
+                                    })
+                                    .populate({
+                                        path: 'rockets',
+                                        populate: { path: 'twoWeek' },
+                                    })
+                                    .populate({
+                                        path: 'rockets',
+                                        populate: { path: 'twoMonth' },
+                                    })
+                                    .then(teacher => {
+                                        res.status(201).json(teacher);
                                     })
                                     .catch(err => {
                                         res.status(500).json({
-                                            errorMessage: 'There was an error finding the user',
+                                            errorMessage: err.message,
                                         });
                                     });
                             })
                             .catch(err => {
                                 res.status(500).json({
-                                    errorMessage: 'There was an error updating the cohort',
+                                    errorMessage: err.message,
                                 });
                             });
                     })
@@ -78,6 +90,7 @@ function post(req, res) {
             });
     }
 }
+
 function getid(req, res) {
     const id = req.params.id;
     Student.findById(id)

@@ -18,13 +18,17 @@ const CohortCard = props => {
 			<CardContent>
 				<FormControl>
 					<Input>
-						<StyledLink to={{ pathname: '/rocket/classForm', state: props.cohort._id }}>
+						<StyledLink
+							to={{
+								pathname: '/rocket/classForm',
+								state: { cohortID: props.cohort._id, students: props.cohort.students },
+							}}
+						>
 							{props.cohort.title}
 						</StyledLink>
 					</Input>
 					<Input>
-						Students:{' '}
-						{typeof props.cohort.students.length === 'object' ? props.cohort.students.length : 0}
+						Students: {props.cohort.students.length > 0 ? props.cohort.students.length : 0}
 					</Input>
 					<Input>Participation:</Input>
 					<Input>Rockets Sent:</Input>
