@@ -40,13 +40,13 @@ export default (state = defaultState, action) => {
             StateCopy.status = DELETING_ROCKET;
             return StateCopy;
         case DELETE_ROCKET:
-            console.log('User reducer hit', action.payload)
+            console.log('User reducer hit', action.payload);
             StateCopy.status = ADD_ROCKET;
-            StateCopy.rockets.forEach((rocket, index)=>{
-                if(rocket._id === action.payload.rocketId) {
-                    StateCopy.rockets.splice(index, 1)
+            StateCopy.rockets.forEach((rocket, index) => {
+                if (rocket._id === action.payload.rocketId) {
+                    StateCopy.rockets.splice(index, 1);
                 }
-            })
+            });
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
@@ -73,7 +73,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_STUDENT:
             console.log(`payload ${action.payload}`);
-            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy = action.payload;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
