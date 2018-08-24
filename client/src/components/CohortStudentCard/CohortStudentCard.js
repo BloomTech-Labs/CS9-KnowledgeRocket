@@ -57,7 +57,14 @@ class CohortStudentCard extends Component {
 		this.setState({ anchorEl: null });
 	};
 
+	handleDeleteStudent = () => {
+		const { studentID } = this.state.student._id;
+
+		this.props.deleteStudent(studentID);
+	};
+
 	render() {
+		console.log(this.state.student);
 		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
 

@@ -136,5 +136,5 @@ class Cohort extends Component {
 export default connect(mapStateToProps, {
     generateBreadCrumbs,
     addCohort,
-    addStudent
+    addStudent,
 })(Cohort);
