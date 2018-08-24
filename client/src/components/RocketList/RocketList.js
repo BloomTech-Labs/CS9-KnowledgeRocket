@@ -110,6 +110,9 @@ class RocketList extends Component {
             });
         }
     };
+    rocketChoice = e => {
+        this.props.handlePickRocket(e.target.id);
+    };
     handleNewRocket = e => {
         this.props.history.push('/rocket/new');
     };
@@ -139,6 +142,17 @@ class RocketList extends Component {
                                                     mini
                                                 >
                                                     <DeleteIcon />
+                                                </Button>
+                                            </Tooltip>
+                                            <Tooltip title="Add Rocket to Cohort">
+                                                <Button
+                                                    variant="fab"
+                                                    id={rocket._id}
+                                                    color="primary"
+                                                    onClick={this.rocketChoice}
+                                                    mini
+                                                >
+                                                    Select Rocket
                                                 </Button>
                                             </Tooltip>
                                         </RocketCardTop>

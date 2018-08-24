@@ -15,6 +15,9 @@ import {
     DELETING_ROCKET,
     ADD_STUDENT,
     DELETE_STUDENT,
+    APPENDING_ROCKETS,
+    APPEND_ROCKETS,
+    APPENDING_ROCKETS_FAILED,
 } from '../actions';
 
 const defaultState = {
@@ -50,8 +53,20 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
+            StateCopy.authenticated = true;
             // console.log('Payload inside ADD_Rocket Reducer', action.payload)
             StateCopy = { ...StateCopy, ...action.payload };
+            return StateCopy;
+        case APPEND_ROCKETS:
+            StateCopy.status = APPEND_ROCKETS;
+            StateCopy.authenticated = true;
+            StateCopy = action.payload;
+            return StateCopy;
+        case APPENDING_ROCKETS:
+            StateCopy.status = APPENDING_ROCKETS;
+            return StateCopy;
+        case APPENDING_ROCKETS_FAILED:
+            StateCopy.status = APPENDING_ROCKETS_FAILED;
             return StateCopy;
         case ADDING_USER:
             StateCopy.status = ADDING_USER;
