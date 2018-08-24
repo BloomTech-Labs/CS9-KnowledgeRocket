@@ -80,9 +80,9 @@ function post(req, res) {
                             });
                     })
                     .catch(err => {
-                        res
-                            .status(500)
-                            .json({ errorMessage: 'There was an error saving the student' });
+                        res.status(500).json({
+                            errorMessage: 'There was an error saving the student',
+                        });
                     });
             })
             .catch(err => {
