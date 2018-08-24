@@ -28,14 +28,14 @@ const RocketListContainer = Styled.div`
 
 const RocketAddCard = Styled(Card)`
     margin: 1rem 1rem 0 0;
-    width: 16rem;
-    height: 12rem;
+    width: 20rem;
+    height: 16rem;
 `;
 
 const RocketListCard = Styled(Card)`
     margin: 1rem 1rem 0 0;
-    width: 16rem;
-    height: 12rem;
+    width: 20rem;
+    height: 16rem;
 `;
 
 const StyledCardContent = Styled(CardContent)`
@@ -44,7 +44,13 @@ const StyledCardContent = Styled(CardContent)`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 12rem;
+    height: 16rem;
+`;
+
+const RocketCardTop = Styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
 `;
 
 class RocketList extends Component {
@@ -77,7 +83,7 @@ class RocketList extends Component {
                         return (
                             <RocketListCard key={rocket._id} id={rocket._id}>
                                 <StyledCardContent>
-                                    <div style={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+                                    <RocketCardTop>
                                         <Tooltip title="Delete Rocket Permanently">
                                             <Button
                                                 variant="fab"
@@ -89,13 +95,28 @@ class RocketList extends Component {
                                                 <DeleteIcon />
                                             </Button>
                                         </Tooltip>
+                                    </RocketCardTop>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'flex-start',
+                                            width: '100%',
+                                            height: '10rem',
+                                        }}
+                                    >
+                                        <div className="RocketCard_content">
+                                            <header style={{ fontSize: '2rem' }}>
+                                                {rocket.title}
+                                            </header>
+                                            <hr />
+                                            <p>Hard Coded Classes {3}</p>
+                                        </div>
                                     </div>
-
-                                    <div className="RocketCard_content">
-                                        <p>{rocket.title}</p>
-                                        <p>Total Classes {3}</p>
-                                    </div>
-                                    <Link to={`/rocket/view/${rocket._id}`} style={{textDecoration: 'none'}}>
+                                    <Link
+                                        to={`/rocket/view/${rocket._id}`}
+                                        style={{ textDecoration: 'none' }}
+                                    >
                                         <Button variant="contained" color="primary">
                                             View
                                         </Button>
@@ -104,14 +125,32 @@ class RocketList extends Component {
                             </RocketListCard>
                         );
                     })}
-                    <RocketAddCard>
+                    <RocketListCard>
                         <StyledCardContent>
-                            <p>Add a new Rocket</p>
+                            <RocketCardTop />
+                            <div
+                                style={{
+                                    margin: '1.8rem 0 0 0',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'flex-start',
+                                    width: '100%',
+                                    height: '7rem',
+                                }}
+                            >
+                                <div className="RocketCard_content">
+                                    <header style={{ fontSize: '2rem' }}>
+                                        {'Add a New Rocket'}
+                                    </header>
+                                    <hr />
+                                    <p>Click the plus sign to create a new rocket</p>
+                                </div>
+                            </div>
                             <Button variant="fab" color="primary">
                                 <AddIcon onClick={this.handleNewRocket} />
                             </Button>
                         </StyledCardContent>
-                    </RocketAddCard>
+                    </RocketListCard>
                 </RocketListContainer>
             </div>
         );
