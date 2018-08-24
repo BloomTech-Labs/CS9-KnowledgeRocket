@@ -18,6 +18,7 @@ function mapStateToProps(state) {
 }
 
 const RocketListContainer = Styled.div`
+    padding: 0 1.2rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -56,12 +57,16 @@ const RocketCardMid = Styled.div`
 `;
 
 const RocketCardMidAdd = Styled(RocketCardMid)`
-    margin: 2rem 0 0 0;
-    height: 8rem;
+    margin: 1.7rem 0 0 0;
+    height: 6.9rem;
 `;
 
 const RocketCardHeader = Styled.div`
-    fontSize: 2rem;
+    font-size: 2rem;
+`;
+
+const HorizontalDivider = Styled.hr`
+    border: 1px solid black;
 `;
 
 class RocketList extends Component {
@@ -86,9 +91,6 @@ class RocketList extends Component {
     render() {
         return (
             <div className="Main_container">
-                {/* {`Welcome To your Rockets: ${this.props.state.user.email}`} */}
-                {/* ROCKET CARDS IF ANY ROCKETS ON THE USERS ARAY */}
-                {/* ROCKET CARD WITH A + SIGN TO ADD MORE */}
                 <RocketListContainer>
                     {this.props.state.user.rockets.map(rocket => {
                         return (
@@ -99,7 +101,7 @@ class RocketList extends Component {
                                             <Button
                                                 variant="fab"
                                                 color="secondary"
-                                                onClick={()=>this.handleDeleteRocket(rocket._id)}
+                                                onClick={() => this.handleDeleteRocket(rocket._id)}
                                                 mini
                                             >
                                                 <DeleteIcon />
@@ -109,7 +111,7 @@ class RocketList extends Component {
                                     <RocketCardMid>
                                         <div>
                                             <RocketCardHeader>{rocket.title}</RocketCardHeader>
-                                            <hr style={{ border: '1px solid black' }} />
+                                            <HorizontalDivider />
                                             <p>Hard Coded Classes {3}</p>
                                         </div>
                                     </RocketCardMid>
@@ -131,12 +133,12 @@ class RocketList extends Component {
                             <RocketCardMidAdd>
                                 <div>
                                     <RocketCardHeader>{'Add a New Rocket'}</RocketCardHeader>
-                                    <hr style={{ border: '1px solid black' }} />
+                                    <HorizontalDivider />
                                     <p>Click the plus sign to create a new rocket</p>
                                 </div>
                             </RocketCardMidAdd>
-                            <Button variant="fab" color="primary">
-                                <AddIcon onClick={this.handleNewRocket} />
+                            <Button variant="fab" color="primary" onClick={this.handleNewRocket} >
+                                <AddIcon />
                             </Button>
                         </StyledCardContent>
                     </RocketListCard>
