@@ -9,6 +9,7 @@ import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
+import FormLabel from '@material-ui/core/FormLabel';
 // Actions
 import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
 function mapStateToProps(state) {
@@ -30,20 +31,20 @@ const CohortFormMainContainer = styled(Card)`
 const StyledCohortSettingForm = styled(CohortSettingForm)`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 95%;
-    height: 60px;
-    padding: 10px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
 `;
 
 const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 95%;
-    height: 60px;
-    padding: 10px;
+    justify-content: space-between;
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
     margin-bottom: 20px;
 `;
 
@@ -53,8 +54,25 @@ const StyledCohortStudentList = styled(CohortStudentList)`
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    width: 95%;
-    padding: 20px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+`;
+
+const StyledCohortRocketList = styled(CohortRocketList)`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+`;
+
+const CohortLabel = styled(FormLabel)`
+    width: 100%;
+    height: 2rem;
+    color: black !important;
 `;
 
 class Cohort extends Component {
@@ -73,9 +91,9 @@ class Cohort extends Component {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
         // If authenticated it will set the state with the current user.
-        if (!this.props.state.user.authenticated) {
-            this.props.history.push('/rocket/auth');
-        }
+        // if (!this.props.state.user.authenticated) {
+        //     this.props.history.push('/rocket/auth');
+        // }
         this.props.generateBreadCrumbs('/rocket/classes');
         this.setState({
             startDate: { objectID: Date.now() },
@@ -127,9 +145,11 @@ class Cohort extends Component {
 
     render() {
         console.log(this.props);
-        return [
+        return (
             <CohortFormMainContainer>
+                <CohortLabel>Create or Edit the Class Settings</CohortLabel>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
+                <CohortLabel>Add New Studdents</CohortLabel>
                 <StyledCohortAddStudentForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
@@ -137,21 +157,20 @@ class Cohort extends Component {
                     ccStatus={this.state.ccEmail}
                 />
 
-                {this.props.location.state ? (
-                    <div>
-                        <StyledCohortStudentList students={this.props.location.state.students} cohortID={this.props.match.params.id} />
-                        <CohortRocketList
-                            handlePickRocket={this.handlePickRocket}
-                            cohortID={this.props.location.state.cohortID}
-                        />
-                    </div>
-                ) : (
-                    <h3>Looks like you don't have any students</h3>
-                )}
+                <CohortLabel>List of Students</CohortLabel>
+                <StyledCohortStudentList
+                    students={this.props.location.state.students}
+                    cohortID={this.props.match.params.id}
+                />
 
+                <CohortLabel>List of Rockets</CohortLabel>
+                <StyledCohortRocketList
+                    handlePickRocket={this.handlePickRocket}
+                    cohortID={this.props.match.params.id}
+                />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
-            </CohortFormMainContainer>,
-        ];
+            </CohortFormMainContainer>
+        );
     }
 }
 

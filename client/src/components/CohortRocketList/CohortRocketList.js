@@ -64,9 +64,9 @@ class RocketMenuItem extends Component {
                     width: '100%',
                     height: '4rem',
                     border: '1px solid black',
-					backgroundColor: '#000',
-					borderRadius: '0.5rem',
-					marginBottom:'0.3rem',
+                    backgroundColor: '#000',
+                    borderRadius: '0.5rem',
+                    marginBottom: '0.3rem',
                 }}
             >
                 <FloatingAdd
@@ -74,13 +74,18 @@ class RocketMenuItem extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         width: '100%',
-						justifyContent: 'space-between',
-						alignItems:'center',
-						padding: '0.5rem',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '0.5rem',
                     }}
                 >
                     <h1>{this.props.rocket.title}</h1>
-                    <Button variant="fab" color="primary" mini onClick={e => this.props.rocketChoice(this.props.rocket._id, Date.now())}>
+                    <Button
+                        variant="fab"
+                        color="primary"
+                        mini
+                        onClick={e => this.props.rocketChoice(this.props.rocket._id, Date.now())}
+                    >
                         <AddIcon />
                     </Button>
                 </FloatingAdd>
@@ -102,7 +107,7 @@ class CohortRocketList extends Component {
 
     rocketChoice = rocketID => {
         console.log(rocketID, this.props);
-        this.props.handlePickRocket(rocketID)
+        this.props.handlePickRocket(rocketID);
     };
 
     generateRocketSelector = rocket => {};
@@ -111,11 +116,16 @@ class CohortRocketList extends Component {
         // const { anchorEl } = this.state;
         // const open = Boolean(anchorEl);
         return (
-            <div style={{ display: 'flex' }}>
-				{this.props.state.user.cohorts[this.props.state.user.cohorts.reduce((acc, curr, index)=>{
-					return acc = curr._id === this.props.cohortID ? index : 0})].rockets.map(element =>{
-					return (<CohortRocketCard key={element._id}/>)
-				})}                
+            <Card className={this.props.className}>
+                {this.props.state.user._id
+                    ? this.props.state.user.cohorts[
+                          this.props.state.user.cohorts.reduce((acc, curr, index) => {
+                              return (acc = curr._id === this.props.cohortID ? index : 0);
+                          })
+                      ].rockets.map(element => {
+                          return <CohortRocketCard key={element._id} />;
+                      })
+                    : null /*THIS IS IMPORTANT TO NOT ERROR OUT DO NOT REMOVE*/}
                 <RocketListCard>
                     <StyledCardContent>
                         <RocketCardTop>
@@ -161,7 +171,7 @@ class CohortRocketList extends Component {
                         </RocketCardMid>
                     </StyledCardContent>
                 </RocketListCard>
-            </div>
+            </Card>
         );
     }
 }
