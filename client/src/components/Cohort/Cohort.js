@@ -123,11 +123,10 @@ class Cohort extends Component {
         };
 
         this.props.addStudent(student, teacherID, cohortID);
-        this.props.history.push('/rocket/classes');
     };
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
@@ -140,7 +139,7 @@ class Cohort extends Component {
 
                 {this.props.location.state ? (
                     <div>
-                        <StyledCohortStudentList students={this.props.location.state.students} />
+                        <StyledCohortStudentList students={this.props.location.state.students} cohortID={this.props.match.params.id} />
                         <CohortRocketList
                             handlePickRocket={this.handlePickRocket}
                             cohortID={this.props.location.state.cohortID}

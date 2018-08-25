@@ -129,7 +129,7 @@ class RocketList extends Component {
                     <RocketListContainer height={this.state.height}>
                         {this.props.state.user.rockets.map(rocket => {
                             return (
-                                <RocketListCard key={rocket._id}>
+                                <RocketListCard key={`RLC_${rocket._id}`}>
                                     <StyledCardContent>
                                         <RocketCardTop>
                                             <Tooltip title="Delete Rocket Permanently">
