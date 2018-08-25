@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
+import Styled from 'styled-components';
 // Material Components
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,7 +16,7 @@ function mapStateToProps(state) {
     };
 }
 
-const StylizedCardContent = styled(CardContent)`
+const StylizedCardContent = Styled(CardContent)`
     width: 200px;
     display: flex;
     flex-direction: row;

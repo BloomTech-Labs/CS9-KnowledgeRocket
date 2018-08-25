@@ -138,6 +138,7 @@ class Cohort extends Component {
     };
 
     render() {
+        console.log(this.props);
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
@@ -149,12 +150,17 @@ class Cohort extends Component {
                 />
 
                 {this.props.location.state ? (
-                    <StyledCohortStudentList students={this.props.location.state.students} />
+                    <div>
+                        <StyledCohortStudentList students={this.props.location.state.students} />
+                        <CohortRocketList
+                            handlePickRocket={this.handlePickRocket}
+                            cohortID={this.props.location.state.cohortID}
+                        />
+                    </div>
                 ) : (
                     <h3>Looks like you don't have any students</h3>
                 )}
 
-                <StyledCohortRocketList handlePickRocket={this.handlePickRocket} />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
             </CohortFormMainContainer>,
         ];
