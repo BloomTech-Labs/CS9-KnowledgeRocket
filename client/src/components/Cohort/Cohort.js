@@ -57,17 +57,6 @@ const StyledCohortStudentList = styled(CohortStudentList)`
     padding: 20px;
 `;
 
-const StyledCohortRocketList = styled(CohortRocketList)`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    width: 95%;
-    height: 800px;
-    padding: 20px;
-`;
-
 class Cohort extends Component {
     state = {
         title: '',

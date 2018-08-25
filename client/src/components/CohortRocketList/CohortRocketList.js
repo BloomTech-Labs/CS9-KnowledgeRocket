@@ -13,33 +13,12 @@ function mapStateToProps(state) {
     };
 }
 
-const StylizedCardContent = Styled(CardContent)`
-    width: 200px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    margin: 10px;
-`;
-
 const FloatingAdd = Styled.div`
     width: 3rem; 
     height: inherit;
     text-align: center;
     color: white;
     text-shadow: -1px -1px 0 #000 , 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 8px #000000dd;
-`;
-
-const RocketListContainer = Styled.div`
-    padding: 0 1.2rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    max-height: ${props => props.height};
 `;
 
 const RocketListCard = Styled(Card)`
@@ -69,10 +48,6 @@ const RocketCardMid = Styled.div`
     justify-content: flex-start;
     width: 100%;
     min-height: 10rem;
-`;
-
-const RocketCardHeader = Styled.div`
-    font-size: 2rem;
 `;
 
 const HorizontalDivider = Styled.hr`
