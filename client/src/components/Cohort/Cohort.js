@@ -76,7 +76,7 @@ class Cohort extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
-        this.props.generateBreadCrumbs(this.props.history.location.pathname);
+        this.props.generateBreadCrumbs('/rocket/classes');
         this.setState({
             startDate: { objectID: Date.now() },
         });
@@ -126,7 +126,7 @@ class Cohort extends Component {
     };
 
     render() {
-        // console.log(this.props);
+        console.log(this.props);
         return [
             <CohortFormMainContainer>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
