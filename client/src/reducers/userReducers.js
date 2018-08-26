@@ -50,17 +50,18 @@ export default (state = defaultState, action) => {
                     StateCopy.rockets.splice(index, 1);
                 }
             });
+            StateCopy.authenticated = true;
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
-            StateCopy.authenticated = true;
             // console.log('Payload inside ADD_Rocket Reducer', action.payload)
             StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.authenticated = true;
             return StateCopy;
         case APPEND_ROCKETS:
-            StateCopy.status = APPEND_ROCKETS;
-            StateCopy.authenticated = true;
             StateCopy = action.payload;
+            StateCopy.authenticated = true;
+            StateCopy.status = APPEND_ROCKETS;
             return StateCopy;
         case APPENDING_ROCKETS:
             StateCopy.status = APPENDING_ROCKETS;

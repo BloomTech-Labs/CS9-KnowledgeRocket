@@ -91,9 +91,9 @@ class Cohort extends Component {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
         // If authenticated it will set the state with the current user.
-        // if (!this.props.state.user.authenticated) {
-        //     this.props.history.push('/rocket/auth');
-        // }
+        if (!this.props.state.user.authenticated) {
+            this.props.history.push('/rocket/auth');
+        }
         this.props.generateBreadCrumbs('/rocket/classes');
         this.setState({
             startDate: { objectID: Date.now() },

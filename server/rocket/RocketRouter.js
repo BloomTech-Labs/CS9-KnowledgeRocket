@@ -238,15 +238,19 @@ function put(req, res) {
 }
 function deleteid(req, res) {
     const id = req.params.id;
-    if (!Rocket.findById(id)) {
-        res.status(404).json({ message: 'Rocket not found' });
-    }
-    Rocket.findByIdAndRemove(id)
-        .then(expected => {
-            res.status(204).json(expected);
+    Rocket.findById(id)
+        .then(found => {
+            found
+                .remove()
+                .then(removed => {
+                    res.status(204).json(removed);
+                })
+                .catch(err => {
+                    res.status(500).json({ message: 'Error on DEL' });
+                });
         })
         .catch(err => {
-            res.status(500).json({ message: 'Error on DEL' });
+            res.status(404).json({ message: 'Rocket not found' });
         });
 }
 
