@@ -9,9 +9,9 @@ import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
+import FormLabel from '@material-ui/core/FormLabel';
 // Actions
-import { generateBreadCrumbs, addCohort, addStudent } from '../../actions';
-
+import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
 function mapStateToProps(state) {
     return {
         state,
@@ -31,20 +31,20 @@ const CohortFormMainContainer = styled(Card)`
 const StyledCohortSettingForm = styled(CohortSettingForm)`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 95%;
-    height: 60px;
-    padding: 10px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
 `;
 
 const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 95%;
-    height: 60px;
-    padding: 10px;
+    justify-content: space-between;
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
     margin-bottom: 20px;
 `;
 
@@ -54,8 +54,9 @@ const StyledCohortStudentList = styled(CohortStudentList)`
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    width: 95%;
-    padding: 20px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
 `;
 
 const StyledCohortRocketList = styled(CohortRocketList)`
@@ -63,10 +64,15 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: flex-start;
-    width: 95%;
-    height: 800px;
-    padding: 20px;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+`;
+
+const CohortLabel = styled(FormLabel)`
+    width: 100%;
+    height: 2rem;
+    color: black !important;
 `;
 
 class Cohort extends Component {
@@ -75,6 +81,10 @@ class Cohort extends Component {
         firstName: '',
         lastName: '',
         email: '',
+        startDate: {
+            /* objectID : date*/
+            objectID: 0,
+        },
     };
 
     componentDidMount() {
@@ -84,7 +94,10 @@ class Cohort extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
-        this.props.generateBreadCrumbs(this.props.history.location.pathname);
+        this.props.generateBreadCrumbs('/rocket/classes');
+        this.setState({
+            startDate: { objectID: Date.now() },
+        });
     }
 
     handleNewInput = e => {
@@ -101,7 +114,22 @@ class Cohort extends Component {
         };
         this.props.addCohort(cohort, this.props.state.user._id);
     };
-
+    handleAppendRocket = (rocketID, startDate) => {
+        //startDate:
+        this.setState({
+            startDate: { [rocketID]: startDate },
+        });
+        this.props.appendRocket(
+            rocketID,
+            startDate,
+            this.props.state.user._id,
+            this.props.location.state.cohortID
+        );
+        //rocketID, startDate, userID, cohortID
+    };
+    handlePickRocket = rocketID => {
+        this.handleAppendRocket(rocketID, Date.now());
+    };
     handleAddStudent = () => {
         const { firstName, lastName, email } = this.state;
         const teacherID = this.props.state.user._id;
@@ -113,13 +141,15 @@ class Cohort extends Component {
         };
 
         this.props.addStudent(student, teacherID, cohortID);
-        this.props.history.push('/rocket/classes');
     };
 
     render() {
-        return [
+        console.log(this.props);
+        return (
             <CohortFormMainContainer>
+                <CohortLabel>Create or Edit the Class Settings</CohortLabel>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
+                <CohortLabel>Add New Studdents</CohortLabel>
                 <StyledCohortAddStudentForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
@@ -127,16 +157,20 @@ class Cohort extends Component {
                     ccStatus={this.state.ccEmail}
                 />
 
-                {this.props.location.state ? (
-                    <StyledCohortStudentList students={this.props.location.state.students} />
-                ) : (
-                    <h3>Looks like you don't have any students</h3>
-                )}
+                <CohortLabel>List of Students</CohortLabel>
+                <StyledCohortStudentList
+                    students={this.props.location.state.students}
+                    cohortID={this.props.match.params.id}
+                />
 
-                <StyledCohortRocketList />
+                <CohortLabel>List of Rockets</CohortLabel>
+                <StyledCohortRocketList
+                    handlePickRocket={this.handlePickRocket}
+                    cohortID={this.props.match.params.id}
+                />
                 <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
-            </CohortFormMainContainer>,
-        ];
+            </CohortFormMainContainer>
+        );
     }
 }
 
@@ -146,5 +180,6 @@ export default connect(
         generateBreadCrumbs,
         addCohort,
         addStudent,
+        appendRocket,
     }
 )(Cohort);

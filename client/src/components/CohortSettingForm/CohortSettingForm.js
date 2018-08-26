@@ -8,14 +8,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 
 const StylizedInput = styled(Input)`
-	padding: 5px;
+	padding: .5rem;
 `;
 
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
 	render() {
 		return (
-			<Card className={this.props.title}>
+			<Card className={this.props.className}>
 				<StylizedInput
 					placeholder="Class Name"
 					disableUnderline={true}
