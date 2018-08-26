@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const Cohort = require('../cohort/Cohort.js');
+const Question = require('../question/Question.js');
 
 const Rocket = mongoose.Schema({
     title: { type: String, required: true },
@@ -17,8 +18,30 @@ function remove(array, element) {
     });
 }
 
-// Pre Remove schema to find nested Scheduled Rockets inside cohorts and remove them.
+function removeQuestions(next, model) {
+    Question.findById(String(model.twoDay)).remove()
+        .then(() => {
+            Question.findById(String(model.twoWeek)).remove()
+                .then(() => {
+                    Question.findById(String(model.twoMonth)).remove()
+                        .then(() => {
+                            next();
+                        })
+                        .catch(err => {
+                            next(err);
+                        });
+                })
+                .catch(err => {
+                    next(err);
+                });
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
 Rocket.pre('remove', function(next) {
+    // Remove nested scheduled rockets inside cohorts.
     let included = [];
     Cohort.find().then(found => {
         found.forEach(rocket => {
@@ -31,16 +54,15 @@ Rocket.pre('remove', function(next) {
                 });
             }
         });
-        included.forEach(item => {
-            Cohort.findByIdAndUpdate(item._id, item)
-                .then(updated => {
-                    next();
-                })
-                .catch(err => {
-                    next(err);
+        if (included.length > 0) {
+            included.forEach(item => {
+                Cohort.findByIdAndUpdate(item._id, item).then(updated => {
+                    removeQuestions(next, this);
                 });
-        });
-        next();
+            });
+        } else {
+            removeQuestions(next, this);
+        }
     });
 });
 
