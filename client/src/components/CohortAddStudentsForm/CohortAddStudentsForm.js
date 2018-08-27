@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 // Material Components
 import Card from '@material-ui/core/Card';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+// Actions
+import { addCohort } from '../../actions';
+
+function mapStateToProps(state) {
+	return {
+		state,
+	};
+}
 
 const StylizedInput = styled(Input)`
 	padding: 5px;
@@ -75,4 +84,6 @@ class CohortAddStudentsForm extends Component {
 	}
 }
 
-export default CohortAddStudentsForm;
+export default connect(mapStateToProps, {
+	addCohort,
+})(CohortAddStudentsForm);

@@ -11,6 +11,7 @@ import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
 import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
+
 function mapStateToProps(state) {
     return {
         state,
