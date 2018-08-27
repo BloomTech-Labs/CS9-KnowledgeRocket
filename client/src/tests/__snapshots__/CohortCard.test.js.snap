@@ -14,8 +14,8 @@ exports[`CohortCard renders correctly 1`] = `
         className="MuiCardContent-root-29"
       >
         <a
-          className="sc-bdVaJa kKOtui"
-          href="/rocket/classForm"
+          className="sc-bdVaJa iqJYxZ"
+          href="/rocket/classForm/123"
           onClick={[Function]}
         >
           Calculus 101
@@ -24,7 +24,8 @@ exports[`CohortCard renders correctly 1`] = `
       <div
         className="MuiCardContent-root-29"
       >
-        Students: 
+        Students:
+         
         3
       </div>
       <div

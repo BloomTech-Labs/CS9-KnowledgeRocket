@@ -140,12 +140,32 @@ describe('server', () => {
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('rockets');
     });
-    test('DEL should return 204', async () => {
-        const mockUser = { title: 'bob todd loves extra letters' };
-        const newUser = await Rocket.create(mockUser);
-        const response = await request(server).delete(`/api/rocket/${newUser._id}`);
+    test('DEL Rockket should return 204', async () => {
+        // Fixing Rocket Delete Test
+        // Make a User
+        const mockUser = { email: 'bobtodd@gmail.com' };
+        const newUser = await User.create(mockUser);
+        // Make Cohort
+        const mockCohort = { title: 'Cohort Tile' };
+        const newCohort = await Cohort.create(mockCohort);
+        //Make Question
+        const mockQuestion = {
+            title: 'some title',
+            explanation: 'some explanation',
+            question: 'what is life when you write backend code?',
+            correct: 'The correct answer is: the matrix!',
+        };
+        await Question.create(mockQuestion)
+        // End of Prep before Rocket Creation and Deletion.
+        const mockRocket = { title: 'bob todd loves extra letters' };
+        const newRocket = await Rocket.create(mockRocket);
+        const response = await request(server).delete(`/api/rocket/${newRocket._id}`);
         expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('rockets');
+        // Drop prep Collections
+        await mongoose.connection.db.dropCollection('cohorts');
+        await mongoose.connection.db.dropCollection('questions');
+        await mongoose.connection.db.dropCollection('users');
     });
     //Response Rocket Tests
     test('should return 200 and a response', async () => {
