@@ -170,13 +170,15 @@ table {
     height: inherit;
     background-color: #a0b7ce;
     /* background-color: #979797;  */
-	overflow-y: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.Main_container::-webkit-scrollbar {display:none;}
+.Main_container::-webkit-scrollbar {
+    display: none;
+}
 
 .routeContainer {
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
 }
