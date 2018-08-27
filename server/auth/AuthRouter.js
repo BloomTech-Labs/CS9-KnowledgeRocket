@@ -35,54 +35,77 @@ function modifyUser(req, res) {
     const email = req.body.email;
     const newPW = req.body.changes.newPW;
     const ccEmail = req.body.changes.ccEmail;
-    res.json({ message: `received id: ${id}` });
-    // Sign in User
-    init_firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(response => {
-            let currentUser = init_firebase.auth().currentUser;
-            if (ccEmail) {
-                currentUser.updateEmail(ccEmail).then(() => {
-                    UserModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
-                        ccEmail,
-                        email: ccEmail,
-                    })
-                        .populate('cohorts')
-                        .populate({
-                            path: 'cohorts',
-                            populate: { path: 'students', model: 'Students' },
-                        })
-                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
-                        .then(updatedUser => {
-                            if (newPW) {
-                                currentUser
-                                    .updatePassword(newPW)
-                                    .then(() => {
+    // Sign in User if it provided a password: Meaning this user is email password provider
+    if (password) {
+        init_firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(response => {
+                let currentUser = init_firebase.auth().currentUser;
+                if (ccEmail) {
+                    currentUser
+                        .updateEmail(ccEmail)
+                        .then(() => {
+                            // Update said user in our DB
+                            UserModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+                                ccEmail,
+                                email: ccEmail,
+                            })
+                                .populate('cohorts')
+                                .populate({
+                                    path: 'cohorts',
+                                    populate: { path: 'students', model: 'Students' },
+                                })
+                                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                                .then(updatedUser => {
+                                    if (newPW) {
+                                        currentUser
+                                            .updatePassword(newPW)
+                                            .then(() => {
+                                                res.status(201).json(updatedUser);
+                                            })
+                                            .catch(err => {
+                                                res.status(400).json({ errorMessage: err.message });
+                                            });
+                                    } else {
                                         res.status(201).json(updatedUser);
-                                    })
-                                    .catch(err => {
-                                        res.status(400).json({ errorMessage: err.message });
-                                    });
-                            } else {
-                                res.status(201).json(updatedUser);
-                            }
+                                    }
+                                })
+                                .catch(err => {
+                                    res.status(400).json({ errorMessage: err.message });
+                                });
+                        })
+                        .catch(err => {
+                            res.status(400).json({ errorMessage: err.message });
                         });
-                    // .catch(err => {
-                    //     res.status(400).json({ errorMessage: err.message });
-                    // });
-                });
-                // .catch(err => {
-                //     res.status(400).json({ errorMessage: err.message });
-                // });
-            }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(400).json({ errorMessage: err.message });
+            });
+    } else {
+        // No password was provided, so Find and Update the ccEmail in our DB.
+        UserModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+            ccEmail,
         })
-        .catch(err => {
-            console.log(err);
-            // res.status(400).json({ errorMessage: err.message });
-        });
+            .populate('cohorts')
+            .populate({
+                path: 'cohorts',
+                populate: { path: 'students', model: 'Students' },
+            })
+            .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+            .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+            .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+            .then(updatedUser => {
+                res.status(201).json(updatedUser);
+            })
+            .catch(err => {
+                res.status(400).json({ errorMessage: err.message });
+            });
+    }
 }
 
 // TODO: Implement Token Verification from Firebase
