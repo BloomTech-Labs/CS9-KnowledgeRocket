@@ -82,9 +82,6 @@ const StyledAddCohortBtn = styled(Button)`
 class Cohort extends Component {
     state = {
         title: '',
-        // firstName: '',
-        // lastName: '',
-        // email: '',
         startDate: {
             /* objectID : date*/
             objectID: 0,
@@ -106,6 +103,10 @@ class Cohort extends Component {
 
     handleNewInput = e => {
         this.setState({ [e.target.name]: e.target.value });
+    };
+
+    handleCheckBox = e => {
+        this.setState({ [e.target.name]: !e.target.checked });
     };
 
     handleAddCohort = () => {
@@ -133,19 +134,6 @@ class Cohort extends Component {
         this.handleAppendRocket(rocketID, Date.now());
     };
 
-    handleAddStudent = () => {
-        const { firstName, lastName, email } = this.state;
-        const teacherID = this.props.state.user._id;
-        const cohortID = this.props.location.state.cohortID;
-        const student = {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-        };
-
-        this.props.addStudent(student, teacherID, cohortID);
-    };
-
     render() {
         console.log(this.props);
         return (
@@ -153,7 +141,7 @@ class Cohort extends Component {
                 <StyledHeaders>Class Settings</StyledHeaders>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
                 <StyledHeaders>Add Students</StyledHeaders>
-                <StyledCohortAddStudentForm handleAddStudent={this.handleAddStudent} />
+                <StyledCohortAddStudentForm />
                 <StyledHeaders>Students</StyledHeaders>
                 {this.props.location.state ? (
                     <StyledCohortStudentList students={this.props.location.state.students} />

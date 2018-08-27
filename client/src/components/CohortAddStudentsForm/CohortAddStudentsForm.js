@@ -23,8 +23,17 @@ class CohortAddStudentsForm extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-	handleCheckBox = e => {
-		this.setState({ [e.target.name]: !e.target.checked });
+	handleAddStudent = () => {
+		const { firstName, lastName, email } = this.state;
+		const teacherID = this.props.state.user._id;
+		const cohortID = this.props.location.state.cohortID;
+		const student = {
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
+		};
+
+		this.props.addStudent(student, teacherID, cohortID);
 	};
 
 	render() {
@@ -34,21 +43,21 @@ class CohortAddStudentsForm extends Component {
 					placeholder="Last Name"
 					disableUnderline={true}
 					name="lastName"
-					onChange={this.props.handleNewInput}
+					onChange={this.handleNewInput}
 					required={true}
 				/>
 				<StylizedInput
 					placeholder="First Name"
 					disableUnderline={true}
 					name="firstName"
-					onChange={this.props.handleNewInput}
+					onChange={this.handleNewInput}
 					required={true}
 				/>
 				<StylizedInput
 					placeholder="Email"
 					disableUnderline={true}
 					name="email"
-					onChange={this.props.handleNewInput}
+					onChange={this.handleNewInput}
 					type="email"
 					required={true}
 					pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])"
@@ -57,7 +66,7 @@ class CohortAddStudentsForm extends Component {
 					variant="contained"
 					color="primary"
 					disabled={this.state.disabled}
-					onClick={this.props.handleAddStudent}
+					onClick={this.handleAddStudent}
 				>
 					Add
 				</Button>
