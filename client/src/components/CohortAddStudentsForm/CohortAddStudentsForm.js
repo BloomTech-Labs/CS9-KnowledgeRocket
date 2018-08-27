@@ -11,6 +11,10 @@ const StylizedInput = styled(Input)`
 
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortAddStudentsForm extends Component {
+	state = {
+		disabled: true,
+	};
+
 	render() {
 		return (
 			<Card className={this.props.className}>
@@ -37,7 +41,12 @@ class CohortAddStudentsForm extends Component {
 					required={true}
 					pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])"
 				/>
-				<Button variant="contained" color="primary" onClick={this.props.handleAddStudent}>
+				<Button
+					variant="contained"
+					color="primary"
+					disabled={this.state.disabled}
+					onClick={this.props.handleAddStudent}
+				>
 					Add
 				</Button>
 			</Card>
