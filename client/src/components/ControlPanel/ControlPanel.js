@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Styled from 'styled-components';
-import './ControlPanel.css';
+import styled from 'styled-components';
+// Material Components
+import { Button } from '@material-ui/core';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 function mapStateToProps(state) {
     return {
@@ -11,34 +14,32 @@ function mapStateToProps(state) {
     };
 }
 
-const ControlPanelContainer = Styled.div`
+const StyledControlPanel = styled(Drawer)`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     padding: 1rem;
     width: 10rem;
-    border-radius: .4rem;
+    border-radius: 0.4rem;
     min-height: 10rem;
-    background-color: #0088CC;
-`;
-const CPCWithBorder = ControlPanelContainer.extend`
-    border: 1px solid rgb(119, 136, 153);
     height: ${props => props.height};
+    background-color: #0088cc;
 `;
 
-export const CPCButton = Styled(Button)`
-    color: #EEEEEE !important;
+const CPCButton = styled(Button)`
+    color: #eeeeee !important;
     border: 1px solid rgb(119, 136, 153);
     background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
     width: 100%;
     margin-bottom: 1rem !important;
 `;
 
-const CPLink = Styled(Link)`
+const CPLink = styled(Link)`
     text-decoration: none;
     width: 100%;
 `;
+
 class ControlPanel extends Component {
     state = {
         height: '0px',
