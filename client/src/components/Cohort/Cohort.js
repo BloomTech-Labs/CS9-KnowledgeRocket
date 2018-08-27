@@ -18,6 +18,13 @@ function mapStateToProps(state) {
     };
 }
 
+const StyledHeaders = styled.h2`
+    align-self: flex-start;
+    font-size 2rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto', serif;
+`;
+
 const CohortFormMainContainer = styled(Card)`
     margin-left: 1rem;
     padding: 1rem;
@@ -69,10 +76,8 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     padding: 1rem;
 `;
 
-const CohortLabel = styled(FormLabel)`
-    width: 100%;
-    height: 2rem;
-    color: black !important;
+const StyledAddCohortBtn = styled(Button)`
+    width: 95%;
 `;
 
 class Cohort extends Component {
@@ -147,30 +152,36 @@ class Cohort extends Component {
         console.log(this.props);
         return (
             <CohortFormMainContainer>
-                <CohortLabel>Create or Edit the Class Settings</CohortLabel>
+                <StyledHeaders>Create or Edit the Class Settings</StyledHeaders>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
-                <CohortLabel>Add New Studdents</CohortLabel>
+                <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
                     handleAddStudent={this.handleAddStudent}
                     ccStatus={this.state.ccEmail}
                 />
-
-                <CohortLabel>List of Students</CohortLabel>
-                <StyledCohortStudentList
-                    students={this.props.location.state.students}
-                    cohortID={this.props.match.params.id}
-                />
-
-                <CohortLabel>List of Rockets</CohortLabel>
+                <StyledHeaders>Students</StyledHeaders>
+                {this.props.location.state ? (
+                    <StyledCohortStudentList students={this.props.location.state.students} />
+                ) : (
+                    <h3>Looks like you don't have any students</h3>
+                )}
+                <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
                 />
-                <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
+                
+                <StyledAddCohortBtn
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleAddCohort}
+                >
+                    Add this Cohort
+                </StyledAddCohortBtn>
             </CohortFormMainContainer>
-        );
+        )
     }
 }
 
