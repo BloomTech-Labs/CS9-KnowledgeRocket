@@ -137,7 +137,9 @@ class Cohort extends Component {
 
     render() {
         console.log(`COHORT ID ${this.props.location.state.cohortID}`);
+        console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const { cohortID } = this.props.location.state;
+        const { students } = this.props.location.state;
 
         return (
             <CohortFormMainContainer>
@@ -147,7 +149,7 @@ class Cohort extends Component {
                 <StyledCohortAddStudentForm cohortID={cohortID} />
                 <StyledHeaders>Students</StyledHeaders>
                 {this.props.location.state ? (
-                    <StyledCohortStudentList students={this.props.location.state.students} />
+                    <StyledCohortStudentList students={students} />
                 ) : (
                     <h3>Looks like you don't have any students</h3>
                 )}
