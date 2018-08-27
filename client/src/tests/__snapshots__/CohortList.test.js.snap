@@ -20,8 +20,8 @@ exports[`CohortList renders correctly 1`] = `
             className="MuiCardContent-root-29"
           >
             <a
-              className="sc-bdVaJa kKOtui"
-              href="/rocket/classForm"
+              className="sc-bdVaJa iqJYxZ"
+              href="/rocket/classForm/undefined"
               onClick={[Function]}
             >
               
@@ -30,7 +30,8 @@ exports[`CohortList renders correctly 1`] = `
           <div
             className="MuiCardContent-root-29"
           >
-            Students: 
+            Students:
+             
             1
           </div>
           <div
