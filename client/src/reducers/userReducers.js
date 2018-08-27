@@ -94,18 +94,25 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
-            // StateCopy = { ...StateCopy, ...action.payload };
-            // StateCopy.status = DELETE_STUDENT;
-            // return StateCopy;
+            StateCopy.authenticated = true;
+            StateCopy.status = DELETE_STUDENT;
+            const updatedStudents = [];
+            let targetIdx = 0;
 
-            return Object.assign({}, StateCopy, {
-                user: {
-                    cohorts: state.cohorts.filter((cohort, index) => {
-                        return cohort[index] !== action.payload;
-                    }),
-                },
-                status: DELETE_STUDENT,
+            StateCopy.cohorts.map((cohort, index) => {
+                let students = cohort.students;
+                for (let i = 0; i < students.length; i++) {
+                    if (students[i]._id === action.payload._id) {
+                        console.log(`target idx is ${index}`);
+                        targetIdx = index;
+                    }
+                    if (students[i]._id !== action.payload._id) {
+                        updatedStudents.push(students[i]);
+                    }
+                }
             });
+            StateCopy.cohorts[targetIdx].students = updatedStudents;
+            return StateCopy;
 
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
