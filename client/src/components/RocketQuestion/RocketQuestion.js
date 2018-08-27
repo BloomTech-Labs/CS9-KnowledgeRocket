@@ -5,6 +5,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
+import FormControl from '@material-ui/core/FormControl';
+import { CPCButton } from '../ControlPanel/ControlPanel';
 
 const url = process.env.REACT_APP_SERVER;
 
@@ -24,6 +26,7 @@ const defaultState = {
         ],
         correct: '',
     },
+    submitted: false,
 };
 
 const QuestionHeader = styled.div`
@@ -63,12 +66,22 @@ class RocketQuestion extends Component {
             });
     }
 
-    handleSubmit = e => {};
+    handleSubmit = e => {
+        this.setState({
+            submitted: true,
+        });
+    };
+    handleRadio = e => {
+        this.setState({
+            value: e.target.value,
+        });
+    };
     handleInput = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
 
     render() {
+        console.log(this.state.rocketQuestion.choices[0].correct);
         console.log('My state is:', this.state);
         return (
             <QuestionHeader className="Question_container">
@@ -84,21 +97,36 @@ class RocketQuestion extends Component {
                     <FormLabel component="legend" className="legend">
                         Please Answer The Question:
                     </FormLabel>
-                    <RadioGroup value={this.state.value} id="value" onChange={this.handleInput}>
+                    <FormControl component="fieldset" className={`fieldset`}>
                         {this.state.rocketQuestion.choices.map((answer, index) => {
                             return (
-                                <div key={`${index}`}>
+                                <RadioGroup
+                                    value={this.state.value}
+                                    name={'value' + index}
+                                    onChange={this.handleRadio}
+                                    key={index}
+                                    style={
+                                        { backgroundColor: 'green !important' }
+                                        // this.state.submitted
+                                        //     ? this.state.rocketQuestion.choices[index].correct
+                                        //         ? { color: 'green !important' }
+                                        //         : {}
+                                        //     : {}
+                                    }
+                                >
                                     <FormControlLabel
-                                        id={index}
                                         value={answer.text}
                                         control={<Radio color="primary" />}
                                         label={answer.text}
                                         labelPlacement="end"
                                     />
-                                </div>
+                                </RadioGroup>
                             );
                         })}
-                    </RadioGroup>
+                        <CPCButton className="submitButton" onClick={this.handleSubmit}>
+                            Submit Answer
+                        </CPCButton>
+                    </FormControl>
                 </div>
             </QuestionHeader>
         );
