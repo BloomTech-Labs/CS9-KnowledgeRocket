@@ -151,7 +151,7 @@ class Cohort extends Component {
         console.log(this.props);
         return (
             <CohortFormMainContainer>
-                <StyledHeaders>Create or Edit the Class Settings</StyledHeaders>
+                <StyledHeaders>Class Settings</StyledHeaders>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm
@@ -171,7 +171,7 @@ class Cohort extends Component {
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
                 />
-                
+
                 <StyledAddCohortBtn
                     variant="contained"
                     color="primary"
@@ -180,16 +180,13 @@ class Cohort extends Component {
                     Add this Cohort
                 </StyledAddCohortBtn>
             </CohortFormMainContainer>
-        )
+        );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        generateBreadCrumbs,
-        addCohort,
-        addStudent,
-        appendRocket,
-    }
-)(Cohort);
+export default connect(mapStateToProps, {
+    generateBreadCrumbs,
+    addCohort,
+    addStudent,
+    appendRocket,
+})(Cohort);
