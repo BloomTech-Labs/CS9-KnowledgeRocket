@@ -14,6 +14,7 @@ function mapStateToProps(state) {
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortStudentList extends Component {
 	render() {
+		console.log(`PROPS ${this.props}`);
 		return (
 			<Card className={this.props.className}>
 				{/* Render all students added */}

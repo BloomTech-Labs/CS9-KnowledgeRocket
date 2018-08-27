@@ -17,6 +17,13 @@ function mapStateToProps(state) {
     };
 }
 
+const StyledHeaders = styled.h2`
+    align-self: flex-start;
+    font-size 2rem;
+    margin-bottom: 20px;
+    margin-left: 2.5%;
+`;
+
 const CohortFormMainContainer = styled(Card)`
     margin-left: 1rem;
     padding: 1rem;
@@ -55,6 +62,7 @@ const StyledCohortStudentList = styled(CohortStudentList)`
     align-items: center;
     width: 95%;
     padding: 20px;
+    margin-bottom: 20px;
 `;
 
 const StyledCohortRocketList = styled(CohortRocketList)`
@@ -65,7 +73,11 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     align-items: flex-start;
     width: 95%;
     height: 800px;
-    padding: 20px;
+    padding: 10px 20px 20px 20px;
+`;
+
+const StyledAddCohortBtn = styled(Button)`
+    width: 95%;
 `;
 
 class Cohort extends Component {
@@ -140,22 +152,30 @@ class Cohort extends Component {
     render() {
         return [
             <CohortFormMainContainer>
+                <StyledHeaders>Class Settings</StyledHeaders>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
+                <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
                     handleAddStudent={this.handleAddStudent}
                     ccStatus={this.state.ccEmail}
                 />
-
+                <StyledHeaders>Students</StyledHeaders>
                 {this.props.location.state ? (
                     <StyledCohortStudentList students={this.props.location.state.students} />
                 ) : (
                     <h3>Looks like you don't have any students</h3>
                 )}
-
-                <StyledCohortRocketList handlePickRocket={this.handlePickRocket} />
-                <Button onClick={this.handleAddCohort}>Add this Cohort</Button>
+                <StyledHeaders>Knowledge Rockets</StyledHeaders>
+                <StyledCohortRocketList />
+                <StyledAddCohortBtn
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleAddCohort}
+                >
+                    Add this Cohort
+                </StyledAddCohortBtn>
             </CohortFormMainContainer>,
         ];
     }
