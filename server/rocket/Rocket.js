@@ -19,13 +19,13 @@ function remove(array, element) {
 }
 
 function removeQuestions(next, model) {
-    Question.findById(String(model.twoDay))
+    Question.findById(mongoose.Types.ObjectId(model.twoDay))
         .remove()
         .then(() => {
-            Question.findById(String(model.twoWeek))
+            Question.findById(mongoose.Types.ObjectId(model.twoWeek))
                 .remove()
                 .then(() => {
-                    Question.findById(String(model.twoMonth))
+                    Question.findById(mongoose.Types.ObjectId(model.twoMonth))
                         .remove()
                         .then(() => {
                             next();
