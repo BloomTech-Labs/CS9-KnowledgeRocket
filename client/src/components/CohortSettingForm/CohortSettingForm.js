@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Papa from 'papaparse';
 // Material Components
 import Card from '@material-ui/core/Card';
 import Input from '@material-ui/core/Input';
@@ -13,6 +14,11 @@ const StylizedInput = styled(Input)`
 
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
+	handleFileSelect = e => {
+		console.log('MADE IT TO FILE SELECT');
+		const file = e.target.files[0];
+		console.log(`FILE ${file}`);
+	};
 	render() {
 		return (
 			<Card className={this.props.className}>
@@ -23,17 +29,15 @@ class CohortSettingForm extends Component {
 					onChange={this.props.handleNewInput}
 				/>
 				<FormControlLabel
-					control={
-						<Checkbox
-							onChange={this.props.handleCheckBox}
-							name="ccEmail"
-						/>
-					}
+					control={<Checkbox onChange={this.props.handleCheckBox} name="ccEmail" />}
 					label="CC Me on Rocket Emails"
 				/>
+				{/* 
 				<Button variant="contained" color="primary">
 					Import CSV
-				</Button>
+				</Button> */}
+
+				<input type="file" id="csv-file" name="files" onClick={this.handleFileSelect} />
 			</Card>
 		);
 	}
