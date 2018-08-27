@@ -5,7 +5,6 @@ router
     .route('/')
     .get(get)
     .post(post);
-
 router
     .route('/:id')
     .put(put)

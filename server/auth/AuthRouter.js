@@ -3,6 +3,7 @@ const Firebase = require('firebase');
 const admin = require('firebase-admin');
 const UserModel = require('../user/User');
 const { FIREBASE_CONFIG } = require('../config');
+const mongoose = require('mongoose');
 
 // Variable to Initialize Firebase Client App
 let init_firebase;
@@ -26,6 +27,63 @@ admin.initializeApp({
     databaseURL: `${process.env.REACT_APP_FIRE_DB_URL}`,
 });
 router.route('/').post(post);
+router.route('/:id').put(modifyUser);
+
+function modifyUser(req, res) {
+    const { id } = req.params;
+    const password = req.body.changes.currentPW;
+    const email = req.body.email;
+    const newPW = req.body.changes.newPW;
+    const ccEmail = req.body.changes.ccEmail;
+    res.json({ message: `received id: ${id}` });
+    // Sign in User
+    init_firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(response => {
+            let currentUser = init_firebase.auth().currentUser;
+            if (ccEmail) {
+                currentUser.updateEmail(ccEmail).then(() => {
+                    UserModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+                        ccEmail,
+                        email: ccEmail,
+                    })
+                        .populate('cohorts')
+                        .populate({
+                            path: 'cohorts',
+                            populate: { path: 'students', model: 'Students' },
+                        })
+                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                        .then(updatedUser => {
+                            if (newPW) {
+                                currentUser
+                                    .updatePassword(newPW)
+                                    .then(() => {
+                                        res.status(201).json(updatedUser);
+                                    })
+                                    .catch(err => {
+                                        res.status(400).json({ errorMessage: err.message });
+                                    });
+                            } else {
+                                res.status(201).json(updatedUser);
+                            }
+                        });
+                    // .catch(err => {
+                    //     res.status(400).json({ errorMessage: err.message });
+                    // });
+                });
+                // .catch(err => {
+                //     res.status(400).json({ errorMessage: err.message });
+                // });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            // res.status(400).json({ errorMessage: err.message });
+        });
+}
 
 // TODO: Implement Token Verification from Firebase
 // In the case a user is already authenticated on front end.
@@ -99,14 +157,6 @@ function post(req, res) {
                         uid,
                         authProvider: 'email',
                     })
-                        .populate('cohorts')
-                        .populate({
-                            path: 'cohorts',
-                            populate: { path: 'students', model: 'Students' },
-                        })
-                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                         .then(createdUser => res.json(createdUser))
                         .catch(errUser => {
                             res.json({ errorMessage: errUser.message });
@@ -147,14 +197,6 @@ function post(req, res) {
                                     uid,
                                     authProvider: authType,
                                 })
-                                    .populate('cohorts')
-                                    .populate({
-                                        path: 'cohorts',
-                                        populate: { path: 'students', model: 'Students' },
-                                    })
-                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                     .then(createdUser => res.json(createdUser))
                                     .catch(errUser => {
                                         res.json({
