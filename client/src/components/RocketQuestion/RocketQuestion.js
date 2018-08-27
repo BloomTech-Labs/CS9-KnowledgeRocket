@@ -22,11 +22,6 @@ const defaultState = {
 };
 
 class RocketQuestion extends Component {
-<<<<<<< HEAD
-    state = {};
-    render() {
-        return <div className="Main_container" />;
-=======
     state = defaultState;
 
     componentDidMount() {
@@ -48,9 +43,9 @@ class RocketQuestion extends Component {
 
     handleSubmit = e => {};
 
-    handleInput = (e)=> {
-        this.setState({[e.target.id]: e.target.value})
-    }
+    handleInput = e => {
+        this.setState({ [e.target.id]: e.target.value });
+    };
 
     render() {
         console.log('My state is:', this.state);
@@ -71,7 +66,6 @@ class RocketQuestion extends Component {
                 </div>
             </div>
         );
->>>>>>> b259d04c8b7d5511bfd14fb636a5a30f05f74116
     }
 }
 
