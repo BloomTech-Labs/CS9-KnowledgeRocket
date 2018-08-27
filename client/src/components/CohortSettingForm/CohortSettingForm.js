@@ -18,6 +18,16 @@ class CohortSettingForm extends Component {
 		console.log('MADE IT TO FILE SELECT');
 		const file = e.target.files[0];
 		console.log(`FILE ${file}`);
+		const config = {
+			quoteChar: '"',
+			header: true,
+			preview: 0,
+			complete: function(results, file) {
+				const data = results;
+				console.log('Parsing complete:', results, file);
+			},
+		};
+		Papa.parse(file, config);
 	};
 	render() {
 		return (
