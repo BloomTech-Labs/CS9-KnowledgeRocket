@@ -22,7 +22,6 @@ const ResponseRocket = mongoose.Schema({
                 },
             }
         ],
-        
     }],
     sent: { type: Number, default: 0 },
 });
