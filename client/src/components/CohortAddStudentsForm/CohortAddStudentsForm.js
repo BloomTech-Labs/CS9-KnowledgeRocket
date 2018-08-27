@@ -13,6 +13,18 @@ const StylizedInput = styled(Input)`
 class CohortAddStudentsForm extends Component {
 	state = {
 		disabled: true,
+		firstName: '',
+		lastName: '',
+		email: '',
+		cc: '',
+	};
+
+	handleNewInput = e => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	handleCheckBox = e => {
+		this.setState({ [e.target.name]: !e.target.checked });
 	};
 
 	render() {

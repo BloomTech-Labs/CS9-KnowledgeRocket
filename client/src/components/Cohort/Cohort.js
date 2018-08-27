@@ -82,9 +82,9 @@ const StyledAddCohortBtn = styled(Button)`
 class Cohort extends Component {
     state = {
         title: '',
-        firstName: '',
-        lastName: '',
-        email: '',
+        // firstName: '',
+        // lastName: '',
+        // email: '',
         startDate: {
             /* objectID : date*/
             objectID: 0,
@@ -108,16 +108,13 @@ class Cohort extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    handleCheckBox = e => {
-        this.setState({ [e.target.name]: !e.target.checked });
-    };
-
     handleAddCohort = () => {
         const cohort = {
             title: this.state.title,
         };
         this.props.addCohort(cohort, this.props.state.user._id);
     };
+
     handleAppendRocket = (rocketID, startDate) => {
         //startDate:
         this.setState({
@@ -131,9 +128,11 @@ class Cohort extends Component {
         );
         //rocketID, startDate, userID, cohortID
     };
+
     handlePickRocket = rocketID => {
         this.handleAppendRocket(rocketID, Date.now());
     };
+
     handleAddStudent = () => {
         const { firstName, lastName, email } = this.state;
         const teacherID = this.props.state.user._id;
@@ -154,12 +153,7 @@ class Cohort extends Component {
                 <StyledHeaders>Class Settings</StyledHeaders>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
                 <StyledHeaders>Add Students</StyledHeaders>
-                <StyledCohortAddStudentForm
-                    handleNewInput={this.handleNewInput}
-                    handleCheckBox={this.handleCheckBox}
-                    handleAddStudent={this.handleAddStudent}
-                    ccStatus={this.state.ccEmail}
-                />
+                <StyledCohortAddStudentForm handleAddStudent={this.handleAddStudent} />
                 <StyledHeaders>Students</StyledHeaders>
                 {this.props.location.state ? (
                     <StyledCohortStudentList students={this.props.location.state.students} />
