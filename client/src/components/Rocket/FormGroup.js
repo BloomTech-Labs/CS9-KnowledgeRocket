@@ -46,8 +46,8 @@ const verbageDictionary = {
  * @param {Function} props.handleChange
  * @param {object} props.values
  * @param {string} props.increment
- * @param {object=} props.errors
- * @param {object=} props.touched
+ * @param {object} props.errors
+ * @param {object} props.touched
  */
 export const QuestionChoices = ({
     handleBlur,
