@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import FormControl from '@material-ui/core/FormControl';
 import { CPCButton } from '../ControlPanel/ControlPanel';
+import './RocketQuestion.css';
 
 const url = process.env.REACT_APP_SERVER;
 
@@ -67,9 +68,23 @@ class RocketQuestion extends Component {
     }
 
     handleSubmit = e => {
-        this.setState({
-            submitted: true,
-        });
+        const packAge = {
+            answer: this.state.answer,
+            questionID: this.state.questionID,
+            studentID: this.state.studentID,
+        };
+        axios
+            .post(`${url}/responserocket/answer`, packAge)
+            .then(response => {
+                this.setState({
+                    submitted: true,
+                });
+            })
+            .catch(err => {
+                this.setState({
+                    submitted: err.message,
+                });
+            });
     };
     handleRadio = e => {
         this.setState({
@@ -105,19 +120,24 @@ class RocketQuestion extends Component {
                                     name={'value' + index}
                                     onChange={this.handleRadio}
                                     key={index}
-                                    style={
-                                        { backgroundColor: 'green !important' }
-                                        // this.state.submitted
-                                        //     ? this.state.rocketQuestion.choices[index].correct
-                                        //         ? { color: 'green !important' }
-                                        //         : {}
-                                        //     : {}
+                                    className={
+                                        this.state.submitted
+                                            ? this.state.rocketQuestion.choices[index].correct
+                                                ? 'answer--correct'
+                                                : 'answer'
+                                            : ''
                                     }
                                 >
                                     <FormControlLabel
                                         value={answer.text}
                                         control={<Radio color="primary" />}
-                                        label={answer.text}
+                                        label={
+                                            this.state.submitted
+                                                ? this.state.rocketQuestion.choices[index].correct
+                                                    ? answer.text + ' (correct)'
+                                                    : answer.text
+                                                : answer.text
+                                        }
                                         labelPlacement="end"
                                     />
                                 </RadioGroup>
