@@ -246,11 +246,11 @@ function deleteid(req, res) {
                     res.status(204).json(removed);
                 })
                 .catch(err => {
-                    res.status(500).json({ message: 'Error on DEL' });
+                    res.status(500).json({ message: err.message });
                 });
         })
         .catch(err => {
-            res.status(404).json({ message: 'Rocket not found' });
+            res.status(404).json({ message: err.message });
         });
 }
 

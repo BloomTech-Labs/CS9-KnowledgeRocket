@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const Cohort = require('../cohort/Cohort.js');
-const Question = require('../question/Question.js');
+const Cohort = require('../cohort/Cohort');
+const Question = require('../question/Question');
 
 const Rocket = mongoose.Schema({
     title: { type: String, required: true },
@@ -19,11 +19,14 @@ function remove(array, element) {
 }
 
 function removeQuestions(next, model) {
-    Question.findById(String(model.twoDay)).remove()
+    Question.findById(String(model.twoDay))
+        .remove()
         .then(() => {
-            Question.findById(String(model.twoWeek)).remove()
+            Question.findById(String(model.twoWeek))
+                .remove()
                 .then(() => {
-                    Question.findById(String(model.twoMonth)).remove()
+                    Question.findById(String(model.twoMonth))
+                        .remove()
                         .then(() => {
                             next();
                         })
