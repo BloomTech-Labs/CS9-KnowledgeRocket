@@ -27,7 +27,7 @@ class Settings extends Component {
             this.props.history.push('/rocket/auth');
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
-        this.setState({authProvider: this.props.state.user.authProvider})
+        this.setState({authProvider: this.props.state.user.authProvider,})
     }
 
     handleUpdateSettings = e => {
