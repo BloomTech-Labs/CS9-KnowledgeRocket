@@ -9,6 +9,7 @@ const Student = mongoose.Schema({
 	email: { type: String, required: true },
 });
 
+// called when a delete request is made for a student
 // find students inside a cohort and remove them from the students field
 Student.pre('remove', function(next) {
 	Cohort.update({ students: this._id }, { $pull: { students: this._id } }, { multi: true }).exec();

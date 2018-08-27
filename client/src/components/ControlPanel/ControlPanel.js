@@ -15,6 +15,7 @@ function mapStateToProps(state) {
     };
 }
 
+// custom material theme - overrides default styles/injected with withStyles HOC
 const styles = theme => ({
     root: {
         flexGrow: 1,

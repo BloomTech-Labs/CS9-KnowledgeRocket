@@ -123,8 +123,8 @@ function deleteid(req, res) {
     }
     Student.findById(id)
         .then(deleted => {
-            deleted.remove();
-            res.send(deleted);
+            deleted.remove(); // calls the remove pre hook for Student schema
+            res.send(deleted); // return a deleted user to update reducer
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on DEL' });
