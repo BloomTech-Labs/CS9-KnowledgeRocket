@@ -18,14 +18,14 @@ supertest,
 <h3>Installation</h3>
 <p>Use yarn or npm to install all the development dependencies used in this project.</p>
 
-```yarn install``` or ```npm install```
+`yarn install` or `npm install`
 
 <p>Check to see the project has compiled successfully:</p>
 
-```yarn start```
+`yarn start` or `npm start`
 
 <p>Open the project locally with the url described as Database_Url in env</p>
 
 <h2>Tests</h2>
 <p>This project uses the jest and supertest testing suites. All server-side tests can be found in the tests directory.</p>
-```yarn test```
+```yarn test``` or ```npm test```
