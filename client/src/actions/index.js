@@ -47,6 +47,9 @@ export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 
 // Rocket Actions
 export const ADD_ROCKET = 'ADD_ROCKET';
+export const APPEND_ROCKETS = 'APPEND_ROCKETS';
+export const APPENDING_ROCKETS = 'APPENDING_ROCKETS';
+export const APPENDING_ROCKETS_FAILED = 'APPENDING_ROCKETS_FAILED';
 export const ADDING_ROCKET = 'ADDING_ROCKET';
 export const DELETING_ROCKET = 'DELETING_ROCKET';
 export const DELETE_ROCKET = 'DELETE_ROCKET';
@@ -61,6 +64,20 @@ export const addRocket = (rocket, uid) => async dispatch => {
         dispatch({ type: ADD_ROCKET, payload: response.data });
     } catch (err) {}
 };
+export const appendRocket = (rocketID, startDate, userID, cohortID) => async dispatch => {
+    dispatch({ type: APPENDING_ROCKETS });
+    try {
+        let response = await axios.post(`${url}/api/cohort/appendrocket`, {
+            rocketID,
+            startDate,
+            userID,
+            cohortID,
+        });
+        dispatch({ type: APPEND_ROCKETS, payload: response.data });
+    } catch (err) {
+        dispatch({ type: APPENDING_ROCKETS_FAILED });
+    }
+};
 
 export const updateRocket = (rocket, uid) => async dispatch => {
     dispatch({ type: ADDING_ROCKET });
@@ -72,14 +89,14 @@ export const updateRocket = (rocket, uid) => async dispatch => {
     } catch (err) {}
 };
 
-export const deleteRocket = (rocketId) => async dispatch => {
-    console.log('rocket id in question', rocketId)
+export const deleteRocket = rocketId => async dispatch => {
+    console.log('rocket id in question', rocketId);
     dispatch({ type: DELETING_ROCKET });
     try {
         // Make sure Server gives the updated user with the rocket in it as response.
         // Remember in Server to add this rocket to current user's array.
         let response = await axios.delete(`${url}/api/rocket/${rocketId}`);
-        dispatch({ type: DELETE_ROCKET, payload: {response, rocketId} });
+        dispatch({ type: DELETE_ROCKET, payload: { response, rocketId } });
     } catch (err) {}
 };
 
@@ -104,14 +121,10 @@ export const addStudent = (student, teacherID, cohortID) => async dispatch => {
     }
 };
 
-export const deleteStudent = (studentID, teacherID, cohortID) => async dispatch => {
+export const deleteStudent = studentID => async dispatch => {
     dispatch({ type: DELETING_STUDENT });
     try {
-        let response = await axios.delete(`${url}/api/student/${studentID}`, {
-            studentID,
-            teacherID,
-            cohortID,
-        });
+        let response = await axios.delete(`${url}/api/student/${studentID}`);
         dispatch({ type: DELETE_STUDENT, payload: response.data });
     } catch (err) {
         dispatch({ type: DELETING_STUDENT_FAILURE });

@@ -42,6 +42,10 @@ function post(req, res) {
                     UserModel.findOne({ uid })
                         // https://mongoosejs.com/docs/populate.html Populating across multi levels
                         .populate('cohorts')
+                        .populate({
+                            path: 'cohorts',
+                            populate: { path: 'students', model: 'Students' },
+                        })
                         .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                         .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
                         .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
@@ -57,6 +61,10 @@ function post(req, res) {
                                 })
                                     .populate('rockets')
                                     .populate('cohorts')
+                                    .populate({
+                                        path: 'cohorts',
+                                        populate: { path: 'students', model: 'Students' },
+                                    })
                                     .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                                     .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
                                     .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
@@ -92,6 +100,10 @@ function post(req, res) {
                         authProvider: 'email',
                     })
                         .populate('cohorts')
+                        .populate({
+                            path: 'cohorts',
+                            populate: { path: 'students', model: 'Students' },
+                        })
                         .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                         .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
                         .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
@@ -119,6 +131,10 @@ function post(req, res) {
                 if (uid === decodedUid) {
                     UserModel.findOne({ uid })
                         .populate('cohorts')
+                        .populate({
+                            path: 'cohorts',
+                            populate: { path: 'students', model: 'Students' },
+                        })
                         .populate('rockets')
                         .populate('questions')
                         .populate('rockets.questions.twoDay')
@@ -132,6 +148,10 @@ function post(req, res) {
                                     authProvider: authType,
                                 })
                                     .populate('cohorts')
+                                    .populate({
+                                        path: 'cohorts',
+                                        populate: { path: 'students', model: 'Students' },
+                                    })
                                     .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                                     .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
                                     .populate({ path: 'rockets', populate: { path: 'twoMonth' } })

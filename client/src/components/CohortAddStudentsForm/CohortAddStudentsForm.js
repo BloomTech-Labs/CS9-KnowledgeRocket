@@ -19,18 +19,23 @@ class CohortAddStudentsForm extends Component {
 					disableUnderline={true}
 					name="lastName"
 					onChange={this.props.handleNewInput}
+					required={true}
 				/>
 				<StylizedInput
 					placeholder="First Name"
 					disableUnderline={true}
 					name="firstName"
 					onChange={this.props.handleNewInput}
+					required={true}
 				/>
 				<StylizedInput
 					placeholder="Email"
 					disableUnderline={true}
 					name="email"
 					onChange={this.props.handleNewInput}
+					type="email"
+					required={true}
+					pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])"
 				/>
 				<Button variant="contained" color="primary" onClick={this.props.handleAddStudent}>
 					Add

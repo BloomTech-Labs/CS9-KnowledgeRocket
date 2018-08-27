@@ -15,6 +15,9 @@ import {
     DELETING_ROCKET,
     ADD_STUDENT,
     DELETE_STUDENT,
+    APPENDING_ROCKETS,
+    APPEND_ROCKETS,
+    APPENDING_ROCKETS_FAILED,
 } from '../actions';
 
 const defaultState = {
@@ -40,18 +43,31 @@ export default (state = defaultState, action) => {
             StateCopy.status = DELETING_ROCKET;
             return StateCopy;
         case DELETE_ROCKET:
-            console.log('User reducer hit', action.payload)
+            console.log('User reducer hit', action.payload);
             StateCopy.status = ADD_ROCKET;
-            StateCopy.rockets.forEach((rocket, index)=>{
-                if(rocket._id === action.payload.rocketId) {
-                    StateCopy.rockets.splice(index, 1)
+            StateCopy.rockets.forEach((rocket, index) => {
+                if (rocket._id === action.payload.rocketId) {
+                    StateCopy.rockets.splice(index, 1);
                 }
-            })
+            });
+            StateCopy.authenticated = true;
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
             // console.log('Payload inside ADD_Rocket Reducer', action.payload)
             StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.authenticated = true;
+            return StateCopy;
+        case APPEND_ROCKETS:
+            StateCopy = action.payload;
+            StateCopy.authenticated = true;
+            StateCopy.status = APPEND_ROCKETS;
+            return StateCopy;
+        case APPENDING_ROCKETS:
+            StateCopy.status = APPENDING_ROCKETS;
+            return StateCopy;
+        case APPENDING_ROCKETS_FAILED:
+            StateCopy.status = APPENDING_ROCKETS_FAILED;
             return StateCopy;
         case ADDING_USER:
             StateCopy.status = ADDING_USER;
@@ -72,13 +88,25 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_COHORT;
             return StateCopy;
         case ADD_STUDENT:
-            StateCopy = { ...StateCopy, ...action.payload };
+            console.log(`payload ${action.payload}`);
+            StateCopy = action.payload;
+            StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
-            StateCopy = { ...StateCopy, ...action.payload };
-            StateCopy.status = DELETE_STUDENT;
-            return StateCopy;
+            // StateCopy = { ...StateCopy, ...action.payload };
+            // StateCopy.status = DELETE_STUDENT;
+            // return StateCopy;
+
+            return Object.assign({}, StateCopy, {
+                user: {
+                    cohorts: state.cohorts.filter((cohort, index) => {
+                        return cohort[index] !== action.payload;
+                    }),
+                },
+                status: DELETE_STUDENT,
+            });
+
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
             return StateCopy;
