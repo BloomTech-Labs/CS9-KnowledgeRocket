@@ -7,6 +7,7 @@ router
     .route('/')
     .get(get)
     .post(post);
+router.route('/appendrocket').post(appendRocket);
 router
     .route('/:id')
     .put(put)
@@ -22,6 +23,53 @@ function get(req, res) {
             res.status(500).json({ errorMessage: 'There was an error in GET' });
         });
 }
+// startDate: { type: Date },
+//             td: { type: Date },
+//             tm: { type: Date },
+//             tw: { type: Date },
+function appendRocket(req, res) {
+    //rocketID, startDate, userID, cohortID
+    const { rocketID, startDate, userID, cohortID } = req.body;
+    console.log(rocketID, startDate, userID, cohortID)
+    Cohort.findById(cohortID)
+        .populate('rockets')
+        .then(foundCohort => {
+            console.log('foundcohort before', foundCohort)
+            foundCohort.rockets.push({
+                rocketId: rocketID,
+                startDate,
+                td: Date.now() + 48 * 60 * 60 * 1000,
+                tw: Date.now() + 14 * 24 * 60 * 60 * 1000,
+                tm: Date.now() + 60 * 24 * 60 * 60 * 1000,
+            });
+            console.log('foundcohort after', foundCohort)
+            Cohort.findByIdAndUpdate(cohortID, foundCohort)
+                .then(() => {
+                    User.findById(userID)
+                        .populate('cohorts')
+                        .populate({
+                            path: 'cohorts',
+                            populate: { path: 'students', model: 'Students' },
+                        })
+                        .populate('rockets')
+                        .populate('questions')
+                        .populate('rockets.questions.twoDay')
+                        .populate('rockets.questions.twoWeek')
+                        .populate('rockets.questions.twoMonth')
+                        .then(populatedUser =>{
+                            res.status(201).json(populatedUser);
+                        }).catch(failureToPopulateUser =>{
+                            res.status(500).json({failureToPopulateUser: failureToPopulateUser.message})
+                        })
+                })
+                .catch(errorAdding => {
+                    res.status(500).json({ errorAdding: errorAdding.message });
+                });
+        })
+        .catch(errFinding => {
+            res.status(500).json({ errorFinding: errFinding.message });
+        });
+}
 
 function post(req, res) {
     const cohort = new Cohort(req.body.cohort);
@@ -32,7 +80,15 @@ function post(req, res) {
         .then(savedCohort => {
             User.findOne({ _id: id })
                 .populate('cohorts')
+                .populate({
+                    path: 'cohorts',
+                    populate: { path: 'students', model: 'Students' },
+                })
                 .populate('rockets')
+                .populate('questions')
+                .populate('rockets.questions.twoDay')
+                .populate('rockets.questions.twoWeek')
+                .populate('rockets.questions.twoMonth')
                 .then(found => {
                     found.cohorts.push(savedCohort._id);
                     User.findByIdAndUpdate(id, { cohorts: found.cohorts })

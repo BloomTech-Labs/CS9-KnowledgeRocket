@@ -1,0 +1,452 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RocketForm /> renders correctly 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c3 {
+  width: 100%;
+  height: 4rem;
+}
+
+.c2 {
+  width: 100%;
+  height: 4rem;
+  margin: 1rem 0;
+  text-align: justify;
+}
+
+.c4 {
+  display: grid;
+  margin: 0 0 1rem 0;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+}
+
+.c1 {
+  color: red;
+  font-size: .8rem;
+  height: 1rem;
+}
+
+<form
+  onSubmit={[Function]}
+>
+  <div
+    className="c0"
+  >
+    <label
+      htmlFor="title"
+    />
+    <input
+      name="title"
+      onChange={[Function]}
+      placeholder="Title"
+      value=""
+    />
+    <span
+      className="c1"
+    />
+  </div>
+  <div
+    className="c0"
+  >
+    <p
+      className="c2"
+    >
+      Knowledge rockets are short paragraphs followed by a multiple choice question. These are automatically sent two days, two weeks, and two months after a lesson is taught and are intended to cause the student to recall what they have learned. The rockets should not be used to provide exhaustive review. Instead, they ask the student to "reload" the mental maps that acquired during the lesson.
+    </p>
+    <span
+      style={
+        Object {
+          "color": "red",
+          "marginBottom": "2%",
+        }
+      }
+    >
+      All fields are required.
+    </span>
+  </div>
+  <section>
+    <div
+      className="c0"
+    >
+      <label
+        htmlFor="td.explanation"
+      >
+        Two Days - Review Text
+      </label>
+      <textarea
+        aria-describedby="td-explanation-ErrorDescription"
+        className="c3"
+        name="td.explanation"
+        onChange={[Function]}
+        placeholder="Two Day Review Text"
+        value=""
+      />
+      <span
+        className="c1"
+        id="td-explanation-ErrorDescription"
+      />
+    </div>
+    <div
+      className="c0"
+    >
+      <label
+        htmlFor="td.question"
+      >
+        Two Days - Review Question
+      </label>
+      <textarea
+        aria-describedby="td-question-ErrorDescription"
+        className="c3"
+        name="td.question"
+        onChange={[Function]}
+        placeholder="Two Day Review Text"
+        value=""
+      />
+      <span
+        className="c1"
+        id="td-question-ErrorDescription"
+      />
+    </div>
+    <div
+      className="c4"
+    >
+      <label>
+        <input
+          aria-describedby="td-correct-ErrorDescription"
+          checked={false}
+          name="td.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 1"
+        />
+        <input
+          name="td.choices[0].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 1"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="td-correct-ErrorDescription"
+          checked={false}
+          name="td.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 2"
+        />
+        <input
+          name="td.choices[1].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 2"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="td-correct-ErrorDescription"
+          checked={false}
+          name="td.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 3"
+        />
+        <input
+          name="td.choices[2].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 3"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="td-correct-ErrorDescription"
+          checked={false}
+          name="td.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 4"
+        />
+        <input
+          name="td.choices[3].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 4"
+        />
+      </label>
+    </div>
+    <span
+      className="c1"
+      id="td-correct-ErrorDescription"
+    />
+  </section>
+  <section>
+    <div
+      className="c0"
+    >
+      <label
+        htmlFor="tw.explanation"
+      >
+        Two Weeks - Review Text
+      </label>
+      <textarea
+        aria-describedby="tw-explanation-ErrorDescription"
+        className="c3"
+        name="tw.explanation"
+        onChange={[Function]}
+        placeholder="Two Day Review Text"
+        value=""
+      />
+      <span
+        className="c1"
+        id="tw-explanation-ErrorDescription"
+      />
+    </div>
+    <div
+      className="c0"
+    >
+      <label
+        htmlFor="tw.question"
+      >
+        Two Weeks - Review Question
+      </label>
+      <textarea
+        aria-describedby="tw-question-ErrorDescription"
+        className="c3"
+        name="tw.question"
+        onChange={[Function]}
+        placeholder="Two Day Review Text"
+        value=""
+      />
+      <span
+        className="c1"
+        id="tw-question-ErrorDescription"
+      />
+    </div>
+    <div
+      className="c4"
+    >
+      <label>
+        <input
+          aria-describedby="tw-correct-ErrorDescription"
+          checked={false}
+          name="tw.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 1"
+        />
+        <input
+          name="tw.choices[0].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 1"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="tw-correct-ErrorDescription"
+          checked={false}
+          name="tw.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 2"
+        />
+        <input
+          name="tw.choices[1].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 2"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="tw-correct-ErrorDescription"
+          checked={false}
+          name="tw.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 3"
+        />
+        <input
+          name="tw.choices[2].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 3"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="tw-correct-ErrorDescription"
+          checked={false}
+          name="tw.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 4"
+        />
+        <input
+          name="tw.choices[3].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 4"
+        />
+      </label>
+    </div>
+    <span
+      className="c1"
+      id="tw-correct-ErrorDescription"
+    />
+  </section>
+  <section>
+    <div
+      className="c0"
+    >
+      <label
+        htmlFor="tm.explanation"
+      >
+        Two Months - Review Text
+      </label>
+      <textarea
+        aria-describedby="tm-explanation-ErrorDescription"
+        className="c3"
+        name="tm.explanation"
+        onChange={[Function]}
+        placeholder="Two Day Review Text"
+        value=""
+      />
+      <span
+        className="c1"
+        id="tm-explanation-ErrorDescription"
+      />
+    </div>
+    <div
+      className="c0"
+    >
+      <label
+        htmlFor="tm.question"
+      >
+        Two Months - Review Question
+      </label>
+      <textarea
+        aria-describedby="tm-question-ErrorDescription"
+        className="c3"
+        name="tm.question"
+        onChange={[Function]}
+        placeholder="Two Day Review Text"
+        value=""
+      />
+      <span
+        className="c1"
+        id="tm-question-ErrorDescription"
+      />
+    </div>
+    <div
+      className="c4"
+    >
+      <label>
+        <input
+          aria-describedby="tm-correct-ErrorDescription"
+          checked={false}
+          name="tm.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 1"
+        />
+        <input
+          name="tm.choices[0].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 1"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="tm-correct-ErrorDescription"
+          checked={false}
+          name="tm.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 2"
+        />
+        <input
+          name="tm.choices[1].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 2"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="tm-correct-ErrorDescription"
+          checked={false}
+          name="tm.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 3"
+        />
+        <input
+          name="tm.choices[2].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 3"
+        />
+      </label>
+      <label>
+        <input
+          aria-describedby="tm-correct-ErrorDescription"
+          checked={false}
+          name="tm.correct"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="radio"
+          value="Answer 4"
+        />
+        <input
+          name="tm.choices[3].text"
+          onChange={[Function]}
+          type="text"
+          value="Answer 4"
+        />
+      </label>
+    </div>
+    <span
+      className="c1"
+      id="tm-correct-ErrorDescription"
+    />
+  </section>
+  <button
+    type="submit"
+  >
+    submit
+  </button>
+</form>
+`;

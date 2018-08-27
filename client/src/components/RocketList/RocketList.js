@@ -61,6 +61,8 @@ const RocketCardMid = Styled.div`
 //     height: 6.9rem;
 // `;
 
+
+
 const RocketCardHeader = Styled.div`
     font-size: 2rem;
 `;
@@ -110,9 +112,7 @@ class RocketList extends Component {
             });
         }
     };
-    rocketChoice = e => {
-        this.props.handlePickRocket(e.target.id);
-    };
+
     handleNewRocket = e => {
         this.props.history.push('/rocket/new');
     };
@@ -129,7 +129,7 @@ class RocketList extends Component {
                     <RocketListContainer height={this.state.height}>
                         {this.props.state.user.rockets.map(rocket => {
                             return (
-                                <RocketListCard key={rocket._id}>
+                                <RocketListCard key={`RLC_${rocket._id}`}>
                                     <StyledCardContent>
                                         <RocketCardTop>
                                             <Tooltip title="Delete Rocket Permanently">
@@ -142,17 +142,6 @@ class RocketList extends Component {
                                                     mini
                                                 >
                                                     <DeleteIcon />
-                                                </Button>
-                                            </Tooltip>
-                                            <Tooltip title="Add Rocket to Cohort">
-                                                <Button
-                                                    variant="fab"
-                                                    id={rocket._id}
-                                                    color="primary"
-                                                    onClick={this.rocketChoice}
-                                                    mini
-                                                >
-                                                    Select Rocket
                                                 </Button>
                                             </Tooltip>
                                         </RocketCardTop>

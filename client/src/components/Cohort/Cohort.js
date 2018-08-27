@@ -20,8 +20,8 @@ function mapStateToProps(state) {
 const StyledHeaders = styled.h2`
     align-self: flex-start;
     font-size 2rem;
-    margin-bottom: 20px;
-    margin-left: 2.5%;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto', serif;
 `;
 
 const CohortFormMainContainer = styled(Card)`
@@ -37,20 +37,20 @@ const CohortFormMainContainer = styled(Card)`
 const StyledCohortSettingForm = styled(CohortSettingForm)`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 95%;
-    height: 60px;
-    padding: 10px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
 `;
 
 const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 95%;
-    height: 60px;
-    padding: 10px;
+    justify-content: space-between;
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
     margin-bottom: 20px;
 `;
 
@@ -60,9 +60,9 @@ const StyledCohortStudentList = styled(CohortStudentList)`
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    width: 95%;
-    padding: 20px;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
 `;
 
 const StyledCohortRocketList = styled(CohortRocketList)`
@@ -70,10 +70,9 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: flex-start;
-    width: 95%;
-    height: 800px;
-    padding: 10px 20px 20px 20px;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
 `;
 
 const StyledAddCohortBtn = styled(Button)`
@@ -99,7 +98,7 @@ class Cohort extends Component {
         if (!this.props.state.user.authenticated) {
             this.props.history.push('/rocket/auth');
         }
-        this.props.generateBreadCrumbs(this.props.history.location.pathname);
+        this.props.generateBreadCrumbs('/rocket/classes');
         this.setState({
             startDate: { objectID: Date.now() },
         });
@@ -146,13 +145,13 @@ class Cohort extends Component {
         };
 
         this.props.addStudent(student, teacherID, cohortID);
-        this.props.history.push('/rocket/classes');
     };
 
     render() {
-        return [
+        console.log(this.props);
+        return (
             <CohortFormMainContainer>
-                <StyledHeaders>Class Settings</StyledHeaders>
+                <StyledHeaders>Create or Edit the Class Settings</StyledHeaders>
                 <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm
@@ -168,7 +167,11 @@ class Cohort extends Component {
                     <h3>Looks like you don't have any students</h3>
                 )}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
-                <StyledCohortRocketList />
+                <StyledCohortRocketList
+                    handlePickRocket={this.handlePickRocket}
+                    cohortID={this.props.match.params.id}
+                />
+                
                 <StyledAddCohortBtn
                     variant="contained"
                     color="primary"
@@ -176,8 +179,8 @@ class Cohort extends Component {
                 >
                     Add this Cohort
                 </StyledAddCohortBtn>
-            </CohortFormMainContainer>,
-        ];
+            </CohortFormMainContainer>
+        )
     }
 }
 

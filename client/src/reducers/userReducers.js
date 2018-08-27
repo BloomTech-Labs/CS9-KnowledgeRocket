@@ -18,6 +18,9 @@ import {
     APPENDING_ROCKETS,
     APPEND_ROCKETS,
     APPENDING_ROCKETS_FAILED,
+    UPDATING_USER,
+    UPDATE_USER_FAILURE,
+    UPDATE_USER,
 } from '../actions';
 
 const defaultState = {
@@ -50,17 +53,18 @@ export default (state = defaultState, action) => {
                     StateCopy.rockets.splice(index, 1);
                 }
             });
+            StateCopy.authenticated = true;
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
-            StateCopy.authenticated = true;
             // console.log('Payload inside ADD_Rocket Reducer', action.payload)
             StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.authenticated = true;
             return StateCopy;
         case APPEND_ROCKETS:
-            StateCopy.status = APPEND_ROCKETS;
-            StateCopy.authenticated = true;
             StateCopy = action.payload;
+            StateCopy.authenticated = true;
+            StateCopy.status = APPEND_ROCKETS;
             return StateCopy;
         case APPENDING_ROCKETS:
             StateCopy.status = APPENDING_ROCKETS;
@@ -80,6 +84,17 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, user: [...action.payload] };
             StateCopy.authenticated = true;
             StateCopy.status = UPGRADE_USER;
+            return StateCopy;
+        case UPDATING_USER:
+            StateCopy.status = UPDATING_USER;
+            return StateCopy;
+        case UPDATE_USER_FAILURE:
+            StateCopy.status = UPDATE_USER_FAILURE;
+            return StateCopy;
+        case UPDATE_USER:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.status = UPDATE_USER;
+            StateCopy.authenticated = true;
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
