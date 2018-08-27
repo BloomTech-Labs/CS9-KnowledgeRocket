@@ -121,9 +121,9 @@ function deleteid(req, res) {
     if (!Student.findById(id)) {
         res.status(404).json({ message: 'Student not found' });
     }
-    Student.findByIdAndRemove(id)
+    Student.findById(id)
         .then(deleted => {
-            console.log(`DELETED STUDENT ${JSON.stringify(deleted)}`);
+            deleted.remove();
             res.send(deleted);
         })
         .catch(err => {
