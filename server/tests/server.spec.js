@@ -13,10 +13,7 @@ const testdb = process.env.TestDB_Url;
 describe('server', () => {
     beforeAll(() => {
         return mongoose
-            .connect(
-                testdb,
-                { useNewUrlParser: true }
-            )
+            .connect(testdb, { useNewUrlParser: true })
             .then(console.log('connected to test db'));
     });
 
@@ -83,10 +80,10 @@ describe('server', () => {
                 teacherID: id,
                 cohortID: cohortID,
             });
-        console.log(newCohort);
-        console.log(mockStudent);
+        // console.log(newCohort);
+        // console.log(mockStudent);
 
-        console.log(mockStudent);
+        // console.log(mockStudent);
         expect(mockStudent.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('students');
@@ -111,7 +108,7 @@ describe('server', () => {
         const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
         const newUser = await Student.create(mockUser);
         const response = await request(server).delete(`/api/student/${newUser._id}`);
-        expect(response.status).toBe(204);
+        expect(response.status).toBe(200);
         await mongoose.connection.db.dropCollection('students');
     });
     //Rocket Tests

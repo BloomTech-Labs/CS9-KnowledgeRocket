@@ -15,7 +15,7 @@ const StylizedInput = styled(Input)`
 class CohortSettingForm extends Component {
 	render() {
 		return (
-			<Card className={this.props.title}>
+			<Card className={this.props.className}>
 				<StylizedInput
 					placeholder="Class Name"
 					disableUnderline={true}
