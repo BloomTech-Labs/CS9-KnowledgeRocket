@@ -32,7 +32,7 @@ class Routes extends Component {
                         <Route path="/rocket/new" exact component={Rocket} />
                         <Route path="/rocket/view/:id" exact component={RocketView} />
                         <Route path="/rocket/billing" exact component={Billing} />
-                        <Route path="/rocket/classForm/:id" exact component={Cohort} />
+                        <Route path="/rocket/classForm" exact component={Cohort} />
                         <Route path="/rocket/classes" exact component={CohortList} />
                         <Route path="/rocket/settings" exact component={Settings} />
                         <Route path="/rocket/auth" exact component={Auth} />
