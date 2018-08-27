@@ -9,6 +9,7 @@
     width: 11.4rem;
     border-radius: 0.4rem;
     box-shadow: 0px 0px 8px #000000dd;
+    background-color: white;
 }
 .Auth_input input:before {
     height: 0 !important;

@@ -18,14 +18,17 @@ const ControlPanelContainer = Styled.div`
     align-items: flex-start;
     padding: 1rem;
     width: 10rem;
-    border-radius: .4rem;
+    
     min-height: 10rem;
-    background-color: #0088CC;
+    
 `;
+//border-radius: .4rem;
+//background-color: #0088CC;
 const CPCWithBorder = ControlPanelContainer.extend`
-    border: 1px solid rgb(119, 136, 153);
+    
     height: ${props => props.height};
 `;
+//border: 1px solid rgb(119, 136, 153);
 
 export const CPCButton = Styled(Button)`
     color: #EEEEEE !important;
