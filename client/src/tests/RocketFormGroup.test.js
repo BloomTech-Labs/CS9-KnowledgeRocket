@@ -35,9 +35,36 @@ describe('RocketFormGroup', () => {
         });
     });
     describe('<QuestionChoices />', () => {
-        it('renders', () => {
-            renderSnapshotTest(QuestionChoices);
-        });
+        const mockProps = {
+            values: {
+                tm: {
+                    explanation: '',
+                    choices: [
+                        {
+                            text: '',
+                        },
+                        {
+                            text: '',
+                        },
+                        {
+                            text: '',
+                        },
+                        {
+                            text: '',
+                        },
+                    ],
+                },
+            },
+
+            interval: 'tm',
+
+            errors: {
+                tm: '',
+            },
+
+            touched: {},
+        };
+        renderSnapshotTest(QuestionChoices, mockProps);
         // TODO prop tests
     });
 
