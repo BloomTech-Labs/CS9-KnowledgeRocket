@@ -9,7 +9,6 @@ import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
-import FormLabel from '@material-ui/core/FormLabel';
 // Actions
 import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
 function mapStateToProps(state) {
