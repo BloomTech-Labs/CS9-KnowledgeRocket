@@ -10,13 +10,13 @@ const Rocket = mongoose.Schema({
     twoMonth: { type: ObjectId, ref: 'Question' },
 });
 
-function remove(array, element) {
-    array.forEach((item, index) => {
-        if (String(item._id) === String(element)) {
-            array.splice(index, 1);
-        }
-    });
-}
+// function remove(array, element) {
+//     array.forEach((item, index) => {
+//         if (String(item._id) === String(element)) {
+//             array.splice(index, 1);
+//         }
+//     });
+// }
 
 function removeQuestions(next, model) {
     Question.findById(mongoose.Types.ObjectId(model.twoDay))
