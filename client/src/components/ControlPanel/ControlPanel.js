@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 // Material Components
+import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -14,20 +15,25 @@ function mapStateToProps(state) {
     };
 }
 
-const StyledControlPanel = styled(Drawer)`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 1rem;
-    width: 10rem;
-    border-radius: 0.4rem;
-    min-height: 10rem;
-    height: ${props => props.height};
-    background-color: #0088cc;
-`;
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'flex',
+    },
+    drawerPaper: {
+        position: 'static',
+        width: 200,
+        backgroundColor: '#3f51b5',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+    },
+});
 
-const CPCButton = styled(Button)`
+export const CPCButton = styled(Button)`
     color: #eeeeee !important;
     border: 1px solid rgb(119, 136, 153);
     background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
@@ -44,39 +50,42 @@ class ControlPanel extends Component {
     state = {
         height: '0px',
     };
-    componentDidMount() {
-        this.updateDimensions();
-        window.addEventListener('resize', this.updateDimensions.bind(this));
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateDimensions.bind(this));
-    }
 
-    updateDimensions = () => {
-        if (window.windowState === 1) {
-            this.setState({ height: window.innerHeight - 88 + 'px' });
-        } else {
-            this.setState({ height: document.documentElement.clientHeight - 88 + 'px' });
-        }
-    };
     render() {
+        const { classes } = this.props;
+
         return (
-            <CPCWithBorder height={this.state.height}>
-                <CPLink to="/rocket">
-                    <CPCButton variant="outlined">Rockets</CPCButton>
-                </CPLink>
-                <CPLink to="/rocket/classes">
-                    <CPCButton variant="outlined">Classes</CPCButton>
-                </CPLink>
-                <CPLink to="/rocket/billing">
-                    <CPCButton variant="outlined">Billing</CPCButton>
-                </CPLink>
-                <CPLink to="/rocket/settings">
-                    <CPCButton variant="outlined">Settings</CPCButton>
-                </CPLink>
-            </CPCWithBorder>
+            <Drawer
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <List>
+                    <ListItem>
+                        <CPLink to="/rocket">
+                            <CPCButton variant="outlined">Rockets</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                    <ListItem>
+                        <CPLink to="/rocket/classes">
+                            <CPCButton variant="outlined">Classes</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                    <ListItem>
+                        <CPLink to="/rocket/billing">
+                            <CPCButton variant="outlined">Billing</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                    <ListItem>
+                        <CPLink to="/rocket/settings">
+                            <CPCButton variant="outlined">Settings</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                </List>
+            </Drawer>
         );
     }
 }
 
-export default connect(mapStateToProps)(ControlPanel);
+export default connect(mapStateToProps)(withStyles(styles)(ControlPanel));
