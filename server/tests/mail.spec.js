@@ -6,11 +6,12 @@ describe('testing mail route and capabilities', () => {
         expect(mail).not.toBeUndefined();
     });
 
-    it(`contains it's route and model`, () => {
+    it(`contains its route and model`, () => {
         expect(mail).toMatchObject(
             expect.objectContaining({
-                Router: expect.any(Object),
+                Router: expect.any(Function),
                 Model: expect.any(Object),
+                generateEmail: expect.any(Function),
             })
         );
     });
