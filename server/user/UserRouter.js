@@ -5,7 +5,6 @@ router
     .route('/')
     .get(get)
     .post(post);
-
 router
     .route('/:id')
     .put(put)
@@ -14,8 +13,8 @@ router
 
 function get(req, res) {
     User.find()
-        .then(exp => {
-            res.status(200).json(exp);
+        .then(expected => {
+            res.status(200).json(expected);
         })
         .catch(err => {
             res.status(500).json({ errorMessage: 'There was an error in GET' });
@@ -25,8 +24,8 @@ function get(req, res) {
 function post(req, res) {
     const user = new User(req.body);
     user.save()
-        .then(stuff => {
-            res.status(201).json(stuff);
+        .then(expected => {
+            res.status(201).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'There was an error in POST' });
@@ -35,8 +34,8 @@ function post(req, res) {
 function getid(req, res) {
     const id = req.params.id;
     User.findById(id)
-        .then(user => {
-            res.status(200).json(user);
+        .then(expected => {
+            res.status(200).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on GETID' });
@@ -49,8 +48,8 @@ function put(req, res) {
         res.status(404).json({ message: 'User not found' });
     }
     User.findByIdAndUpdate(id, req.body)
-        .then(user => {
-            res.status(201).json(user);
+        .then(expected => {
+            res.status(201).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on PUT' });
@@ -62,8 +61,8 @@ function deleteid(req, res) {
         res.status(404).json({ message: 'User not found' });
     }
     User.findByIdAndRemove(id)
-        .then(user => {
-            res.status(204).json(user);
+        .then(expected => {
+            res.status(204).json(expected);
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on DEL' });

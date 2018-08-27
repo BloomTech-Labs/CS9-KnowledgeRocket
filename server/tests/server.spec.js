@@ -13,10 +13,7 @@ const testdb = process.env.TestDB_Url;
 describe('server', () => {
     beforeAll(() => {
         return mongoose
-            .connect(
-                testdb,
-                { useNewUrlParser: true }
-            )
+            .connect(testdb, { useNewUrlParser: true })
             .then(console.log('connected to test db'));
     });
 
@@ -50,7 +47,7 @@ describe('server', () => {
         const mockUser = { email: 'bobtodd@gmail.com' };
         const newUser = await User.create(mockUser);
         const response = await request(server)
-            .put(`/api/user/${newUser._id}`)
+            .put(`/api/user/${newUser.id}`)
             .send((newUser.email = 'bobtodd1@gmail.com'));
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('users');
@@ -68,13 +65,26 @@ describe('server', () => {
         expect(response.status).toBe(200);
     });
     test('should return 201', async () => {
-        const fakeMail = 'bobtodd@gmail.com';
-        const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
-        const createdUser = await Student.create(mockUser);
+        const mockUser = { email: 'bobtodd@gmail.com' };
+        const newUser = await User.create(mockUser);
+        const id = newUser._id;
+        const mockCohort = { title: 'bob', teacher: id };
+        const newCohort = await Cohort.create(mockCohort);
+        const cohortID = newCohort._id;
+        const fakeMail = 'bobtod@gmail.com';
+        const mockStudent = { firstName: 'bob', lastName: 'todd', email: 'bobtod@gmail.com' };
         const response = await request(server)
             .post('/api/student')
-            .send(mockUser);
-        expect(createdUser.email).toEqual(fakeMail);
+            .send({
+                student: mockStudent,
+                teacherID: id,
+                cohortID: cohortID,
+            });
+        // console.log(newCohort);
+        // console.log(mockStudent);
+
+        // console.log(mockStudent);
+        expect(mockStudent.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('students');
     });
@@ -98,7 +108,7 @@ describe('server', () => {
         const mockUser = { firstName: 'bob', lastName: 'todd', email: 'bobtodd@gmail.com' };
         const newUser = await Student.create(mockUser);
         const response = await request(server).delete(`/api/student/${newUser._id}`);
-        expect(response.status).toBe(204);
+        expect(response.status).toBe(200);
         await mongoose.connection.db.dropCollection('students');
     });
     //Rocket Tests
@@ -130,12 +140,32 @@ describe('server', () => {
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('rockets');
     });
-    test('DEL should return 204', async () => {
-        const mockUser = { title: 'bob todd loves extra letters' };
-        const newUser = await Rocket.create(mockUser);
-        const response = await request(server).delete(`/api/rocket/${newUser._id}`);
+    test('DEL Rockket should return 204', async () => {
+        // Fixing Rocket Delete Test
+        // Make a User
+        const mockUser = { email: 'bobtodd@gmail.com' };
+        const newUser = await User.create(mockUser);
+        // Make Cohort
+        const mockCohort = { title: 'Cohort Tile' };
+        const newCohort = await Cohort.create(mockCohort);
+        //Make Question
+        const mockQuestion = {
+            title: 'some title',
+            explanation: 'some explanation',
+            question: 'what is life when you write backend code?',
+            correct: 'The correct answer is: the matrix!',
+        };
+        await Question.create(mockQuestion)
+        // End of Prep before Rocket Creation and Deletion.
+        const mockRocket = { title: 'bob todd loves extra letters' };
+        const newRocket = await Rocket.create(mockRocket);
+        const response = await request(server).delete(`/api/rocket/${newRocket._id}`);
         expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('rockets');
+        // Drop prep Collections
+        await mongoose.connection.db.dropCollection('cohorts');
+        await mongoose.connection.db.dropCollection('questions');
+        await mongoose.connection.db.dropCollection('users');
     });
     //Response Rocket Tests
     test('should return 200 and a response', async () => {
@@ -183,6 +213,7 @@ describe('server', () => {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}',
         };
         const response = await request(server)
             .post('/api/question')
@@ -191,23 +222,25 @@ describe('server', () => {
         await mongoose.connection.db.dropCollection('questions');
     });
     test('GET should return 200', async () => {
-        const mockUser = {
+        const mockQuestion = {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}',
         };
-        const newUser = await Question.create(mockUser);
+        const newUser = await Question.create(mockQuestion);
         const response = await request(server).get(`/api/question/${newUser._id}`);
         expect(response.status).toBe(200);
         await mongoose.connection.db.dropCollection('questions');
     });
     test('PUT should return 201', async () => {
-        const mockUser = {
+        const mockQuestion = {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}',
         };
-        const newUser = await Question.create(mockUser);
+        const newUser = await Question.create(mockQuestion);
         const response = await request(server)
             .put(`/api/question/${newUser._id}`)
             .send((newUser.title = 'bobtodd1@gmail.com'));
@@ -215,12 +248,13 @@ describe('server', () => {
         await mongoose.connection.db.dropCollection('questions');
     });
     test('DEL should return 204', async () => {
-        const mockUser = {
+        const mockQuestion = {
             title: 'some title',
             explanation: 'some explanation',
             question: 'what is life when you write backend code?',
+            correct: '{type: String, required: true}',
         };
-        const newUser = await Question.create(mockUser);
+        const newUser = await Question.create(mockQuestion);
         const response = await request(server).delete(`/api/question/${newUser._id}`);
         expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('questions');
@@ -231,10 +265,16 @@ describe('server', () => {
         expect(response.status).toBe(200);
     });
     test('should return 201', async () => {
-        const mockCohort = { title: 'some title', rockets: [{ startDate: '1995-12-17T03:24:00' }] };
+        const mockUser = { email: 'bobtodd@gmail.com' };
+        const newUser = await User.create(mockUser);
+        const id = newUser._id;
+        const mockCohort = { title: 'some title' };
         const response = await request(server)
             .post('/api/cohort')
-            .send(mockCohort);
+            // const cohort = new Cohort(req.body.cohort);
+            // const id = req.body.id;
+            // You have to pass in an object and with prop cohort and just id
+            .send({ cohort: mockCohort, id });
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('cohorts');
     });

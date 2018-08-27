@@ -3,10 +3,10 @@ import Styled from 'styled-components';
 
 export const HomeCTA = Styled.div`
     font-family: 'Roboto';
-    background: url('/img/HomePage_CTA_08.svg') no-repeat center center;
+    background: url('/img/HomePage_CTA_09.svg') no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 1150px;
+    min-height: 600px;
     background-color: black;
     @media(min-width: 2000px) {
         &{
@@ -34,10 +34,18 @@ export const NavLogo = Styled.img`
     height: 3rem;
     width: 3rem;
     margin: 0 1rem;
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const HomeContainer = Styled.div`
     font-family: 'Roboto', sans-serif;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    &::-webkit-scrollbar {display:none;}
+    width: 100%;
 `;
 
 export const MidContainer = Styled.div`

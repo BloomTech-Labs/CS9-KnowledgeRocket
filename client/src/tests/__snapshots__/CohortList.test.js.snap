@@ -2,58 +2,108 @@
 
 exports[`CohortList renders correctly 1`] = `
 <div
-  className="sc-bdVaJa cjjvmq"
+  className="sc-bwzfXH fliMDs"
 >
   <div
-    className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-bxivhb eMGzAp"
+    className="sc-htpNat jAgoUU"
   >
     <div
-      className="MuiCardContent-root-29 sc-ifAKCX kTCbOb"
+      className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-bxivhb LuvEN"
     >
-      <h3
-        className="sc-EHOje eBBwHL"
+      <div
+        className="MuiCardContent-root-29"
       >
-        Add a new class
-      </h3>
-      <button
-        className="MuiButtonBase-root-56 MuiButton-root-30 MuiButton-fab-47 MuiButton-contained-41 MuiButton-containedPrimary-42 MuiButton-raised-44 MuiButton-raisedPrimary-45"
-        disabled={false}
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        tabIndex="0"
-        type="button"
-      >
-        <span
-          className="MuiButton-label-31"
+        <div
+          className="MuiFormControl-root-30"
         >
-          <svg
-            aria-hidden="true"
-            className="MuiSvgIcon-root-59"
-            color={undefined}
-            focusable="false"
-            viewBox="0 0 24 24"
+          <div
+            className="MuiCardContent-root-29"
           >
-            <path
-              d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-            />
-            <path
-              d="M0 0h24v24H0z"
-              fill="none"
-            />
-          </svg>
-        </span>
-        <span
-          className="MuiTouchRipple-root-66"
-        />
-      </button>
+            <a
+              className="sc-bdVaJa iqJYxZ"
+              href="/rocket/classForm/undefined"
+              onClick={[Function]}
+            >
+              
+            </a>
+          </div>
+          <div
+            className="MuiCardContent-root-29"
+          >
+            Students:
+             
+            1
+          </div>
+          <div
+            className="MuiCardContent-root-29"
+          >
+            Participation:
+          </div>
+          <div
+            className="MuiCardContent-root-29"
+          >
+            Rockets Sent:
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-ifAKCX jzUTef"
+    >
+      <div
+        className="MuiCardContent-root-29 sc-EHOje fhnXmt"
+      >
+        <h3
+          className="sc-bZQynM hyWVmf"
+        >
+          New Class
+        </h3>
+        <button
+          className="MuiButtonBase-root-60 MuiButton-root-34 MuiButton-fab-51 MuiButton-contained-45 MuiButton-containedPrimary-46 MuiButton-raised-48 MuiButton-raisedPrimary-49"
+          disabled={false}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          <span
+            className="MuiButton-label-35"
+          >
+            <a
+              className="sc-gzVnrw frFvIN"
+              href="/rocket/classForm"
+              onClick={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-63"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                />
+                <path
+                  d="M0 0h24v24H0z"
+                  fill="none"
+                />
+              </svg>
+            </a>
+          </span>
+          <span
+            className="MuiTouchRipple-root-70"
+          />
+        </button>
+      </div>
     </div>
   </div>
 </div>

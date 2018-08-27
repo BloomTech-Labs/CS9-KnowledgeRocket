@@ -1,0 +1,53 @@
+.Settings_info {
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    font-size: 2rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.Settings_info--Oauth {
+    font-weight: 400;
+    color: rgb(166, 255, 0) !important;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+        0px 0px 6px #000000dd;
+}
+
+.title10 {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 1rem;
+    color: ghostwhite;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+        0px 0px 8px #000000dd;
+}
+.radioGroup {
+    padding: 1rem;
+    border: 1px solid black;
+}
+
+.Settings_form {
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+.Settings_passwords {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.Settings_input {
+    width: 200;
+}
+
+.Settings_submit {
+    width: 5rem;
+}

@@ -3,6 +3,7 @@ const Firebase = require('firebase');
 const admin = require('firebase-admin');
 const UserModel = require('../user/User');
 const { FIREBASE_CONFIG } = require('../config');
+const mongoose = require('mongoose');
 
 // Variable to Initialize Firebase Client App
 let init_firebase;
@@ -26,10 +27,89 @@ admin.initializeApp({
     databaseURL: `${process.env.REACT_APP_FIRE_DB_URL}`,
 });
 router.route('/').post(post);
+router.route('/:id').put(modifyUser);
+
+function modifyUser(req, res) {
+    const { id } = req.params;
+    const password = req.body.changes.currentPW;
+    const email = req.body.email;
+    const newPW = req.body.changes.newPW;
+    const ccEmail = req.body.changes.ccEmail;
+    // Sign in User if it provided a password: Meaning this user is email password provider
+    if (password) {
+        init_firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(response => {
+                let currentUser = init_firebase.auth().currentUser;
+                if (ccEmail) {
+                    currentUser
+                        .updateEmail(ccEmail)
+                        .then(() => {
+                            // Update said user in our DB
+                            UserModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+                                ccEmail,
+                                email: ccEmail,
+                            })
+                                .populate('cohorts')
+                                .populate({
+                                    path: 'cohorts',
+                                    populate: { path: 'students', model: 'Students' },
+                                })
+                                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                                .then(updatedUser => {
+                                    if (newPW) {
+                                        currentUser
+                                            .updatePassword(newPW)
+                                            .then(() => {
+                                                res.status(201).json(updatedUser);
+                                            })
+                                            .catch(err => {
+                                                res.status(400).json({ errorMessage: err.message });
+                                            });
+                                    } else {
+                                        res.status(201).json(updatedUser);
+                                    }
+                                })
+                                .catch(err => {
+                                    res.status(400).json({ errorMessage: err.message });
+                                });
+                        })
+                        .catch(err => {
+                            res.status(400).json({ errorMessage: err.message });
+                        });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(400).json({ errorMessage: err.message });
+            });
+    } else {
+        // No password was provided, so Find and Update the ccEmail in our DB.
+        UserModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
+            ccEmail,
+        })
+            .populate('cohorts')
+            .populate({
+                path: 'cohorts',
+                populate: { path: 'students', model: 'Students' },
+            })
+            .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+            .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+            .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+            .then(updatedUser => {
+                res.status(201).json(updatedUser);
+            })
+            .catch(err => {
+                res.status(400).json({ errorMessage: err.message });
+            });
+    }
+}
 
 // TODO: Implement Token Verification from Firebase
 // In the case a user is already authenticated on front end.
-
 function post(req, res) {
     const { email, password, authType } = req.body;
     if (authType === 'signin') {
@@ -41,6 +121,15 @@ function post(req, res) {
                 const uid = response.user.uid;
                 response.user.getIdToken().then(token => {
                     UserModel.findOne({ uid })
+                        // https://mongoosejs.com/docs/populate.html Populating across multi levels
+                        .populate('cohorts')
+                        .populate({
+                            path: 'cohorts',
+                            populate: { path: 'students', model: 'Students' },
+                        })
+                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                         .then(foundUser => {
                             // Alternatively Replace Token Here and Send back Updated Token...
                             if (
@@ -50,9 +139,19 @@ function post(req, res) {
                                 // Account has Expired Update account accordingly
                                 UserModel.findByIdAndUpdate(foundUser._id, {
                                     account: 'free',
-                                }).then(updatedUser => {
-                                    res.status(201).json(updatedUser);
-                                });
+                                })
+                                    .populate('rockets')
+                                    .populate('cohorts')
+                                    .populate({
+                                        path: 'cohorts',
+                                        populate: { path: 'students', model: 'Students' },
+                                    })
+                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                                    .then(updatedUser => {
+                                        res.status(201).json(updatedUser);
+                                    });
                             } else {
                                 res.json(foundUser);
                             }
@@ -104,6 +203,16 @@ function post(req, res) {
                 const decodedUid = decodedToken.uid;
                 if (uid === decodedUid) {
                     UserModel.findOne({ uid })
+                        .populate('cohorts')
+                        .populate({
+                            path: 'cohorts',
+                            populate: { path: 'students', model: 'Students' },
+                        })
+                        .populate('rockets')
+                        .populate('questions')
+                        .populate('rockets.questions.twoDay')
+                        .populate('rockets.questions.twoWeek')
+                        .populate('rockets.questions.twoMonth')
                         .then(foundUser => {
                             if (foundUser === null) {
                                 UserModel.create({

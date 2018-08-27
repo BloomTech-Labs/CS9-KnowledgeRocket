@@ -10,26 +10,14 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+// import Styled from 'styled-components';
 
 function mapStateToProps(state) {
     return {
         state,
     };
 }
-
-const styles = theme => ({
-    root: {
-        display: 'flex',
-    },
-    formControl: {
-        margin: theme.spacing.unit * 3,
-    },
-    group: {
-        margin: `${theme.spacing.unit}px 0`,
-    },
-});
 
 class Billing extends Component {
     constructor(props) {
@@ -48,66 +36,57 @@ class Billing extends Component {
     }
     handleChange = event => {
         this.setState({ value: event.target.value });
-        this.handleTypeChange(event.target.value)
+        this.handleTypeChange(event.target.value);
     };
 
     handleTypeChange = type => {
         this.setState({ type: type });
     };
     render() {
-        console.log('Subscription type:', this.state.type)
-        const { classes } = this.props;
+        console.log('Subscription type:', this.state.type);
 
         return (
-            <div className="Main_container">
-                <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
-                    <div className="example">
-                        <Card className="Premium_Content">
-                            <span className="title10">What does premium offer?</span>
-                            <p className="pText">
-                                It offers unlimited access to all your favorite features for a
-                                period of 1 year! No more worrying whether or not to create a new
-                                account for every 10 students. You can have as many students and
-                                knowledge rockets as you could ever want.
-                            </p>
-                            <h3 className="premTeam">Join the Premium Team For Only $9.99</h3>
-                            <FormControl component="fieldset" className={classes.formControl}>
-                                <FormLabel component="legend">Subscription</FormLabel>
-                                <RadioGroup
-                                    aria-label="gender"
-                                    name="gender2"
-                                    className={classes.group}
-                                    value={this.state.value}
-                                    onChange={this.handleChange}
-                                >
-                                    <FormControlLabel
-                                        value="monthly"
-                                        control={<Radio color="primary" />}
-                                        label="Monthly"
-                                        labelPlacement="start"
-                                    />
-                                    <FormControlLabel
-                                        value="yearly"
-                                        control={<Radio color="primary" />}
-                                        label="Yearly"
-                                        labelPlacement="start"
-                                    />
-                                </RadioGroup>
-                                <div>{`Total Cost: $${this.state.type === 'monthly' ? 9.99 : 29.99}`}</div>
-                            </FormControl>
-                            <Elements>
-                                <CheckoutForm
-                                    className="Stripe_Modal"
-                                    id={this.props.state.user._id}
-                                    uid={this.props.state.user.uid}
-                                    type={this.state.type}
+            <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
+                <div className="Main_container">
+                    <FormControl component="fieldset" className={`fieldset`}>
+                        <header className="title10">Billing and Subscriptions</header>
+                        <Card className="radioGroup">
+                            <FormLabel component="legend" className="legend">
+                                Please Pick a Subscription
+                            </FormLabel>
+                            <RadioGroup
+                                aria-label="gender"
+                                name="gender2"
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                            >
+                                <FormControlLabel
+                                    value="monthly"
+                                    control={<Radio color="primary" />}
+                                    label="1 Month Subscription"
+                                    labelPlacement="end"
                                 />
-                            </Elements>
+                                <FormControlLabel
+                                    value="yearly"
+                                    control={<Radio color="primary" />}
+                                    label="1 Year Subscription"
+                                    labelPlacement="end"
+                                />
+                            </RadioGroup>
+                            <div>{`Total Cost: $${
+                                this.state.type === 'monthly' ? 9.99 : 29.99
+                            }`}</div>
                         </Card>
-                        
-                    </div>
-                </StripeProvider>
-            </div>
+                    </FormControl>
+                    <Elements>
+                        <CheckoutForm
+                            id={this.props.state.user._id}
+                            uid={this.props.state.user.uid}
+                            type={this.state.type}
+                        />
+                    </Elements>
+                </div>
+            </StripeProvider>
         );
     }
 }
@@ -119,4 +98,4 @@ Billing.propTypes = {
 export default connect(
     mapStateToProps,
     { generateBreadCrumbs }
-)(withStyles(styles)(Billing));
+)(Billing);
