@@ -38,7 +38,7 @@ function appendRocket(req, res) {
             foundCohort.rockets.push({
                 rocketId: rocketID,
                 startDate,
-                td: Date.now() + 24 * 60 * 60 * 1000,
+                td: Date.now() + 48 * 60 * 60 * 1000,
                 tw: Date.now() + 14 * 24 * 60 * 60 * 1000,
                 tm: Date.now() + 60 * 24 * 60 * 60 * 1000,
             });
