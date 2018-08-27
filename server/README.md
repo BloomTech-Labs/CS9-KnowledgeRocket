@@ -6,12 +6,16 @@
 <p>The following are the dependencies you will need: </p>
 
 ```
+cors,
 cross-env,
 dotenv,
 express,
+firebase,
+firebase-admin,
 helmet,
 jest,
 mongoose,
+stripe,
 supertest,
 ```
 
