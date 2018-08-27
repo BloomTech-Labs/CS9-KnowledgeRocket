@@ -7,14 +7,14 @@ export const FormGroup = Styled.div`
     justify-content: flex-start;
     align-items: flex-start;
 `;
-export const Blurb = Styled.p`
-    margin: 1rem 0;
-    text-align: justify;
-`;
-export const TextArea = Blurb.extend`
+export const TextArea = Styled.textarea`
     width: 100%;
     height: 4rem;
-`.withComponent('textarea');
+`;
+export const Blurb = TextArea.extend`
+    margin: 1rem 0;
+    text-align: justify;
+`.withComponent('p');
 
 export const QuestionWrapper = Styled.div`
     display: grid;
@@ -45,7 +45,7 @@ const verbageDictionary = {
  * @param {Function} props.handleBlur
  * @param {Function} props.handleChange
  * @param {object} props.values
- * @param {string} props.increment
+ * @param {string} props.interval
  * @param {object} props.errors
  * @param {object} props.touched
  */
@@ -53,104 +53,114 @@ export const QuestionChoices = ({
     handleBlur,
     handleChange,
     values,
-    increment,
+    interval,
     errors,
     touched,
 }) => {
     const displayError = errorHelper(errors, touched);
+
+    const a11yIdFor = label => generateErrorIdFrom(interval, label);
     return (
         <section>
             <FormGroup>
-                <label htmlFor={`${increment}.explanation`}>{`${
-                    verbageDictionary[increment]
+                <label htmlFor={`${interval}.explanation`}>{`${
+                    verbageDictionary[interval]
                 } - Review Text`}</label>
                 <TextArea
-                    name={`${increment}.explanation`}
-                    value={values[increment].explanation}
+                    name={`${interval}.explanation`}
+                    value={values[interval].explanation}
                     placeholder="Two Day Review Text"
                     onChange={handleChange}
+                    aria-describedby={a11yIdFor('explanation')}
                 />
-                <ErrorText>{displayError('explanation')}</ErrorText>
+                <ErrorText id={a11yIdFor('explanation')}>{displayError('explanation')}</ErrorText>
             </FormGroup>
             <FormGroup>
-                <label htmlFor={`${increment}.question`}>{`${
-                    verbageDictionary[increment]
+                <label htmlFor={`${interval}.question`}>{`${
+                    verbageDictionary[interval]
                 } - Review Question`}</label>
                 <TextArea
-                    name={`${increment}.question`}
-                    value={values[increment].question}
+                    name={`${interval}.question`}
+                    value={values[interval].question}
                     placeholder="Two Day Review Text"
                     onChange={handleChange}
+                    aria-describedby={a11yIdFor('question')}
                 />
-                <ErrorText>{displayError('question')}</ErrorText>
+                <ErrorText id={a11yIdFor('question')}>{displayError('question')}</ErrorText>
             </FormGroup>
             <QuestionWrapper>
                 <label>
                     <input
-                        name={`${increment}.correct`}
-                        checked={values[increment].choices[0].text === values[increment].correct}
-                        value={values[increment].choices[0].text}
+                        name={`${interval}.correct`}
+                        checked={values[interval].choices[0].text === values[interval].correct}
+                        value={values[interval].choices[0].text}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        aria-describedby={a11yIdFor('correct')}
                     />
                     <input
-                        name={`${increment}.choices[0].text`}
+                        name={`${interval}.choices[0].text`}
                         type="text"
                         onChange={handleChange}
-                        value={values[increment].choices[0].text}
+                        value={values[interval].choices[0].text}
                     />
                 </label>
                 <label>
                     <input
-                        name={`${increment}.correct`}
-                        checked={values[increment].choices[1].text === values[increment].correct}
-                        value={values[increment].choices[1].text}
+                        name={`${interval}.correct`}
+                        checked={values[interval].choices[1].text === values[interval].correct}
+                        value={values[interval].choices[1].text}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        aria-describedby={a11yIdFor('correct')}
                     />
                     <input
-                        name={`${increment}.choices[1].text`}
+                        name={`${interval}.choices[1].text`}
                         type="text"
                         onChange={handleChange}
-                        value={values[increment].choices[1].text}
+                        value={values[interval].choices[1].text}
                     />
                 </label>
                 <label>
                     <input
-                        name={`${increment}.correct`}
-                        checked={values[increment].choices[2].text === values[increment].correct}
-                        value={values[increment].choices[2].text}
+                        name={`${interval}.correct`}
+                        checked={values[interval].choices[2].text === values[interval].correct}
+                        value={values[interval].choices[2].text}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        aria-describedby={a11yIdFor('correct')}
                     />
                     <input
-                        name={`${increment}.choices[2].text`}
+                        name={`${interval}.choices[2].text`}
                         type="text"
                         onChange={handleChange}
-                        value={values[increment].choices[2].text}
+                        value={values[interval].choices[2].text}
                     />
                 </label>
                 <label>
                     <input
-                        name={`${increment}.correct`}
-                        checked={values[increment].choices[3].text === values[increment].correct}
-                        value={values[increment].choices[3].text}
+                        name={`${interval}.correct`}
+                        checked={values[interval].choices[3].text === values[interval].correct}
+                        value={values[interval].choices[3].text}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        aria-describedby={a11yIdFor('correct')}
                     />
                     <input
-                        name={`${increment}.choices[3].text`}
+                        name={`${interval}.choices[3].text`}
                         type="text"
                         onChange={handleChange}
-                        value={values[increment].choices[3].text}
+                        value={values[interval].choices[3].text}
                     />
                 </label>
             </QuestionWrapper>
-            <ErrorText>{displayError('correct')}</ErrorText>
+            <ErrorText id={a11yIdFor('correct')}>{displayError('correct')}</ErrorText>
         </section>
     );
 };
+export const generateErrorIdFrom = (attr, identifier = '') =>
+    `${attr}-${identifier}-ErrorDescription`;

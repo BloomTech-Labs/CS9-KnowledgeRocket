@@ -1,5 +1,3 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
 import { renderSnapshotTest } from './utils';
 import 'jest-styled-components';
 // Component
@@ -11,8 +9,10 @@ import {
     QuestionWrapper,
     TextArea,
     errorHelper,
+    generateErrorIdFrom,
 } from '../components/Rocket/FormGroup';
 
+// simple styled components
 const Grouplets = {
     Blurb,
     ErrorText,
@@ -24,14 +24,53 @@ const Grouplets = {
 describe('RocketFormGroup', () => {
     describe('testing styled components', () => {
         describe('render', () => {
-            for (const key in Grouplets) {
-                if (Grouplets.hasOwnProperty(key)) {
-                    const Grouplet = Grouplets[key];
-                    describe(`<${key} />`, () => {
+            for (const ComponentName in Grouplets) {
+                if (Grouplets.hasOwnProperty(ComponentName)) {
+                    const Grouplet = Grouplets[ComponentName];
+                    describe(`<${ComponentName} />`, () => {
                         renderSnapshotTest(Grouplet);
                     });
                 }
             }
+        });
+    });
+    describe('<QuestionChoices />', () => {
+        it('renders', () => {
+            renderSnapshotTest(QuestionChoices);
+        });
+        // TODO prop tests
+    });
+
+    describe('errorHelper', () => {
+        it('displays correct error', () => {
+            const mockError = {
+                td: 'I errored',
+            };
+            const mockTouch = {
+                td: true,
+            };
+            const mockProperty = 'td';
+
+            const mockDisplayError = errorHelper(mockError, mockTouch);
+            expect(mockDisplayError(mockProperty)).toBe(mockError.td);
+        });
+        it('does not return error when value is untouched', () => {
+            const mockError = {
+                td: 'I errored',
+            };
+            const mockTouch = {};
+            const mockProperty = 'td';
+
+            const mockDisplayError = errorHelper(mockError, mockTouch);
+            expect(mockDisplayError(mockProperty)).toBe(undefined);
+        });
+    });
+    describe('generateIdFrom', () => {
+        it('correctly generates id', () => {
+            const attr = 'td';
+            const identifier = 'question';
+            const expected = `${attr}-${identifier}-ErrorDescription`;
+            expect(generateErrorIdFrom(attr, identifier)).toBe(expected);
         });
     });
 });

@@ -19,16 +19,16 @@ exports[`RocketForm renders correctly 1`] = `
   align-items: flex-start;
 }
 
-.c2 {
-  margin: 1rem 0;
-  text-align: justify;
-}
-
 .c3 {
-  margin: 1rem 0;
-  text-align: justify;
   width: 100%;
   height: 4rem;
+}
+
+.c2 {
+  width: 100%;
+  height: 4rem;
+  margin: 1rem 0;
+  text-align: justify;
 }
 
 .c4 {
@@ -72,6 +72,16 @@ exports[`RocketForm renders correctly 1`] = `
     >
       Knowledge rockets are short paragraphs followed by a multiple choice question. These are automatically sent two days, two weeks, and two months after a lesson is taught and are intended to cause the student to recall what they have learned. The rockets should not be used to provide exhaustive review. Instead, they ask the student to "reload" the mental maps that acquired during the lesson.
     </p>
+    <span
+      style={
+        Object {
+          "color": "red",
+          "marginBottom": "2%",
+        }
+      }
+    >
+      All fields are required.
+    </span>
   </div>
   <section>
     <div
@@ -83,6 +93,7 @@ exports[`RocketForm renders correctly 1`] = `
         Two Days - Review Text
       </label>
       <textarea
+        aria-describedby="td-explanation-ErrorDescription"
         className="c3"
         name="td.explanation"
         onChange={[Function]}
@@ -91,6 +102,7 @@ exports[`RocketForm renders correctly 1`] = `
       />
       <span
         className="c1"
+        id="td-explanation-ErrorDescription"
       />
     </div>
     <div
@@ -102,6 +114,7 @@ exports[`RocketForm renders correctly 1`] = `
         Two Days - Review Question
       </label>
       <textarea
+        aria-describedby="td-question-ErrorDescription"
         className="c3"
         name="td.question"
         onChange={[Function]}
@@ -110,6 +123,7 @@ exports[`RocketForm renders correctly 1`] = `
       />
       <span
         className="c1"
+        id="td-question-ErrorDescription"
       />
     </div>
     <div
@@ -117,6 +131,7 @@ exports[`RocketForm renders correctly 1`] = `
     >
       <label>
         <input
+          aria-describedby="td-correct-ErrorDescription"
           checked={false}
           name="td.correct"
           onBlur={[Function]}
@@ -133,6 +148,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="td-correct-ErrorDescription"
           checked={false}
           name="td.correct"
           onBlur={[Function]}
@@ -149,6 +165,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="td-correct-ErrorDescription"
           checked={false}
           name="td.correct"
           onBlur={[Function]}
@@ -165,6 +182,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="td-correct-ErrorDescription"
           checked={false}
           name="td.correct"
           onBlur={[Function]}
@@ -182,6 +200,7 @@ exports[`RocketForm renders correctly 1`] = `
     </div>
     <span
       className="c1"
+      id="td-correct-ErrorDescription"
     />
   </section>
   <section>
@@ -194,6 +213,7 @@ exports[`RocketForm renders correctly 1`] = `
         Two Weeks - Review Text
       </label>
       <textarea
+        aria-describedby="tw-explanation-ErrorDescription"
         className="c3"
         name="tw.explanation"
         onChange={[Function]}
@@ -202,6 +222,7 @@ exports[`RocketForm renders correctly 1`] = `
       />
       <span
         className="c1"
+        id="tw-explanation-ErrorDescription"
       />
     </div>
     <div
@@ -213,6 +234,7 @@ exports[`RocketForm renders correctly 1`] = `
         Two Weeks - Review Question
       </label>
       <textarea
+        aria-describedby="tw-question-ErrorDescription"
         className="c3"
         name="tw.question"
         onChange={[Function]}
@@ -221,6 +243,7 @@ exports[`RocketForm renders correctly 1`] = `
       />
       <span
         className="c1"
+        id="tw-question-ErrorDescription"
       />
     </div>
     <div
@@ -228,6 +251,7 @@ exports[`RocketForm renders correctly 1`] = `
     >
       <label>
         <input
+          aria-describedby="tw-correct-ErrorDescription"
           checked={false}
           name="tw.correct"
           onBlur={[Function]}
@@ -244,6 +268,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="tw-correct-ErrorDescription"
           checked={false}
           name="tw.correct"
           onBlur={[Function]}
@@ -260,6 +285,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="tw-correct-ErrorDescription"
           checked={false}
           name="tw.correct"
           onBlur={[Function]}
@@ -276,6 +302,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="tw-correct-ErrorDescription"
           checked={false}
           name="tw.correct"
           onBlur={[Function]}
@@ -293,6 +320,7 @@ exports[`RocketForm renders correctly 1`] = `
     </div>
     <span
       className="c1"
+      id="tw-correct-ErrorDescription"
     />
   </section>
   <section>
@@ -305,6 +333,7 @@ exports[`RocketForm renders correctly 1`] = `
         Two Months - Review Text
       </label>
       <textarea
+        aria-describedby="tm-explanation-ErrorDescription"
         className="c3"
         name="tm.explanation"
         onChange={[Function]}
@@ -313,6 +342,7 @@ exports[`RocketForm renders correctly 1`] = `
       />
       <span
         className="c1"
+        id="tm-explanation-ErrorDescription"
       />
     </div>
     <div
@@ -324,6 +354,7 @@ exports[`RocketForm renders correctly 1`] = `
         Two Months - Review Question
       </label>
       <textarea
+        aria-describedby="tm-question-ErrorDescription"
         className="c3"
         name="tm.question"
         onChange={[Function]}
@@ -332,6 +363,7 @@ exports[`RocketForm renders correctly 1`] = `
       />
       <span
         className="c1"
+        id="tm-question-ErrorDescription"
       />
     </div>
     <div
@@ -339,6 +371,7 @@ exports[`RocketForm renders correctly 1`] = `
     >
       <label>
         <input
+          aria-describedby="tm-correct-ErrorDescription"
           checked={false}
           name="tm.correct"
           onBlur={[Function]}
@@ -355,6 +388,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="tm-correct-ErrorDescription"
           checked={false}
           name="tm.correct"
           onBlur={[Function]}
@@ -371,6 +405,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="tm-correct-ErrorDescription"
           checked={false}
           name="tm.correct"
           onBlur={[Function]}
@@ -387,6 +422,7 @@ exports[`RocketForm renders correctly 1`] = `
       </label>
       <label>
         <input
+          aria-describedby="tm-correct-ErrorDescription"
           checked={false}
           name="tm.correct"
           onBlur={[Function]}
@@ -404,6 +440,7 @@ exports[`RocketForm renders correctly 1`] = `
     </div>
     <span
       className="c1"
+      id="tm-correct-ErrorDescription"
     />
   </section>
   <button
