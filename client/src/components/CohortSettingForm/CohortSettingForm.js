@@ -8,7 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 
 const StylizedInput = styled(Input)`
-	padding: .5rem;
+	padding: 0.5rem;
 `;
 
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
@@ -27,7 +27,6 @@ class CohortSettingForm extends Component {
 						<Checkbox
 							onChange={this.props.handleCheckBox}
 							name="ccEmail"
-							checked={this.props.ccStatus}
 						/>
 					}
 					label="CC Me on Rocket Emails"

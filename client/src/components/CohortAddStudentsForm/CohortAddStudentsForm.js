@@ -25,7 +25,6 @@ class CohortAddStudentsForm extends Component {
 		firstName: '',
 		lastName: '',
 		email: '',
-		cc: '',
 	};
 
 	handleNewInput = e => {
