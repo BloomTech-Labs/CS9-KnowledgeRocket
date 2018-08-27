@@ -42,6 +42,10 @@ export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATING_USER = 'UPDATING_USER';
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+
 // Breadcrumb Actions
 export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 
@@ -158,6 +162,16 @@ export const loginUser = user => async dispatch => {
         dispatch({ type: LOGIN_USER, payload: response.data });
     } catch (err) {
         dispatch({ type: LOGIN_USER_FAILURE });
+    }
+};
+
+export const updateUser = user => async dispatch => {
+    dispatch({ type: UPDATING_USER });
+    try {
+        let response = await axios.put(`${url}/api/auth/${user._id}`, user);
+        dispatch({ type: UPDATE_USER, payload: response.data });
+    } catch (err) {
+        dispatch({ type: UPDATE_USER_FAILURE });
     }
 };
 
