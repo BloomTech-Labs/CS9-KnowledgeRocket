@@ -36,19 +36,18 @@ class CohortSettingForm extends Component {
 			quoteChar: '"',
 			header: true,
 			preview: 0,
-			complete: function(results, file) {
+			complete: (results, file) => {
 				parsed = results;
 				console.log('Parsing complete:', results, file);
+				this.setState({ csvData: parsed });
 			},
 		};
 		if (file) {
 			return Papa.parse(file, config);
 		}
-		console.log(parsed);
-		this.setState({ csvData: parsed });
 	};
 	render() {
-		console.log(`USER IMPORTED CSV DATA ${this.state.csvData}`);
+		console.log(`USER IMPORTED CSV DATA ${JSON.stringify(this.state.csvData)}`);
 		return (
 			<Card className={this.props.className}>
 				<StylizedInput
