@@ -38,6 +38,7 @@ const CohortCardContainer = styled.div`
 
 const StyledCohortCard = styled(CohortCard)`
   margin: 20px;
+  width: 275px;
 `;
 
 const AddButtonCard = styled(Card)`
