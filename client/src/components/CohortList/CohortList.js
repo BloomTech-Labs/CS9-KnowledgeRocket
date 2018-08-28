@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, /*Link*/ } from 'react-router-dom';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+// import Card from '@material-ui/core/Card';
+// import CardContent from '@material-ui/core/CardContent';
 // import Button from '@material-ui/core/Button';
 // import AddIcon from '@material-ui/icons/Add';
 // Components
-import CohortCard from '../CohortCard/CohortCard';
-import { FloatingAdd, ListCard, RocketListContainer} from '../RocketList/ListElements';
+// import CohortCard from '../CohortCard/CohortCard';
+import { FloatingAdd, ListCard, /*RocketListContainer*/} from '../RocketList/ListElements';
 
 function mapStateToProps(state) {
     return {
@@ -37,28 +37,28 @@ const CohortCardContainer = styled.div`
     width: 100%;
 `;
 
-const StyledCohortCard = styled(CohortCard)`
-    margin: 20px;
-`;
+// const StyledCohortCard = styled(CohortCard)`
+//     margin: 20px;
+// `;
 
-const AddButtonCard = styled(Card)`
-    margin: 20px;
-    width: 150px;
-    text-align: center;
-`;
+// const AddButtonCard = styled(Card)`
+//     margin: 20px;
+//     width: 150px;
+//     text-align: center;
+// `;
 
-const StyledCardContent = styled(CardContent)`
-    margin: 10px 0.5rem;
-`;
+// const StyledCardContent = styled(CardContent)`
+//     margin: 10px 0.5rem;
+// `;
 
-const AddButtonCardTitle = styled.h3`
-    display: block;
-    margin-bottom: 20px;
-`;
+// const AddButtonCardTitle = styled.h3`
+//     display: block;
+//     margin-bottom: 20px;
+// `;
 
-const StyledAddButtonLink = styled(Link)`
-    text-decoration: none;
-`;
+// const StyledAddButtonLink = styled(Link)`
+//     text-decoration: none;
+// `;
 
 // RENDERS A LIST OF COHORT CARDS
 export class CohortList extends Component {
