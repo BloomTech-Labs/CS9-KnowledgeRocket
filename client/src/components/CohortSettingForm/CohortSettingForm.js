@@ -25,6 +25,10 @@ const StylizedCSVInput = styled.input`
 
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
+	state = {
+		csvData: [],
+	};
+
 	handleFileSelect = event => {
 		const file = event.target.files[0];
 		const config = {
@@ -34,6 +38,7 @@ class CohortSettingForm extends Component {
 			complete: function(results, file) {
 				const data = results;
 				console.log('Parsing complete:', results, file);
+				this.setState({ csvData: data });
 			},
 		};
 		if (file) {
@@ -41,6 +46,7 @@ class CohortSettingForm extends Component {
 		}
 	};
 	render() {
+		console.log(`USER IMPORTED CSV DATA ${this.state.csvData}`);
 		return (
 			<Card className={this.props.className}>
 				<StylizedInput
