@@ -88,7 +88,6 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_COHORT;
             return StateCopy;
         case ADD_STUDENT:
-            console.log(`payload ${action.payload}`);
             StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT;
@@ -99,11 +98,10 @@ export default (state = defaultState, action) => {
             const updatedStudents = [];
             let targetIdx = 0;
 
-            StateCopy.cohorts.map((cohort, index) => {
+            StateCopy.cohorts.forEach((cohort, index) => {
                 let students = cohort.students;
                 for (let i = 0; i < students.length; i++) {
                     if (students[i]._id === action.payload._id) {
-                        console.log(`target idx is ${index}`);
                         targetIdx = index;
                     }
                     if (students[i]._id !== action.payload._id) {
