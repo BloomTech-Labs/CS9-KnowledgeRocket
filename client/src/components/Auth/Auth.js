@@ -21,7 +21,6 @@ function mapStateToProps(state) {
 }
 
 const LoginPortal = styled.div`
-    border: 1px solid red;
     margin: 0 12rem 0 0;
 `;
 
