@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import {
@@ -18,6 +19,11 @@ function mapStateToProps(state) {
         user: state.user,
     };
 }
+
+const LoginPortal = styled.div`
+    border: 1px solid red;
+    margin: 0 12rem 0 0;
+`;
 
 class Auth extends Component {
     state = {
@@ -87,96 +93,95 @@ class Auth extends Component {
         // console.log('state user', this.state.authenticated);
         return (
             <div className="Main_container">
-                <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
-                <div className="flex-column-centered">
-                    <Input
-                        className="Auth_input"
-                        type="email"
-                        name="email"
-                        autoFocus={true}
-                        onChange={this.handleInput}
-                        disableUnderline={true}
-                    />
-                    <Input
-                        className="Auth_input"
-                        type="password"
-                        name="password"
-                        onChange={this.handleInput}
-                        disableUnderline={true}
-                    />
-                </div>
-                <div className="flex-column-centered">
-                    <div className="flex-row-centered">
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignUp}
-                        >
-                            Sign-Up
-                        </Button>
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignIn}
-                        >
-                            Sign-In
-                        </Button>
+                <LoginPortal>
+                    <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
+                    <div className="flex-column-centered">
+                        <Input
+                            className="Auth_input"
+                            type="email"
+                            name="email"
+                            autoFocus={true}
+                            onChange={this.handleInput}
+                            disableUnderline={true}
+                        />
+                        <Input
+                            className="Auth_input"
+                            type="password"
+                            name="password"
+                            onChange={this.handleInput}
+                            disableUnderline={true}
+                        />
                     </div>
-                    <div className="Auth_oauth_section">
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignInGoogle}
-                        >
-                            Google Log In
-                        </Button>
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignInFacebook}
-                        >
-                            Facebook Log In
-                        </Button>
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignInTwitter}
-                        >
-                            Twitter Log In
-                        </Button>
+                    <div className="flex-column-centered">
+                        <div className="flex-row-centered">
+                            <Button
+                                className="Auth_button"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.handleSignUp}
+                            >
+                                Sign-Up
+                            </Button>
+                            <Button
+                                className="Auth_button"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.handleSignIn}
+                            >
+                                Sign-In
+                            </Button>
+                        </div>
+                        <div className="Auth_oauth_section">
+                            <Button
+                                className="Auth_button"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.handleSignInGoogle}
+                            >
+                                Google Log In
+                            </Button>
+                            <Button
+                                className="Auth_button"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.handleSignInFacebook}
+                            >
+                                Facebook Log In
+                            </Button>
+                            <Button
+                                className="Auth_button"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.handleSignInTwitter}
+                            >
+                                Twitter Log In
+                            </Button>
+                        </div>
                     </div>
-                </div>
-                <div className="flex-row-centered Auth_prompt-fail">
-                    {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
-                    {this.props.user.status === 'FAILED' ? (
-                        <p>
-                            Authentication failed. Check your email and password and try again.
-                            Thank you.
-                        </p>
-                    ) : this.props.user.status === 'ADDING_USER' ||
-                    this.props.user.status === 'LOGGING_IN_USER' ? (
-                        <Progress />
-                    ) : null}
-                </div>
-                {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
+                    <div className="flex-row-centered Auth_prompt-fail">
+                        {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
+                        {this.props.user.status === 'FAILED' ? (
+                            <p>
+                                Authentication failed. Check your email and password and try again.
+                                Thank you.
+                            </p>
+                        ) : this.props.user.status === 'ADDING_USER' ||
+                        this.props.user.status === 'LOGGING_IN_USER' ? (
+                            <Progress />
+                        ) : null}
+                    </div>
+                    {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
+                </LoginPortal>
             </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        addUser,
-        loginUser,
-        loginUserGoogle,
-        loginUserFacebook,
-        loginUserTwitter,
-        generateBreadCrumbs,
-    }
-)(Auth);
+export default connect(mapStateToProps, {
+    addUser,
+    loginUser,
+    loginUserGoogle,
+    loginUserFacebook,
+    loginUserTwitter,
+    generateBreadCrumbs,
+})(Auth);
