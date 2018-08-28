@@ -10,7 +10,7 @@ function mapStateToProps(state) {
     };
 }
 
-const MainContainer = Styled.div`
+const MainContainer = styled.div`
     padding: 0 1.2rem;
     display: flex;
     flex-direction: row;
