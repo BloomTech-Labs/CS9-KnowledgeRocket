@@ -26,25 +26,25 @@ const CohortListContainer = styled.div`
   align-items: flex-start;
   justify-content: space-around;
   width: 100%;
-  border: 1px solid rgb(119, 136, 153);
-  border-radius: 0.4rem;
 `;
 
 const CohortCardContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
   width: 100%;
 `;
 
 const StyledCohortCard = styled(CohortCard)`
   margin: 20px;
+  width: 275px;
 `;
 
 const AddButtonCard = styled(Card)`
   margin: 20px;
-  width: 150px;
+  width: 275px;
   text-align: center;
 `;
 
