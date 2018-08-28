@@ -82,23 +82,6 @@ class RocketView extends Component {
         });
     }
 
-    componentWillUnmount() {
-        this.setState({})
-        window.removeEventListener('resize', this.updateDimensions.bind(this));
-    }
-
-    updateDimensions = () => {
-        if (window.windowState === 1) {
-            this.setState({
-                height: window.innerHeight - 124 + 'px',
-            });
-        } else {
-            this.setState({
-                height: document.documentElement.clientHeight - 124 + 'px',
-            });
-        }
-    };
-
     handleUpdateRocket = rocket => {
         rocket._id = this.state.rocketData._id;
         rocket.td._id = this.state.rocketData.twoDay._id;
@@ -126,7 +109,4 @@ class RocketView extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { generateBreadCrumbs, updateRocket }
-)(RocketView);
+export default connect(mapStateToProps, { generateBreadCrumbs, updateRocket })(RocketView);
