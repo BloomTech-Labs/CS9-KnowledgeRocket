@@ -15,7 +15,7 @@ import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
 
-const StyledContent_Container = styled.div`
+const StyledContentContainer = styled.div`
     background: #e0f2f1;
     display: flex;
     flex-direction: row;
@@ -34,7 +34,7 @@ class Routes extends Component {
             <BrowserRouter>
                 <div className="routeContainer">
                     <Route path="/rocket" component={NavBar} />
-                    <StyledContent_Container>
+                    <StyledContentContainer>
                         <Route path="/rocket" exact component={RocketList} />
                         <Route path="/rocket/new" exact component={Rocket} />
                         <Route path="/rocket/view/:id" exact component={RocketView} />
@@ -44,7 +44,7 @@ class Routes extends Component {
                         <Route path="/rocket/classes" exact component={CohortList} />
                         <Route path="/rocket/settings" exact component={Settings} />
                         <Route path="/rocket/auth" exact component={Auth} />
-                    </StyledContent_Container>
+                    </StyledContentContainer>
                     <Route path="/" exact component={Home} />
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
                 </div>
