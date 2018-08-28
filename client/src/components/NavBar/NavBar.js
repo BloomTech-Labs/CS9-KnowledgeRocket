@@ -7,7 +7,11 @@ import { SvgIcon } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+// Components
+import ControlPanel from '../ControlPanel/ControlPanel';
 // Actions
 import { logOutUser } from '../../actions';
 
@@ -46,12 +50,6 @@ const StyledSvg = styled(SvgIcon)`
 `;
 
 class NavBar extends Component {
-    componentDidMount() {
-        if (!this.props.state.user.authenticated) {
-            // this.props.history.push('/rocket/auth');
-        }
-    }
-
     handleLogOut = () => {
         this.props.logOutUser();
         this.props.history.push('/rocket/auth');
