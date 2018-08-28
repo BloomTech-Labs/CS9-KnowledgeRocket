@@ -9,6 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
+    font-size: 1.25rem;
+    color: slateblue;
 `;
 
 // RENDERS A COHORT CARD FOR A SINGLE CLASS - receives class info from CohortList

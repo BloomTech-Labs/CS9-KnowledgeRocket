@@ -24,8 +24,9 @@ const styles = theme => ({
         display: 'flex',
     },
     drawerPaper: {
+        borderRadius: '0.5rem',
         position: 'static',
-        width: 200,
+        width: 150,
         backgroundColor: '#3f51b5',
     },
     content: {
