@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs, updateRocket } from '../../actions';
 import RocketForm from './RocketForm';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
 function mapStateToProps(state) {
     return {
@@ -68,10 +68,6 @@ class RocketView extends Component {
         // Hard Coded the Path for the Breadcrumbs
         this.props.generateBreadCrumbs('/rocket/');
 
-        // Updates the dimension of the page hight based on window sizing and maximized window.
-        this.updateDimensions();
-        window.addEventListener('resize', this.updateDimensions.bind(this));
-
         // Filter through the user's Rocket's and find the correct one to display.
         this.props.state.user.rockets.forEach((rocket, index) => {
             if (rocket._id === rocketId) {
@@ -94,7 +90,7 @@ class RocketView extends Component {
         console.log(this.state);
         return (
             <div className="Main_container">
-                <MainContainer height={this.state.height}>
+                <MainContainer>
                     <RocketForm
                         handleSubmit={this.handleUpdateRocket}
                         history={this.props.history}
