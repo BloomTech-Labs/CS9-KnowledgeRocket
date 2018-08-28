@@ -12,12 +12,21 @@ const StylizedInput = styled(Input)`
 	padding: 0.5rem;
 `;
 
+const StylizedForm = styled.form`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+`;
+
+const StylizedCSVInput = styled.input`
+	display: inline-block;
+	margin: 0 10px;
+`;
+
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
 	handleFileSelect = event => {
-		console.log('MADE IT TO FILE SELECT');
 		const file = event.target.files[0];
-		console.log(`FILE ${file}`);
 		const config = {
 			quoteChar: '"',
 			header: true,
@@ -48,8 +57,15 @@ class CohortSettingForm extends Component {
 				<Button variant="contained" color="primary">
 					Import CSV
 				</Button> */}
-
-				<input type="file" id="csv-file" name="files" onClick={this.handleFileSelect} />
+				<StylizedForm>
+					<label for="files">Import CSV</label>
+					<StylizedCSVInput
+						type="file"
+						id="csv-file"
+						name="files"
+						onClick={this.handleFileSelect}
+					/>
+				</StylizedForm>
 			</Card>
 		);
 	}

@@ -140,11 +140,9 @@ class Cohort extends Component {
     };
 
     render() {
-        // console.log(`COHORT ID ${this.props.location.state.cohortID}`);
-        // console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const { cohortID } = this.props.location.state;
         const { students } = this.props.location.state;
-        console.log(`CHECKED ${this.state.ccEmail}`);
+
         return (
             <CohortFormMainContainer>
                 <StyledHeaders>Class Settings</StyledHeaders>
