@@ -16,10 +16,10 @@ import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
 
 const StyledContent_container = styled.div`
+    background: #e0f2f1;
     display: flex;
     flex-direction: row;
     margin-left: 9rem;
-    height: 100vh;
     padding: 0 1rem;
 
     @media (max-width: 1055px) {
