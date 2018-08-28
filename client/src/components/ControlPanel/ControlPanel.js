@@ -51,7 +51,7 @@ class ControlPanel extends Component {
 
         return (
             <Drawer
-                variant="permanent"
+                // variant="permanent"
                 classes={{
                     paper: classes.drawerPaper,
                 }}

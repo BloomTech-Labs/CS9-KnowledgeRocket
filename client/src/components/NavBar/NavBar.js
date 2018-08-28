@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
 // Components
 import ControlPanel from '../ControlPanel/ControlPanel';
 // Actions
@@ -50,16 +51,27 @@ const StyledSvg = styled(SvgIcon)`
 `;
 
 class NavBar extends Component {
+    state = {
+        mobileOpen: false,
+    };
+
     handleLogOut = () => {
         this.props.logOutUser();
         this.props.history.push('/rocket/auth');
     };
 
     render() {
-        console.log(this.props);
         return (
             <StyledNavBarContainer>
                 <StyledBreadCrumbContainer>
+                    <IconButton
+                        color="inherit"
+                        aria-label="Open drawer"
+                        onClick={this.handleDrawerToggle}
+                        // className={classes.navIconHide}
+                    >
+                        <MenuIcon />
+                    </IconButton>
                     {this.props.state.breadcrumb.labels.map((item, index) => (
                         <StyledCrumb key={item + index}>
                             <Link
@@ -77,6 +89,20 @@ class NavBar extends Component {
                 <Button onClick={this.handleLogOut} variant="contained" color="secondary">
                     Sign-Out
                 </Button>
+                <Hidden mdUp>
+                    <ControlPanel
+                        variant="temporary"
+                        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                        open={this.state.mobileOpen}
+                        onClose={this.handleDrawerToggle}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                    />
+                </Hidden>
             </StyledNavBarContainer>
         );
     }
