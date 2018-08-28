@@ -10,4 +10,4 @@ const getAll = (Model, ...populatedFields) => async () => {
 
 const getAllCohorts = getAll(cohortModel, 'students', 'rockets', 'teacher');
 
-module.exports = { getAllCohorts };
+module.exports = { getAllCohorts, getAll };

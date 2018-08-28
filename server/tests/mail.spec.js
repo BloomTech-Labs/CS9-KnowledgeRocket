@@ -1,4 +1,3 @@
-const request = require('supertest');
 const mail = require('../mail');
 
 describe('testing mail route and capabilities', () => {
