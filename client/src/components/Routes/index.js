@@ -13,6 +13,7 @@ import CohortList from '../CohortList/CohortList';
 import Cohort from '../Cohort/Cohort';
 import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
+import RocketQuestion from '../RocketQuestion/RocketQuestion';
 
 function mapStateToProps(state) {
     return {
@@ -39,6 +40,7 @@ class Routes extends Component {
                         <Route path="/rocket/auth" exact component={Auth} />
                     </div>
                     <Route path="/" exact component={Home} />
+                    <Route path='/question/:question/:student' exact component={RocketQuestion}/>
                 </div>
             </BrowserRouter>
         );

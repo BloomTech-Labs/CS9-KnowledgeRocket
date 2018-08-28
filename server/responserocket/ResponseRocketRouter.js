@@ -6,10 +6,27 @@ router
     .get(get)
     .post(post);
 router
+    .route('/answer')
+    .post(postAnswer)
+router
     .route('/:id')
     .put(put)
     .get(getid)
     .delete(deleteid);
+
+function postAnswer(req,res) {
+    /*
+    {
+        studentId: 'ID STRING FOR MONGO STUDENT ID',
+        questionId: 'FOR THE QUESTION THAT GOT ANSWERED',
+        choiceIndex: Number of the index in the array of choices that the user picked.
+        // * students: { 'id':studentId, answer: Null / { choice: 0, submitted: date, updated: Null }},
+    }
+    */
+    // Find a responseRocket
+        // If exists: Update it
+        // if does not exist: Save it.
+}
 
 function get(req, res) {
     ResponseRocket.find()
@@ -69,4 +86,5 @@ function deleteid(req, res) {
             res.status(500).json({ message: 'Error on DEL' });
         });
 }
+
 module.exports = router;

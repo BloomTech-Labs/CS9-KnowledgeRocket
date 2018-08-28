@@ -18,6 +18,9 @@ import {
     APPENDING_ROCKETS,
     APPEND_ROCKETS,
     APPENDING_ROCKETS_FAILED,
+    UPDATING_USER,
+    UPDATE_USER_FAILURE,
+    UPDATE_USER,
 } from '../actions';
 
 const defaultState = {
@@ -81,6 +84,17 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, user: [...action.payload] };
             StateCopy.authenticated = true;
             StateCopy.status = UPGRADE_USER;
+            return StateCopy;
+        case UPDATING_USER:
+            StateCopy.status = UPDATING_USER;
+            return StateCopy;
+        case UPDATE_USER_FAILURE:
+            StateCopy.status = UPDATE_USER_FAILURE;
+            return StateCopy;
+        case UPDATE_USER:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.status = UPDATE_USER;
+            StateCopy.authenticated = true;
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
