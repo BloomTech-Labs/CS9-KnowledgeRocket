@@ -14,9 +14,9 @@ const StylizedInput = styled(Input)`
 
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
-	handleFileSelect = e => {
+	handleFileSelect = event => {
 		console.log('MADE IT TO FILE SELECT');
-		const file = e.target.files[0];
+		const file = event.target.files[0];
 		console.log(`FILE ${file}`);
 		const config = {
 			quoteChar: '"',
@@ -27,7 +27,9 @@ class CohortSettingForm extends Component {
 				console.log('Parsing complete:', results, file);
 			},
 		};
-		Papa.parse(file, config);
+		if (file) {
+			return Papa.parse(file, config);
+		}
 	};
 	render() {
 		return (
