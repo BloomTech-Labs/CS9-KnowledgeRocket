@@ -68,6 +68,8 @@ export const addRocket = (rocket, uid) => async dispatch => {
         dispatch({ type: ADD_ROCKET, payload: response.data });
     } catch (err) {}
 };
+
+// Appends a rocket to the cohorts rocket's scheduled array.
 export const appendRocket = (rocketID, startDate, userID, cohortID) => async dispatch => {
     dispatch({ type: APPENDING_ROCKETS });
     try {

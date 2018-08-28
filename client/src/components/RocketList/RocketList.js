@@ -53,11 +53,12 @@ class RocketList extends Component {
                 <ListWrapper>
                     <RocketListContainer>
                         <ListCard del={false} add={true} redirect='/rocket/new' title='Add New Rocket' label='Add' contents={[<FloatingAdd large click={this.handleNewRocket}/>]}/>
-                        {this.props.state.user.rockets.map(rocket => {
+                        {this.props.state.user.rockets.map((rocket, index) => {
                             const ca = this.calculateCohortsAssigned(rocket)
                             return (
                                 <ListCard
-                                    contents={[<p>Classes Assigned: ({ca})</p>]}
+                                    key={`RL_${index}`}
+                                    contents={[<p>{`Classes Assigned: (${ca})`}</p>]}
                                     title={rocket.title}
                                     redirect={`/rocket/view/${rocket._id}`}
                                     del={this.handleDeleteRocket}

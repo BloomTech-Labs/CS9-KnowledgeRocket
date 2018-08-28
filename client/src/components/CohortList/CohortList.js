@@ -96,6 +96,7 @@ export class CohortList extends Component {
                                 <FloatingAdd
                                     click={this.handleNewCohortRedirect}
                                     key={'FloatingADd_0'}
+                                    large
                                 />,
                             ]}
                         />

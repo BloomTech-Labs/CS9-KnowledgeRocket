@@ -42,7 +42,7 @@ export const RocketCardTop = Styled.div`
 export const RocketCardMid = Styled.div`
     display: flex;
     flex-direction: column;
-    align-items: ${props => props.del ? 'flex-start': 'center'};
+    align-items: ${props => (props.del ? 'flex-start' : 'center')};
     width: 100%;
     height: 10rem;
 `;
@@ -77,7 +77,7 @@ export const FloatingAdd = props => {
     return (
         <AddButton floating={props.floating}>
             <p style={{ marginBottom: '0.5rem' }}>{props.title}</p>
-            
+
             <Button variant="fab" color="primary" mini={mini} onClick={props.click}>
                 <AddIcon />
             </Button>
@@ -94,6 +94,9 @@ export const ListCard = props => {
         button_label: string
         del: function
     */
+    const generateKey = (pre, aft) => {
+        return `${pre}_${new Date().getTime()}_${aft}`;
+    };
     const click = e => {
         return props.click ? props.click(e, props.element) : null;
     };
@@ -113,14 +116,14 @@ export const ListCard = props => {
                         </Tooltip>
                     ) : (
                         <Tooltip title="Delete Permanently">
-                        <Button
-                            variant="fab"
-                            color="secondary"
-                            mini
-                            style={{ visibility: 'hidden' }}
-                        >
-                            <div></div>
-                        </Button>
+                            <Button
+                                variant="fab"
+                                color="secondary"
+                                mini
+                                style={{ visibility: 'hidden' }}
+                            >
+                                <div>{'_'}</div>
+                            </Button>
                         </Tooltip>
                     )}
                 </RocketCardTop>
@@ -130,16 +133,23 @@ export const ListCard = props => {
                             <RocketCardHeader>{props.title}</RocketCardHeader>
                             <HorizontalDivider />
                             {props.contents.map((Item, index) => {
-                                return <div key={index + ''}>{Item}</div>;
+                                const key = generateKey(props.title, index);
+                                return <div key={key}>{Item}</div>;
                             })}
                         </div>
                     </RocketCardMid>
                 ) : (
                     <RocketCardMid>
-                        <div style={{display: 'flex',flexDirection: 'column' ,alignItems: 'center'}}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
                             <RocketCardHeader>{props.title}</RocketCardHeader>
-                            <HorizontalDivider />
-                            {props.contents.map(content =>{
+                            <HorizontalDivider style={{ width: '100%' }} />
+                            {props.contents.map(content => {
                                 return content;
                             })}
                         </div>
