@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 // Material Components
 import Card from '@material-ui/core/Card';
 // Components
