@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import moment from 'moment-timezone';
-// import momentTimezone from 'moment-timezone';
 import {appendRocket} from '../../actions';
 
 function mapStateToProps(state) {
