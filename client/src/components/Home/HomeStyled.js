@@ -1,21 +1,21 @@
 import Button from '@material-ui/core/Button';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-export const HomeCTA = Styled.div`
+export const HomeCTA = styled.div`
     font-family: 'Roboto';
     background: url('/img/HomePage_CTA_09.svg') no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 600px;
     background-color: black;
-    @media(min-width: 2000px) {
-        &{
+    @media (min-width: 2000px) {
+        & {
             background-size: contain;
         }
     }
 `;
 
-export const HomeNav = Styled.div`
+export const HomeNav = styled.div`
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -23,14 +23,14 @@ export const HomeNav = Styled.div`
     background-color: black;
 `;
 
-export const NavButton = Styled(Button)`
+export const NavButton = styled(Button)`
     background-color: white !important;
     color: black !important;
     font-weight: 900 !important;
-    margin: .4rem !important;
+    margin: 0.4rem !important;
 `;
 
-export const NavLogo = Styled.img`
+export const NavLogo = styled.img`
     height: 3rem;
     width: 3rem;
     margin: 0 1rem;
@@ -39,16 +39,18 @@ export const NavLogo = Styled.img`
     }
 `;
 
-export const HomeContainer = Styled.div`
+export const HomeContainer = styled.div`
     font-family: 'Roboto', sans-serif;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    &::-webkit-scrollbar {display:none;}
+    &::-webkit-scrollbar {
+        display: none;
+    }
     width: 100%;
 `;
 
-export const MidContainer = Styled.div`
+export const MidContainer = styled.div`
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
@@ -56,7 +58,7 @@ export const MidContainer = Styled.div`
     align-items: center;
 `;
 
-export const HomeHeader = Styled.h2`
+export const HomeHeader = styled.h2`
     font-size: 4rem;
     font-weight: 900;
     color: #232323;
@@ -66,7 +68,7 @@ export const HomeHeader = Styled.h2`
     margin: 3rem 0;
 `;
 
-export const MidHeader = Styled.h3`
+export const MidHeader = styled.h3`
     font-size: 2rem;
     font-weight: 900;
     color: #232323;
@@ -76,7 +78,7 @@ export const MidHeader = Styled.h3`
     margin: 3rem 0;
 `;
 
-export const MidSectionWrapper = Styled.div`
+export const MidSectionWrapper = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -85,7 +87,7 @@ export const MidSectionWrapper = Styled.div`
     margin: 0 0 2rem 0;
 `;
 
-export const MidColumn = Styled.div`
+export const MidColumn = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,36 +95,36 @@ export const MidColumn = Styled.div`
     min-width: 300px;
 `;
 
-export const MidSection = Styled.div`
+export const MidSection = styled.div`
     display: flex;
     flex-direction: column;
     min-width: 300px;
     max-width: 100%;
-    background-color: #DFDFDF;
-    border-radius: .5rem;
-    border: 1px solid #232323;;
+    background-color: #dfdfdf;
+    border-radius: 0.5rem;
+    border: 1px solid #232323;
     margin: 1rem;
     min-height: 80vh;
-    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
 `;
 
-export const MidImg = Styled.img`
-    background: url( ${props => {
+export const MidImg = styled.img`
+    background: url(${props => {
         return props.src;
-    }} );
+    }});
     margin: 1rem;
     height: 200px;
-    background-color: #FEFEFE;
-    border-radius: .3rem;
+    background-color: #fefefe;
+    border-radius: 0.3rem;
 `;
 
-export const MidSectionText = Styled.p`
+export const MidSectionText = styled.p`
     margin: 1rem;
     font-size: 1.5rem;
     text-align: justify;
 `;
 
-export const FooterSection = Styled.div`
+export const FooterSection = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;

@@ -2,13 +2,13 @@
 
 exports[`CohortList renders correctly 1`] = `
 <div
-  className="sc-bwzfXH fliMDs"
+  className="sc-bwzfXH cSjHQg"
 >
   <div
-    className="sc-htpNat jAgoUU"
+    className="sc-htpNat hGHuoz"
   >
     <div
-      className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-bxivhb LuvEN"
+      className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-bxivhb jRilPe"
     >
       <div
         className="MuiCardContent-root-29"
@@ -48,7 +48,7 @@ exports[`CohortList renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-ifAKCX jzUTef"
+      className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-ifAKCX gxbWQz"
     >
       <div
         className="MuiCardContent-root-29 sc-EHOje fhnXmt"

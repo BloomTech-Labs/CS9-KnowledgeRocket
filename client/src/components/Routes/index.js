@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
+import styled from 'styled-components';
 // Components
 import Home from '../Home/Home';
 import NavBar from '../NavBar/NavBar';
-import ControlPanel from '../ControlPanel/ControlPanel';
+// import ControlPanel from '../ControlPanel/ControlPanel';
 import Auth from '../Auth/Auth';
 import Rocket from '../Rocket/Rocket';
 import RocketList from '../RocketList/RocketList';
@@ -15,11 +15,18 @@ import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
 
-function mapStateToProps(state) {
-    return {
-        state,
-    };
-}
+const StyledContentContainer = styled.div`
+    background: white;
+    display: flex;
+    flex-direction: row;
+    margin-left: 9rem;
+    padding: 0 1rem;
+
+    @media (max-width: 1055px) {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+`;
 
 class Routes extends Component {
     render() {
@@ -27,8 +34,7 @@ class Routes extends Component {
             <BrowserRouter>
                 <div className="routeContainer">
                     <Route path="/rocket" component={NavBar} />
-                    <div className="Content_container">
-                        <Route path="/rocket" component={ControlPanel} />
+                    <StyledContentContainer>
                         <Route path="/rocket" exact component={RocketList} />
                         <Route path="/rocket/new" exact component={Rocket} />
                         <Route path="/rocket/view/:id" exact component={RocketView} />
@@ -38,13 +44,13 @@ class Routes extends Component {
                         <Route path="/rocket/classes" exact component={CohortList} />
                         <Route path="/rocket/settings" exact component={Settings} />
                         <Route path="/rocket/auth" exact component={Auth} />
-                    </div>
+                    </StyledContentContainer>
                     <Route path="/" exact component={Home} />
-                    <Route path='/question/:question/:student' exact component={RocketQuestion}/>
+                    <Route path="/question/:question/:student" exact component={RocketQuestion} />
                 </div>
             </BrowserRouter>
         );
     }
 }
 
-export default connect(mapStateToProps)(Routes);
+export default Routes;
