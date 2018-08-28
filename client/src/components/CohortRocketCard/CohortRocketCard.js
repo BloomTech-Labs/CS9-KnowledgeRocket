@@ -71,17 +71,22 @@ class CohortRocketCard extends Component {
     }
 
     handleDateChange = (e) => {
+        console.log('Handle Date from Calendar', e.target.value)
         const newDate = Date.parse(e.target.value)
+        console.log('Handle Date from Calendar parsed:', newDate)
+        // const momentDate = Date.parse(moment.tz(newDate, this.state.timezone).format());
         this.setState({newDate});
     }
 
     reScheduleRocket = (e) => {
-        const newDate = this.state.newDate;
-        const rocketID = this.props.rocket.rocketId;
-        const userID = this.props.state.user._id;
-        const cohortID = this.props.cohortID;
-        console.log(rocketID, newDate, userID, cohortID)
-        this.props.appendRocket(rocketID, newDate, userID, cohortID);
+        const newDate = Date.parse(new Date(new Date(this.state.newDate).setHours(0,0,0,0)));
+        console.log('newDate', newDate)
+        console.log('newDate', newDate)
+        // const rocketID = this.props.rocket.rocketId;
+        // const userID = this.props.state.user._id;
+        // const cohortID = this.props.cohortID;
+        // console.log(rocketID, newDate, userID, cohortID)
+        // this.props.appendRocket(rocketID, newDate, userID, cohortID);
     }
 
     render() {
@@ -96,7 +101,9 @@ class CohortRocketCard extends Component {
                         <ClipQuestion>{this.state.userRocket.twoWeek.question}</ClipQuestion>
                         <ClipQuestion>{this.state.userRocket.twoMonth.question}</ClipQuestion>
                     </StylizedCohorts>
-                    <CohortLabel>{`Scheduled on ${momentTimezone(this.props.rocket.startDate, this.state.timezone).format('MMM Do YY')}`}</CohortLabel>
+                    {/* <CohortLabel>{`Scheduled on ${moment(Date.parse(this.props.rocket.startDate)).format('MMM Do YY')}`}</CohortLabel> */}
+                    {/* <CohortLabel>{`Scheduled on ${moment(Date.parse(moment.tz(this.props.rocket.startDate, this.state.timezone))+24*60*60*1000).format('MMM Do YY')}`}</CohortLabel> */}
+                    <CohortLabel>{`Scheduled on ${new Date(this.props.rocket.startDate).toDateString()}`}</CohortLabel>
                     <TextField
                         style={{ margin: '.5rem 0' }}
                         id="date"

@@ -24,10 +24,6 @@ function get(req, res) {
         });
 }
 
-// startDate: { type: Date },
-//             td: { type: Date },
-//             tm: { type: Date },
-//             tw: { type: Date },
 function appendRocket(req, res) {
     //rocketID, startDate, userID, cohortID
     const { rocketID, startDate, userID, cohortID } = req.body;

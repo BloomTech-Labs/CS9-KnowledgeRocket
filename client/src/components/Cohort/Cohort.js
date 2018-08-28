@@ -147,7 +147,9 @@ class Cohort extends Component {
         //rocketID, startDate, userID, cohortID
     };
     handlePickRocket = rocketID => {
-        this.handleAppendRocket(rocketID, Date.now());
+        const today = new Date(new Date().setHours(0, 0, 0, 0));
+        // console.log(today.toDateString())
+        this.handleAppendRocket(rocketID, Date.parse(today));
     };
     handleAddStudent = () => {
         const { firstName, lastName, email } = this.state;
@@ -176,7 +178,10 @@ class Cohort extends Component {
                 />
                 <StyledHeaders>Students</StyledHeaders>
                 {this.state.cohort.students.length > 0 ? (
-                    <StyledCohortStudentList students={this.state.cohort.students} match={this.props.match}/>
+                    <StyledCohortStudentList
+                        students={this.state.cohort.students}
+                        match={this.props.match}
+                    />
                 ) : (
                     <h3>Looks like you don't have any students</h3>
                 )}
