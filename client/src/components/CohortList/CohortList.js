@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter, /*Link*/ } from 'react-router-dom';
+import { withRouter /*Link*/ } from 'react-router-dom';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
@@ -11,7 +11,7 @@ import { generateBreadCrumbs } from '../../actions';
 // import AddIcon from '@material-ui/icons/Add';
 // Components
 // import CohortCard from '../CohortCard/CohortCard';
-import { FloatingAdd, ListCard, /*RocketListContainer*/} from '../RocketList/ListElements';
+import { FloatingAdd, ListCard /*RocketListContainer*/ } from '../RocketList/ListElements';
 
 function mapStateToProps(state) {
     return {
@@ -86,14 +86,32 @@ export class CohortList extends Component {
                 {this.state.cohort ? (
                     // user has at least one cohort, render a cohort card
                     <CohortCardContainer>
-                        <ListCard del={false} add={true} redirect='/rocket/newclass' title='Add New Cohort' label='Add' contents={[<FloatingAdd
-                            click={this.handleNewCohortRedirect}
-                        />]}>
-                        </ListCard>
+                        <ListCard
+                            del={false}
+                            add={true}
+                            redirect="/rocket/newclass"
+                            title="Add New Cohort"
+                            label="Add"
+                            contents={[
+                                <FloatingAdd
+                                    click={this.handleNewCohortRedirect}
+                                    key={'FloatingADd_0'}
+                                />,
+                            ]}
+                        />
                         {this.props.state.user.cohorts.map((cohort, index) => (
-                            <ListCard del={console.log} key={`${index}`} title={cohort.title} redirect={`/rocket/classform/${cohort._id}`} element={cohort} add={false} contents={[
-                              <p>{`Total Students:\t(${cohort.students.length})`}</p>, <p>{`Participation:\t(${'100%'})`}</p>, <p>{`Rockets Sent:\t(${0})`}</p>
-                            ]}/>
+                            <ListCard
+                                del={console.log}
+                                key={`CL_${index}`}
+                                title={cohort.title}
+                                redirect={`/rocket/classform/${cohort._id}`}
+                                element={cohort}
+                                contents={[
+                                    <p>{`Total Students:\t(${cohort.students.length})`}</p>,
+                                    <p>{`Participation:\t(${'100%'})`}</p>,
+                                    <p>{`Rockets Sent:\t(${0})`}</p>,
+                                ]}
+                            />
                         ))}
                         <FloatingAdd
                             title={'Add New Cohort'}

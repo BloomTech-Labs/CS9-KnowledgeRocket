@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 
 export const RocketListContainer = Styled.div`
+    ${props => console.log(props.theme)};
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -111,12 +112,16 @@ export const ListCard = props => {
                             </Button>
                         </Tooltip>
                     ) : (
+                        <Tooltip title="Delete Permanently">
                         <Button
                             variant="fab"
                             color="secondary"
                             mini
                             style={{ visibility: 'hidden' }}
-                        />
+                        >
+                            <div></div>
+                        </Button>
+                        </Tooltip>
                     )}
                 </RocketCardTop>
                 {props.del ? (

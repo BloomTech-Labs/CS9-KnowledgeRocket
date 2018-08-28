@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Routes from './components/Routes/';
 
 class App extends Component {
+  
   render() {
     return (
       // Only Routes Here, All Components get added inside the Routes File
