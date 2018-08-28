@@ -78,7 +78,7 @@ const StyledCohortRocketList = styled(CohortRocketList)`
 `;
 
 const StyledAddCohortBtn = styled(Button)`
-    width: 95%;
+    width: 100%;
 `;
 
 class Cohort extends Component {
