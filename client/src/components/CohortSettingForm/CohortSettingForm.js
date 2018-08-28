@@ -31,19 +31,21 @@ class CohortSettingForm extends Component {
 
 	handleFileSelect = event => {
 		const file = event.target.files[0];
+		let parsed;
 		const config = {
 			quoteChar: '"',
 			header: true,
 			preview: 0,
 			complete: function(results, file) {
-				const data = results;
+				parsed = results;
 				console.log('Parsing complete:', results, file);
-				this.setState({ csvData: data });
 			},
 		};
 		if (file) {
 			return Papa.parse(file, config);
 		}
+		console.log(parsed);
+		this.setState({ csvData: parsed });
 	};
 	render() {
 		console.log(`USER IMPORTED CSV DATA ${this.state.csvData}`);
@@ -64,12 +66,12 @@ class CohortSettingForm extends Component {
 					Import CSV
 				</Button> */}
 				<StylizedForm>
-					<label for="files">Import CSV</label>
+					<label for="csv-file">Import CSV</label>
 					<StylizedCSVInput
 						type="file"
 						id="csv-file"
 						name="files"
-						onClick={this.handleFileSelect}
+						onChange={this.handleFileSelect}
 					/>
 				</StylizedForm>
 			</Card>
