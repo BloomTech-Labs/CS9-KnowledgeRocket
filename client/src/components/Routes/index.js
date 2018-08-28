@@ -34,7 +34,7 @@ class Routes extends Component {
             <BrowserRouter>
                 <div className="routeContainer">
                     <Route path="/rocket" component={NavBar} />
-                    <StyledContent_container>
+                    <StyledContent_Container>
                         <Route path="/rocket" exact component={RocketList} />
                         <Route path="/rocket/new" exact component={Rocket} />
                         <Route path="/rocket/view/:id" exact component={RocketView} />
