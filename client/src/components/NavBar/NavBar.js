@@ -103,6 +103,15 @@ class NavBar extends Component {
                         }}
                     />
                 </Hidden>
+                <Hidden smDown implementation="css">
+                    <Drawer
+                        variant="permanent"
+                        open
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                    />
+                </Hidden>
             </StyledNavBarContainer>
         );
     }
