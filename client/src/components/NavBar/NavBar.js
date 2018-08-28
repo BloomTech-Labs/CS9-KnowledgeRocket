@@ -60,6 +60,10 @@ class NavBar extends Component {
         this.props.history.push('/rocket/auth');
     };
 
+    handleDrawerToggle = () => {
+        this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+    };
+
     render() {
         return (
             <StyledNavBarContainer>
