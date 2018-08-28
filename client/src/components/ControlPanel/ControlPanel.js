@@ -22,11 +22,14 @@ const styles = theme => ({
         overflow: 'hidden',
         position: 'relative',
         display: 'flex',
+        // height: 'inherit',
     },
     drawerPaper: {
+        borderRadius: '0.5rem',
         position: 'static',
-        width: 200,
+        width: 150,
         backgroundColor: '#3f51b5',
+        // height: 'inherit',
     },
     content: {
         flexGrow: 1,
@@ -52,9 +55,28 @@ class ControlPanel extends Component {
         height: '0px',
     };
 
+    // componentDidMount() {
+    //     this.updateDimensions();
+    //     window.addEventListener('resize', this.updateDimensions.bind(this));
+    // }
+    // componentWillUnmount() {
+    //     window.removeEventListener('resize', this.updateDimensions.bind(this));
+    // }
+
+    // updateDimensions = () => {
+    //     const bias = 132;
+    //     if (window.windowState === 1) {
+    //         this.setState({ height: window.innerHeight - bias + 'px' });
+    //     } else {
+    //         this.setState({ height: document.documentElement.clientHeight - bias + 'px' });
+    //     }
+    // };
+
     render() {
         const { classes } = this.props;
-
+        {
+            /* <div style={{ height: this.state.height, backgroundColor: '#3f51b5' }}> */
+        }
         return (
             <Drawer
                 variant="permanent"
