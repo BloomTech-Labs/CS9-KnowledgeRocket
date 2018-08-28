@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 // Material Components
@@ -8,12 +7,6 @@ import { Button } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-
-function mapStateToProps(state) {
-    return {
-        state,
-    };
-}
 
 // custom material theme - overrides default styles/injected with withStyles HOC
 const styles = theme => ({
@@ -90,4 +83,4 @@ class ControlPanel extends Component {
     }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(ControlPanel));
+export default withStyles(styles)(ControlPanel);
