@@ -31,11 +31,13 @@
         "helmet": "^3.13.0",
         "jest": "^23.5.0",
         "mongoose": "^5.2.7",
+        "mongoose-autopopulate": "^0.8.0",
         "stripe": "^6.7.0",
         "supertest": "^3.1.0",
         "yup": "^0.26.2"
     },
     "devDependencies": {
+        "@types/mongoose": "^5.2.7",
         "@types/yup": "^0.24.9",
         "nodemon": "^1.18.3"
     }
