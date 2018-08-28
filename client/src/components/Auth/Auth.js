@@ -20,9 +20,9 @@ function mapStateToProps(state) {
     };
 }
 
-const LoginPortal = styled.div`
-    margin: 0 12rem 0 0;
-`;
+// const LoginPortal = styled.div`
+//     margin: 0 12rem 0 0;
+// `;
 
 class Auth extends Component {
     state = {
