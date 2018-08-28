@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Styled from 'styled-components';
-import './ControlPanel.css';
+import styled from 'styled-components';
+// Material Components
+import { withStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 function mapStateToProps(state) {
     return {
@@ -11,41 +15,45 @@ function mapStateToProps(state) {
     };
 }
 
-const ControlPanelContainer = Styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 1rem;
-    width: 10rem;
-    
-    min-height: 10rem;
-    
-`;
-//border-radius: .4rem;
-//background-color: #0088CC;
-const CPCWithBorder = ControlPanelContainer.extend`
-    
-    height: ${props => props.height};
-`;
-//border: 1px solid rgb(119, 136, 153);
+// custom material theme - overrides default styles/injected with withStyles HOC
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'flex',
+        height: 'inherit',
+    },
+    drawerPaper: {
+        position: 'static',
+        // width: 200,
+        backgroundColor: '#eeeeee;',
+        height: 'inherit',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+    },
+});
 
-export const CPCButton = Styled(Button)`
-    color: #EEEEEE !important;
+export const CPCButton = styled(Button)`
+    color: #eeeeee !important;
     border: 1px solid rgb(119, 136, 153);
     background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
     width: 100%;
     margin-bottom: 1rem !important;
 `;
 
-const CPLink = Styled(Link)`
+const CPLink = styled(Link)`
     text-decoration: none;
     width: 100%;
 `;
+
 class ControlPanel extends Component {
     state = {
         height: '0px',
     };
+
     componentDidMount() {
         this.updateDimensions();
         window.addEventListener('resize', this.updateDimensions.bind(this));
@@ -56,29 +64,50 @@ class ControlPanel extends Component {
 
     updateDimensions = () => {
         if (window.windowState === 1) {
-            this.setState({ height: window.innerHeight - 88 + 'px' });
+            this.setState({ height: window.innerHeight - 128 + 'px' });
         } else {
-            this.setState({ height: document.documentElement.clientHeight - 88 + 'px' });
+            this.setState({ height: document.documentElement.clientHeight - 128 + 'px' });
         }
     };
+
     render() {
+        const { classes } = this.props;
+
         return (
-            <CPCWithBorder height={this.state.height}>
-                <CPLink to="/rocket">
-                    <CPCButton variant="outlined">Rockets</CPCButton>
-                </CPLink>
-                <CPLink to="/rocket/classes">
-                    <CPCButton variant="outlined">Classes</CPCButton>
-                </CPLink>
-                <CPLink to="/rocket/billing">
-                    <CPCButton variant="outlined">Billing</CPCButton>
-                </CPLink>
-                <CPLink to="/rocket/settings">
-                    <CPCButton variant="outlined">Settings</CPCButton>
-                </CPLink>
-            </CPCWithBorder>
+            <div style={{height: this.state.height}}>
+            <Drawer
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+                style={{height: this.state.height}}
+            >
+                <List>
+                    <ListItem>
+                        <CPLink to="/rocket">
+                            <CPCButton variant="outlined">Rockets</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                    <ListItem>
+                        <CPLink to="/rocket/classes">
+                            <CPCButton variant="outlined">Classes</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                    <ListItem>
+                        <CPLink to="/rocket/billing">
+                            <CPCButton variant="outlined">Billing</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                    <ListItem>
+                        <CPLink to="/rocket/settings">
+                            <CPCButton variant="outlined">Settings</CPCButton>
+                        </CPLink>
+                    </ListItem>
+                </List>
+            </Drawer>
+            </div>
         );
     }
 }
 
-export default connect(mapStateToProps)(ControlPanel);
+export default connect(mapStateToProps)(withStyles(styles)(ControlPanel));

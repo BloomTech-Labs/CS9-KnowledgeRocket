@@ -26,7 +26,6 @@ const CohortListContainer = styled.div`
   align-items: flex-start;
   justify-content: space-around;
   width: 100%;
-  border: 1px solid rgb(119, 136, 153);
   border-radius: 0.4rem;
 `;
 

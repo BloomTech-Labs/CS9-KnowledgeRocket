@@ -1,0 +1,15 @@
+.answer {
+    background-color: pink !important;
+    padding-left: 1rem;
+}
+.answer--correct {
+    background-color: greenyellow !important;
+    padding-left: 1rem;
+}
+.answer--correct span {
+    font-size: 1rem;
+    font-weight: bold;
+}
+.answer span {
+    font-size: 1rem;
+}

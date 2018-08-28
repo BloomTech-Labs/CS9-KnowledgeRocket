@@ -20,12 +20,13 @@
 }
 
 .Auth_header {
-    font-family: roboto;
+    font-family: 'Roboto', serif;
+    font-weight: bold;
     font-size: 2rem;
     margin: 1rem;
-    color: ghostwhite;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
-        0px 0px 8px #000000dd;
+    color: #324151;
+    /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+        0px 0px 8px #000000dd; */
 }
 
 .Auth_prompt-fail {

@@ -41,17 +41,21 @@ class CohortStudentCard extends Component {
     };
 
     handleDeleteStudent = () => {
-        const studentID = this.state.student._id;
+        const studentID = this.props.student._id;
+        console.log(`STUDENT ID ${studentID}`);
         this.props.deleteStudent(studentID);
     };
 
     handleOnClick = () => {
         this.handleClose();
+        this.handleDeleteStudent();
     };
 
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
+        console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student._id)}`);
+        console.log(`COHORT USER ID ${this.props.student.user}`);
         return (
             <StylizedCardContent>
                 <h3>{this.props.student.firstName}</h3>
@@ -82,9 +86,6 @@ class CohortStudentCard extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        deleteStudent,
-    }
-)(CohortStudentCard);
+export default connect(mapStateToProps, {
+    deleteStudent,
+})(CohortStudentCard);

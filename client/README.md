@@ -18,18 +18,26 @@ REACT_APP_SERVER=https://urlofserver.com
 
 ```
 axios
+dotenv
 enzyme
+enzyme-adapter-react-16
+firebase
+formik
 jest
 material-ui
+moment
 react
 react-dom
 react-redux
 react-router-dom
 react-scripts
+react-stripe-elements
+react-test-renderer
 redux
 redux-thunk
 redux-logger
 styled-components
+yup
 ```
 
 <h3>Installation</h3>
