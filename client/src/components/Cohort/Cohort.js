@@ -74,6 +74,7 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     align-items: center;
     width: 100%;
     padding: 1rem;
+    margin-bottom: 1rem;
 `;
 
 const StyledAddCohortBtn = styled(Button)`
