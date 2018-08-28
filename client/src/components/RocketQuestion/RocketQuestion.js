@@ -6,7 +6,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import FormControl from '@material-ui/core/FormControl';
-import { CPCButton } from '../ControlPanel/ControlPanel';
+import Button from '@material-ui/core/Button';
 import './RocketQuestion.css';
 
 const url = process.env.REACT_APP_SERVER;
@@ -30,6 +30,14 @@ const defaultState = {
     submitted: false,
 };
 
+const CPCButton = styled(Button)`
+    color: #eeeeee !important;
+    border: 1px solid rgb(119, 136, 153);
+    background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
+    width: 100%;
+    margin-bottom: 1rem !important;
+`;
+
 const QuestionHeader = styled.div`
     margin-left: 2rem;
     margin-top: 2rem;
@@ -46,6 +54,7 @@ const StyledHeaders = styled.h1`
     font-weight: 460;
     font-family: 'Roboto', serif;
 `;
+
 class RocketQuestion extends Component {
     state = { ...defaultState };
 
@@ -70,11 +79,11 @@ class RocketQuestion extends Component {
     handleSubmit = e => {
         const packAge = {
             answer: this.state.answer,
-            questionID: this.state.questionID,
-            studentID: this.state.studentID,
+            questionId: this.state.questionID,
+            studentId: this.state.studentID,
         };
         axios
-            .post(`${url}/responserocket/answer`, packAge)
+            .post(`${url}/api/responserocket/answer`, packAge)
             .then(response => {
                 this.setState({
                     submitted: true,
@@ -86,6 +95,7 @@ class RocketQuestion extends Component {
                 });
             });
     };
+
     handleRadio = e => {
         this.setState({
             value: e.target.value,
