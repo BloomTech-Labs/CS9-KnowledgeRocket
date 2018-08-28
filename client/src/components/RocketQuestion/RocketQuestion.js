@@ -70,11 +70,11 @@ class RocketQuestion extends Component {
     handleSubmit = e => {
         const packAge = {
             answer: this.state.answer,
-            questionID: this.state.questionID,
-            studentID: this.state.studentID,
+            questionId: this.state.questionID,
+            studentId: this.state.studentID,
         };
         axios
-            .post(`${url}/responserocket/answer`, packAge)
+            .post(`${url}/api/responserocket/answer`, packAge)
             .then(response => {
                 this.setState({
                     submitted: true,
@@ -86,6 +86,7 @@ class RocketQuestion extends Component {
                 });
             });
     };
+
     handleRadio = e => {
         this.setState({
             value: e.target.value,
