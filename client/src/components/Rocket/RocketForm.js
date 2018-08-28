@@ -22,6 +22,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
             </FormGroup>
             <FormGroup>
                 <Blurb>{rocketBlurb}</Blurb>
+                <span style={{ color: 'red', marginBottom: '2%' }}>All fields are required.</span>
             </FormGroup>
 
             {/* ROCKET QUESTION SECTION 1*/}
@@ -29,7 +30,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
                 values={values}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
-                increment="td"
+                interval="td"
                 errors={errors.td}
                 touched={touched.td}
             />
@@ -39,7 +40,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
                 values={values}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
-                increment="tw"
+                interval="tw"
                 errors={errors.tw}
                 touched={touched.tw}
             />
@@ -49,7 +50,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
                 values={values}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
-                increment="tm"
+                interval="tm"
                 errors={errors.tm}
                 touched={touched.tm}
             />
