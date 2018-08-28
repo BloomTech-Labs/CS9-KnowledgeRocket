@@ -43,7 +43,7 @@ const StyledCohortCard = styled(CohortCard)`
 
 const AddButtonCard = styled(Card)`
   margin: 20px;
-  width: 150px;
+  width: 275px;
   text-align: center;
 `;
 
