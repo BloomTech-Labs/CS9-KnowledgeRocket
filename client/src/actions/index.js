@@ -144,7 +144,7 @@ export const importCSV = studentData => async dispatch => {
     console.log('MADE IT TO IMPORT CSV ACTION CREATOR');
     dispatch({ type: UPLOADING_CSV });
     try {
-        let response = await axios.post(`${url}/api/student/importcsv`, {
+        let response = await axios.post(`${url}/importcsv`, {
             teacherID,
             cohortID,
             studentData,

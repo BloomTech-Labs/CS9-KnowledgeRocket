@@ -11,15 +11,16 @@ const ResponseRocketRouter = require('./responserocket/ResponseRocketRouter');
 const QuestionRouter = require('./question/QuestionRouter');
 const CohortRouter = require('./cohort/CohortRouter');
 const BillingRouter = require('./billing/BillingRouter');
+const CSVRouter = require('./csv/CSVRouter');
 
 const server = express();
 
 const authMiddleware = (req, res, next) => {
-    // TODO: Implement Authentication and Authorization
-    // const {token, uid} = req.headers;
-    // Will require Front-End Caching of Data to save spot
-    // So data is back if user's token expires while they are not done.
-    next();
+	// TODO: Implement Authentication and Authorization
+	// const {token, uid} = req.headers;
+	// Will require Front-End Caching of Data to save spot
+	// So data is back if user's token expires while they are not done.
+	next();
 };
 
 // Begin code for cross-site allowances -------------------------------------
@@ -30,6 +31,7 @@ server.use(express.static('../client/build/'));
 
 // Back End Routes will User authMiddleware
 server.use('/api/student', authMiddleware, StudentRouter);
+server.use('/importcsv', authMiddleware, CSVRouter);
 server.use('/api/auth/', AuthRouter);
 server.use('/api/rocket', authMiddleware, RocketRouter);
 server.use('/api/user', authMiddleware, UserRouter);
