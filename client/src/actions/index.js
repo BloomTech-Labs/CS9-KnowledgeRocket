@@ -140,7 +140,7 @@ export const deleteStudent = studentID => async dispatch => {
 };
 
 // User Actions
-export const importCSV = studentData => async dispatch => {
+export const importCSV = (teacherID, cohortID, studentData) => async dispatch => {
     console.log('MADE IT TO IMPORT CSV ACTION CREATOR');
     dispatch({ type: UPLOADING_CSV });
     try {
