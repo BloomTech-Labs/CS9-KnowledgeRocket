@@ -5,27 +5,81 @@ router
     .route('/')
     .get(get)
     .post(post);
-router
-    .route('/answer')
-    .post(postAnswer)
+router.route('/answer').post(postAnswer);
 router
     .route('/:id')
     .put(put)
     .get(getid)
     .delete(deleteid);
 
-function postAnswer(req,res) {
-    /*
-    {
-        studentId: 'ID STRING FOR MONGO STUDENT ID',
-        questionId: 'FOR THE QUESTION THAT GOT ANSWERED',
-        choiceIndex: Number of the index in the array of choices that the user picked.
-        // * students: { 'id':studentId, answer: Null / { choice: 0, submitted: date, updated: Null }},
-    }
-    */
+function postAnswer(req, res) {    
+    const { studentId, questionId, answer } = req.body;
+    const responseObject = {
+        questionId,
+        students: [
+            {
+                studentId,
+                answer: [
+                    {
+                        choice: answer,
+                        submitted: Date.now(),
+                    },
+                ],
+            },
+        ],
+    };
+
     // Find a responseRocket
-        // If exists: Update it
-        // if does not exist: Save it.
+    // If exists: Update it
+    // if does not exist: Save it.
+    ResponseRocket.find({ questionId })
+        .then(found => {
+            if (found.length > 0) {
+                // If found one with the questionId provided, append to it.
+                // add student to found
+                let studentIncluded = false;
+                found[0].students.forEach((item, index) => {
+                    // if the student already answered once.
+                    if (String(item.studentId) === String(studentId)) {
+                        item.answer.push({
+                            choice: answer,
+                            submitted: Date.now(),
+                        });
+                        studentIncluded = true;
+                    }
+                });
+                // if the student had not answered before.
+                // push a new student object to the students array.
+                if (!studentIncluded) {
+                    found[0].students.push({
+                        studentId,
+                        answer: {
+                            choice: answer,
+                            submitted: Date.now(),
+                        },
+                    });
+                }
+                found[0]
+                    .update(found[0])
+                    .then(updatedRR => {
+                        res.status(201).json(updatedRR);
+                    })
+                    .catch(err => {
+                        res.status(500).json({ errorMessage: err.message });
+                    });
+            } else {
+                ResponseRocket.create(responseObject)
+                    .then(createdRR => {
+                        res.status(201).json(createdRR);
+                    })
+                    .catch(err => {
+                        res.status(500).json({ errorMessage: err.message });
+                    });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: err.message });
+        });
 }
 
 function get(req, res) {
