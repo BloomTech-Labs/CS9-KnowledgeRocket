@@ -13,16 +13,23 @@ function mapStateToProps(state) {
 
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortStudentList extends Component {
+    state = {
+        students: [{}],
+    };
+    componentDidMount() {
+        this.props.state.user.cohorts.forEach(cohort => {
+            if (cohort._id === this.props.match.params.id) {
+                this.setState({ students: cohort.students });
+            } else {
+
+            }
+        });
+    }
     render() {
-        const cohorts = this.props.state.user.cohorts.filter(each => {
-            return each._id === this.props.cohortID ? true : false;
-		});
-		
-		const cohort = cohorts.length > 0 ? cohorts[0] : { students: [{}]}
         return (
             <Card className={this.props.className}>
                 {/* Render all students added */}
-				{cohort.students.map((student, index) => (
+                {this.state.students.map((student, index) => (
                     <CohortStudentCard student={student} key={`student_${index}`} />
                 ))}
             </Card>

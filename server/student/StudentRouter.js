@@ -51,19 +51,9 @@ function post(req, res) {
                                         path: 'cohorts',
                                         populate: { path: 'students', model: 'Students' },
                                     })
-                                    .populate('rockets')
-                                    .populate({
-                                        path: 'rockets',
-                                        populate: { path: 'twoDay' },
-                                    })
-                                    .populate({
-                                        path: 'rockets',
-                                        populate: { path: 'twoWeek' },
-                                    })
-                                    .populate({
-                                        path: 'rockets',
-                                        populate: { path: 'twoMonth' },
-                                    })
+                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                     .then(teacher => {
                                         res.status(201).json(teacher);
                                     })

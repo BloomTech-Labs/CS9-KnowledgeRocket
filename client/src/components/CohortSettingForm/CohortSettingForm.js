@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 // Material Components
-import Card from '@material-ui/core/Card';
 import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -15,7 +14,7 @@ const StylizedInput = styled(Input)`
 class CohortSettingForm extends Component {
 	render() {
 		return (
-			<Card className={this.props.className}>
+			<div className={this.props.className}>
 				<StylizedInput
 					placeholder="Class Name"
 					disableUnderline={true}
@@ -35,7 +34,7 @@ class CohortSettingForm extends Component {
 				<Button variant="contained" color="primary">
 					Import CSV
 				</Button>
-			</Card>
+			</div>
 		);
 	}
 }

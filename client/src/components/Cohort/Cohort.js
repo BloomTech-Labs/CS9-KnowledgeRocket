@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 // Material Components
-import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
@@ -24,24 +23,26 @@ const StyledHeaders = styled.h2`
     font-family: 'Roboto', serif;
 `;
 
-const CohortFormMainContainer = styled(Card)`
-    margin-left: 1rem;
-    padding: 1rem;
+const CohortFormMainContainer = styled.div`
+    padding: var(--grayRedBlue_padding);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     width: 100%;
+    min-height: 60rem;
 `;
 
 const StyledCohortSettingForm = styled(CohortSettingForm)`
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 4rem;
     padding: 1rem;
     margin-bottom: 1rem;
     width: 100%;
+    background-color: white;
+    border-radius: 0.4rem;
+    box-shadow: var(--grayRedBlue_shadow);
 `;
 
 const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
@@ -76,7 +77,7 @@ const StyledCohortRocketList = styled(CohortRocketList)`
 `;
 
 const StyledAddCohortBtn = styled(Button)`
-    width: 95%;
+    width: 10rem;
 `;
 
 class Cohort extends Component {
@@ -89,6 +90,13 @@ class Cohort extends Component {
             /* objectID : date*/
             objectID: 0,
         },
+        cohort: {
+            cc: false,
+            rockets: { _id: '', rocketId: '', startDate: '', td: '', tw: '', tm: '' },
+            students: [{}],
+            title: '',
+            _id: '',
+        },
     };
 
     componentDidMount() {
@@ -99,8 +107,15 @@ class Cohort extends Component {
             this.props.history.push('/rocket/auth');
         }
         this.props.generateBreadCrumbs('/rocket/classes');
+        let cohort = {};
+        this.props.state.user.cohorts.forEach(ch => {
+            if (ch._id === this.props.match.params.id) {
+                cohort = ch;
+            }
+        });
         this.setState({
             startDate: { objectID: Date.now() },
+            cohort,
         });
     }
 
@@ -127,7 +142,7 @@ class Cohort extends Component {
             rocketID,
             startDate,
             this.props.state.user._id,
-            this.props.location.state.cohortID
+            this.props.match.params.id
         );
         //rocketID, startDate, userID, cohortID
     };
@@ -137,7 +152,7 @@ class Cohort extends Component {
     handleAddStudent = () => {
         const { firstName, lastName, email } = this.state;
         const teacherID = this.props.state.user._id;
-        const cohortID = this.props.location.state.cohortID;
+        const cohortID = this.props.match.params.id;
         const student = {
             firstName: firstName,
             lastName: lastName,
@@ -148,7 +163,6 @@ class Cohort extends Component {
     };
 
     render() {
-        console.log(this.props);
         return (
             <CohortFormMainContainer>
                 <StyledHeaders>Create or Edit the Class Settings</StyledHeaders>
@@ -161,8 +175,8 @@ class Cohort extends Component {
                     ccStatus={this.state.ccEmail}
                 />
                 <StyledHeaders>Students</StyledHeaders>
-                {this.props.location.state ? (
-                    <StyledCohortStudentList students={this.props.location.state.students} />
+                {this.state.cohort.students.length > 0 ? (
+                    <StyledCohortStudentList students={this.state.cohort.students} match={this.props.match}/>
                 ) : (
                     <h3>Looks like you don't have any students</h3>
                 )}
@@ -171,7 +185,7 @@ class Cohort extends Component {
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
                 />
-                
+
                 <StyledAddCohortBtn
                     variant="contained"
                     color="primary"
@@ -180,7 +194,7 @@ class Cohort extends Component {
                     Add this Cohort
                 </StyledAddCohortBtn>
             </CohortFormMainContainer>
-        )
+        );
     }
 }
 

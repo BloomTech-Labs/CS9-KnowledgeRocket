@@ -14,6 +14,7 @@ import Cohort from '../Cohort/Cohort';
 import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
+import CohortAdd from '../Cohort/CohortAdd';
 
 function mapStateToProps(state) {
     return {
@@ -33,7 +34,8 @@ class Routes extends Component {
                         <Route path="/rocket/new" exact component={Rocket} />
                         <Route path="/rocket/view/:id" exact component={RocketView} />
                         <Route path="/rocket/billing" exact component={Billing} />
-                        <Route path="/rocket/classForm/:id" exact component={Cohort} />
+                        <Route path="/rocket/classform/:id" exact component={Cohort} />
+                        <Route path="/rocket/newclass" exact component={CohortAdd} />
                         <Route path="/rocket/classes" exact component={CohortList} />
                         <Route path="/rocket/settings" exact component={Settings} />
                         <Route path="/rocket/auth" exact component={Auth} />

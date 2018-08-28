@@ -41,11 +41,6 @@ export const NavLogo = Styled.img`
 
 export const HomeContainer = Styled.div`
     font-family: 'Roboto', sans-serif;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    &::-webkit-scrollbar {display:none;}
-    width: 100%;
 `;
 
 export const MidContainer = Styled.div`
@@ -102,7 +97,7 @@ export const MidSection = Styled.div`
     border-radius: .5rem;
     border: 1px solid #232323;;
     margin: 1rem;
-    min-height: 80vh;
+    height: 100%;
     box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
 `;
 

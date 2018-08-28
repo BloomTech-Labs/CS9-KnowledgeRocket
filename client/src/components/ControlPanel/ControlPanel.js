@@ -25,10 +25,11 @@ const styles = theme => ({
         height: 'inherit',
     },
     drawerPaper: {
-        position: 'static',
-        // width: 200,
-        backgroundColor: '#eeeeee;',
-        height: 'inherit',
+        zIndex: '10',
+        position: 'fixed',
+        padding: '7rem 0 0 0',
+        backgroundColor: 'var(--grayRedBlue_background)',
+        overflow: 'hidden',
     },
     content: {
         flexGrow: 1,
@@ -37,9 +38,9 @@ const styles = theme => ({
 });
 
 export const CPCButton = styled(Button)`
-    color: #eeeeee !important;
+    color: var(--grayRedBlue_background) !important;
     border: 1px solid rgb(119, 136, 153);
-    background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
+    background-color: var(--grayRedBlue_nav) !important;
     width: 100%;
     margin-bottom: 1rem !important;
 `;
@@ -80,7 +81,6 @@ class ControlPanel extends Component {
                 classes={{
                     paper: classes.drawerPaper,
                 }}
-                style={{height: this.state.height}}
             >
                 <List>
                     <ListItem>
