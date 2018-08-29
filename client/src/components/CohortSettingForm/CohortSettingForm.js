@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Papa from 'papaparse';
 // Material Components
@@ -7,6 +8,14 @@ import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
+// Actions
+import { importCSV } from '../../actions/';
+
+function mapStateToProps(state) {
+	return {
+		state,
+	};
+}
 
 const StylizedInput = styled(Input)`
 	padding: 0.5rem;
@@ -30,16 +39,19 @@ class CohortSettingForm extends Component {
 	};
 
 	handleFileSelect = event => {
+		const teacherID = this.props.state.user._id;
+		const cohortID = this.props.cohortID;
+		let studentData;
 		const file = event.target.files[0];
-		let parsed;
 		const config = {
 			quoteChar: '"',
 			header: true,
 			preview: 0,
 			complete: (results, file) => {
-				parsed = results;
 				console.log('Parsing complete:', results, file);
-				this.setState({ csvData: parsed });
+				studentData = results;
+				this.props.importCSV(results);
+				this.setState({ csvData: results });
 			},
 		};
 		if (file) {
@@ -48,6 +60,7 @@ class CohortSettingForm extends Component {
 	};
 	render() {
 		console.log(`USER IMPORTED CSV DATA ${JSON.stringify(this.state.csvData)}`);
+		console.log(`PROPS ${JSON.stringify(this.props)}`);
 		return (
 			<Card className={this.props.className}>
 				<StylizedInput
@@ -78,4 +91,6 @@ class CohortSettingForm extends Component {
 	}
 }
 
-export default CohortSettingForm;
+export default connect(mapStateToProps, {
+	importCSV,
+})(CohortSettingForm);
