@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { getAllCohorts } = require('./MailModel');
 
-const whereCohortTwoDay = (interval, start, end) => ({
+const whereCohortRocket = (interval, start, end) => ({
     rockets: {
         $elemMatch: {
             [interval]: {
@@ -19,7 +19,7 @@ router.route('/').get(async (_, res) => {
     tomorrow.setHours(23, 59, 59, 59);
 
     try {
-        const data = await getAllCohorts(whereCohortTwoDay('tw', today, tomorrow));
+        const data = await getAllCohorts(whereCohortRocket('tw', today, tomorrow));
         res.json(data);
     } catch (err) {
         res.json({
