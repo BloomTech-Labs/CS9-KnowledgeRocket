@@ -14,6 +14,7 @@ import Cohort from '../Cohort/Cohort';
 import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
+import RocektResults from '../RocketResults/RocketResults';
 
 const StyledContentContainer = styled.div`
     background: white;
@@ -44,6 +45,7 @@ class Routes extends Component {
                         <Route path="/rocket/classes" exact component={CohortList} />
                         <Route path="/rocket/settings" exact component={Settings} />
                         <Route path="/rocket/auth" exact component={Auth} />
+                        <Route path="/rocket/results" exact component={RocektResults} />
                     </StyledContentContainer>
                     <Route path="/" exact component={Home} />
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
