@@ -158,14 +158,16 @@ class CohortRocketList extends Component {
                 let myIndex = (acc = curr._id === this.props.cohortID ? index : 0);
                 console.log('My INdex', myIndex);
                 return myIndex;
-            })
+            }, 0)
         ];
-        const rocketSelectors = this.props.state.user._id
-            ? filteredCohort
-                ? []
-                : filteredCohort
-            : [];
-        return rocketSelectors;
+
+        console.log(filteredCohort);
+        if (filteredCohort.rockets !== undefined) {
+            return filteredCohort.rockets.map(rocket => {
+                return <CohortRocketCard key={rocket._id} rocket={rocket} cohortID={this.props.cohortID}/>;
+            });
+        }
+        return [];
     };
 
     generateRocketAddLinks = () => {
