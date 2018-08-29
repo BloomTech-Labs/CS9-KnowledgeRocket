@@ -71,16 +71,7 @@ class Routes extends Component {
             <BrowserRouter>
                 <RouteContainer>
                     <Route path="/rocket" component={NavBar} />
-                    <StyledContentContainer>
-                        <Route path="/rocket" exact component={RocketList} />
-                        <Route path="/rocket/new" exact component={Rocket} />
-                        <Route path="/rocket/view/:id" exact component={RocketView} />
-                        <Route path="/rocket/billing" exact component={Billing} />
-                        <Route path="/rocket/classForm/:id" exact component={Cohort} />
-                        <Route path="/rocket/classes" exact component={CohortList} />
-                        <Route path="/rocket/settings" exact component={Settings} />
-                        <Route path="/rocket/auth" exact component={Auth} />
-                    </StyledContentContainer>
+                    <Route path="/rocket" component={InnerRoutes} />
                     <Route path="/" exact component={Home} />
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
                 </RouteContainer>
