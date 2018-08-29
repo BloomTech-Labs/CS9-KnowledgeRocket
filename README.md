@@ -1,3 +1,13 @@
+# Knowledge Rocket
+
+[![Build Status](https://travis-ci.org/Lambda-School-Labs/CS9-KnowledgeRocket.svg?branch=master)](https://travis-ci.org/Lambda-School-Labs/CS9-KnowledgeRocket)
+
+## How to develop locally
+
+## How to build locally
+
+## How to deploy
+
 # Table of Contents
 
 -   ## [Front End](./client/README.md)
