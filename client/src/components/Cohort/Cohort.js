@@ -25,7 +25,7 @@ const StyledHeaders = styled.h2`
 `;
 
 const CohortFormMainContainer = styled.div`
-    padding: var(--grayRedBlue_padding);
+    padding: 1rem 0 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;

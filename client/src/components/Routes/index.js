@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, {injectGlobal} from 'styled-components';
 // Components
 import Home from '../Home/Home';
 import NavBar from '../NavBar/NavBar';
@@ -16,10 +16,17 @@ import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
 import CohortAdd from '../Cohort/CohortAdd';
 
+injectGlobal`
+    * {
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
+`
+
 const StyledContentContainer = styled.div`
     min-height: 100vh;
     width: 100%;
-    padding: 0rem 0.8rem 0.8rem 10.5rem;
+    padding: 0rem 0.8rem 0.8rem 11.1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,6 +37,13 @@ const StyledContentContainer = styled.div`
         max-width: 100%;
     }
 `;
+
+const RouteContainer = styled.div`
+    background-color: #eeeeee;
+    height: inherit;
+    width: 100vw;
+    // max-width: 100vw;
+`
 
 class InnerRoutes extends Component {
     render() {
@@ -53,7 +67,7 @@ class Routes extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div className="routeContainer">
+                <RouteContainer>
                     <Route path="/rocket" component={NavBar} />
                     <Route path="/rocket" component={InnerRoutes} />
                     <Route path="/" exact component={Home} />
@@ -62,7 +76,7 @@ class Routes extends Component {
                             exact
                             component={RocketQuestion}
                         />
-                </div>
+                </RouteContainer>
             </BrowserRouter>
         );
     }
