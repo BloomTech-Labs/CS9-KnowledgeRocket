@@ -156,13 +156,14 @@ class CohortRocketList extends Component {
         const rocketSelectors = this.props.state.user._id
             ? this.props.state.user.cohorts[
                   this.props.state.user.cohorts.reduce((acc, curr, index) => {
-                      return (acc = curr._id === this.props.cohortID ? index : 0);
+                      let myIndex = (acc = curr._id === this.props.cohortID ? index : 0);
+                      console.log('Found matching rocket at index: ', myIndex)
+                      return myIndex
                   })
               ].rockets.map(rocket => {
                   return <CohortRocketCard key={rocket._id} rocket={rocket} cohortID={this.props.cohortID}/>;
               })
             : []; /*THIS IS IMPORTANT TO NOT ERROR OUT DO NOT REMOVE*/
-        rocketSelectors.push();
         return rocketSelectors;
     };
 
@@ -179,9 +180,10 @@ class CohortRocketList extends Component {
     render() {
         // const { anchorEl } = this.state;
         // const open = Boolean(anchorEl);
+        console.log('Props in CohortRocketList', this.props)
         return (
             <Card className={this.props.className}>
-                {this.generateRocketSelector()}
+                {/* {this.generateRocketSelector()} */}
                 <AddRocketWrap>
                     <StyledCardContent>
                         <RocketCardTop>
