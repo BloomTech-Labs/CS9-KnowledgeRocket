@@ -2,12 +2,12 @@ const cohortModel = require('../cohort/Cohort');
 const generateQueryPopulator = query => field =>
     Array.isArray(field) ? query.populate(...field) : query.populate(field);
 
-const getAll = (Model, ...populatedFields) => async () => {
-    const query = Model.find();
-    const handlePopulatingFields = generateQueryPopulator(query);
+const getAll = (Model, ...populatedFields) => async (searchQuery = {}) => {
+    const prepopulated = Model.find(searchQuery);
+    const handlePopulatingFields = generateQueryPopulator(prepopulated);
 
     populatedFields.forEach(handlePopulatingFields);
-    return await query.exec();
+    return await prepopulated.exec();
 };
 
 const getAllCohorts = getAll(cohortModel);
