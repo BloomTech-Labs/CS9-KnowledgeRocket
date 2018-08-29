@@ -15,6 +15,7 @@ import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
 import CohortAdd from '../Cohort/CohortAdd';
+import RocketResults from '../RocketResults/RocketResults';
 
 injectGlobal`
     * {
@@ -58,6 +59,7 @@ class InnerRoutes extends Component {
                 <Route path="/rocket/classes" exact component={CohortList} />
                 <Route path="/rocket/settings" exact component={Settings} />
                 <Route path="/rocket/auth" exact component={Auth} />
+                <Route path="/rocket/results" exact component={RocketResults} />
             </StyledContentContainer>
         );
     }

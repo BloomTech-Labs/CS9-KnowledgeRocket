@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import moment from 'moment-timezone';
-import {appendRocket} from '../../actions';
+import { appendRocket } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -51,7 +51,7 @@ class CohortRocketCard extends Component {
         userRocket: { title: '', twoDay: {}, twoWeek: {}, twoMonth: {} },
         scheduledRocket: {},
         newDate: '',
-        timezone: ''
+        timezone: '',
     };
 
     componentDidMount() {
@@ -65,32 +65,32 @@ class CohortRocketCard extends Component {
         console.log(rocketData, this.props.rocket);
         const timezone = moment.tz.guess();
         if (rocketData) {
-            this.setState({ timezone, userRocket: rocketData, scheduledRocket: this.props.rocket});
+            this.setState({ timezone, userRocket: rocketData, scheduledRocket: this.props.rocket });
         }
     }
 
-    handleDateChange = (e) => {
+    handleDateChange = e => {
         // console.log('Handle Date from Calendar', e.target.value)
-        const newDate = Date.parse(e.target.value)
+        const newDate = Date.parse(e.target.value);
         // console.log('Handle Date from Calendar parsed:', newDate)
-        this.setState({newDate});
-    }
+        this.setState({ newDate });
+    };
 
-    reScheduleRocket = (e) => {
+    reScheduleRocket = e => {
         const newDate = this.state.newDate;
-        console.log('newDate', newDate)
-        console.log('newDate', newDate)
+        console.log('newDate', newDate);
+        console.log('newDate', newDate);
         const rocketID = this.props.rocket.rocketId;
         const userID = this.props.state.user._id;
         const cohortID = this.props.cohortID;
-        console.log(rocketID, newDate, userID, cohortID)
+        console.log(rocketID, newDate, userID, cohortID);
         this.props.appendRocket(rocketID, newDate, userID, cohortID);
-    }
+    };
 
     render() {
         console.log(this.props);
         console.log(this.state);
-        let scheduledOn = this.props.rocket.startDate.slice(0,10);
+        let scheduledOn = this.props.rocket.startDate.slice(0, 10);
         return (
             <StylizedRocket>
                 <CardContent>
@@ -100,7 +100,9 @@ class CohortRocketCard extends Component {
                         <ClipQuestion>{this.state.userRocket.twoWeek.question}</ClipQuestion>
                         <ClipQuestion>{this.state.userRocket.twoMonth.question}</ClipQuestion>
                     </StylizedCohorts>
-                    <CohortLabel>{`Scheduled on ${moment(Date.parse(moment.tz(scheduledOn, this.state.timezone))).format('MMM Do YY')}`}</CohortLabel>
+                    <CohortLabel>{`Scheduled on ${moment(
+                        Date.parse(moment.tz(scheduledOn, this.state.timezone))
+                    ).format('MMM Do YY')}`}</CohortLabel>
                     <TextField
                         style={{ margin: '.5rem 0' }}
                         id="date"
@@ -121,4 +123,7 @@ class CohortRocketCard extends Component {
     }
 }
 
-export default connect(mapStateToProps, {appendRocket})(CohortRocketCard);
+export default connect(
+    mapStateToProps,
+    { appendRocket }
+)(CohortRocketCard);
