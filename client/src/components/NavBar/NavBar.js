@@ -53,7 +53,7 @@ const styles = theme => ({
         [theme.breakpoints.up('md')]: {
             position: 'fixed',
         },
-        paddingTop: '80px',
+        paddingTop: '7rem',
         zIndex: 0,
     },
     content: {
@@ -64,6 +64,7 @@ const styles = theme => ({
 });
 
 const StyledNavBarContainer = styled(AppBar)`
+    z-index: 1000;
     padding: 1rem;
     display: flex;
     flex-direction: row !important;
@@ -71,8 +72,9 @@ const StyledNavBarContainer = styled(AppBar)`
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    position: relative !important;
+    position: fixed !important;
     margin-bottom: 20px;
+    background-color: #2E3033 !important;
 `;
 
 const StyledBreadCrumbContainer = styled(Toolbar)`

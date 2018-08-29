@@ -159,7 +159,7 @@ class CohortRocketList extends Component {
                       return (acc = curr._id === this.props.cohortID ? index : 0);
                   })
               ].rockets.map(rocket => {
-                  return <CohortRocketCard key={rocket._id} rocket={rocket} />;
+                  return <CohortRocketCard key={rocket._id} rocket={rocket} cohortID={this.props.cohortID}/>;
               })
             : []; /*THIS IS IMPORTANT TO NOT ERROR OUT DO NOT REMOVE*/
         rocketSelectors.push();
@@ -167,12 +167,12 @@ class CohortRocketList extends Component {
     };
 
     generateRocketAddLinks = () => {
-        const rocketAddLinks = this.props.state.user.rockets.map(rocket => {
+        const rocketAddLinks = this.props.state.user.rockets.map((rocket, index) => {
             return (
                 <RocketMenuItem rocket={rocket} key={rocket._id} rocketChoice={this.rocketChoice} />
             );
         });
-        rocketAddLinks.push(<CreateNewRocketLink />);
+        rocketAddLinks.push(<CreateNewRocketLink key={`CNRL_KEY`} />);
         return rocketAddLinks;
     };
 

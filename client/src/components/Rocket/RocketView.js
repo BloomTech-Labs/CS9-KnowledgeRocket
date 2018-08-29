@@ -11,15 +11,14 @@ function mapStateToProps(state) {
 }
 
 const MainContainer = styled.div`
-    padding: 0 1.2rem;
+    padding: 1rem 1.2rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    height: ${props => props.height};
-    overflow: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 `;
@@ -89,7 +88,7 @@ class RocketView extends Component {
     render() {
         console.log(this.state);
         return (
-            <div className="Main_container">
+            <div>
                 <MainContainer>
                     <RocketForm
                         handleSubmit={this.handleUpdateRocket}

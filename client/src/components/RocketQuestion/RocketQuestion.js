@@ -56,7 +56,7 @@ const StyledHeaders = styled.h1`
 `;
 
 class RocketQuestion extends Component {
-    state = { ...defaultState };
+    state = JSON.parse(JSON.stringify(defaultState))
 
     componentDidMount() {
         const questionID = this.props.match.params.question;
@@ -65,11 +65,13 @@ class RocketQuestion extends Component {
         axios
             .get(`${url}/api/question/${questionID}`)
             .then(response => {
-                this.setState({
-                    questionID,
-                    studentID: this.props.match.params.student,
-                    rocketQuestion: response.data,
-                });
+                if (response.data.choices.length > 0) {
+                    this.setState({
+                        questionID,
+                        studentID: this.props.match.params.student,
+                        rocketQuestion: response.data,
+                    });
+                }                
             })
             .catch(questionError => {
                 this.setState(defaultState);
@@ -106,9 +108,10 @@ class RocketQuestion extends Component {
     };
 
     render() {
-        console.log(this.state.rocketQuestion.choices[0].correct);
+        // console.log(this.state.rocketQuestion.choices[0].correct);
         console.log('My state is:', this.state);
         return (
+            // <div></div>
             <QuestionHeader className="Question_container">
                 <div className="Question_text">
                     <StyledHeaders>{this.state.rocketQuestion.title}</StyledHeaders>
