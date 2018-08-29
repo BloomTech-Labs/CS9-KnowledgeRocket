@@ -15,6 +15,7 @@ import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
 import CohortAdd from '../Cohort/CohortAdd';
+import RocketResults from '../RocketResults/RocketResults';
 
 injectGlobal`
     * {
@@ -58,6 +59,7 @@ class InnerRoutes extends Component {
                 <Route path="/rocket/classes" exact component={CohortList} />
                 <Route path="/rocket/settings" exact component={Settings} />
                 <Route path="/rocket/auth" exact component={Auth} />
+                <Route path="/rocket/results" exact component={RocketResults} />
             </StyledContentContainer>
         );
     }
@@ -69,18 +71,6 @@ class Routes extends Component {
             <BrowserRouter>
                 <RouteContainer>
                     <Route path="/rocket" component={NavBar} />
-                    <StyledContentContainer>
-                        <Route path="/rocket" exact component={RocketList} />
-                        <Route path="/rocket/new" exact component={Rocket} />
-                        <Route path="/rocket/view/:id" exact component={RocketView} />
-                        <Route path="/rocket/billing" exact component={Billing} />
-                        <Route path="/rocket/classForm/:id" exact component={Cohort} />
-                        <Route path="/rocket/classForm" exact component={Cohort} />
-                        <Route path="/rocket/classes" exact component={CohortList} />
-                        <Route path="/rocket/settings" exact component={Settings} />
-                        <Route path="/rocket/auth" exact component={Auth} />
-                        <Route path="/rocket/results" exact component={RocektResults} />
-                    </StyledContentContainer>
                     <Route path="/rocket" component={InnerRoutes} />
                     <Route path="/" exact component={Home} />
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
