@@ -1,7 +1,4 @@
 import React from 'react';
-// import { generateBreadCrumbs } from '../../actions';
-// import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,11 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-// function mapStateToProps(state) {
-//     return {
-//         state,
-//     };
-// }
 const styles = theme => ({
     root: {
         width: '100%',
@@ -35,8 +27,7 @@ const rows = [
     createGraph('TWO WEEK TEST QUESTION', 10, 83, 83),
     createGraph('TWO MONTH TEST QUESTION', 99, 83, 83),
 ];
-function RocketResult(props) {
-    const { classes } = props;
+function RocketResult() {
     return (
         <Paper>
             <Table>
@@ -64,14 +55,5 @@ function RocketResult(props) {
         </Paper>
     );
 }
-RocketResult.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-// export default compose(
-//     withStyles(styles),
-//     connect(
-//         mapStateToProps,
-//         { generateBreadCrumbs }
-//     )
-// )(RocketResult);
+
 export default withStyles(styles)(RocketResult);
