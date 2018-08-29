@@ -13,10 +13,35 @@ function mapStateToProps(state) {
         state,
     };
 }
+let id = 0;
+function createGraph(label, participation, sent, students) {
+    id += 1;
+    return { id, label, participation, sent, students };
+}
+const rows = [createGraph('SAY MY NAME', 100, 83, 83), createGraph('John Cena', 10, 83, 83)];
 class RocketResult extends Component {
     componentDidMount() {}
     render() {
-        return <div />;
+        return (
+            <Paper>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>f</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map(row => {
+                            return (
+                                <TableRow key={row.id}>
+                                    <TableCell>{row.name}</TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </Paper>
+        );
     }
 }
 
