@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const HomeCTA = styled.div`
     font-family: 'Roboto';
-    background: url('/img/HomePage_CTA_10.svg') no-repeat center center;
+    background: url('/img/HomePage_CTA_11.svg') no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 600px;
