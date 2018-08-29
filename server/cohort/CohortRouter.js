@@ -27,9 +27,7 @@ function get(req, res) {
 function appendRocket(req, res) {
     //rocketID, startDate, userID, cohortID
     const { rocketID, startDate, userID, cohortID } = req.body;
-    console.log(rocketID, startDate, userID, cohortID);
     const parsedStartDate = Number(startDate);
-    console.log('MyStartDateParsed', parsedStartDate);
     // Had to add 10 MS to the dates for actual moment to interpret past midnight
     const rocketObject = {
         rocketId: rocketID,
@@ -41,7 +39,6 @@ function appendRocket(req, res) {
     Cohort.findById(cohortID)
         .populate('rockets')
         .then(foundCohort => {
-            // console.log('foundcohort before', foundCohort);
             // Find inside rockets array if a rocket matching rocketID exists
             // If exists: modify it with new schedule, etc.
             // else: push a new rocket to the array.
@@ -55,7 +52,6 @@ function appendRocket(req, res) {
             if (!included) {
                 foundCohort.rockets.push(rocketObject);
             }
-            // console.log('foundcohort after', foundCohort);
             Cohort.findByIdAndUpdate(cohortID, foundCohort)
                 .then(() => {
                     User.findById(userID)
