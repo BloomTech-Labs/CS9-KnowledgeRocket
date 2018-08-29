@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CohortRocketCard from '../CohortRocketCard/CohortRocketCard';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Styled from 'styled-components';
@@ -153,16 +152,18 @@ class CohortRocketList extends Component {
     };
 
     generateRocketSelector = () => {
+        const filteredCohort = this.props.state.user.cohorts[
+            this.props.state.user.cohorts.reduce((acc, curr, index) => {
+                let myIndex = (acc = curr._id === this.props.cohortID ? index : 0);
+                console.log('My INdex', myIndex);
+                return myIndex;
+            })
+        ];
         const rocketSelectors = this.props.state.user._id
-            ? this.props.state.user.cohorts[
-                  this.props.state.user.cohorts.reduce((acc, curr, index) => {
-                      return (acc = curr._id === this.props.cohortID ? index : 0);
-                  })
-              ].rockets.map(rocket => {
-                  return <CohortRocketCard key={rocket._id} rocket={rocket} cohortID={this.props.cohortID}/>;
-              })
-            : []; /*THIS IS IMPORTANT TO NOT ERROR OUT DO NOT REMOVE*/
-        rocketSelectors.push();
+            ? filteredCohort
+                ? []
+                : filteredCohort
+            : [];
         return rocketSelectors;
     };
 
@@ -177,8 +178,6 @@ class CohortRocketList extends Component {
     };
 
     render() {
-        // const { anchorEl } = this.state;
-        // const open = Boolean(anchorEl);
         return (
             <Card className={this.props.className}>
                 {this.generateRocketSelector()}
