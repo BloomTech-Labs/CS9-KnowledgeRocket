@@ -4,8 +4,16 @@ const { getAllCohorts, whereCohortRocket, getTodayAndTomorrow } = require('./Mai
 router.route('/').get(async (_, res) => {
     const { today, tomorrow } = getTodayAndTomorrow();
 
+    const whereCohortIntervalIs = interval => whereCohortRocket(interval, today, tomorrow);
+
+    const asdf = [
+        getAllCohorts(whereCohortIntervalIs('td')),
+        getAllCohorts(whereCohortIntervalIs('tw')),
+        getAllCohorts(whereCohortIntervalIs('tm')),
+    ];
+
     try {
-        const data = await getAllCohorts(whereCohortRocket('td', today, tomorrow));
+        const data = await Promise.all(asdf);
         res.json(data);
     } catch (err) {
         res.json({
