@@ -42,15 +42,15 @@ class CohortSettingForm extends Component {
 		const teacherID = this.props.state.user._id;
 		const cohortID = this.props.cohortID;
 		let studentData;
+
 		const file = event.target.files[0];
 		const config = {
 			quoteChar: '"',
 			header: true,
 			preview: 0,
 			complete: (results, file) => {
-				console.log('Parsing complete:', results, file);
-				studentData = results;
-				this.props.importCSV(results);
+				studentData = results.data;
+				this.props.importCSV(teacherID, cohortID, studentData);
 				this.setState({ csvData: results });
 			},
 		};
@@ -60,7 +60,7 @@ class CohortSettingForm extends Component {
 	};
 	render() {
 		console.log(`USER IMPORTED CSV DATA ${JSON.stringify(this.state.csvData)}`);
-		console.log(`PROPS ${JSON.stringify(this.props)}`);
+
 		return (
 			<Card className={this.props.className}>
 				<StylizedInput
