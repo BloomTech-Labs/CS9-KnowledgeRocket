@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const HomeCTA = styled.div`
     font-family: 'Roboto';
-    background: url('/img/HomePage_CTA_09.svg') no-repeat center center;
+    background: url('/img/HomePage_CTA_11.svg') no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 600px;
@@ -41,13 +41,6 @@ export const NavLogo = styled.img`
 
 export const HomeContainer = styled.div`
     font-family: 'Roboto', sans-serif;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    width: 100%;
 `;
 
 export const MidContainer = styled.div`
@@ -104,8 +97,8 @@ export const MidSection = styled.div`
     border-radius: 0.5rem;
     border: 1px solid #232323;
     margin: 1rem;
-    min-height: 80vh;
-    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
+    height: 100%;
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
 `;
 
 export const MidImg = styled.img`

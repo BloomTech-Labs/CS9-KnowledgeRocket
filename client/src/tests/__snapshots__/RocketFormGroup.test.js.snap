@@ -2,6 +2,7 @@
 
 exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
 .c0 {
+  padding: 2rem 2rem 0 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -187,6 +188,7 @@ exports[`RocketFormGroup testing styled components render <ErrorText /> renders 
 
 exports[`RocketFormGroup testing styled components render <FormGroup /> renders correctly 1`] = `
 .c0 {
+  padding: 2rem 2rem 0 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

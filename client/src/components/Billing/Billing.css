@@ -1,12 +1,3 @@
-.title10 {
-    font-family: roboto;
-    font-weight: 400;
-    font-size: 2rem;
-    margin: 1rem;
-    color: ghostwhite;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
-        0px 0px 8px #000000dd;
-}
 .radioGroup {
     padding: 1rem;
     border: 1px solid black;

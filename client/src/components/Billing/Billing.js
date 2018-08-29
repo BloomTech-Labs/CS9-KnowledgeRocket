@@ -47,7 +47,7 @@ class Billing extends Component {
 
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
-                <div className="Main_container">
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <FormControl component="fieldset" className={`fieldset`}>
                         <header className="title10">Billing and Subscriptions</header>
                         <Card className="radioGroup">

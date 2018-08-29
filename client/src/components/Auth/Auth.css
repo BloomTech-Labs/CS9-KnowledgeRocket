@@ -8,7 +8,8 @@
     padding: 22px;
     width: 11.4rem;
     border-radius: 0.4rem;
-    box-shadow: 0px 0px 8px #000000dd;
+    box-shadow: var(--grayRedBlue_shadow);
+    background-color: white;
 }
 .Auth_input input:before {
     height: 0 !important;
@@ -19,17 +20,16 @@
 }
 
 .Auth_header {
-    font-family: roboto;
+    font-family: 'Roboto', serif;
+    font-weight: bold;
     font-size: 2rem;
     margin: 1rem;
-    color: ghostwhite;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
-        0px 0px 8px #000000dd;
+    color: var(--grayRedBlue_header);
 }
 
 .Auth_prompt-fail {
     margin: 1rem;
-    color: red;
+    color: var(--grayRedBlue_secondary);
     font-weight: bold;
     width: 18rem;
     text-justify: auto;
@@ -41,4 +41,12 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     width: 11.9rem;
+}
+
+.Auth_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
 }
