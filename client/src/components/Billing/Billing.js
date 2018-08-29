@@ -11,11 +11,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import PropTypes from 'prop-types';
-import {
-
-    ListWrapper,
-
-} from '../RocketList/ListElements';
 // import Styled from 'styled-components';
 
 function mapStateToProps(state) {

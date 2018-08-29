@@ -11,7 +11,7 @@ import { generateBreadCrumbs } from '../../actions';
 // import AddIcon from '@material-ui/icons/Add';
 // Components
 // import CohortCard from '../CohortCard/CohortCard';
-import { FloatingAdd, ListCard /*RocketListContainer*/ } from '../RocketList/ListElements';
+import { FloatingAdd, ListCard , ListWrapper/*RocketListContainer*/ } from '../RocketList/ListElements';
 
 function mapStateToProps(state) {
     return {
@@ -82,7 +82,7 @@ export class CohortList extends Component {
 
     render() {
         return (
-            <div className="Main_container">
+            <ListWrapper>
                 {this.state.cohort ? (
                     // user has at least one cohort, render a cohort card
                     <CohortCardContainer>
@@ -129,7 +129,7 @@ export class CohortList extends Component {
                         large
                     />
                 )}
-            </div>
+            </ListWrapper>
         );
     }
 }
