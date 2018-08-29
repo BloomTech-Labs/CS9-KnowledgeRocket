@@ -11,16 +11,32 @@ function post(req, res) {
 	console.log(`COHORTID ${JSON.stringify(teacherID)}`);
 	console.log(`STUDENTDATA ${JSON.stringify(studentData)}`);
 
-	// add new students to Cohort.students
-
 	// find teacher by id
 	User.findById(teacherID)
-		.then(found => {
-			console.log(`SUCECSSFULLY FOUND A USER ${found}`);
+		.populate('cohorts')
+		.populate({
+			path: 'cohorts',
+			populate: { path: 'students', model: 'Students' },
+		})
+		.then(user => {
+			console.log(`SUCECSSFULLY FOUND A USER ${user}`);
 			// find cohort by id
 			Cohort.findById(cohortID)
-				.then(found => {
-					console.log(`SUCESSFULLY FOUND A COHORT ${found}`);
+				.populate('students')
+				.then(cohort => {
+					console.log(`SUCESSFULLY FOUND A COHORT ${cohort}`);
+					// add new students to Cohort.students
+					cohort.students = [...cohort.students, ...studentData];
+					console.log(`ADDED STUDENTS ${cohort.students}`);
+
+					// update user
+					User.findByIdAndUpdate(teacherID, { cohorts: cohort.students })
+						.then(udpated => {
+							console.log(`UPDATED USER SUCCESSFULLY`);
+						})
+						.catch(ERR => {
+							RES.STATUS(500).JSON({ errorMessage: err.message });
+						});
 				})
 				.catch(err => {
 					res.status(500).json({ errorMessage: err.message });
