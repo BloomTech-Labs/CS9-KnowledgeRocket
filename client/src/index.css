@@ -148,29 +148,59 @@ table {
     align-items: center;
 }
 
-.Main_container {
+.Content_container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    margin: 0 auto;
     width: 100%;
-    min-width: 29rem;
-    /*border: 1px solid rgb(119, 136, 153);*/
-    /*border-radius: 0.4rem;*/
-    font-family: 'Roboto', serif;
     height: inherit;
-    /*background-color: #a0b7ce;*/
-    /* background-color: #979797;  */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.Main_container::-webkit-scrollbar {
-    display: none;
+.Main_container {
 }
+
+/* @media (max-width: 960px) {
+    .Main_container {
+        padding: var(--mainPadding_sml);
+        width: 100%;
+    }
+} */
 
 .routeContainer {
-    /*background-color: #eeeeee;*/
-    background-color: white;
-    height: 100vh;
+    background-color: #eeeeee;
+    height: inherit;
+    width: 100vw;
+}
+
+.title10 {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', serif;
+    font-weight: 900;
+    font-size: 2rem;
+    margin: 1rem;
+    color: var(--grayRedBlue_header);
+}
+
+/* Themes */
+/* grayRedBlue */
+:root {
+    /* Component Spacing Main */
+    --mainPadding: 7rem 1rem 1rem 11rem;
+    --mainPadding_sml: 7rem 1rem 1rem 0rem;
+    --cpPadding: 7rem 0 0 0;
+
+    --grayRedBlue_padding: 7rem 1rem 1rem 12.2rem;
+
+    /* Colors and Styles */
+    --grayRedBlue_header: #324151;
+    --grayRedBlue_background: #eeeeee;
+    --grayRedBlue_border: #d1d1d1;
+    --grayRedBlue_primary: #3f51b5;
+    --grayRedBlue_secondary: #f50057;
+    --grayRedBlue_nav: #324151;
+    --grayRedBlue_border_light: #74a752;
+    --grayRedBlue_highlight: #dcfdc6;
+    --grayRedBlue_shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
