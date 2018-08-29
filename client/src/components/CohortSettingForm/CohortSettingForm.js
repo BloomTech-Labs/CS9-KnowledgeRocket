@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Papa from 'papaparse';
 // Material Components
-import Card from '@material-ui/core/Card';
 import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -62,7 +61,7 @@ class CohortSettingForm extends Component {
 		console.log(`USER IMPORTED CSV DATA ${JSON.stringify(this.state.csvData)}`);
 
 		return (
-			<Card className={this.props.className}>
+			<div className={this.props.className}>
 				<StylizedInput
 					placeholder="Class Name"
 					disableUnderline={true}
@@ -86,7 +85,7 @@ class CohortSettingForm extends Component {
 						onChange={this.handleFileSelect}
 					/>
 				</StylizedForm>
-			</Card>
+			</div>
 		);
 	}
 }

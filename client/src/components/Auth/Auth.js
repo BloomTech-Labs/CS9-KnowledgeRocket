@@ -88,8 +88,6 @@ class Auth extends Component {
     };
 
     render() {
-        // console.log('props user', this.props.user);
-        // console.log('state user', this.state.authenticated);
         return (
             <div className="Main_container">
                 <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
