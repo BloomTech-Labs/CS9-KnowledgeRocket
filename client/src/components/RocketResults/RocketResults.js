@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,6 +7,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { generateBreadCrumbs } from '../../actions';
+
+function mapStateToProps(state) {
+    return {
+        state,
+    };
+}
 
 const styles = theme => ({
     root: {
@@ -27,33 +35,41 @@ const rows = [
     createGraph('TWO WEEK TEST QUESTION', 10, 83, 83),
     createGraph('TWO MONTH TEST QUESTION', 99, 83, 83),
 ];
-function RocketResult() {
-    return (
-        <Paper>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Some Name for this Data likely a template literal</TableCell>
-                        <TableCell numeric>Participation</TableCell>
-                        <TableCell numeric>Sent</TableCell>
-                        <TableCell numeric>Students</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map(row => {
-                        return (
-                            <TableRow key={row.id}>
-                                <TableCell>{row.label}</TableCell>
-                                <TableCell numeric>{row.participation}%</TableCell>
-                                <TableCell numeric>{row.sent}</TableCell>
-                                <TableCell numeric>{row.students}</TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
-        </Paper>
-    );
+class RocketResult extends Component {
+    componentDidMount() {
+        this.props.generateBreadCrumbs('/rocket/results');
+    }
+    render() {
+        return (
+            <Paper>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Some Name for this Data likely a template literal</TableCell>
+                            <TableCell numeric>Participation</TableCell>
+                            <TableCell numeric>Sent</TableCell>
+                            <TableCell numeric>Students</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map(row => {
+                            return (
+                                <TableRow key={row.id}>
+                                    <TableCell>{row.label}</TableCell>
+                                    <TableCell numeric>{row.participation}%</TableCell>
+                                    <TableCell numeric>{row.sent}</TableCell>
+                                    <TableCell numeric>{row.students}</TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </Paper>
+        );
+    }
 }
 
-export default withStyles(styles)(RocketResult);
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs }
+)(withStyles(styles)(RocketResult));
