@@ -149,6 +149,7 @@ class Cohort extends Component {
                 <StyledCohortSettingForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
+                    cohortID={cohortID}
                 />
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm cohortID={cohortID} />
