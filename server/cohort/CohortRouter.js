@@ -23,26 +23,35 @@ function get(req, res) {
             res.status(500).json({ errorMessage: 'There was an error in GET' });
         });
 }
-// startDate: { type: Date },
-//             td: { type: Date },
-//             tm: { type: Date },
-//             tw: { type: Date },
+
 function appendRocket(req, res) {
     //rocketID, startDate, userID, cohortID
     const { rocketID, startDate, userID, cohortID } = req.body;
-    console.log(rocketID, startDate, userID, cohortID)
+    const parsedStartDate = Number(startDate);
+    // Had to add 10 MS to the dates for actual moment to interpret past midnight
+    const rocketObject = {
+        rocketId: rocketID,
+        startDate: parsedStartDate,
+        td: parsedStartDate + 48 * 60 * 60 * 1000,
+        tw: parsedStartDate + 14 * 24 * 60 * 60 * 1000,
+        tm: parsedStartDate + 60 * 24 * 60 * 60 * 1000,
+    };
     Cohort.findById(cohortID)
         .populate('rockets')
         .then(foundCohort => {
-            console.log('foundcohort before', foundCohort)
-            foundCohort.rockets.push({
-                rocketId: rocketID,
-                startDate,
-                td: Date.now() + 48 * 60 * 60 * 1000,
-                tw: Date.now() + 14 * 24 * 60 * 60 * 1000,
-                tm: Date.now() + 60 * 24 * 60 * 60 * 1000,
+            // Find inside rockets array if a rocket matching rocketID exists
+            // If exists: modify it with new schedule, etc.
+            // else: push a new rocket to the array.
+            let included = false;
+            foundCohort.rockets.forEach((rocket, i) => {
+                if (String(rocket.rocketId) === rocketID) {
+                    foundCohort.rockets[i] = rocketObject;
+                    included = true;
+                }
             });
-            console.log('foundcohort after', foundCohort)
+            if (!included) {
+                foundCohort.rockets.push(rocketObject);
+            }
             Cohort.findByIdAndUpdate(cohortID, foundCohort)
                 .then(() => {
                     User.findById(userID)
@@ -51,16 +60,17 @@ function appendRocket(req, res) {
                             path: 'cohorts',
                             populate: { path: 'students', model: 'Students' },
                         })
-                        .populate('rockets')
-                        .populate('questions')
-                        .populate('rockets.questions.twoDay')
-                        .populate('rockets.questions.twoWeek')
-                        .populate('rockets.questions.twoMonth')
-                        .then(populatedUser =>{
+                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                        .then(populatedUser => {
                             res.status(201).json(populatedUser);
-                        }).catch(failureToPopulateUser =>{
-                            res.status(500).json({failureToPopulateUser: failureToPopulateUser.message})
                         })
+                        .catch(failureToPopulateUser => {
+                            res.status(500).json({
+                                failureToPopulateUser: failureToPopulateUser.message,
+                            });
+                        });
                 })
                 .catch(errorAdding => {
                     res.status(500).json({ errorAdding: errorAdding.message });

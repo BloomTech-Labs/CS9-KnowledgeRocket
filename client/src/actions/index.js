@@ -68,6 +68,8 @@ export const addRocket = (rocket, uid) => async dispatch => {
         dispatch({ type: ADD_ROCKET, payload: response.data });
     } catch (err) {}
 };
+
+// Appends a rocket to the cohorts rocket's scheduled array.
 export const appendRocket = (rocketID, startDate, userID, cohortID) => async dispatch => {
     dispatch({ type: APPENDING_ROCKETS });
     try {
@@ -106,9 +108,10 @@ export const deleteRocket = rocketId => async dispatch => {
 
 // COHORT ACTIONS
 export const addCohort = (cohort, id) => async dispatch => {
+    const packagedCohort = {...cohort, teacher: id};
     dispatch({ type: ADDING_COHORT });
     try {
-        let response = await axios.post(`${url}/api/cohort`, { cohort, id });
+        let response = await axios.post(`${url}/api/cohort`, {cohort: packagedCohort, id});
         dispatch({ type: ADD_COHORT, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_COHORT_FAILURE });

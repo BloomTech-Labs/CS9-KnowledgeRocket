@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 
 export const FormGroup = Styled.div`
+    padding: 2rem 2rem 0 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
