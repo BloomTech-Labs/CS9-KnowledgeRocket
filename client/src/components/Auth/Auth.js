@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import {
@@ -18,6 +19,10 @@ function mapStateToProps(state) {
         user: state.user,
     };
 }
+
+// const LoginPortal = styled.div`
+//     margin: 0 12rem 0 0;
+// `;
 
 class Auth extends Component {
     state = {
@@ -167,14 +172,11 @@ class Auth extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        addUser,
-        loginUser,
-        loginUserGoogle,
-        loginUserFacebook,
-        loginUserTwitter,
-        generateBreadCrumbs,
-    }
-)(Auth);
+export default connect(mapStateToProps, {
+    addUser,
+    loginUser,
+    loginUserGoogle,
+    loginUserFacebook,
+    loginUserTwitter,
+    generateBreadCrumbs,
+})(Auth);

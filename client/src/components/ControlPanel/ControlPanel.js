@@ -27,7 +27,7 @@ const styles = theme => ({
     drawerPaper: {
         zIndex: '10',
         position: 'fixed',
-        padding: '7rem 0 0 0',
+        padding: '8rem 0 0 0',
         backgroundColor: 'var(--grayRedBlue_background)',
         overflow: 'hidden',
     },
@@ -52,36 +52,24 @@ const CPLink = styled(Link)`
 
 class ControlPanel extends Component {
     state = {
-        height: '0px',
+
     };
 
     componentDidMount() {
         this.updateDimensions();
-        window.addEventListener('resize', this.updateDimensions.bind(this));
     }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateDimensions.bind(this));
-    }
-
-    updateDimensions = () => {
-        if (window.windowState === 1) {
-            this.setState({ height: window.innerHeight - 128 + 'px' });
-        } else {
-            this.setState({ height: document.documentElement.clientHeight - 128 + 'px' });
-        }
-    };
 
     render() {
         const { classes } = this.props;
 
         return (
-            <div style={{height: this.state.height}}>
+            <div style={{height: '100vh', padding: '7rem 0 0 0'}}>
             <Drawer
                 variant="permanent"
                 classes={{
                     paper: classes.drawerPaper,
                 }}
-            >
+            >   
                 <List>
                     <ListItem>
                         <CPLink to="/rocket">

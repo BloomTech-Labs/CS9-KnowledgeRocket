@@ -9,7 +9,8 @@ import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsFor
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
-import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
+import { generateBreadCrumbs, addCohort, appendRocket } from '../../actions';
+
 function mapStateToProps(state) {
     return {
         state,
@@ -74,6 +75,7 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     align-items: center;
     width: 100%;
     padding: 1rem;
+    margin-bottom: 2rem;
 `;
 
 const StyledAddCohortBtn = styled(Button)`
@@ -83,9 +85,6 @@ const StyledAddCohortBtn = styled(Button)`
 class Cohort extends Component {
     state = {
         title: '',
-        firstName: '',
-        lastName: '',
-        email: '',
         startDate: {
             /* objectID : date*/
             objectID: 0,
@@ -124,7 +123,8 @@ class Cohort extends Component {
     };
 
     handleCheckBox = e => {
-        this.setState({ [e.target.name]: !e.target.checked });
+        console.log('MADE IT TO handleCheckBox');
+        this.setState({ [e.target.name]: !!e.target.checked });
     };
 
     handleAddCohort = () => {
@@ -133,6 +133,7 @@ class Cohort extends Component {
         };
         this.props.addCohort(cohort, this.props.state.user._id);
     };
+
     handleAppendRocket = (rocketID, startDate) => {
         //startDate:
         this.setState({
@@ -146,6 +147,7 @@ class Cohort extends Component {
         );
         //rocketID, startDate, userID, cohortID
     };
+
     handlePickRocket = rocketID => {
         const today = new Date(new Date().setHours(0, 0, 0, 0));
         // console.log(today.toDateString())
@@ -167,15 +169,13 @@ class Cohort extends Component {
     render() {
         return (
             <CohortFormMainContainer>
-                <StyledHeaders>Create or Edit the Class Settings</StyledHeaders>
-                <StyledCohortSettingForm handleNewInput={this.handleNewInput} />
-                <StyledHeaders>Add Students</StyledHeaders>
-                <StyledCohortAddStudentForm
+                <StyledHeaders>Class Settings</StyledHeaders>
+                <StyledCohortSettingForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
-                    handleAddStudent={this.handleAddStudent}
-                    ccStatus={this.state.ccEmail}
                 />
+                <StyledHeaders>Add Students</StyledHeaders>
+                <StyledCohortAddStudentForm cohortID={this.props.match.params.id} />
                 <StyledHeaders>Students</StyledHeaders>
                 {this.state.cohort.students.length > 0 ? (
                     <StyledCohortStudentList
@@ -203,12 +203,8 @@ class Cohort extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        generateBreadCrumbs,
-        addCohort,
-        addStudent,
-        appendRocket,
-    }
-)(Cohort);
+export default connect(mapStateToProps, {
+    generateBreadCrumbs,
+    addCohort,
+    appendRocket,
+})(Cohort);

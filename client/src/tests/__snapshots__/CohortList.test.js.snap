@@ -43,7 +43,9 @@ exports[`CohortList renders correctly 1`] = `
             <span
               className="MuiButton-label-38"
             >
-              <div />
+              <div>
+                _
+              </div>
             </span>
             <span
               className="MuiTouchRipple-root-66"
@@ -69,6 +71,11 @@ exports[`CohortList renders correctly 1`] = `
             </div>
             <hr
               className="sc-bZQynM ihzXMZ"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
             />
             <div
               className="sc-gzVnrw cwaINH"
@@ -81,7 +88,7 @@ exports[`CohortList renders correctly 1`] = `
                 }
               />
               <button
-                className="MuiButtonBase-root-63 MuiButton-root-37 MuiButton-fab-54 MuiButton-mini-59 MuiButton-contained-48 MuiButton-containedPrimary-49 MuiButton-raised-51 MuiButton-raisedPrimary-52"
+                className="MuiButtonBase-root-63 MuiButton-root-37 MuiButton-fab-54 MuiButton-contained-48 MuiButton-containedPrimary-49 MuiButton-raised-51 MuiButton-raisedPrimary-52"
                 disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}

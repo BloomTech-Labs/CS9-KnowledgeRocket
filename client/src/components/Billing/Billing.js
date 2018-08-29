@@ -11,6 +11,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import PropTypes from 'prop-types';
+import {
+
+    ListWrapper,
+
+} from '../RocketList/ListElements';
 // import Styled from 'styled-components';
 
 function mapStateToProps(state) {
@@ -47,7 +52,7 @@ class Billing extends Component {
 
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
-                <div className="Main_container">
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <FormControl component="fieldset" className={`fieldset`}>
                         <header className="title10">Billing and Subscriptions</header>
                         <Card className="radioGroup">

@@ -49,7 +49,6 @@ class RocketList extends Component {
 
     render() {
         return (
-            <div className="Main_container">
                 <ListWrapper>
                     <RocketListContainer>
                         <ListCard del={false} add={true} redirect='/rocket/new' title='Add New Rocket' label='Add' contents={[<FloatingAdd large click={this.handleNewRocket}/>]}/>
@@ -70,7 +69,6 @@ class RocketList extends Component {
                     </RocketListContainer>
                     <FloatingAdd click={this.handleNewRocket} title={'Add Rocket'} floating/>
                 </ListWrapper>
-            </div>
         );
     }
 }

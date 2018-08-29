@@ -55,7 +55,6 @@ function appendRocket(req, res) {
             if (!included) {
                 foundCohort.rockets.push(rocketObject);
             }
-
             // console.log('foundcohort after', foundCohort);
             Cohort.findByIdAndUpdate(cohortID, foundCohort)
                 .then(() => {

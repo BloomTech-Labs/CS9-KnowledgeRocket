@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 // Material Components
 import Card from '@material-ui/core/Card';
 // Components
@@ -34,7 +34,7 @@ class CohortStudentList extends Component {
                 ))}
             </Card>
         );
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps)(CohortStudentList);
