@@ -1,4 +1,4 @@
-const { getAllCohorts, getAll } = require('./MailModel');
+const { getAllCohorts, getAll, whereCohortRocket, getTodayAndTomorrow } = require('./MailModel');
 
 describe('MailModel', () => {
     it('has a getAllCohorts fn', () => {
@@ -37,6 +37,41 @@ describe('MailModel', () => {
             const getAllMock = getAll(mockModel, ...fields);
             await getAllMock();
             expect(mockPopulate.mock.calls.length).toBe(fields.length);
+        });
+    });
+
+    describe('.whereCohortRocket', () => {
+        it('creates an object of the correct shape', () => {
+            const opts = {
+                interval: 'td',
+                start: 1,
+                end: 2,
+            };
+            const createdOject = whereCohortRocket(opts.interval, opts.start, opts.end);
+            expect(createdOject).toMatchObject(
+                expect.objectContaining({
+                    rockets: {
+                        $elemMatch: {
+                            [opts.interval]: {
+                                $gte: opts.start,
+                                $lt: opts.end,
+                            },
+                        },
+                    },
+                })
+            );
+        });
+    });
+
+    describe('.getTodayAndTomorrow', () => {
+        it('returns an object with today and tomorrow properties', () => {
+            const toanto = getTodayAndTomorrow();
+            expect(toanto).toMatchObject(
+                expect.objectContaining({
+                    today: expect.any(Date),
+                    tomorrow: expect.any(Date),
+                })
+            );
         });
     });
 });
