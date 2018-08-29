@@ -8,6 +8,7 @@ import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
 // import CohortRocketList from '../CohortRocketList/CohortRocketList';
+
 // Actions
 import { generateBreadCrumbs, addCohort, appendRocket } from '../../actions';
 
@@ -168,8 +169,8 @@ class Cohort extends Component {
 
     render() {
         console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
-        const { cohortID } = this.props.match.params.id;
-        // const { students } = this.props.location.state;
+        const cohortID = this.props.match.params.id;
+        console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
 
         return (
             <CohortFormMainContainer>
