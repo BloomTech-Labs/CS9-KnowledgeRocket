@@ -153,7 +153,7 @@ export const importCSV = (teacherID, cohortID, studentData) => async dispatch =>
             studentData,
         });
         dispatch({ type: UPLOAD_CSV, payload: response.data });
-        console.log(`IMPORT CSV RESPONSE ${response.data}`);
+        console.log(`IMPORT CSV RESPONSE ${JSON.stringify(response.data)}`);
     } catch (err) {
         dispatch({ type: UPLOAD_CSV_FAILURE });
     }
@@ -168,6 +168,7 @@ export const addUser = user => async dispatch => {
         dispatch({ type: ADD_USER_FAILURE });
     }
 };
+
 export const upgradeUser = user => async dispatch => {
     dispatch({ type: UPGRADE_USER });
     try {
