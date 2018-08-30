@@ -135,10 +135,6 @@ class RocketResult extends Component {
     render() {
         return (
             <div>
-                <div style={{ width: '300px', height: '300px', padding: '1rem' }}>
-                    {this.generateChart()}
-                </div>
-
                 <Paper>
                     <Table>
                         <TableHead>
@@ -166,7 +162,9 @@ class RocketResult extends Component {
                     </Table>
                 </Paper>
                 <Paper>
-                    <canvas ref="canvas" width="600" height="500" />
+                    <div style={{ width: '300px', height: '300px', padding: '1rem' }}>
+                        {this.generateChart()}
+                    </div>
                 </Paper>
             </div>
         );
