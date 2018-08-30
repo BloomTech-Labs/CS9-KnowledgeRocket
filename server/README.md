@@ -3,6 +3,9 @@
 <h2>Description</h2>
 <p>This is the specification for the Knowledge Rockets back-end client.</p>
 
+<h2>Getting Started</h2>
+<p>These instructions will get you a copy of the project on your local machine for development and testing purposes.</p>
+
 <h3>Prerequisites</h3>
 <p>The following are the dependencies you will need: </p>
 
