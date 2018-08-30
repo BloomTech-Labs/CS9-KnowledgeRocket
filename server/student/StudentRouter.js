@@ -163,6 +163,35 @@ function postCSV(req, res) {
                         found.students.push(student._id);
                     });
                     console.log('SUCCESFULLY ADDED NEW STUDENTS');
+                    Cohort.findByIdAndUpdate(cohortID, found)
+                        .then(() => {
+                            console.log('SUCCESSFULLY UPDATED COHORT WITH NEW STUDENTS');
+                            User.findById(teacherID)
+                                .populate('cohorts')
+                                .populate({
+                                    path: 'cohorts',
+                                    populate: { path: 'students', model: 'Students' },
+                                })
+                                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                                .then(teacher => {
+                                    console.log(
+                                        'SUCCESSFULLY FOUND A USER BY ID AND POPULATED DATA FIELDS'
+                                    );
+                                    res.status(201).json(teacher);
+                                })
+                                .catch(err => {
+                                    res.status(500).json({
+                                        errorMessage: err.message,
+                                    });
+                                });
+                        })
+                        .catch(err => {
+                            res
+                                .status(500)
+                                .json({ errorMessage: 'There was an error updating the cohort' });
+                        });
                 })
                 .catch(err => {
                     res.status(500).json({ errorMessage: 'There was an error finding the cohort' });
