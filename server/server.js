@@ -16,11 +16,11 @@ const { Router: MailRouter } = require('./mail');
 const server = express();
 
 const authMiddleware = (req, res, next) => {
-    // TODO: Implement Authentication and Authorization
-    // const {token, uid} = req.headers;
-    // Will require Front-End Caching of Data to save spot
-    // So data is back if user's token expires while they are not done.
-    next();
+	// TODO: Implement Authentication and Authorization
+	// const {token, uid} = req.headers;
+	// Will require Front-End Caching of Data to save spot
+	// So data is back if user's token expires while they are not done.
+	next();
 };
 
 // Begin code for cross-site allowances -------------------------------------

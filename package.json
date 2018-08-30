@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket/issues"
   },
-  "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme"
+  "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme",
+  "dependencies": {
+    "papaparse": "^4.6.0"
+  }
 }

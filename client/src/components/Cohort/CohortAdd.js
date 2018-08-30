@@ -29,7 +29,7 @@ const StyledCohortSettingForm = styled.div`
     margin-bottom: 1rem;
     width: 100%;
     background-color: white;
-    border-radius: .4rem;
+    border-radius: 0.4rem;
     box-shadow: var(--grayRedBlue_shadow);
 `;
 
@@ -50,7 +50,7 @@ const CohortFormMainContainer = styled.div`
     min-height: 100vh;
 `;
 
-class Cohort extends Component {
+class CohortAdd extends Component {
     state = {
         title: '',
         firstName: '',
@@ -88,33 +88,29 @@ class Cohort extends Component {
     };
 
     render() {
-        console.log(this.props);
+        console.log('MADE IT TO COHORTADD');
         return (
             <CohortFormMainContainer>
                 <StyledHeaders>Create a new Cohort</StyledHeaders>
                 <StyledCohortSettingForm>
-                
-                <StylizedInput
-                    placeholder="Please Enter a Name for your New Class"
-                    disableUnderline={true}
-                    name="title"
-                    onChange={this.handleNewInput}
-                />
-                <Button variant="contained" color="primary" onClick={this.handleAddCohort}>
-                    Add this Cohort
-                </Button>
+                    <StylizedInput
+                        placeholder="Please Enter a Name for your New Class"
+                        disableUnderline={true}
+                        name="title"
+                        onChange={this.handleNewInput}
+                    />
+                    <Button variant="contained" color="primary" onClick={this.handleAddCohort}>
+                        Add this Cohort
+                    </Button>
                 </StyledCohortSettingForm>
             </CohortFormMainContainer>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        generateBreadCrumbs,
-        addCohort,
-        addStudent,
-        appendRocket,
-    }
-)(Cohort);
+export default connect(mapStateToProps, {
+    generateBreadCrumbs,
+    addCohort,
+    addStudent,
+    appendRocket,
+})(CohortAdd);
