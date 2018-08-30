@@ -46,6 +46,10 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATING_USER = 'UPDATING_USER';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
+export const UPLOAD_CSV = 'UPLOAD_CSV';
+export const UPLOADING_CSV = 'UPLOADING_CSV';
+export const UPLOAD_CSV_FAILURE = 'UPLOAD_CSV_FAILURE';
+
 // Breadcrumb Actions
 export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 
@@ -108,10 +112,10 @@ export const deleteRocket = rocketId => async dispatch => {
 
 // COHORT ACTIONS
 export const addCohort = (cohort, id) => async dispatch => {
-    const packagedCohort = {...cohort, teacher: id};
+    const packagedCohort = { ...cohort, teacher: id };
     dispatch({ type: ADDING_COHORT });
     try {
-        let response = await axios.post(`${url}/api/cohort`, {cohort: packagedCohort, id});
+        let response = await axios.post(`${url}/api/cohort`, { cohort: packagedCohort, id });
         dispatch({ type: ADD_COHORT, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_COHORT_FAILURE });
@@ -139,6 +143,22 @@ export const deleteStudent = studentID => async dispatch => {
 };
 
 // User Actions
+export const importCSV = (teacherID, cohortID, studentData) => async dispatch => {
+    console.log('MADE IT TO IMPORT CSV ACTION CREATOR');
+    dispatch({ type: UPLOADING_CSV });
+    try {
+        let response = await axios.post(`${url}/api/student/importcsv`, {
+            teacherID,
+            cohortID,
+            studentData,
+        });
+        dispatch({ type: UPLOAD_CSV, payload: response.data });
+        console.log(`IMPORT CSV RESPONSE ${JSON.stringify(response.data)}`);
+    } catch (err) {
+        dispatch({ type: UPLOAD_CSV_FAILURE });
+    }
+};
+
 export const addUser = user => async dispatch => {
     dispatch({ type: ADDING_USER });
     try {
@@ -148,6 +168,7 @@ export const addUser = user => async dispatch => {
         dispatch({ type: ADD_USER_FAILURE });
     }
 };
+
 export const upgradeUser = user => async dispatch => {
     dispatch({ type: UPGRADE_USER });
     try {

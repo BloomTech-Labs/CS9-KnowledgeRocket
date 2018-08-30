@@ -21,6 +21,9 @@ import {
     UPDATING_USER,
     UPDATE_USER_FAILURE,
     UPDATE_USER,
+    UPLOAD_CSV,
+    UPLOADING_CSV,
+    UPLOAD_CSV_FAILURE,
 } from '../actions';
 
 const defaultState = {
@@ -46,8 +49,20 @@ export default (state = defaultState, action) => {
             StateCopy.status = DELETING_ROCKET;
             return StateCopy;
         case DELETE_ROCKET:
-            console.log('User reducer hit', action.payload);
             StateCopy.status = ADD_ROCKET;
+            // update cohort rockets
+            let target = [];
+            StateCopy.cohorts.forEach((c, cIndex) => {
+                c.rockets.forEach((r, rIndex) => {
+                    if (r.rocketId === action.payload.rocketId) {
+                        target.push([cIndex, rIndex]);
+                    }
+                });
+            });
+            target.forEach(t => {
+                StateCopy.cohorts[t[0]].rockets.splice(t[1], 1);
+            });
+            // update user rockets
             StateCopy.rockets.forEach((rocket, index) => {
                 if (rocket._id === action.payload.rocketId) {
                     StateCopy.rockets.splice(index, 1);
@@ -125,7 +140,19 @@ export default (state = defaultState, action) => {
             });
             StateCopy.cohorts[targetIdx].students = updatedStudents;
             return StateCopy;
-
+        case UPLOAD_CSV:
+            console.log('MADE IT TO UPLOAD CSV REDUCER');
+            console.log(`PAYLOAD ${JSON.stringify(action.payload)}`);
+            StateCopy = action.payload;
+            StateCopy.authenticated = true;
+            StateCopy.status = UPLOAD_CSV;
+            return StateCopy;
+        case UPLOADING_CSV:
+            StateCopy.status = UPLOADING_CSV;
+            return StateCopy;
+        case UPLOAD_CSV_FAILURE:
+            StateCopy.status = UPLOAD_CSV_FAILURE;
+            return StateCopy;
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
             return StateCopy;

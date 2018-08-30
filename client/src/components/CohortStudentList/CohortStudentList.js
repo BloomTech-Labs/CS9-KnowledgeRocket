@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // Material Components
 import Card from '@material-ui/core/Card';
 // Components
@@ -13,28 +13,35 @@ function mapStateToProps(state) {
 
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortStudentList extends Component {
-    state = {
-        students: [{}],
-    };
-    componentDidMount() {
-        this.props.state.user.cohorts.forEach(cohort => {
-            if (cohort._id === this.props.match.params.id) {
-                this.setState({ students: cohort.students });
-            } else {
+    // state = {
+    //     students: [{}],
+    // };
+    // componentDidMount() {
+    //     this.props.state.user.cohorts.forEach(cohort => {
+    //         if (cohort._id === this.props.match.params.id) {
+    //             this.setState({ students: cohort.students });
+    //         } else {
+    //         }
+    //     });
+    // }
 
-            }
-        });
+    componentWillUpdate() {
+        console.log(`STUDENT LIST WILL UPDATE ${JSON.stringify(this.props)}`);
     }
+
     render() {
         return (
             <Card className={this.props.className}>
                 {/* Render all students added */}
-                {this.state.students.map((student, index) => (
-                    <CohortStudentCard student={student} key={`student_${index}`} />
-                ))}
+                {this.props.state.user.cohorts[this.props.cohortID].students.map(
+                    (student, index) => (
+                        <CohortStudentCard student={student} key={`student_${index}`} />
+                    )
+                )}
             </Card>
         );
-    };
-};
+    }
+}
 
 export default connect(mapStateToProps)(CohortStudentList);
+// export default CohortStudentList;
