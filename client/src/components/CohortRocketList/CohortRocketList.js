@@ -60,7 +60,13 @@ const HorizontalDivider = Styled.hr`
 `;
 
 class RocketMenuItem extends Component {
+
+
+return 
     render() {
+        let s1 = <circle cx="5" cy="5" r="10" stroke="green" strokeWidth="4" fill="blue" />;
+        let s2 = <circle cx="50" cy="50" r="40" stroke="green" strokeWidth="4" fill="blue" />;
+        let tl = [s1 + s2]; // Operator '+' cannot be applied to types 'Element' and 'Element'.
         return (
             <div
                 style={{
@@ -74,6 +80,7 @@ class RocketMenuItem extends Component {
                     marginBottom: '0.3rem',
                 }}
             >
+            <svg>{tl}</svg>
                 <FloatingAdd
                     style={{
                         display: 'flex',
