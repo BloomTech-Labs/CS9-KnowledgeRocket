@@ -57,12 +57,45 @@ const StyledCardContent = styled(CardContent)`
 `;
 
 const StyledFormHeader = styled(StyledCardContent)`
+    display: block;
     background-color: #fff;
     font-weight: 300;
     line-height: 40px;
     color: #39d1b4;
     width: 100%;
     padding: 0;
+`;
+
+const StyledInputContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+    padding: 10px;
+`;
+
+const StyledInput = styled.input`
+    background-color: inherit;
+    width: 250px;
+    height: 30px;
+    color: #5b7383;
+    font-weight: 600;
+    font-size: 1rem;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    margin: 10px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::placeholder {
+        color: #fff;
+        font-weight: 300;
+        opacity: 0.7;
+    }
 `;
 
 class Auth extends Component {
@@ -199,6 +232,14 @@ class Auth extends Component {
                 <StyledFormCard>
                     <StyledCardContent className={classes.root}>
                         <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
+                        <StyledInputContainer>
+                            <div style={{ width: '50%' }}>
+                                <StyledInput type="text" placeholder="username" required />
+                                <StyledInput type="text" placeholder="password" required />
+                                <StyledInput type="text" placeholder="email" required />
+                            </div>
+                            <div style={{ width: '50%' }}>username password sign in</div>
+                        </StyledInputContainer>
                     </StyledCardContent>
                 </StyledFormCard>
                 <div className="flex-row-centered Auth_prompt-fail">
