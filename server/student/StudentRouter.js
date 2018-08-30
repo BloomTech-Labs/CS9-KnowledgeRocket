@@ -13,6 +13,7 @@ router
     .put(put)
     .get(getid)
     .delete(deleteid);
+router.route('/importcsv').post(postCSV);
 
 function get(req, res) {
     Student.find()
@@ -27,7 +28,7 @@ function get(req, res) {
 function post(req, res) {
     const email = req.body.student.email;
     // validate student email
-    let regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+    const regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     if (regVar.test(email)) {
         // email is valid
         const student = new Student(req.body.student); // instantiate a new student
@@ -106,6 +107,7 @@ function put(req, res) {
             res.status(500).json({ message: 'Error on PUT' });
         });
 }
+
 function deleteid(req, res) {
     const id = req.params.id;
     if (!Student.findById(id)) {
@@ -118,6 +120,44 @@ function deleteid(req, res) {
         })
         .catch(err => {
             res.status(500).json({ message: 'Error on DEL' });
+        });
+}
+
+function postCSV(req, res) {
+    const { teacherID, cohortID, studentData } = req.body;
+    console.log(`TEACHERID ${JSON.stringify(teacherID)}`);
+    console.log(`COHORTID ${JSON.stringify(cohortID)}`);
+    console.log(`STUDENTDATA ${JSON.stringify(studentData)}`);
+
+    const regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+    let count = 0;
+    // validate students
+    studentData.forEach(student => {
+        if (
+            student.lastName.length > 0 &&
+            student.firstName.length > 0 &&
+            student.email.length > 0 &&
+            regVar.test(student.email)
+        ) {
+            console.log('STUDENT VALIDATED');
+        } else {
+            console.log("ONE OR MORE STUDENTS DON'T HAVE THE CORRECT DATA");
+        }
+    });
+
+    // save all students
+    // find the user who is currently signed in
+    // add new students to the user's cohort.students
+    // update cohort
+    // find user and populate data fields
+
+    Student.insertMany(studentData)
+        .then(newStudents => {
+            console.log('SUCCESSFULLY INSERTED NEW STUDENTS');
+            console.log(studentData);
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: 'There was an error saving the students' });
         });
 }
 
