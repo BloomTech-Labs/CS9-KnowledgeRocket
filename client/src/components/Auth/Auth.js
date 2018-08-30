@@ -265,7 +265,13 @@ class Auth extends Component {
                                 <StyledButton style={{ marginTop: '20px' }}>Sign In</StyledButton>
                                 <StyledButton>Sign Up</StyledButton>
                             </div>
-                            <div style={{ width: '50%' }}>username password sign in</div>
+                            <div style={{ width: '50%' }}>
+                                <StyledButton style={{ marginTop: '60px' }}>
+                                    Sign In with Google
+                                </StyledButton>
+                                <StyledButton>Sign In with Facebook</StyledButton>
+                                <StyledButton>Sign in with Twitter</StyledButton>
+                            </div>
                         </StyledInputContainer>
                     </StyledCardContent>
                 </StyledFormCard>
