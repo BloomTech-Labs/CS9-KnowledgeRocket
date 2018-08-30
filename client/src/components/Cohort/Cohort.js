@@ -25,10 +25,11 @@ const StyledHeaders = styled.h2`
 `;
 
 const CohortFormMainContainer = styled.div`
-    padding: 1rem 0 0 0;
+    box-sizing: border-box;
+    padding: 1rem 1rem 1rem 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
     min-height: 60rem;
