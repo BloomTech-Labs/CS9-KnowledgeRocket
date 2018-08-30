@@ -9,12 +9,16 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { generateBreadCrumbs } from '../../actions';
 import './RocketResults.css';
+import styled from 'styled-components';
 
 function mapStateToProps(state) {
     return {
         state,
     };
 }
+const PaperHeader = styled.div`
+    display: flex, justify;
+`;
 
 const styles = theme => ({
     root: {
@@ -99,7 +103,6 @@ class RocketResult extends Component {
         for (let i = 0; i < choices.length; i++) {
             //Converting to radians aka percentages of 2
             let offset = 0;
-            let offsetCenter = 1;
             let percent = choices[i] / sum;
             const startX = Math.cos(2 * Math.PI * (cumulativePercent + offset));
             const startY = Math.sin(2 * Math.PI * (cumulativePercent + offset));
