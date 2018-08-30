@@ -54,7 +54,8 @@ class CohortStudentCard extends Component {
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
-        console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student._id)}`);
+        console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student)}`);
+        // console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student._id)}`);
         console.log(`COHORT USER ID ${this.props.state.user._id}`);
         return (
             <StylizedCardContent>

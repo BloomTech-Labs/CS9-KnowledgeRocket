@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
-// import CohortRocketList from '../CohortRocketList/CohortRocketList';
+import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
 import { generateBreadCrumbs, addCohort, appendRocket } from '../../actions';
 
@@ -67,16 +67,16 @@ const StyledCohortStudentList = styled(CohortStudentList)`
     margin-bottom: 1rem;
 `;
 
-// const StyledCohortRocketList = styled(CohortRocketList)`
-//     display: flex;
-//     flex-direction: row;
-//     flex-wrap: wrap;
-//     justify-content: space-around;
-//     align-items: center;
-//     width: 100%;
-//     padding: 1rem;
-//     margin-bottom: 2rem;
-// `;
+const StyledCohortRocketList = styled(CohortRocketList)`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+`;
 
 const StyledAddCohortBtn = styled(Button)`
     width: 10rem;
@@ -197,10 +197,10 @@ class Cohort extends Component {
                 )}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
 
-                {/* <StyledCohortRocketList
+                <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
-                /> */}
+                />
 
                 <StyledAddCohortBtn
                     variant="contained"
