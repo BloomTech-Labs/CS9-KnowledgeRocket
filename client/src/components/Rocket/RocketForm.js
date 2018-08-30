@@ -116,16 +116,16 @@ function generateDefaults() {
         question: '',
         choices: [
             {
-                text: 'Answer 1',
+                text: '',
             },
             {
-                text: 'Answer 2',
+                text: '',
             },
             {
-                text: 'Answer 3',
+                text: '',
             },
             {
-                text: 'Answer 4',
+                text: '',
             },
         ],
         correct: '',

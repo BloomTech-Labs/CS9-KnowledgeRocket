@@ -105,6 +105,7 @@ export const QuestionChoices = ({
                         type="text"
                         onChange={handleChange}
                         value={values[interval].choices[0].text}
+                        placeholder={'Answer 1'}
                     />
                 </label>
                 <label>
@@ -122,6 +123,7 @@ export const QuestionChoices = ({
                         type="text"
                         onChange={handleChange}
                         value={values[interval].choices[1].text}
+                        placeholder={'Answer 2'}
                     />
                 </label>
                 <label>
@@ -139,6 +141,7 @@ export const QuestionChoices = ({
                         type="text"
                         onChange={handleChange}
                         value={values[interval].choices[2].text}
+                        placeholder={'Answer 3'}
                     />
                 </label>
                 <label>
@@ -156,6 +159,7 @@ export const QuestionChoices = ({
                         type="text"
                         onChange={handleChange}
                         value={values[interval].choices[3].text}
+                        placeholder={'Answer 4'}
                     />
                 </label>
             </QuestionWrapper>

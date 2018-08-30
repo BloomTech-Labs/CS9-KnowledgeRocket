@@ -20,6 +20,7 @@ class CohortStudentList extends Component {
 
     render() {
         console.log('My StudentList State',this.state)
+        console.log('CohortList cohortID', this.props.cohortID)
         return (
             <Card className={this.props.className}>
                 {/* Render all students added */}
