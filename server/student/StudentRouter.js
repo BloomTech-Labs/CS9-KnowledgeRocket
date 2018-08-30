@@ -155,6 +155,18 @@ function postCSV(req, res) {
         .then(newStudents => {
             console.log('SUCCESSFULLY INSERTED NEW STUDENTS');
             console.log(studentData);
+            Cohort.findOne({ _id: cohortID })
+                .then(found => {
+                    console.log('SUCCESFULLY FOUND COHORT');
+                    newStudents.forEach(student => {
+                        console.log(`STUDENT ID ${student._id}`);
+                        found.students.push(student._id);
+                    });
+                    console.log('SUCCESFULLY ADDED NEW STUDENTS');
+                })
+                .catch(err => {
+                    res.status(500).json({ errorMessage: 'There was an error finding the cohort' });
+                });
         })
         .catch(err => {
             res.status(500).json({ errorMessage: 'There was an error saving the students' });
