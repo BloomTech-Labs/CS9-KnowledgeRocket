@@ -30,7 +30,7 @@ const whereCohortRocket = (interval, start, end) => ({
 const getTodayAndTomorrow = () => {
     const thisSecond = Date.now();
     const today = new Date(thisSecond);
-    today.setHours(0, 0, 0, 0);
+    today.setUTCHours(0, 0, 0, 0);
     const tomorrow = new Date(thisSecond);
     tomorrow.setHours(23, 59, 59, 59);
     return { today, tomorrow };
