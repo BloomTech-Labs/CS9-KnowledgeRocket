@@ -15,7 +15,7 @@ exports[`CohortCard renders correctly 1`] = `
       >
         <a
           className="sc-bdVaJa jGJpMx"
-          href="/rocket/classForm/123"
+          href="/"
           onClick={[Function]}
         >
           Calculus 101
