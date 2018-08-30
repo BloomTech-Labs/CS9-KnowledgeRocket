@@ -87,6 +87,10 @@ function postRocket(req, res) {
                                         User.findById(foundUser._id)
                                             .populate('cohorts')
                                             .populate({
+                                                path: 'cohorts',
+                                                populate: { path: 'students', model: 'Students' },
+                                            })
+                                            .populate({
                                                 path: 'rockets',
                                                 populate: { path: 'twoDay' },
                                             })
@@ -167,6 +171,10 @@ function updateRocket(req, res) {
                             // Add created rocket to the user's rocket array;
                             User.findOne({ uid })
                                 .populate('cohorts')
+                                .populate({
+                                    path: 'cohorts',
+                                    populate: { path: 'students', model: 'Students' },
+                                })
                                 .populate({ path: 'rockets', populate: { path: 'twoDay' } })
                                 .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
                                 .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
