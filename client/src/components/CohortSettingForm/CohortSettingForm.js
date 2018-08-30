@@ -6,7 +6,7 @@ import Papa from 'papaparse';
 import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 // Actions
 import { importCSV } from '../../actions/';
 

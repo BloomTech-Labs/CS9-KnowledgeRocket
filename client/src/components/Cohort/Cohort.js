@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
-import CohortRocketList from '../CohortRocketList/CohortRocketList';
+// import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
 import { generateBreadCrumbs, addCohort, appendRocket } from '../../actions';
 
