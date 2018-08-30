@@ -160,6 +160,7 @@ class Auth extends Component {
         };
         this.props.addUser(user);
         this.setState({ attempts: this.state.attempts + 1 });
+        this.handleFlip();
     };
 
     handleSignIn = e => {
@@ -170,119 +171,68 @@ class Auth extends Component {
         };
         this.props.loginUser(user);
         this.setState({ attempts: this.state.attempts + 1 });
+        this.handleFlip();
     };
 
     handleSignInGoogle = e => {
         this.props.loginUserGoogle();
+        this.handleFlip();
     };
 
     handleSignInFacebook = e => {
         this.props.loginUserFacebook();
+        this.handleFlip();
     };
 
     handleSignInTwitter = e => {
         this.props.loginUserTwitter();
-    };
-
-    handleSignInGoogle = e => {
-        this.props.loginUserGoogle();
-    };
-
-    handleSignInFacebook = e => {
-        this.props.loginUserFacebook();
-    };
-
-    handleSignInTwitter = e => {
-        this.props.loginUserTwitter();
+        this.handleFlip();
     };
 
     render() {
         const { classes } = this.props;
-        const flip = { transform: 'translate(0, 0%) rotateX(180deg)' };
+        const flip = { transform: 'translate(0, 0) rotateX(180deg)' };
 
         return (
             <StyledFormContainer>
-                {/* <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
-                <div className="flex-column-centered">
-                    <Input
-                        className="Auth_input"
-                        type="email"
-                        name="email"
-                        autoFocus={true}
-                        onChange={this.handleInput}
-                        disableUnderline={true}
-                    />
-                    <Input
-                        className="Auth_input"
-                        type="password"
-                        name="password"
-                        onChange={this.handleInput}
-                        disableUnderline={true}
-                    />
-                </div>
-                <div className="flex-column-centered">
-                    <div className="flex-row-centered">
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignUp}
-                        >
-                            Sign-Up
-                        </Button>
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignIn}
-                        >
-                            Sign-In
-                        </Button>
-                    </div>
-                    <div className="Auth_oauth_section">
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignInGoogle}
-                        >
-                            Google Log In
-                        </Button>
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignInFacebook}
-                        >
-                            Facebook Log In
-                        </Button>
-                        <Button
-                            className="Auth_button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleSignInTwitter}
-                        >
-                            Twitter Log In
-                        </Button>
-                    </div>
-                </div> */}
                 <StyledFormCard style={this.state.flipStatus ? flip : null}>
                     <StyledCardContent className={classes.root}>
                         <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
                         <StyledInputContainer>
                             <div style={{ width: '50%' }}>
-                                <StyledInput type="text" placeholder="username" required />
-                                <StyledInput type="text" placeholder="password" required />
-                                <StyledInput type="text" placeholder="email" required />
-                                <StyledButton style={{ marginTop: '20px' }}>Sign In</StyledButton>
-                                <StyledButton>Sign Up</StyledButton>
+                                <StyledInput
+                                    type="text"
+                                    name="email"
+                                    onChange={this.handleInput}
+                                    placeholder="email"
+                                    required
+                                />
+                                <StyledInput
+                                    type="text"
+                                    name="password"
+                                    onChange={this.handleInput}
+                                    placeholder="password"
+                                    required
+                                />
+                                <StyledButton
+                                    style={{ marginTop: '20px' }}
+                                    onClick={this.handleSignIn}
+                                >
+                                    Sign In
+                                </StyledButton>
+                                <StyledButton onClick={this.handleSignUp}>Sign Up</StyledButton>
                             </div>
                             <div style={{ width: '50%' }}>
-                                <StyledButton style={{ marginTop: '60px' }}>
+                                <StyledButton
+                                    style={{ marginTop: '60px' }}
+                                    onClick={this.handleSignInGoogle}
+                                >
                                     Sign In with Google
                                 </StyledButton>
-                                <StyledButton>Sign In with Facebook</StyledButton>
-                                <StyledButton onClick={this.handleFlip}>
+                                <StyledButton onClick={this.handleSignInFacebook}>
+                                    Sign In with Facebook
+                                </StyledButton>
+                                <StyledButton onClick={this.handleSignInTwitter}>
                                     Sign in with Twitter
                                 </StyledButton>
                             </div>
