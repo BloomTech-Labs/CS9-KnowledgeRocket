@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Styled from 'styled-components';
 import AddIcon from '@material-ui/icons/Add';
 import Card from '@material-ui/core/Card';
+import CohortRocketCard from '../CohortRocketCard/CohortRocketCard';
 
 function mapStateToProps(state) {
     return {
@@ -155,16 +156,24 @@ class CohortRocketList extends Component {
         const filteredCohort = this.props.state.user.cohorts[
             this.props.state.user.cohorts.reduce((acc, curr, index) => {
                 let myIndex = (acc = curr._id === this.props.cohortID ? index : 0);
-                console.log('My INdex', myIndex);
+                // console.log('My INdex', myIndex);
                 return myIndex;
-            })
+            }, 0)
         ];
-        const rocketSelectors = this.props.state.user._id
-            ? filteredCohort
-                ? []
-                : filteredCohort
-            : [];
-        return rocketSelectors;
+
+        console.log(filteredCohort);
+        if (filteredCohort.rockets !== undefined) {
+            return filteredCohort.rockets.map(rocket => {
+                return (
+                    <CohortRocketCard
+                        key={rocket._id}
+                        rocket={rocket}
+                        cohortID={this.props.cohortID}
+                    />
+                );
+            });
+        }
+        return [];
     };
 
     generateRocketAddLinks = () => {

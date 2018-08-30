@@ -62,7 +62,6 @@ class CohortRocketCard extends Component {
             }
             return false;
         })[0];
-        console.log(rocketData, this.props.rocket);
         const timezone = moment.tz.guess();
         if (rocketData) {
             this.setState({ timezone, userRocket: rocketData, scheduledRocket: this.props.rocket });
@@ -70,27 +69,22 @@ class CohortRocketCard extends Component {
     }
 
     handleDateChange = e => {
-        // console.log('Handle Date from Calendar', e.target.value)
         const newDate = Date.parse(e.target.value);
-        // console.log('Handle Date from Calendar parsed:', newDate)
         this.setState({ newDate });
     };
 
     reScheduleRocket = e => {
         const newDate = this.state.newDate;
-        console.log('newDate', newDate);
-        console.log('newDate', newDate);
         const rocketID = this.props.rocket.rocketId;
         const userID = this.props.state.user._id;
         const cohortID = this.props.cohortID;
-        console.log(rocketID, newDate, userID, cohortID);
         this.props.appendRocket(rocketID, newDate, userID, cohortID);
     };
 
     render() {
-        console.log(this.props);
-        console.log(this.state);
-        let scheduledOn = this.props.rocket.startDate.slice(0, 10);
+        let scheduledOn = this.props.rocket.startDate
+            ? this.props.rocket.startDate.slice(0, 10)
+            : Date.now();
         return (
             <StylizedRocket>
                 <CardContent>
@@ -123,7 +117,4 @@ class CohortRocketCard extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { appendRocket }
-)(CohortRocketCard);
+export default connect(mapStateToProps, { appendRocket })(CohortRocketCard);

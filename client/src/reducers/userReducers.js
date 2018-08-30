@@ -49,8 +49,20 @@ export default (state = defaultState, action) => {
             StateCopy.status = DELETING_ROCKET;
             return StateCopy;
         case DELETE_ROCKET:
-            console.log('User reducer hit', action.payload);
             StateCopy.status = ADD_ROCKET;
+            // update cohort rockets
+            let target = [];
+            StateCopy.cohorts.forEach((c, cIndex) => {
+                c.rockets.forEach((r, rIndex) => {
+                    if (r.rocketId === action.payload.rocketId) {
+                        target.push([cIndex, rIndex]);
+                    }
+                });
+            });
+            target.forEach(t => {
+                StateCopy.cohorts[t[0]].rockets.splice(t[1], 1);
+            });
+            // update user rockets
             StateCopy.rockets.forEach((rocket, index) => {
                 if (rocket._id === action.payload.rocketId) {
                     StateCopy.rockets.splice(index, 1);
