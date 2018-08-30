@@ -45,7 +45,7 @@ const StyledFormContainer = styled.div`
 const StyledFormCard = styled(Card)`
     display: flex;
     flex-direction: row;
-    height: 300px;
+    height: 400px;
     width: 800px;
 `;
 
@@ -95,6 +95,31 @@ const StyledInput = styled.input`
         color: #fff;
         font-weight: 300;
         opacity: 0.7;
+    }
+
+    &:focus,
+    &:valid {
+        border-color: white;
+    }
+`;
+
+const StyledButton = styled.button`
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+    background-color: inherit;
+    width: 250px;
+    height: 50px;
+    border: 1px solid #fff;
+    border-radius: 25px;
+    margin: 10px 0;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        background-color: HSLA(0, 0%, 100%, 0.2);
     }
 `;
 
@@ -237,6 +262,8 @@ class Auth extends Component {
                                 <StyledInput type="text" placeholder="username" required />
                                 <StyledInput type="text" placeholder="password" required />
                                 <StyledInput type="text" placeholder="email" required />
+                                <StyledButton style={{ marginTop: '20px' }}>Sign In</StyledButton>
+                                <StyledButton>Sign Up</StyledButton>
                             </div>
                             <div style={{ width: '50%' }}>username password sign in</div>
                         </StyledInputContainer>
