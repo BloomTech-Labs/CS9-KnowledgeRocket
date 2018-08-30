@@ -112,10 +112,10 @@ export const deleteRocket = rocketId => async dispatch => {
 
 // COHORT ACTIONS
 export const addCohort = (cohort, id) => async dispatch => {
-    const packagedCohort = {...cohort, teacher: id};
+    const packagedCohort = { ...cohort, teacher: id };
     dispatch({ type: ADDING_COHORT });
     try {
-        let response = await axios.post(`${url}/api/cohort`, {cohort: packagedCohort, id});
+        let response = await axios.post(`${url}/api/cohort`, { cohort: packagedCohort, id });
         dispatch({ type: ADD_COHORT, payload: response.data });
     } catch (err) {
         dispatch({ type: ADD_COHORT_FAILURE });
@@ -147,7 +147,7 @@ export const importCSV = (teacherID, cohortID, studentData) => async dispatch =>
     console.log('MADE IT TO IMPORT CSV ACTION CREATOR');
     dispatch({ type: UPLOADING_CSV });
     try {
-        let response = await axios.post(`${url}/importcsv`, {
+        let response = await axios.post(`${url}/api/student/importcsv`, {
             teacherID,
             cohortID,
             studentData,
