@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 import {
     addUser,
     loginUser,
@@ -9,7 +10,12 @@ import {
     loginUserTwitter,
     generateBreadCrumbs,
 } from '../../actions';
+// MaterialComponents
+import { withStyles } from '@material-ui/core/styles';
 import { Button, Input } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Progress from '../Progress/Progress';
 import './Auth.css';
 
@@ -18,6 +24,46 @@ function mapStateToProps(state) {
         user: state.user,
     };
 }
+
+const styles = {
+    card: {
+        maxWidth: 345,
+    },
+    root: {
+        padding: 0,
+    },
+    media: {
+        height: 140,
+    },
+};
+
+const StyledFormContainer = styled.div`
+    margin-top: 110px;
+    margin-right: 11.1rem;
+`;
+
+const StyledFormCard = styled(Card)`
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    width: 800px;
+`;
+
+const StyledCardContent = styled(CardContent)`
+    background-color: #39d1b4;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+`;
+
+const StyledFormHeader = styled(StyledCardContent)`
+    background-color: #fff;
+    font-weight: 300;
+    line-height: 40px;
+    color: #39d1b4;
+    width: 100%;
+    padding: 0;
+`;
 
 class Auth extends Component {
     state = {
@@ -83,9 +129,10 @@ class Auth extends Component {
     };
 
     render() {
+        const { classes } = this.props;
         return (
-            <div className="Main_container">
-                <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
+            <StyledFormContainer>
+                {/* <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
                 <div className="flex-column-centered">
                     <Input
                         className="Auth_input"
@@ -148,7 +195,12 @@ class Auth extends Component {
                             Twitter Log In
                         </Button>
                     </div>
-                </div>
+                </div> */}
+                <StyledFormCard>
+                    <StyledCardContent className={classes.root}>
+                        <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
+                    </StyledCardContent>
+                </StyledFormCard>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
                     {this.props.user.status === 'FAILED' ? (
@@ -162,7 +214,7 @@ class Auth extends Component {
                     ) : null}
                 </div>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
-            </div>
+            </StyledFormContainer>
         );
     }
 }
@@ -174,4 +226,4 @@ export default connect(mapStateToProps, {
     loginUserFacebook,
     loginUserTwitter,
     generateBreadCrumbs,
-})(Auth);
+})(withStyles(styles)(Auth));
