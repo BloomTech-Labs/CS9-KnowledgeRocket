@@ -27,17 +27,22 @@ function mapStateToProps(state) {
 const StyledFormContainer = styled.div`
     border: 2px solid blue;
     margin-top: 110px;
-    padding-right: 11.1rem;
+    margin-right: 11.1rem;
 `;
 
 const StyledFormCard = styled(Card)`
     border: 1px solid red;
     display: flex;
     flex-direction: row;
+    height: 300px;
+    width: 800px;
 `;
 
 const StyledCardContent = styled(CardContent)`
     border: 1px solid black;
+    width: 50%;
+    text-align: center;
+    font-size: 1.5rem;
 `;
 
 class Auth extends Component {
@@ -171,7 +176,7 @@ class Auth extends Component {
                     </div>
                 </div> */}
                 <StyledFormCard>
-                    <StyledCardContent>SIGN IN WITH USERNAME/EMAIL</StyledCardContent>
+                    <StyledCardContent>Sign In or Sign Up</StyledCardContent>
                     <StyledCardContent>Sign in with social media</StyledCardContent>
                 </StyledFormCard>
                 <div className="flex-row-centered Auth_prompt-fail">
