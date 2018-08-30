@@ -156,16 +156,6 @@ table {
     height: inherit;
 }
 
-.Main_container {
-}
-
-/* @media (max-width: 960px) {
-    .Main_container {
-        padding: var(--mainPadding_sml);
-        width: 100%;
-    }
-} */
-
 .routeContainer {
     background-color: #eeeeee;
     height: inherit;

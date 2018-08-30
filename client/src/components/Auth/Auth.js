@@ -84,7 +84,7 @@ class Auth extends Component {
 
     render() {
         return (
-            <div className="Main_container">
+            <div>
                 <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
                 <div className="flex-column-centered">
                     <Input
