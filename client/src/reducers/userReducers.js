@@ -130,7 +130,8 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case UPLOAD_CSV:
             console.log('MADE IT TO UPLOAD CSV REDUCER');
-            console.log(`PAYLOAD ${action.payload}`);
+            console.log(`PAYLOAD ${JSON.stringify(action.payload)}`);
+            StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = UPLOAD_CSV;
             return StateCopy;
