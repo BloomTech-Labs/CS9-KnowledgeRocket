@@ -7,8 +7,7 @@ import Button from '@material-ui/core/Button';
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
 import CohortStudentList from '../CohortStudentList/CohortStudentList';
-// import CohortRocketList from '../CohortRocketList/CohortRocketList';
-
+import CohortRocketList from '../CohortRocketList/CohortRocketList';
 // Actions
 import { generateBreadCrumbs, addCohort, appendRocket } from '../../actions';
 
@@ -192,6 +191,7 @@ class Cohort extends Component {
                     <h3>Looks like you don't have any students</h3>
                 )}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
+
                 {/* <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
