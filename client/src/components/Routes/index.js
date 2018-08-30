@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import styled, {injectGlobal} from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 // Components
 import Home from '../Home/Home';
 import NavBar from '../NavBar/NavBar';
@@ -15,13 +15,14 @@ import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
 import CohortAdd from '../Cohort/CohortAdd';
+import RocketResults from '../RocketResults/RocketResults';
 
 injectGlobal`
     * {
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
     }
-`
+`;
 
 const StyledContentContainer = styled.div`
     min-height: 100vh;
@@ -43,7 +44,7 @@ const RouteContainer = styled.div`
     height: inherit;
     width: 100vw;
     // max-width: 100vw;
-`
+`;
 
 class InnerRoutes extends Component {
     render() {
@@ -57,7 +58,8 @@ class InnerRoutes extends Component {
                 <Route path="/rocket/newclass" exact component={CohortAdd} />
                 <Route path="/rocket/classes" exact component={CohortList} />
                 <Route path="/rocket/settings" exact component={Settings} />
-                <Route path="/rocket/auth" exact component={Auth} />                        
+                <Route path="/rocket/auth" exact component={Auth} />
+                <Route path="/rocket/results" exact component={RocketResults} />
             </StyledContentContainer>
         );
     }
@@ -71,11 +73,7 @@ class Routes extends Component {
                     <Route path="/rocket" component={NavBar} />
                     <Route path="/rocket" component={InnerRoutes} />
                     <Route path="/" exact component={Home} />
-                        <Route
-                            path="/question/:question/:student"
-                            exact
-                            component={RocketQuestion}
-                        />
+                    <Route path="/question/:question/:student" exact component={RocketQuestion} />
                 </RouteContainer>
             </BrowserRouter>
         );

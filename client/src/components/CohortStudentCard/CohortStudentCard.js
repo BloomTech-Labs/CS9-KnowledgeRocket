@@ -72,20 +72,13 @@ class CohortStudentCard extends Component {
         });
         this.setState({status: this.props.state.user.status, student: myStudent, cohorts: this.props.state.user.cohorts })
     }
-    // shouldComponentUpdate() {
-    //     console.log('component receiving props', 'status in state is:', this.state.status, 'status in props is:', this.props.state.user.status)
-    //     if (this.state.status !== this.props.state.user.status) {
-    //         return true;
-    //     }
-    // }
 
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
-        // console.log(`PROPS INSIDE STUDENT CARD:`, (this.props));
+        // console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student)}`);
         // console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student._id)}`);
         // console.log(`COHORT USER ID ${this.props.state.user._id}`);
-        console.log('State inside Student Card:', this.state)
         return (
             <StylizedCardContent>
                 {this.props.state.user.status}
