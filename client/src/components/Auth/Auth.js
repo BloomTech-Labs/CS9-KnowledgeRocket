@@ -132,7 +132,7 @@ class Auth extends Component {
         const { classes } = this.props;
         return (
             <StyledFormContainer>
-                {/* <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
+                <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
                 <div className="flex-column-centered">
                     <Input
                         className="Auth_input"
@@ -195,12 +195,12 @@ class Auth extends Component {
                             Twitter Log In
                         </Button>
                     </div>
-                </div> */}
-                <StyledFormCard>
+                </div>
+                {/* <StyledFormCard>
                     <StyledCardContent className={classes.root}>
                         <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
                     </StyledCardContent>
-                </StyledFormCard>
+                </StyledFormCard> */}
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
                     {this.props.user.status === 'FAILED' ? (

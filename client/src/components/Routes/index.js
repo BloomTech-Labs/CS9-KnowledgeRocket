@@ -25,7 +25,7 @@ injectGlobal`
 `;
 
 const StyledContentContainer = styled.div`
-    min-height: 100vh;
+    height: inherit
     width: 100%;
     padding: 0rem 0.8rem 0.8rem 11.1rem;
     display: flex;
@@ -41,7 +41,7 @@ const StyledContentContainer = styled.div`
 
 const RouteContainer = styled.div`
     background-color: #eeeeee;
-    height: inherit;
+    min-height: 100vh;
     width: 100vw;
     // max-width: 100vw;
 `;

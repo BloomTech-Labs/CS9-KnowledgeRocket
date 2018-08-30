@@ -99,16 +99,6 @@ class Cohort extends Component {
         cohortIDX: 0,
     };
 
-    shouldComponentUpdate() {
-        console.log('shouldComponentUpdate: INSIDE COHORT');
-        this.forceUpdate()
-    }
-
-    componentWillReceiveProps() {
-        console.log('componentWillReceiveProps: INSIDE COHORT');
-        this.forceUpdate()
-    }
-
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -181,20 +171,13 @@ class Cohort extends Component {
     };
 
     render() {
-        // console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
+        console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const cohortID = this.props.match.params.id;
-        // console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
+        console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
 
         return (
             <CohortFormMainContainer>
-                <div>
-                    {this.props.state.user.cohorts.map(cohort =>{
-                        return <div>Cohort: {cohort.title} {cohort.students.map(student => {
-                            return <div>{`${student.firstName} ${student.lastName}`}</div>
-                        })}</div>
-                    })}
-                </div>
-                <StyledHeaders>Class Settings: {this.state.cohort.title}{this.state.cohort.title}</StyledHeaders>
+                <StyledHeaders>Class Settings</StyledHeaders>
                 <StyledCohortSettingForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
@@ -203,14 +186,15 @@ class Cohort extends Component {
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm cohortID={this.props.match.params.id} />
                 <StyledHeaders>Students</StyledHeaders>
-                <StyledCohortStudentList
+                {this.state.cohort.students.length > 0 ? (
+                    <StyledCohortStudentList
                         students={this.state.cohort.students}
                         match={this.props.match}
-                        status={this.props.state.status}
-                        studentID={this.props.state.user._id}
-                        cohortID={this.props.match.params.id}
-                        history={this.props.history}
-                />
+                        cohortID={this.state.cohortIDX}
+                    />
+                ) : (
+                    <h3>Looks like you don't have any students</h3>
+                )}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
 
                 <StyledCohortRocketList
