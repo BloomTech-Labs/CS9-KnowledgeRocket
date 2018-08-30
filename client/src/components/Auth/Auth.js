@@ -11,6 +11,7 @@ import {
     generateBreadCrumbs,
 } from '../../actions';
 // MaterialComponents
+import { withStyles } from '@material-ui/core/styles';
 import { Button, Input } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -24,14 +25,24 @@ function mapStateToProps(state) {
     };
 }
 
+const styles = {
+    card: {
+        maxWidth: 345,
+    },
+    root: {
+        padding: 0,
+    },
+    media: {
+        height: 140,
+    },
+};
+
 const StyledFormContainer = styled.div`
-    border: 2px solid blue;
     margin-top: 110px;
     margin-right: 11.1rem;
 `;
 
 const StyledFormCard = styled(Card)`
-    border: 1px solid red;
     display: flex;
     flex-direction: row;
     height: 300px;
@@ -39,10 +50,19 @@ const StyledFormCard = styled(Card)`
 `;
 
 const StyledCardContent = styled(CardContent)`
-    border: 1px solid black;
-    width: 50%;
+    background-color: #39d1b4;
+    width: 100%;
     text-align: center;
     font-size: 1.5rem;
+`;
+
+const StyledFormHeader = styled(StyledCardContent)`
+    background-color: #fff;
+    font-weight: 300;
+    line-height: 40px;
+    color: #39d1b4;
+    width: 100%;
+    padding: 0;
 `;
 
 class Auth extends Component {
@@ -109,6 +129,7 @@ class Auth extends Component {
     };
 
     render() {
+        const { classes } = this.props;
         return (
             <StyledFormContainer>
                 {/* <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
@@ -176,8 +197,9 @@ class Auth extends Component {
                     </div>
                 </div> */}
                 <StyledFormCard>
-                    <StyledCardContent>Sign In or Sign Up</StyledCardContent>
-                    <StyledCardContent>Sign in with social media</StyledCardContent>
+                    <StyledCardContent className={classes.root}>
+                        <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
+                    </StyledCardContent>
                 </StyledFormCard>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
@@ -204,4 +226,4 @@ export default connect(mapStateToProps, {
     loginUserFacebook,
     loginUserTwitter,
     generateBreadCrumbs,
-})(Auth);
+})(withStyles(styles)(Auth));
