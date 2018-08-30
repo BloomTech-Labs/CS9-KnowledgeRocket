@@ -17,7 +17,11 @@ function mapStateToProps(state) {
     };
 }
 const PaperHeader = styled.div`
-    display: flex, justify;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: auto auto;
 `;
 
 const styles = theme => ({
@@ -137,7 +141,7 @@ class RocketResult extends Component {
     };
     render() {
         return (
-            <div>
+            <PaperHeader>
                 <Paper>
                     <Table>
                         <TableHead>
@@ -169,7 +173,7 @@ class RocketResult extends Component {
                         {this.generateChart()}
                     </div>
                 </Paper>
-            </div>
+            </PaperHeader>
         );
     }
 }
