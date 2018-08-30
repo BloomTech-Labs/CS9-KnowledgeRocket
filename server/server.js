@@ -11,7 +11,6 @@ const ResponseRocketRouter = require('./responserocket/ResponseRocketRouter');
 const QuestionRouter = require('./question/QuestionRouter');
 const CohortRouter = require('./cohort/CohortRouter');
 const BillingRouter = require('./billing/BillingRouter');
-const CSVRouter = require('./csv/CSVRouter');
 
 const server = express();
 
@@ -31,7 +30,6 @@ server.use(express.static('../client/build/'));
 
 // Back End Routes will User authMiddleware
 server.use('/api/student', authMiddleware, StudentRouter);
-server.use('/importcsv', authMiddleware, CSVRouter);
 server.use('/api/auth/', AuthRouter);
 server.use('/api/rocket', authMiddleware, RocketRouter);
 server.use('/api/user', authMiddleware, UserRouter);
