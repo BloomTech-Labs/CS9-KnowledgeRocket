@@ -1,6 +1,7 @@
 <h1>Knowledge Rockets Back-End Specification</h1>
 
 <h2>Description</h2>
+<p>This is the specification for the Knowledge Rockets back-end client.</p>
 
 <h3>Prerequisites</h3>
 <p>The following are the dependencies you will need: </p>
