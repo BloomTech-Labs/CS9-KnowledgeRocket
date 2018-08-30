@@ -47,6 +47,11 @@ const StyledFormCard = styled(Card)`
     flex-direction: row;
     height: 400px;
     width: 800px;
+
+    transform: translate(0%, 0%);
+    transform-origin: 25% 50%;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
 `;
 
 const StyledCardContent = styled(CardContent)`
@@ -129,6 +134,7 @@ class Auth extends Component {
         password: '',
         authenticated: {},
         success: true,
+        flipStatus: false,
     };
 
     componentDidMount() {
@@ -137,6 +143,10 @@ class Auth extends Component {
             : this.setState({ success: true });
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
+
+    handleFlip = () => {
+        this.setState({ flipStatus: true });
+    };
 
     handleInput = e => {
         this.setState({ [e.target.name]: e.target.value });
@@ -188,6 +198,8 @@ class Auth extends Component {
 
     render() {
         const { classes } = this.props;
+        const flip = { transform: 'translate(0, 0%) rotateX(180deg)' };
+
         return (
             <StyledFormContainer>
                 {/* <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
@@ -254,7 +266,7 @@ class Auth extends Component {
                         </Button>
                     </div>
                 </div> */}
-                <StyledFormCard>
+                <StyledFormCard style={this.state.flipStatus ? flip : null}>
                     <StyledCardContent className={classes.root}>
                         <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
                         <StyledInputContainer>
@@ -270,7 +282,9 @@ class Auth extends Component {
                                     Sign In with Google
                                 </StyledButton>
                                 <StyledButton>Sign In with Facebook</StyledButton>
-                                <StyledButton>Sign in with Twitter</StyledButton>
+                                <StyledButton onClick={this.handleFlip}>
+                                    Sign in with Twitter
+                                </StyledButton>
                             </div>
                         </StyledInputContainer>
                     </StyledCardContent>
