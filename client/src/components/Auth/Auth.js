@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 import {
     addUser,
     loginUser,
@@ -9,7 +10,11 @@ import {
     loginUserTwitter,
     generateBreadCrumbs,
 } from '../../actions';
+// MaterialComponents
 import { Button, Input } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Progress from '../Progress/Progress';
 import './Auth.css';
 
@@ -18,6 +23,22 @@ function mapStateToProps(state) {
         user: state.user,
     };
 }
+
+const StyledFormContainer = styled.div`
+    border: 2px solid blue;
+    margin-top: 110px;
+    padding-right: 11.1rem;
+`;
+
+const StyledFormCard = styled(Card)`
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+`;
+
+const StyledCardContent = styled(CardContent)`
+    border: 1px solid black;
+`;
 
 class Auth extends Component {
     state = {
@@ -84,8 +105,8 @@ class Auth extends Component {
 
     render() {
         return (
-            <div>
-                <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
+            <StyledFormContainer>
+                {/* <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
                 <div className="flex-column-centered">
                     <Input
                         className="Auth_input"
@@ -148,7 +169,11 @@ class Auth extends Component {
                             Twitter Log In
                         </Button>
                     </div>
-                </div>
+                </div> */}
+                <StyledFormCard>
+                    <StyledCardContent>SIGN IN WITH USERNAME/EMAIL</StyledCardContent>
+                    <StyledCardContent>Sign in with social media</StyledCardContent>
+                </StyledFormCard>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
                     {this.props.user.status === 'FAILED' ? (
@@ -162,7 +187,7 @@ class Auth extends Component {
                     ) : null}
                 </div>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
-            </div>
+            </StyledFormContainer>
         );
     }
 }
