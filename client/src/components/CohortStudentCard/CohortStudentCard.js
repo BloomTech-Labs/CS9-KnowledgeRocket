@@ -30,6 +30,7 @@ class CohortStudentCard extends Component {
     state = {
         anchorEl: null,
         student: {},
+        status: ''
     };
 
     handleClick = event => {
@@ -44,20 +45,50 @@ class CohortStudentCard extends Component {
         const studentID = this.props.student._id;
         console.log(`STUDENT ID ${studentID}`);
         this.props.deleteStudent(studentID);
+        // this.props.history.push(`/rockets/cohort/${this.props.cohortID}`)
     };
 
     handleOnClick = () => {
-        this.handleClose();
         this.handleDeleteStudent();
+        this.handleClose();
     };
+
+    componentDidMount() {
+        let myStudent = {}
+        let listOfStudents = [];
+        this.props.state.user.cohorts.forEach(cohort => {
+            if (cohort._id === this.props.cohortID) {
+                listOfStudents = cohort.students;
+            } else {
+
+            }
+        });
+        listOfStudents.forEach(student => {
+            if (student._id === this.props.studentID) {
+                myStudent = student;
+            } else {
+
+            }
+        });
+        this.setState({status: this.props.state.user.status, student: myStudent, cohorts: this.props.state.user.cohorts })
+    }
+    // shouldComponentUpdate() {
+    //     console.log('component receiving props', 'status in state is:', this.state.status, 'status in props is:', this.props.state.user.status)
+    //     if (this.state.status !== this.props.state.user.status) {
+    //         return true;
+    //     }
+    // }
 
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
-        console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student._id)}`);
-        console.log(`COHORT USER ID ${this.props.state.user._id}`);
+        // console.log(`PROPS INSIDE STUDENT CARD:`, (this.props));
+        // console.log(`COHORT STUDENT CARD PROPS ${JSON.stringify(this.props.student._id)}`);
+        // console.log(`COHORT USER ID ${this.props.state.user._id}`);
+        console.log('State inside Student Card:', this.state)
         return (
             <StylizedCardContent>
+                {this.props.state.user.status}
                 <h3>{this.props.student.firstName}</h3>
                 <IconButton
                     aria-label="More"

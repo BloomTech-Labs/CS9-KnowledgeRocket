@@ -148,7 +148,7 @@ class CohortRocketList extends Component {
     };
 
     rocketChoice = rocketID => {
-        console.log(rocketID, this.props);
+        // console.log(rocketID, this.props);
         this.props.handlePickRocket(rocketID);
     };
 
@@ -156,7 +156,7 @@ class CohortRocketList extends Component {
         const filteredCohort = this.props.state.user.cohorts[
             this.props.state.user.cohorts.reduce((acc, curr, index) => {
                 let myIndex = (acc = curr._id === this.props.cohortID ? index : 0);
-                console.log('My INdex', myIndex);
+                // console.log('My INdex', myIndex);
                 return myIndex;
             }, 0)
         ];
@@ -164,14 +164,20 @@ class CohortRocketList extends Component {
         console.log(filteredCohort);
         if (filteredCohort.rockets !== undefined) {
             return filteredCohort.rockets.map(rocket => {
-                return <CohortRocketCard key={rocket._id} rocket={rocket} cohortID={this.props.cohortID}/>;
+                return (
+                    <CohortRocketCard
+                        key={rocket._id}
+                        rocket={rocket}
+                        cohortID={this.props.cohortID}
+                    />
+                );
             });
         }
         return [];
     };
 
     generateRocketAddLinks = () => {
-        const rocketAddLinks = this.props.state.user.rockets.map((rocket, index) => {
+        const rocketAddLinks = this.props.state.user.rockets.map(rocket => {
             return (
                 <RocketMenuItem rocket={rocket} key={rocket._id} rocketChoice={this.rocketChoice} />
             );

@@ -81,6 +81,7 @@ export class CohortList extends Component {
     };
 
     render() {
+        console.log('Cohort re-rendered')
         return (
             <ListWrapper>
                 {this.state.cohort ? (

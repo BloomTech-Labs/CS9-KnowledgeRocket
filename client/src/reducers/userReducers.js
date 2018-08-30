@@ -14,6 +14,8 @@ import {
     DELETE_ROCKET,
     DELETING_ROCKET,
     ADD_STUDENT,
+    ADDING_STUDENT,
+    ADD_STUDENT_FAILURE,
     DELETE_STUDENT,
     APPENDING_ROCKETS,
     APPEND_ROCKETS,
@@ -30,7 +32,7 @@ const defaultState = {
     token: '',
     account: 'Free',
     authenticated: false,
-    status: '',
+    status: 'INITIAL',
     students: [],
     rockets: [],
     cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{}] }],
@@ -46,7 +48,6 @@ export default (state = defaultState, action) => {
             StateCopy.status = DELETING_ROCKET;
             return StateCopy;
         case DELETE_ROCKET:
-            console.log('User reducer hit', action.payload);
             StateCopy.status = ADD_ROCKET;
             StateCopy.rockets.forEach((rocket, index) => {
                 if (rocket._id === action.payload.rocketId) {
@@ -101,17 +102,23 @@ export default (state = defaultState, action) => {
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
             return StateCopy;
+        case ADDING_STUDENT:
+            StateCopy.authenticated = true;
+            StateCopy.status = ADDING_STUDENT;
+            return StateCopy;
+        case ADD_STUDENT_FAILURE:
+            StateCopy.authenticated = true;
+            StateCopy.status = ADD_STUDENT_FAILURE;
+            return StateCopy;
         case ADD_STUDENT:
             StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
-            StateCopy.authenticated = true;
             StateCopy.status = DELETE_STUDENT;
             const updatedStudents = [];
             let targetIdx = 0;
-
             StateCopy.cohorts.forEach((cohort, index) => {
                 let students = cohort.students;
                 for (let i = 0; i < students.length; i++) {
@@ -124,8 +131,8 @@ export default (state = defaultState, action) => {
                 }
             });
             StateCopy.cohorts[targetIdx].students = updatedStudents;
+            StateCopy.authenticated = true;
             return StateCopy;
-
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
             return StateCopy;
