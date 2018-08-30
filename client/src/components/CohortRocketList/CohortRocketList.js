@@ -161,7 +161,7 @@ class CohortRocketList extends Component {
             }, 0)
         ];
 
-        console.log(filteredCohort);
+        // console.log(filteredCohort);
         if (filteredCohort.rockets !== undefined) {
             return filteredCohort.rockets.map(rocket => {
                 return (

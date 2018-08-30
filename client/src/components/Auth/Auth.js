@@ -15,7 +15,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button, Input } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import Progress from '../Progress/Progress';
 import './Auth.css';
 
