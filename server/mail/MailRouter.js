@@ -51,8 +51,6 @@ router.route('/').get(async (_, res) => {
         const createPersonalization = (studentId, questionId, email) => ({
             to: [{ email }],
             dynamic_template_data: {
-                sid: studentId,
-                qid: questionId,
                 url: `https://${BASE_URL}/question/${questionId}/${studentId}`,
             },
         });
