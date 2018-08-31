@@ -226,15 +226,24 @@ class Auth extends Component {
                             </div>
                             <div style={{ width: '50%' }}>
                                 <StyledButton
-                                    style={{ marginTop: '60px' }}
+                                    style={{ marginTop: '50px' }}
                                     onClick={this.handleSignInGoogle}
                                 >
+                                    <span style={{ padding: '0 0.5rem' }}>
+                                        <i class="fab fa-google fa-lg" />
+                                    </span>{' '}
                                     Sign In with Google
                                 </StyledButton>
                                 <StyledButton onClick={this.handleSignInFacebook}>
+                                    <span style={{ padding: '0 0.5rem' }}>
+                                        <i class="fab fa-facebook-f fa-lg" />
+                                    </span>{' '}
                                     Sign In with Facebook
                                 </StyledButton>
                                 <StyledButton onClick={this.handleSignInTwitter}>
+                                    <span style={{ padding: '0 0.5rem' }}>
+                                        <i class="fab fa-twitter fa-lg" />
+                                    </span>{' '}
                                     Sign in with Twitter
                                 </StyledButton>
                             </div>
