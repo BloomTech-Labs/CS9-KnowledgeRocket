@@ -13,22 +13,14 @@ const Rocket = mongoose.Schema({
 
 Rocket.plugin(autopopulate);
 
-// function remove(array, element) {
-//     array.forEach((item, index) => {
-//         if (String(item._id) === String(element)) {
-//             array.splice(index, 1);
-//         }
-//     });
-// }
-
 function removeQuestions(next, model) {
-    Question.findById(mongoose.Types.ObjectId(model.twoDay))
+    Question.findById(mongoose.Types.ObjectId(model.twoDay._id))
         .remove()
         .then(() => {
-            Question.findById(mongoose.Types.ObjectId(model.twoWeek))
+            Question.findById(mongoose.Types.ObjectId(model.twoWeek._id))
                 .remove()
                 .then(() => {
-                    Question.findById(mongoose.Types.ObjectId(model.twoMonth))
+                    Question.findById(mongoose.Types.ObjectId(model.twoMonth._id))
                         .remove()
                         .then(() => {
                             next();
@@ -53,7 +45,7 @@ Rocket.pre('remove', function(next) {
         found.forEach(rocket => {
             if (rocket.rockets.length > 0) {
                 rocket.rockets.forEach((each, index) => {
-                    if (String(each.rocketId) === String(this._id)) {
+                    if (String(each.rocketId._id) === String(this._id)) {
                         rocket.rockets.splice(index, 1);
                         included.push(rocket);
                     }
@@ -64,12 +56,12 @@ Rocket.pre('remove', function(next) {
             included.forEach(item => {
                 Cohort.findByIdAndUpdate(item._id, item).then(updated => {
                     removeQuestions(next, this);
-                });
+                }).catch(next)
             });
         } else {
             removeQuestions(next, this);
         }
-    });
+    }).catch(next)
 });
 
 module.exports = mongoose.model('Rocket', Rocket);
