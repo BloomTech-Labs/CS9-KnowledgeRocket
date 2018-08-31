@@ -14,6 +14,8 @@ import {
     DELETE_ROCKET,
     DELETING_ROCKET,
     ADD_STUDENT,
+    ADDING_STUDENT,
+    ADD_STUDENT_FAILURE,
     DELETE_STUDENT,
     APPENDING_ROCKETS,
     APPEND_ROCKETS,
@@ -33,10 +35,10 @@ const defaultState = {
     token: '',
     account: 'Free',
     authenticated: false,
-    status: '',
+    status: 'INITIAL',
     students: [],
     rockets: [],
-    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{}] }],
+    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{rocketId: {}}] }],
 };
 
 export default (state = defaultState, action) => {
@@ -54,7 +56,7 @@ export default (state = defaultState, action) => {
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
                 c.rockets.forEach((r, rIndex) => {
-                    if (r.rocketId === action.payload.rocketId) {
+                    if (r.rocketId._id === action.payload.rocketId._id) {
                         target.push([cIndex, rIndex]);
                     }
                 });
@@ -64,7 +66,7 @@ export default (state = defaultState, action) => {
             });
             // update user rockets
             StateCopy.rockets.forEach((rocket, index) => {
-                if (rocket._id === action.payload.rocketId) {
+                if (rocket._id === action.payload.rocketId._id) {
                     StateCopy.rockets.splice(index, 1);
                 }
             });
@@ -116,33 +118,36 @@ export default (state = defaultState, action) => {
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
             return StateCopy;
+        case ADDING_STUDENT:
+            StateCopy.authenticated = true;
+            StateCopy.status = ADDING_STUDENT;
+            return StateCopy;
+        case ADD_STUDENT_FAILURE:
+            StateCopy.authenticated = true;
+            StateCopy.status = ADD_STUDENT_FAILURE;
+            return StateCopy;
         case ADD_STUDENT:
             StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
-            StateCopy.authenticated = true;
             StateCopy.status = DELETE_STUDENT;
-            const updatedStudents = [];
-            let targetIdx = 0;
-
+            let cohortIdx =  -1; // Initialize as a non index
+            let studentIdx = -1; // Initialize as a non index
             StateCopy.cohorts.forEach((cohort, index) => {
                 let students = cohort.students;
                 for (let i = 0; i < students.length; i++) {
                     if (students[i]._id === action.payload._id) {
-                        targetIdx = index;
-                    }
-                    if (students[i]._id !== action.payload._id) {
-                        updatedStudents.push(students[i]);
+                        cohortIdx = index; // When Found save Cohort Index
+                        studentIdx = i; // When Found save Student Index
                     }
                 }
             });
-            StateCopy.cohorts[targetIdx].students = updatedStudents;
+            StateCopy.cohorts[cohortIdx].students.splice(studentIdx, 1);
+            StateCopy.authenticated = true;
             return StateCopy;
         case UPLOAD_CSV:
-            console.log('MADE IT TO UPLOAD CSV REDUCER');
-            console.log(`PAYLOAD ${JSON.stringify(action.payload)}`);
             StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = UPLOAD_CSV;

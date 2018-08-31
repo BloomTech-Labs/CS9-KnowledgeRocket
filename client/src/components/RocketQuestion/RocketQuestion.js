@@ -30,33 +30,38 @@ const defaultState = {
     submitted: false,
 };
 
-const CPCButton = styled(Button)`
-    color: #eeeeee !important;
-    border: 1px solid rgb(119, 136, 153);
-    background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
-    width: 100%;
-    margin-bottom: 1rem !important;
-`;
-
 const QuestionHeader = styled.div`
-    margin-left: 2rem;
-    margin-top: 2rem;
+    font-family: 'Roboto', serif;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    .Question_Wrapper {
+        background-color: white;
+        border-radius: .5rem;
+        padding: 2rem
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
+        border: 1px solid #A9A9A9;
+    }
+    .legend {
+        padding: 0 1.5rem;
+        font-size: 0.9rem;
+    }
 `;
 const QuestionText = styled.p`
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    margin: 0 0 1.5rem 2rem;
 `;
 
 const StyledHeaders = styled.h1`
     align-self: flex-start;
     font-size 2rem;
-    margin-bottom: 1rem;
+    margin: 0 0 1.5rem 1rem;
     font-weight: 460;
     font-family: 'Roboto', serif;
 `;
 
 class RocketQuestion extends Component {
-    state = JSON.parse(JSON.stringify(defaultState))
+    state = JSON.parse(JSON.stringify(defaultState));
 
     componentDidMount() {
         const questionID = this.props.match.params.question;
@@ -71,7 +76,7 @@ class RocketQuestion extends Component {
                         studentID: this.props.match.params.student,
                         rocketQuestion: response.data,
                     });
-                }                
+                }
             })
             .catch(questionError => {
                 this.setState(defaultState);
@@ -79,23 +84,27 @@ class RocketQuestion extends Component {
     }
 
     handleSubmit = e => {
-        const packAge = {
-            answer: this.state.answer,
-            questionId: this.state.questionID,
-            studentId: this.state.studentID,
-        };
-        axios
-            .post(`${url}/api/responserocket/answer`, packAge)
-            .then(response => {
-                this.setState({
-                    submitted: true,
+        if (!this.state.submitted) {
+            const packAge = {
+                answer: this.state.answer,
+                questionId: this.state.questionID,
+                studentId: this.state.studentID,
+            };
+            axios
+                .post(`${url}/api/responserocket/answer`, packAge)
+                .then(response => {
+                    this.setState({
+                        submitted: true,
+                    });
+                })
+                .catch(err => {
+                    this.setState({
+                        submitted: err.message,
+                    });
                 });
-            })
-            .catch(err => {
-                this.setState({
-                    submitted: err.message,
-                });
-            });
+        } else {
+            this.props.history.push('/question/thankyou');
+        }
     };
 
     handleRadio = e => {
@@ -104,62 +113,72 @@ class RocketQuestion extends Component {
         });
     };
     handleInput = e => {
-        this.setState({ [e.target.id]: e.target.value });
+        if (!this.state.submitted) {
+            this.setState({ [e.target.id]: e.target.value });
+        } else {
+            // Do not allow changing answers
+        }
     };
 
     render() {
-        // console.log(this.state.rocketQuestion.choices[0].correct);
         console.log('My state is:', this.state);
         return (
-            // <div></div>
             <QuestionHeader className="Question_container">
-                <div className="Question_text">
-                    <StyledHeaders>{this.state.rocketQuestion.title}</StyledHeaders>
-                    <QuestionText>{this.state.rocketQuestion.explanation}</QuestionText>
-                </div>
-                <div className="Question_question">
-                    <StyledHeaders>{'Question:'}</StyledHeaders>
-                    <QuestionText>{this.state.rocketQuestion.question}</QuestionText>
-                </div>
-                <div className="Question_answers">
-                    <FormLabel component="legend" className="legend">
-                        Please Answer The Question:
-                    </FormLabel>
-                    <FormControl component="fieldset" className={`fieldset`}>
-                        {this.state.rocketQuestion.choices.map((answer, index) => {
-                            return (
-                                <RadioGroup
-                                    value={this.state.value}
-                                    name={'value' + index}
-                                    onChange={this.handleRadio}
-                                    key={index}
-                                    className={
-                                        this.state.submitted
-                                            ? this.state.rocketQuestion.choices[index].correct
-                                                ? 'answer--correct'
-                                                : 'answer'
-                                            : ''
-                                    }
-                                >
-                                    <FormControlLabel
-                                        value={answer.text}
-                                        control={<Radio color="primary" />}
-                                        label={
+                <div className="Question_Wrapper">
+                    <div className="Question_text">
+                        <StyledHeaders>{this.state.rocketQuestion.title}</StyledHeaders>
+                        <QuestionText>{this.state.rocketQuestion.explanation}</QuestionText>
+                    </div>
+                    <div className="Question_question">
+                        <StyledHeaders>{'Question:'}</StyledHeaders>
+                        <QuestionText>{this.state.rocketQuestion.question}</QuestionText>
+                    </div>
+                    <div className="Question_answers">
+                        <FormLabel component="legend" className="legend">
+                            Select one answer and hit submit:
+                        </FormLabel>
+                        <FormControl component="fieldset" className={`fieldset`}>
+                            {this.state.rocketQuestion.choices.map((answer, index) => {
+                                return (
+                                    <RadioGroup
+                                        value={this.state.value}
+                                        name={'value' + index}
+                                        onChange={this.handleRadio}
+                                        key={index}
+                                        className={
                                             this.state.submitted
                                                 ? this.state.rocketQuestion.choices[index].correct
-                                                    ? answer.text + ' (correct)'
-                                                    : answer.text
-                                                : answer.text
+                                                    ? 'answer--correct'
+                                                    : 'answer'
+                                                : 'choices'
                                         }
-                                        labelPlacement="end"
-                                    />
-                                </RadioGroup>
-                            );
-                        })}
-                        <CPCButton className="submitButton" onClick={this.handleSubmit}>
-                            Submit Answer
-                        </CPCButton>
-                    </FormControl>
+                                    >
+                                        <FormControlLabel
+                                            value={answer.text}
+                                            control={<Radio color="primary" />}
+                                            label={
+                                                this.state.submitted
+                                                    ? this.state.rocketQuestion.choices[index]
+                                                          .correct
+                                                        ? answer.text + ' (correct)'
+                                                        : answer.text
+                                                    : answer.text
+                                            }
+                                            labelPlacement="end"
+                                        />
+                                    </RadioGroup>
+                                );
+                            })}
+                            <Button
+                                className="submitButton"
+                                color="primary"
+                                onClick={this.handleSubmit}
+                                variant="contained"
+                            >
+                                Submit Answer
+                            </Button>
+                        </FormControl>
+                    </div>
                 </div>
             </QuestionHeader>
         );

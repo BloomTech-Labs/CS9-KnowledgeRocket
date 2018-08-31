@@ -33,7 +33,7 @@ const styles = theme => ({
         position: 'relative',
         display: 'flex',
         width: '100%',
-        height: 100,
+        height: '4.3rem', // Fixed for Smaller Nav Bar
     },
     appBar: {
         position: 'absolute',
@@ -53,7 +53,7 @@ const styles = theme => ({
         [theme.breakpoints.up('md')]: {
             position: 'fixed',
         },
-        paddingTop: '7rem',
+        paddingTop: '5rem',
         zIndex: 0,
     },
     content: {
@@ -64,8 +64,8 @@ const styles = theme => ({
 });
 
 const StyledNavBarContainer = styled(AppBar)`
+    padding: 0 0.5rem 0 0;
     z-index: 1000;
-    padding: 1rem;
     display: flex;
     flex-direction: row !important;
     width: 100%;
@@ -73,7 +73,6 @@ const StyledNavBarContainer = styled(AppBar)`
     justify-content: space-between;
     align-items: center;
     position: fixed !important;
-    margin-bottom: 20px;
     background-color: #2e3033 !important;
 `;
 
@@ -87,6 +86,9 @@ const StyledCrumb = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.1rem;
+    @media (max-width: 500px) {
+        display: none;
+    }
 `;
 
 const StyledSvg = styled(SvgIcon)`
@@ -169,22 +171,22 @@ class NavBar extends Component {
                     >
                         <List>
                             <ListItem>
-                                <CPLink to="/rocket">
+                                <CPLink to="/rocket" onClick={this.handleDrawerToggle}>
                                     <CPCButton variant="outlined">Rockets</CPCButton>
                                 </CPLink>
                             </ListItem>
                             <ListItem>
-                                <CPLink to="/rocket/classes">
+                                <CPLink to="/rocket/classes" onClick={this.handleDrawerToggle}>
                                     <CPCButton variant="outlined">Classes</CPCButton>
                                 </CPLink>
                             </ListItem>
                             <ListItem>
-                                <CPLink to="/rocket/billing">
+                                <CPLink to="/rocket/billing" onClick={this.handleDrawerToggle}>
                                     <CPCButton variant="outlined">Billing</CPCButton>
                                 </CPLink>
                             </ListItem>
                             <ListItem>
-                                <CPLink to="/rocket/settings">
+                                <CPLink to="/rocket/settings" onClick={this.handleDrawerToggle}>
                                     <CPCButton variant="outlined">Settings</CPCButton>
                                 </CPLink>
                             </ListItem>

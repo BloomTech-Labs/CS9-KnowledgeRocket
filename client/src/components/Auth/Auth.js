@@ -52,6 +52,11 @@ const StyledFormContainer = styled.div`
 
 const StyledFormCard = styled(Card)`
     backface-visibility: hidden;
+    margin-top: 110px;
+    margin-right: 11.1rem;
+`;
+
+const StyledFormCard = styled(Card)`
     display: flex;
     flex-direction: row;
     height: 400px;
@@ -81,6 +86,28 @@ const StyledFormHeader = styled(StyledCardContent)`
     color: #39d1b4;
     width: 100%;
     padding: 0;
+    flex-direction: row;
+    height: 300px;
+    width: 800px;
+`;
+
+const StyledCardContent = styled(CardContent)`
+    background-color: #39d1b4;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+`;
+
+const StyledFormHeader = styled(StyledCardContent)`
+    background-color: #fff;
+    font-weight: 300;
+    line-height: 40px;
+    color: #39d1b4;
+    width: 100%;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 `;
 
 const StyledInputContainer = styled.div`
@@ -280,7 +307,6 @@ class Auth extends Component {
                             </FieldSetSocial>
                         </StyledInputContainer>
                     </StyledCardContent>
-
                     {this.props.user.status === 'FAILED' ? (
                         <AuthBackside message={'failed'} />
                     ) : this.props.user.status === 'LOGGING_IN_USER' ? (

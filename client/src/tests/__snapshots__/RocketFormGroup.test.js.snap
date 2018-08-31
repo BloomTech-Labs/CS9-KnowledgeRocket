@@ -2,7 +2,7 @@
 
 exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
 .c0 {
-  padding: 2rem 2rem 0 0;
+  font-family: 'Roboto',serif;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -20,23 +20,65 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
   align-items: flex-start;
 }
 
+.c0 label {
+  padding: .25rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: .5rem;
+}
+
+.c0 .requiredFields {
+  color: red;
+  margin-bottom: .5rem;
+}
+
+.c0 input[name="title"] {
+  border: 0.5px solid #A9A9A9;
+  width: 50%;
+  min-height: 2rem;
+  border-radius: 0.25rem;
+  padding: .25rem;
+}
+
 .c1 {
   width: 100%;
-  height: 4rem;
+  min-height: 4rem;
+  border-radius: 0.25rem;
+  padding: .25rem;
 }
 
 .c3 {
   display: grid;
-  margin: 0 0 1rem 0;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   width: 100%;
+}
+
+.c3 input[type="text"] {
+  border-radius: 0.25rem;
+  border: 0.5px solid #A9A9A9;
+  width: 91%;
+  min-height: 2rem;
+  padding: .25rem .5rem;
+  margin: .25rem;
+}
+
+.c3 input[type="radio"] {
+  padding: .25rem;
 }
 
 .c2 {
   color: red;
   font-size: .8rem;
   height: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width:600px) {
+  .c3 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 }
 
 <section>
@@ -56,7 +98,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       placeholder="Two Day Review Text"
       value=""
     />
-    <span
+    <div
       className="c2"
       id="tm-explanation-ErrorDescription"
     />
@@ -77,7 +119,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       placeholder="Two Day Review Text"
       value={undefined}
     />
-    <span
+    <div
       className="c2"
       id="tm-question-ErrorDescription"
     />
@@ -98,6 +140,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[0].text"
         onChange={undefined}
+        placeholder="Answer 1"
         type="text"
         value=""
       />
@@ -115,6 +158,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[1].text"
         onChange={undefined}
+        placeholder="Answer 2"
         type="text"
         value=""
       />
@@ -132,6 +176,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[2].text"
         onChange={undefined}
+        placeholder="Answer 3"
         type="text"
         value=""
       />
@@ -149,12 +194,13 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[3].text"
         onChange={undefined}
+        placeholder="Answer 4"
         type="text"
         value=""
       />
     </label>
   </div>
-  <span
+  <div
     className="c2"
     id="tm-correct-ErrorDescription"
   />
@@ -164,9 +210,12 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
 exports[`RocketFormGroup testing styled components render <Blurb /> renders correctly 1`] = `
 .c0 {
   width: 100%;
-  height: 4rem;
+  min-height: 4rem;
+  border-radius: 0.25rem;
+  padding: .25rem;
   margin: 1rem 0;
   text-align: justify;
+  font-size: 1.1rem;
 }
 
 <p
@@ -179,16 +228,17 @@ exports[`RocketFormGroup testing styled components render <ErrorText /> renders 
   color: red;
   font-size: .8rem;
   height: 1rem;
+  margin-bottom: 1rem;
 }
 
-<span
+<div
   className="c0"
 />
 `;
 
 exports[`RocketFormGroup testing styled components render <FormGroup /> renders correctly 1`] = `
 .c0 {
-  padding: 2rem 2rem 0 0;
+  font-family: 'Roboto',serif;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -206,6 +256,26 @@ exports[`RocketFormGroup testing styled components render <FormGroup /> renders 
   align-items: flex-start;
 }
 
+.c0 label {
+  padding: .25rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: .5rem;
+}
+
+.c0 .requiredFields {
+  color: red;
+  margin-bottom: .5rem;
+}
+
+.c0 input[name="title"] {
+  border: 0.5px solid #A9A9A9;
+  width: 50%;
+  min-height: 2rem;
+  border-radius: 0.25rem;
+  padding: .25rem;
+}
+
 <div
   className="c0"
 />
@@ -214,10 +284,29 @@ exports[`RocketFormGroup testing styled components render <FormGroup /> renders 
 exports[`RocketFormGroup testing styled components render <QuestionWrapper /> renders correctly 1`] = `
 .c0 {
   display: grid;
-  margin: 0 0 1rem 0;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   width: 100%;
+}
+
+.c0 input[type="text"] {
+  border-radius: 0.25rem;
+  border: 0.5px solid #A9A9A9;
+  width: 91%;
+  min-height: 2rem;
+  padding: .25rem .5rem;
+  margin: .25rem;
+}
+
+.c0 input[type="radio"] {
+  padding: .25rem;
+}
+
+@media (max-width:600px) {
+  .c0 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 }
 
 <div
@@ -228,7 +317,9 @@ exports[`RocketFormGroup testing styled components render <QuestionWrapper /> re
 exports[`RocketFormGroup testing styled components render <TextArea /> renders correctly 1`] = `
 .c0 {
   width: 100%;
-  height: 4rem;
+  min-height: 4rem;
+  border-radius: 0.25rem;
+  padding: .25rem;
 }
 
 <textarea
