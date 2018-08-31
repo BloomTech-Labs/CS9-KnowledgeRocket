@@ -74,7 +74,7 @@ const StyledNavBarContainer = styled(AppBar)`
     align-items: center;
     position: fixed !important;
     margin-bottom: 20px;
-    background-color: #2E3033 !important;
+    background-color: #2e3033 !important;
 `;
 
 const StyledBreadCrumbContainer = styled(Toolbar)`

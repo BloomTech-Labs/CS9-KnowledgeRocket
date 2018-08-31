@@ -36,8 +36,20 @@ const styles = {
 };
 
 const StyledFormContainer = styled.div`
-    margin-top: 30px;
-    margin-right: 11.1rem;
+    padding-top: 30px;
+    padding-right: 11.1rem;
+    display: flex;
+
+    @media (max-width: 1150px) {
+        width: 40rem;
+        padding-right: 0.1rem;
+    }
+
+    @media (max-width: 500px) {
+        width: 80%;
+        margin: 0 auto;
+        padding-right: 0;
+    }
 `;
 
 const StyledFormCard = styled(Card)`
@@ -45,11 +57,15 @@ const StyledFormCard = styled(Card)`
     display: flex;
     flex-direction: row;
     height: 400px;
-    width: 800px;
+    width: 50rem;
     overflow: visible;
     transform-origin: 25% 50%;
     transform-style: preserve-3d;
     transition: all 1s ease-in-out;
+
+    @media (max-width: 700px) {
+        height: 100%;
+    }
 `;
 
 const StyledCardContent = styled(CardContent)`
@@ -72,9 +88,21 @@ const StyledFormHeader = styled(StyledCardContent)`
 const StyledInputContainer = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     height: 100%;
     padding: 10px;
+`;
+
+const FieldSet = styled.div`
+    width: 50%;
+    @media (max-width: 700px) {
+        width: 20rem;
+    }
+`;
+
+const FieldSetSocial = styled(FieldSet)`
+    padding-bottom: 80px;
 `;
 
 const StyledInput = styled.input`
@@ -123,6 +151,14 @@ const StyledButton = styled.button`
 
     &:hover {
         background-color: HSLA(0, 0%, 100%, 0.2);
+    }
+`;
+
+const StyledGoogleBtn = styled(StyledButton)`
+    margin-top: 50px;
+
+    @media (max-width: 700px) {
+        margin-top: 0;
     }
 `;
 
@@ -201,7 +237,7 @@ class Auth extends Component {
                     <StyledCardContent className={classes.root}>
                         <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
                         <StyledInputContainer>
-                            <div style={{ width: '50%' }}>
+                            <FieldSet>
                                 <StyledInput
                                     type="text"
                                     name="email"
@@ -223,17 +259,14 @@ class Auth extends Component {
                                     Sign In
                                 </StyledButton>
                                 <StyledButton onClick={this.handleSignUp}>Sign Up</StyledButton>
-                            </div>
-                            <div style={{ width: '50%' }}>
-                                <StyledButton
-                                    style={{ marginTop: '50px' }}
-                                    onClick={this.handleSignInGoogle}
-                                >
+                            </FieldSet>
+                            <FieldSetSocial>
+                                <StyledGoogleBtn onClick={this.handleSignInGoogle}>
                                     <span style={{ padding: '0 0.5rem' }}>
                                         <i class="fab fa-google fa-lg" />
                                     </span>{' '}
                                     Sign In with Google
-                                </StyledButton>
+                                </StyledGoogleBtn>
                                 <StyledButton onClick={this.handleSignInFacebook}>
                                     <span style={{ padding: '0 0.5rem' }}>
                                         <i class="fab fa-facebook-f fa-lg" />
@@ -246,7 +279,7 @@ class Auth extends Component {
                                     </span>{' '}
                                     Sign in with Twitter
                                 </StyledButton>
-                            </div>
+                            </FieldSetSocial>
                         </StyledInputContainer>
                     </StyledCardContent>
 
