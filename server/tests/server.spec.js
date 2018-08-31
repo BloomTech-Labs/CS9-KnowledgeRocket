@@ -13,7 +13,10 @@ const testdb = process.env.TestDB_Url;
 describe('server', () => {
     beforeAll(() => {
         return mongoose
-            .connect(testdb, { useNewUrlParser: true })
+            .connect(
+                testdb,
+                { useNewUrlParser: true }
+            )
             .then(console.log('connected to test db'));
     });
 
@@ -155,11 +158,14 @@ describe('server', () => {
             question: 'what is life when you write backend code?',
             correct: 'The correct answer is: the matrix!',
         };
-        await Question.create(mockQuestion)
+        await Question.create(mockQuestion);
         // End of Prep before Rocket Creation and Deletion.
         const mockRocket = { title: 'bob todd loves extra letters' };
         const newRocket = await Rocket.create(mockRocket);
         const response = await request(server).delete(`/api/rocket/${newRocket._id}`);
+        // Debugging: 2 lines below, please do not delete yet.
+        // console.log(response.body.message)
+        // expect(response).toBe('')
         expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('rockets');
         // Drop prep Collections
@@ -275,7 +281,6 @@ describe('server', () => {
             // const id = req.body.id;
             // You have to pass in an object and with prop cohort and just id
             .send({ cohort: mockCohort, id });
-        expect(response.message).toBe('This');
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('cohorts');
     });

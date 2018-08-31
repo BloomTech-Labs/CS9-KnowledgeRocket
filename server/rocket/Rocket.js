@@ -11,10 +11,17 @@ const Rocket = mongoose.Schema({
     twoMonth: { type: ObjectId, ref: 'Question', autopopulate: true },
 });
 
-Rocket.plugin(autopopulate);
+
 
 function removeQuestions(next, model) {
-    Question.findById(mongoose.Types.ObjectId(model.twoDay._id))
+    console.log('got to questions')
+    // Check that the questions assigned are valid!
+    const question1 = model.twoDay;
+    const question2 = model.twoWeek;
+    const question3 = model.twoMonth;
+    const shouldCascade = (!!question3 && !!question2 && !!question1);
+    if (shouldCascade) {
+        Question.findById(mongoose.Types.ObjectId(model.twoDay._id))
         .remove()
         .then(() => {
             Question.findById(mongoose.Types.ObjectId(model.twoWeek._id))
@@ -25,17 +32,20 @@ function removeQuestions(next, model) {
                         .then(() => {
                             next();
                         })
-                        .catch(err => {
-                            next(err);
+                        .catch(err1 => {
+                            next(err1);
                         });
                 })
-                .catch(err => {
-                    next(err);
+                .catch(err2 => {
+                    next(err2);
                 });
         })
-        .catch(err => {
-            next(err);
+        .catch(err3 => {
+            next(err3);
         });
+    } else {
+        next()
+    }    
 }
 
 Rocket.pre('remove', function(next) {
@@ -56,12 +66,18 @@ Rocket.pre('remove', function(next) {
             included.forEach(item => {
                 Cohort.findByIdAndUpdate(item._id, item).then(updated => {
                     removeQuestions(next, this);
-                }).catch(next)
+                }).catch(err1 => {
+                    next(err1)
+                })
             });
         } else {
             removeQuestions(next, this);
         }
-    }).catch(next)
+    }).catch(err2 => {
+        next(err2)
+    })
 });
+
+Rocket.plugin(autopopulate);
 
 module.exports = mongoose.model('Rocket', Rocket);
