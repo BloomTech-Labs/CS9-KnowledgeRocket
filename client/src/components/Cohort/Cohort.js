@@ -183,6 +183,12 @@ class Cohort extends Component {
         console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const cohortID = this.props.match.params.id;
         console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
+        let cohortIDX = 0
+        this.props.state.user.cohorts.forEach((ch, index) => {
+            if (ch._id === this.props.match.params.id) {
+                cohortIDX = index;
+            }
+        });
 
         return (
             <CohortFormMainContainer>
@@ -200,7 +206,7 @@ class Cohort extends Component {
                     <StyledCohortStudentList
                         students={this.state.cohort.students}
                         match={this.props.match}
-                        cohortID={this.state.cohortIDX}
+                        cohortID={cohortIDX}
                     />
                 ) : (
                     null
