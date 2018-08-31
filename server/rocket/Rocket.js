@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
+const autopopulate = require('mongoose-autopopulate');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const Cohort = require('../cohort/Cohort');
 const Question = require('../question/Question');
 
 const Rocket = mongoose.Schema({
     title: { type: String, required: true },
-    twoDay: { type: ObjectId, ref: 'Question' },
-    twoWeek: { type: ObjectId, ref: 'Question' },
-    twoMonth: { type: ObjectId, ref: 'Question' },
+    twoDay: { type: ObjectId, ref: 'Question', autopopulate: true },
+    twoWeek: { type: ObjectId, ref: 'Question', autopopulate: true },
+    twoMonth: { type: ObjectId, ref: 'Question', autopopulate: true },
 });
+
+Rocket.plugin(autopopulate);
 
 // function remove(array, element) {
 //     array.forEach((item, index) => {

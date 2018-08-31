@@ -11,6 +11,7 @@ const ResponseRocketRouter = require('./responserocket/ResponseRocketRouter');
 const QuestionRouter = require('./question/QuestionRouter');
 const CohortRouter = require('./cohort/CohortRouter');
 const BillingRouter = require('./billing/BillingRouter');
+const { Router: MailRouter } = require('./mail');
 
 const server = express();
 
@@ -37,5 +38,8 @@ server.use('/api/responserocket', authMiddleware, ResponseRocketRouter);
 server.use('/api/question', authMiddleware, QuestionRouter);
 server.use('/api/cohort', authMiddleware, CohortRouter);
 server.use('/charge', authMiddleware, BillingRouter);
+
+// handle emails
+server.use('/api/mail', authMiddleware, MailRouter);
 
 module.exports = server;
