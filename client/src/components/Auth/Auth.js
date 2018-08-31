@@ -246,7 +246,7 @@ class Auth extends Component {
                                     required
                                 />
                                 <StyledInput
-                                    type="text"
+                                    type="password"
                                     name="password"
                                     onChange={this.handleInput}
                                     placeholder="password"
