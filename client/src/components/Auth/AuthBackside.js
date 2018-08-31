@@ -33,12 +33,12 @@ const AuthBackside = props => {
 				? [
 						<h2>Oops.</h2>,
 						<br />,
-						<h3>Your log in failed. Please check your username and password</h3>,
+						<h3>Your log in failed. Please check your username and password.</h3>,
 				  ]
 				: props.message === 'loggingIn'
-					? [<h2>Please wait.</h2>, <br />, <h3>We are logging you in</h3>]
+					? [<h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3>]
 					: props.message === 'addingUser'
-						? [<h2>Please wait.</h2>, <br />, <h3>We are creating your account</h3>]
+						? [<h2>Please wait.</h2>, <br />, <h3>We are creating your account.</h3>]
 						: null}
 		</StyledSection>
 	);
