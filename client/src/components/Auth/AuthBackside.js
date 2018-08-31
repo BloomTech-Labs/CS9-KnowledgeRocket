@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 const StyledSection = styled.section`
 	background-color: #5b7383;
+	font-size: 1rem;
+	letter-spacing: 0.1rem;
 	padding: 15px;
 	width: 100%;
 	height: 100%;
@@ -25,9 +27,9 @@ const StyledSection = styled.section`
 const AuthBackside = props => {
 	return (
 		<StyledSection>
-			<h2>Merci!</h2>
+			<h2>Thank You!</h2>
 			<br />
-			<h3>Votre compte a été créé avec succès.</h3>
+			<h3 style={{ color: 'white' }}>Your account was created successfully</h3>
 		</StyledSection>
 	);
 };
