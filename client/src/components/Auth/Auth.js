@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 import {
     addUser,
     loginUser,
@@ -9,7 +10,10 @@ import {
     loginUserTwitter,
     generateBreadCrumbs,
 } from '../../actions';
+// MaterialComponents
+import { withStyles } from '@material-ui/core/styles';
 import { Button, Input } from '@material-ui/core';
+// import CardActions from '@material-ui/core/CardActions';
 import Progress from '../Progress/Progress';
 import './Auth.css';
 
@@ -18,6 +22,26 @@ function mapStateToProps(state) {
         user: state.user,
     };
 }
+
+const styles = {
+    card: {
+        maxWidth: 345,
+    },
+    root: {
+        padding: 0,
+    },
+    media: {
+        height: 140,
+    },
+};
+
+const StyledFormContainer = styled.div`
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+`;
 
 class Auth extends Component {
     state = {
@@ -84,8 +108,8 @@ class Auth extends Component {
 
     render() {
         return (
-            <div className="Main_container">
-                <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
+            <StyledFormContainer>
+                <h1 className="Auth_header">Please Sign-in or Sign-up</h1>
                 <div className="flex-column-centered">
                     <Input
                         className="Auth_input"
@@ -162,16 +186,19 @@ class Auth extends Component {
                     ) : null}
                 </div>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
-            </div>
+            </StyledFormContainer>
         );
     }
 }
 
-export default connect(mapStateToProps, {
-    addUser,
-    loginUser,
-    loginUserGoogle,
-    loginUserFacebook,
-    loginUserTwitter,
-    generateBreadCrumbs,
-})(Auth);
+export default connect(
+    mapStateToProps,
+    {
+        addUser,
+        loginUser,
+        loginUserGoogle,
+        loginUserFacebook,
+        loginUserTwitter,
+        generateBreadCrumbs,
+    }
+)(withStyles(styles)(Auth));

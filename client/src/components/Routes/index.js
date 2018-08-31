@@ -14,6 +14,7 @@ import Cohort from '../Cohort/Cohort';
 import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
+import ThankYou from '../RocketQuestion/ThankYou';
 import CohortAdd from '../Cohort/CohortAdd';
 import RocketResults from '../RocketResults/RocketResults';
 
@@ -25,9 +26,9 @@ injectGlobal`
 `;
 
 const StyledContentContainer = styled.div`
-    min-height: 100vh;
+    height: inherit;
     width: 100%;
-    padding: 0rem 0.8rem 0.8rem 11.1rem;
+    padding: 0rem 0.8rem 0.8rem 10.6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +42,7 @@ const StyledContentContainer = styled.div`
 
 const RouteContainer = styled.div`
     background-color: #eeeeee;
-    height: inherit;
+    min-height: 100vh;
     width: 100vw;
     // max-width: 100vw;
 `;
@@ -74,6 +75,7 @@ class Routes extends Component {
                     <Route path="/rocket" component={InnerRoutes} />
                     <Route path="/" exact component={Home} />
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
+                    <Route path="/question/thankyou" exact component={ThankYou} />
                 </RouteContainer>
             </BrowserRouter>
         );

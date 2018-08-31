@@ -81,14 +81,14 @@ export class CohortList extends Component {
     };
 
     render() {
+        console.log('Cohort re-rendered')
         return (
             <ListWrapper>
                 {this.state.cohort ? (
                     // user has at least one cohort, render a cohort card
                     <CohortCardContainer>
                         <ListCard
-                            del={false}
-                            add={true}
+                            add
                             redirect="/rocket/newclass"
                             title="Add New Cohort"
                             label="Add"
@@ -102,32 +102,19 @@ export class CohortList extends Component {
                         />
                         {this.props.state.user.cohorts.map((cohort, index) => (
                             <ListCard
-                                del={console.log}
                                 key={`CL_${index}`}
                                 title={cohort.title}
                                 redirect={`/rocket/classform/${cohort._id}`}
                                 element={cohort}
                                 contents={[
-                                    <p>{`Total Students:\t(${cohort.students.length})`}</p>,
-                                    <p>{`Participation:\t(${'100%'})`}</p>,
-                                    <p>{`Rockets Sent:\t(${0})`}</p>,
+                                    <p>{`Total Students:\t`}<span style={{fontWeight: '900'}}>{`(${cohort.students.length})`}</span></p>,
+                                    <p>{`Participation:\t`}<span style={{fontWeight: '900'}}>{`(${'100%'})`}</span></p>,
+                                    <p>{`Rockets Sent:\t`}<span style={{fontWeight: '900'}}>{`(${0})`}</span></p>,
                                 ]}
                             />
                         ))}
-                        <FloatingAdd
-                            title={'Add New Cohort'}
-                            floating
-                            click={this.handleNewCohortRedirect}
-                            large
-                        />
                     </CohortCardContainer>
-                ) : (
-                    <FloatingAdd
-                        title={'Add New Cohort'}
-                        floating
-                        click={this.handleNewCohortRedirect}
-                        large
-                    />
+                ) : ( null
                 )}
             </ListWrapper>
         );

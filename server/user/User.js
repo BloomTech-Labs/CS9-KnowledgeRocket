@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const Rocket = require('../rocket/Rocket');
 const Cohort = require('../cohort/Cohort');
-
+const autopopulate = require('mongoose-autopopulate');
 
 const User = mongoose.Schema({
     email: { type: String, required: true },
     ccEmail: { type: String, default: this.email},
     uid: { type: String },
     // token: { type: String },
-    rockets: [{ type: ObjectId, ref: 'Rocket' }],
-    cohorts: [{ type: ObjectId, ref: 'Cohort' }],
+    rockets: [{ type: ObjectId, ref: 'Rocket', autopopulate: true }],
+    cohorts: [{ type: ObjectId, ref: 'Cohort', autopopulate: true }],
     account: {
         // Options 'free','monthly', 'yearly'
         type: String,
@@ -28,7 +28,9 @@ const User = mongoose.Schema({
     },
 });
 
-//TODO: Test it inside server by calling User.remove({_id: useridhere});
+User.plugin(autopopulate);
+
+// TODO: Test it inside server by calling User.remove({_id: useridhere});
 User.pre('remove', function(next) {
     // Remove Rockets: For all items in rockets array
     // Each item is a rocket's MongoDB _id
@@ -44,5 +46,6 @@ User.pre('remove', function(next) {
     });
     next();
 });
+
 
 module.exports = mongoose.model('User', User);

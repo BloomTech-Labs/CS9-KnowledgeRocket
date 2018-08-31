@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Cohort = mongoose.Schema({
     title: { type: String, required: true },
-    teacher: { type: ObjectId, ref: 'User', autopopulate: true },
+    teacher: { type: ObjectId, ref: 'User'},
     cc: { type: Boolean, default: false },
     students: [{ type: ObjectId, ref: 'Student', autopopulate: true }],
     rockets: [

@@ -23,7 +23,6 @@ router.route('/').get(async (_, res) => {
 
     try {
         const data = await Promise.all(unresolvedCohortData);
-
         // get all the emails
         const emails = data.map((resolvedCohorts, i) =>
             resolvedCohorts.map(({ teacher: { email }, students, rockets, cc }) => {
