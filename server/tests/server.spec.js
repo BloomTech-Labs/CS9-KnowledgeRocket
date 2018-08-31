@@ -144,10 +144,10 @@ describe('server', () => {
         // Fixing Rocket Delete Test
         // Make a User
         const mockUser = { email: 'bobtodd@gmail.com' };
-        const newUser = await User.create(mockUser);
+        await User.create(mockUser);
         // Make Cohort
         const mockCohort = { title: 'Cohort Tile' };
-        const newCohort = await Cohort.create(mockCohort);
+        await Cohort.create(mockCohort);
         //Make Question
         const mockQuestion = {
             title: 'some title',
@@ -275,6 +275,7 @@ describe('server', () => {
             // const id = req.body.id;
             // You have to pass in an object and with prop cohort and just id
             .send({ cohort: mockCohort, id });
+        expect(response.message).toBe('This');
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('cohorts');
     });

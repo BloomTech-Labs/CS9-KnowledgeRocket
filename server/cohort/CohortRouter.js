@@ -30,7 +30,9 @@ function appendRocket(req, res) {
     //rocketID, startDate, userID, cohortID
     const { rocketID, startDate, userID, cohortID } = req.body;
     const parsedStartDate = Number(startDate);
-    const timeMinusOffset = Number(subHours(new Date(parsedStartDate), timeOffset.UTCToPSTHourOffset));
+    const timeMinusOffset = Number(
+        subHours(new Date(parsedStartDate), timeOffset.UTCToPSTHourOffset)
+    );
     // Had to add 10 MS to the dates for actual moment to interpret past midnight
     const rocketObject = {
         rocketId: rocketID,
@@ -58,9 +60,9 @@ function appendRocket(req, res) {
             Cohort.findByIdAndUpdate(cohortID, foundCohort)
                 .then(() => {
                     User.findById(userID)
-                        
+
                         .then(populatedUser => {
-                            console.log(populatedUser)
+                            console.log(populatedUser);
                             res.status(201).json(populatedUser);
                         })
                         .catch(failureToPopulateUser => {
@@ -111,33 +113,32 @@ function post(req, res) {
             });
     } else {
         // TODO: Implement: Updating Cohort
-    }
-
-    cohort
-        .save()
-        .then(savedCohort => {
-            User.findOne({ _id: id })
-                .then(found => {
-                    found.cohorts.push(savedCohort._id);
-                    User.findByIdAndUpdate(id, { cohorts: found.cohorts })
-                        .then(() => {
-                            User.findOne({ _id: id })
-                                .then(user => {
-                                    res.status(201).json(user); // sends user w/ populated cohorts
-                                })
-                                .catch();
-                        })
-                        .catch(err => {
-                            res.status(500).json({ errorMessage: err.message });
-                        });
-                })
-                .catch(err => {
-                    res.status(500).json({ errorMessage: err.message });
+        User.findOne({ _id: id })
+            .then(found => {
+                // Filter the cohorts for the user
+                let cohortIndex = -1;
+                found.cohorts.forEach((ch, i) => {
+                    if (ch._id === updateCohortId) {
+                    }
                 });
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'There was an error in POST' });
-        });
+                // OverWrite / Update Cohort
+                found[cohortIndex] = cohort;
+                User.findByIdAndUpdate(found._id, found)
+                    .then(() => {
+                        User.findOne({ _id: id })
+                            .then(user => {
+                                res.status(201).json(user); // sends user w/ populated cohorts
+                            })
+                            .catch();
+                    })
+                    .catch(err => {
+                        res.status(500).json({ errorMessage: err.message });
+                    });
+            })
+            .catch(err => {
+                res.status(500).json({ errorMessage: err.message });
+            });
+    }
 }
 function getid(req, res) {
     const id = req.params.id;

@@ -3,6 +3,8 @@ const router = require('express').Router();
 const Rocket = require('./Rocket');
 const User = require('../user/User');
 const Question = require('../question/Question');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 router
     .route('/')
@@ -42,15 +44,6 @@ function postRocket(req, res) {
         };
     };
 
-    // const tdResult = Question.create(updateAndSaveFormattedQuestions(td))
-    // const twResult = Question.create(updateAndSaveFormattedQuestions(tw))
-    // const tmResult = Question.create(updateAndSaveFormattedQuestions(tm))
-
-    // const promiseArray = [tdResult,twResult,tmResult];
-    // Promise.all(promiseArray).then(response=>{
-    //     console.log(response)
-    // })
-
     let td_id, tw_id, tm_id;
     Question.create(updateAndSaveFormattedQuestions(td)).then(tdQuestion => {
         td_id = tdQuestion._id;
@@ -59,14 +52,12 @@ function postRocket(req, res) {
             Question.create(updateAndSaveFormattedQuestions(tm)).then(tmQuestion => {
                 tm_id = tmQuestion._id;
                 // Format Rocket
-                // console.log('ids', td_id, tw_id, tm_id)
                 const rocketToSave = {
                     title: postRocket.title,
                     twoDay: td_id,
                     twoWeek: tw_id,
                     twoMonth: tm_id,
                 };
-                // console.log('rocket to save', rocketToSave)
                 // Save Rocket to MongoDB
                 Rocket.create(rocketToSave)
                     .then(createdRocket => {
