@@ -12,7 +12,7 @@
         "build:client": "cd client && npm run build && cd ..",
         "build": "npm run build:client",
         "start": "cd server && npm start",
-        "sendmail": "curl \"$BASE_URL/mail\""
+        "sendmail": "curl \"$BASE_URL/api/mail\""
     },
     "repository": {
         "type": "git",
