@@ -62,7 +62,7 @@ class CohortRocketCard extends Component {
     };
 
     componentDidMount() {
-        const rocketID = this.props.rocket.rocketId;
+        const rocketID = this.props.rocket.rocketId._id;
         const rocketData = this.props.state.user.rockets.filter(rocket => {
             if (rocket._id === rocketID) {
                 return true;
@@ -82,7 +82,7 @@ class CohortRocketCard extends Component {
 
     reScheduleRocket = e => {
         const newDate = this.state.newDate;
-        const rocketID = this.props.rocket.rocketId;
+        const rocketID = this.props.rocket.rocketId._id;
         const userID = this.props.state.user._id;
         const cohortID = this.props.cohortID;
         this.props.appendRocket(rocketID, newDate, userID, cohortID);

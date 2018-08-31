@@ -86,8 +86,6 @@ const RocketAddToggle = Styled.div`
 `;
 class RocketMenuItem extends Component {
 
-
-return 
     render() {
         return (
             <RocketAddWrapper>

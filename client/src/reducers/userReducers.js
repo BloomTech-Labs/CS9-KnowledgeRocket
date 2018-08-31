@@ -38,7 +38,7 @@ const defaultState = {
     status: 'INITIAL',
     students: [],
     rockets: [],
-    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{}] }],
+    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{rocketId: {}}] }],
 };
 
 export default (state = defaultState, action) => {
@@ -56,7 +56,7 @@ export default (state = defaultState, action) => {
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
                 c.rockets.forEach((r, rIndex) => {
-                    if (r.rocketId === action.payload.rocketId) {
+                    if (r.rocketId._id === action.payload.rocketId._id) {
                         target.push([cIndex, rIndex]);
                     }
                 });
@@ -66,7 +66,7 @@ export default (state = defaultState, action) => {
             });
             // update user rockets
             StateCopy.rockets.forEach((rocket, index) => {
-                if (rocket._id === action.payload.rocketId) {
+                if (rocket._id === action.payload.rocketId._id) {
                     StateCopy.rockets.splice(index, 1);
                 }
             });

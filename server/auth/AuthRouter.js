@@ -51,14 +51,6 @@ function modifyUser(req, res) {
                                 ccEmail,
                                 email: ccEmail,
                             })
-                                // .populate('cohorts')
-                                // .populate({
-                                //     path: 'cohorts',
-                                //     populate: { path: 'students', model: 'Students' },
-                                // })
-                                // .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                                // .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                                // .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                 .then(updatedUser => {
                                     if (newPW) {
                                         currentUser
@@ -91,14 +83,6 @@ function modifyUser(req, res) {
         UserModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), {
             ccEmail,
         })
-            .populate('cohorts')
-            .populate({
-                path: 'cohorts',
-                populate: { path: 'students', model: 'Students' },
-            })
-            .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-            .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-            .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
             .then(updatedUser => {
                 res.status(201).json(updatedUser);
             })
@@ -118,18 +102,10 @@ function post(req, res) {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(response => {
+                // console.log('Response from signIn FB', response)
                 const uid = response.user.uid;
                 response.user.getIdToken().then(token => {
                     UserModel.findOne({ uid })
-                        // https://mongoosejs.com/docs/populate.html Populating across multi levels
-                        .populate('cohorts')
-                        .populate({
-                            path: 'cohorts',
-                            populate: { path: 'students', model: 'Students' },
-                        })
-                        .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                        .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                        .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                         .then(foundUser => {
                             // Alternatively Replace Token Here and Send back Updated Token...
                             if (
@@ -139,19 +115,9 @@ function post(req, res) {
                                 // Account has Expired Update account accordingly
                                 UserModel.findByIdAndUpdate(foundUser._id, {
                                     account: 'free',
-                                })
-                                    .populate('rockets')
-                                    .populate('cohorts')
-                                    .populate({
-                                        path: 'cohorts',
-                                        populate: { path: 'students', model: 'Students' },
-                                    })
-                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
-                                    .then(updatedUser => {
-                                        res.status(201).json(updatedUser);
-                                    });
+                                }).then(updatedUser => {
+                                    res.status(201).json(updatedUser);
+                                });
                             } else {
                                 res.json(foundUser);
                             }
@@ -203,16 +169,6 @@ function post(req, res) {
                 const decodedUid = decodedToken.uid;
                 if (uid === decodedUid) {
                     UserModel.findOne({ uid })
-                        .populate('cohorts')
-                        .populate({
-                            path: 'cohorts',
-                            populate: { path: 'students', model: 'Students' },
-                        })
-                        .populate('rockets')
-                        .populate('questions')
-                        .populate('rockets.questions.twoDay')
-                        .populate('rockets.questions.twoWeek')
-                        .populate('rockets.questions.twoMonth')
                         .then(foundUser => {
                             if (foundUser === null) {
                                 UserModel.create({

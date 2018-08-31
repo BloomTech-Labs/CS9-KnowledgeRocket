@@ -204,15 +204,15 @@ class Cohort extends Component {
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm cohortID={this.props.match.params.id} />
                 <StyledHeaders>Students</StyledHeaders>
-                {/* {this.state.cohort.students.length > 0 ? ( */}
+                {this.state.cohort.students.length > 0 ? (
                     <StyledCohortStudentList
                         students={this.state.cohort.students}
                         match={this.props.match}
                         cohortID={cohortIDX}
                     />
-                {/* ) : (
+                ) : (
                     null
-                )} */}
+                )} }
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
