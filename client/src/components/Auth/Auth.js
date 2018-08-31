@@ -17,7 +17,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Progress from '../Progress/Progress';
-import './Auth.css';
+import AuthBackside from './AuthBackside';
 
 function mapStateToProps(state) {
     return {
@@ -26,11 +26,9 @@ function mapStateToProps(state) {
 }
 
 const styles = {
-    card: {
-        maxWidth: 345,
-    },
     root: {
         padding: 0,
+        overflow: 'visible !important',
     },
     media: {
         height: 140,
@@ -38,17 +36,17 @@ const styles = {
 };
 
 const StyledFormContainer = styled.div`
-    margin-top: 110px;
+    margin-top: 30px;
     margin-right: 11.1rem;
 `;
 
 const StyledFormCard = styled(Card)`
+    backface-visibility: hidden;
     display: flex;
     flex-direction: row;
     height: 400px;
     width: 800px;
-
-    transform: translate(0%, 0%);
+    overflow: visible;
     transform-origin: 25% 50%;
     transform-style: preserve-3d;
     transition: all 1s ease-in-out;
@@ -195,7 +193,10 @@ class Auth extends Component {
 
         return (
             <StyledFormContainer>
-                <StyledFormCard style={this.state.flipStatus ? flip : null}>
+                <StyledFormCard
+                    className={classes.root}
+                    style={this.state.flipStatus ? flip : null}
+                >
                     <StyledCardContent className={classes.root}>
                         <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
                         <StyledInputContainer>
@@ -238,6 +239,7 @@ class Auth extends Component {
                             </div>
                         </StyledInputContainer>
                     </StyledCardContent>
+                    <AuthBackside />
                 </StyledFormCard>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
