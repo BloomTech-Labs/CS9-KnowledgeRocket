@@ -98,6 +98,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[0].text"
         onChange={undefined}
+        placeholder="Answer 1"
         type="text"
         value=""
       />
@@ -115,6 +116,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[1].text"
         onChange={undefined}
+        placeholder="Answer 2"
         type="text"
         value=""
       />
@@ -132,6 +134,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[2].text"
         onChange={undefined}
+        placeholder="Answer 3"
         type="text"
         value=""
       />
@@ -149,6 +152,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
       <input
         name="tm.choices[3].text"
         onChange={undefined}
+        placeholder="Answer 4"
         type="text"
         value=""
       />
