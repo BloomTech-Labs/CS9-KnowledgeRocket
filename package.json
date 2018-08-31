@@ -1,28 +1,29 @@
 {
-  "name": "cs9-knowledgerocket",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server/server.js",
-  "scripts": {
-    "test:client": "cd client && npm run test:once && cd ..",
-    "test:server": "cd server && npm run test:once && cd ..",
-    "test": "npm run test:client && npm run test:server",
-    "install": "cd client && npm i && cd .. && cd server && npm i && cd ..",
-    "postinstall": "npm run build",
-    "build:client": "cd client && npm run build && cd ..",
-    "build": "npm run build:client",
-    "start": "cd server && npm start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket.git"
-  },
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket/issues"
-  },
-  "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme",
-  "dependencies": {
-    "papaparse": "^4.6.0"
-  }
+    "name": "cs9-knowledgerocket",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server/server.js",
+    "scripts": {
+        "test:client": "cd client && npm run test:once && cd ..",
+        "test:server": "cd server && npm run test:once && cd ..",
+        "test": "npm run test:client && npm run test:server",
+        "install": "cd client && npm i && cd .. && cd server && npm i && cd ..",
+        "postinstall": "npm run build",
+        "build:client": "cd client && npm run build && cd ..",
+        "build": "npm run build:client",
+        "start": "cd server && npm start",
+        "sendmail": "curl \"$BASE_URL/mail\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket.git"
+    },
+    "author": "",
+    "bugs": {
+        "url": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket/issues"
+    },
+    "homepage": "https://github.com/Lambda-School-Labs/CS9-KnowledgeRocket#readme",
+    "dependencies": {
+        "papaparse": "^4.6.0"
+    }
 }
