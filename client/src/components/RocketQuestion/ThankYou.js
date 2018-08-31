@@ -1,34 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
-import FormLabel from '@material-ui/core/FormLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
 import './RocketQuestion.css';
-
-const url = process.env.REACT_APP_SERVER;
-
-const defaultState = {
-    answer: 0,
-    questionID: '',
-    studentID: '',
-    rocketQuestion: {
-        title: '',
-        explanation: '',
-        question: '',
-        choices: [
-            { text: '', correct: true },
-            { text: '', correct: false },
-            { text: '', correct: false },
-            { text: '', correct: false },
-        ],
-        correct: '',
-    },
-    submitted: false,
-};
 
 const QuestionHeader = styled.div`
     font-family: 'Roboto', serif;
@@ -47,10 +19,6 @@ const QuestionHeader = styled.div`
         font-size: 0.9rem;
     }
 `;
-const QuestionText = styled.p`
-    font-size: 1rem;
-    margin: 0 0 1.5rem 2rem;
-`;
 
 const StyledHeaders = styled.h1`
     align-self: flex-start;
@@ -61,59 +29,8 @@ const StyledHeaders = styled.h1`
 `;
 
 class RocketQuestion extends Component {
-    state = JSON.parse(JSON.stringify(defaultState));
-
-    componentDidMount() {
-        const questionID = this.props.match.params.question;
-        // Get stuff about the question from the server
-        console.log(this.props);
-        axios
-            .get(`${url}/api/question/${questionID}`)
-            .then(response => {
-                if (response.data.choices.length > 0) {
-                    this.setState({
-                        questionID,
-                        studentID: this.props.match.params.student,
-                        rocketQuestion: response.data,
-                    });
-                }
-            })
-            .catch(questionError => {
-                this.setState(defaultState);
-            });
-    }
-
-    handleSubmit = e => {
-        const packAge = {
-            answer: this.state.answer,
-            questionId: this.state.questionID,
-            studentId: this.state.studentID,
-        };
-        axios
-            .post(`${url}/api/responserocket/answer`, packAge)
-            .then(response => {
-                this.setState({
-                    submitted: true,
-                });
-            })
-            .catch(err => {
-                this.setState({
-                    submitted: err.message,
-                });
-            });
-    };
-
-    handleRadio = e => {
-        this.setState({
-            value: e.target.value,
-        });
-    };
-    handleInput = e => {
-        this.setState({ [e.target.id]: e.target.value });
-    };
 
     render() {
-        console.log('My state is:', this.state);
         return (
             <QuestionHeader className="Question_container">
                 <div className="Question_Wrapper">
