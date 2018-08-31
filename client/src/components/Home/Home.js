@@ -30,7 +30,8 @@ export default class Home extends Component {
     };
 
     render() {
-        return <HomeContainer>
+        return (
+            <HomeContainer>
                 <HomeCTA>
                     <HomeNav>
                         <div>
@@ -50,11 +51,10 @@ export default class Home extends Component {
                             <MidSection>
                                 <MidImg src="/img/amanda-sandlin-10508-unsplash.jpg" />
                                 <MidSectionText>
-                                    Text for mid section here should not be very length but
-                                    should contain enough information about this
-                                    section.Text for mid section here should not be very
-                                    length but should contain enough information about this
-                                    section.
+                                    Knowledge Rockets are customizable quizzes that you create and
+                                    send to your students on scheduled intervals of 2 days, 2 weeks
+                                    and 2 months after the initial lecture. Rocket templates are
+                                    provided for ease of creation.
                                 </MidSectionText>
                             </MidSection>
                         </MidColumn>
@@ -63,13 +63,9 @@ export default class Home extends Component {
                             <MidSection>
                                 <MidImg src="/img/erik-nielsen-783260-unsplash.jpg" />
                                 <MidSectionText>
-                                    Text for mid section here should not be very length but
-                                    should contain enough information about this
-                                    section.Text for mid section here should not be very
-                                    length but should contain enough information about this
-                                    section.Text for mid section here should not be very
-                                    length but should contain enough information about this
-                                    section.
+                                    Lectures can be sometimes difficult for students to follow.
+                                    Knowledge Rockets reinforce lecture information and helps
+                                    students retain it.
                                 </MidSectionText>
                             </MidSection>
                         </MidColumn>
@@ -78,11 +74,10 @@ export default class Home extends Component {
                             <MidSection>
                                 <MidImg src="/img/bryan-minear-315814-unsplash.jpg" />
                                 <MidSectionText>
-                                    Text for mid section here should not be very length but
-                                    should contain enough information about this
-                                    section.Text for mid section here should not be very
-                                    length but should contain enough information about this
-                                    section.
+                                    Studies show that familiarity of class lecture retention works
+                                    with reinforcement. Knowledge Rocket, with its ease of use,
+                                    simplifies the instuctor's life while improving the student's
+                                    comprehension.
                                 </MidSectionText>
                             </MidSection>
                         </MidColumn>
@@ -92,7 +87,28 @@ export default class Home extends Component {
                     <NavButton onClick={this.handleContact}>CONTACT US</NavButton>
                     <NavButton onClick={this.handleAuthRedirect}>SIGN UP</NavButton>
                     <NavButton onClick={this.handleAuthRedirect}>SIGN IN</NavButton>
+                    <p>
+                        Follow us on
+                        <a
+                            style={{ textDecoration: 'none' }}
+                            href="https://twitter.com/KnowledegeR"
+                            title="Knowledge Rocket on Twitter"
+                        >
+                            {' '}
+                            TWITTER
+                        </a>{' '}
+                        and
+                        <a
+                            style={{ textDecoration: 'none' }}
+                            href="https://www.facebook.com/Knowledge-Rocket-464965013986045"
+                            title="Knowledge Rocket on Facebook"
+                        >
+                            {' '}
+                            FACEBOOK
+                        </a>
+                    </p>
                 </FooterSection>
-            </HomeContainer>;
+            </HomeContainer>
+        );
     }
 }
