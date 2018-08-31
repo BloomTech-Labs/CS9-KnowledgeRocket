@@ -183,7 +183,7 @@ class Cohort extends Component {
         console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const cohortID = this.props.match.params.id;
         console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
-        let cohortIDX = 0
+        let cohortIDX;
         this.props.state.user.cohorts.forEach((ch, index) => {
             if (ch._id === this.props.match.params.id) {
                 cohortIDX = index;
@@ -202,19 +202,20 @@ class Cohort extends Component {
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm cohortID={this.props.match.params.id} />
                 <StyledHeaders>Students</StyledHeaders>
-                {this.state.cohort.students.length > 0 ? (
+                {/* {this.state.cohort.students.length > 0 ? ( */}
                     <StyledCohortStudentList
                         students={this.state.cohort.students}
                         match={this.props.match}
                         cohortID={cohortIDX}
                     />
-                ) : (
+                {/* ) : (
                     null
-                )}
+                )} */}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
+                    cohortIDX={cohortIDX}
                 />
             </CohortFormMainContainer>
         );

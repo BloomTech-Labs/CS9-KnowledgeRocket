@@ -35,4 +35,3 @@ class CohortStudentList extends Component {
 }
 
 export default connect(mapStateToProps)(CohortStudentList);
-// export default CohortStudentList;

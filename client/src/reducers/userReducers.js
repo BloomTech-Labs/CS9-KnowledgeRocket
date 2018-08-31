@@ -133,20 +133,18 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_STUDENT:
             StateCopy.status = DELETE_STUDENT;
-            const updatedStudents = [];
-            let targetIdx = 0;
+            let cohortIdx =  -1; // Initialize as a non index
+            let studentIdx = -1; // Initialize as a non index
             StateCopy.cohorts.forEach((cohort, index) => {
                 let students = cohort.students;
                 for (let i = 0; i < students.length; i++) {
                     if (students[i]._id === action.payload._id) {
-                        targetIdx = index;
-                    }
-                    if (students[i]._id !== action.payload._id) {
-                        updatedStudents.push(students[i]);
+                        cohortIdx = index; // When Found save Cohort Index
+                        studentIdx = i; // When Found save Student Index
                     }
                 }
             });
-            StateCopy.cohorts[targetIdx].students = updatedStudents;
+            StateCopy.cohorts[cohortIdx].students.splice(studentIdx, 1);
             StateCopy.authenticated = true;
             return StateCopy;
         case UPLOAD_CSV:
