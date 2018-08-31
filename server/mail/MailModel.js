@@ -1,4 +1,6 @@
 const cohortModel = require('../cohort/Cohort');
+const subHours = require('date-fns/sub_hours');
+
 const generateQueryPopulator = query => field =>
     Array.isArray(field) ? query.populate(...field) : query.populate(field);
 
@@ -29,9 +31,16 @@ const whereCohortRocket = (interval, start, end) => ({
 
 const getTodayAndTomorrow = () => {
     const thisSecond = Date.now();
-    const today = new Date(thisSecond);
-    today.setUTCHours(0, 0, 0, 0);
-    const tomorrow = new Date(thisSecond);
+
+    // The server and database are set to UTC time.
+    // Therefore we need to offset the time to PST Time
+    // Depending on daylight savings, this number can be 7 or 8
+    const UTCToPSTHourOffset = 8;
+
+    const today = subHours(new Date(thisSecond), UTCToPSTHourOffset);
+
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = subHours(new Date(thisSecond), UTCToPSTHourOffset);
     tomorrow.setHours(23, 59, 59, 59);
     return { today, tomorrow };
 };
