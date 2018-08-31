@@ -15,7 +15,10 @@ router
     .put(put)
     .get(getid)
     .delete(deleteid);
-
+// ENDPOINT TO RECEIVE { ORG_COHORTID, USER_COHORTID, USERID=teacherID, SKIPVALIDATE } AND APPEND TO USER COHORT
+    // Find ORG_COHORT by ID => Which organization Cohort Belongs to.
+        // Parse into Object that looks like: [{ lastName, firstName, email },{ lastName, firstName, email }]
+        // Call => POSTCSV with const { teacherID, USER_COHORTID, ORG_COHORT }
 function get(req, res) {
     Cohort.find()
         .then(expected => {
