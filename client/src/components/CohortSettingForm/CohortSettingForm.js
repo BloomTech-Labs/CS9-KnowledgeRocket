@@ -68,10 +68,10 @@ const StyledFormControlLabel = styled(FormControlLabel)`
     margin-right: 0.5rem;
 `;
 
-const MyCheckBox = styled.div`
-    padding: .2rem;
-    border: #f2f7ff;
-`
+// const MyCheckBox = styled.div`
+//     padding: .2rem;
+//     border: #f2f7ff;
+// `
 
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
