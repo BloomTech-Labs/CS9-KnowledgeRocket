@@ -75,7 +75,6 @@ function modifyUser(req, res) {
                 }
             })
             .catch(err => {
-                console.log(err);
                 res.status(400).json({ errorMessage: err.message });
             });
     } else {
@@ -102,7 +101,6 @@ function post(req, res) {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(response => {
-                // console.log('Response from signIn FB', response)
                 const uid = response.user.uid;
                 response.user.getIdToken().then(token => {
                     UserModel.findOne({ uid })
