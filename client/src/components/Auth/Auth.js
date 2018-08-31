@@ -188,6 +188,7 @@ class Auth extends Component {
     };
 
     render() {
+        console.log(`AUTH PROPS ${JSON.stringify(this.props)}`);
         const { classes } = this.props;
         const flip = { transform: 'translate(0, 0) rotateX(180deg)' };
 
@@ -239,20 +240,15 @@ class Auth extends Component {
                             </div>
                         </StyledInputContainer>
                     </StyledCardContent>
-                    <AuthBackside />
-                </StyledFormCard>
-                <div className="flex-row-centered Auth_prompt-fail">
-                    {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
+
                     {this.props.user.status === 'FAILED' ? (
-                        <p>
-                            Authentication failed. Check your email and password and try again.
-                            Thank you.
-                        </p>
-                    ) : this.props.user.status === 'ADDING_USER' ||
-                    this.props.user.status === 'LOGGING_IN_USER' ? (
-                        <Progress />
+                        <AuthBackside message={'failed'} />
+                    ) : this.props.user.status === 'LOGGING_IN_USER' ? (
+                        <AuthBackside message={'loggingIn'} />
+                    ) : this.props.user.status === 'ADDING_USER' ? (
+                        <AuthBackside message={'addingUser'} />
                     ) : null}
-                </div>
+                </StyledFormCard>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
             </StyledFormContainer>
         );
