@@ -14,6 +14,7 @@ import Cohort from '../Cohort/Cohort';
 import Settings from '../Settings/Settings';
 import RocketView from '../Rocket/RocketView';
 import RocketQuestion from '../RocketQuestion/RocketQuestion';
+import ThankYou from '../RocketQuestion/ThankYou';
 import CohortAdd from '../Cohort/CohortAdd';
 import RocketResults from '../RocketResults/RocketResults';
 
@@ -74,6 +75,7 @@ class Routes extends Component {
                     <Route path="/rocket" component={InnerRoutes} />
                     <Route path="/" exact component={Home} />
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
+                    <Route path="/question/thankyou" exact component={ThankYou} />
                 </RouteContainer>
             </BrowserRouter>
         );
