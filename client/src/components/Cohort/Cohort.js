@@ -83,7 +83,7 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     padding: 0.5rem;
@@ -98,7 +98,7 @@ class Cohort extends Component {
             objectID: 0,
         },
         cohort: {
-            cc: false,
+            ccEmail: false,
             rockets: { _id: '', rocketId: '', startDate: '', td: '', tw: '', tm: '' },
             students: [{}],
             title: '',
@@ -137,7 +137,7 @@ class Cohort extends Component {
 
     handleCheckBox = e => {
         console.log('MADE IT TO handleCheckBox');
-        this.setState({ [e.target.name]: !!e.target.checked });
+        this.setState({ cohort:{ ccEmail: !!e.target.checked } });
     };
 
     handleAddCohort = () => {
@@ -180,9 +180,9 @@ class Cohort extends Component {
     };
 
     render() {
-        console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
+        // console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const cohortID = this.props.match.params.id;
-        console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
+        // console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
         let cohortIDX;
         this.props.state.user.cohorts.forEach((ch, index) => {
             if (ch._id === this.props.match.params.id) {
@@ -197,7 +197,9 @@ class Cohort extends Component {
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
                     cohortID={cohortID}
+                    cohortIDX={cohortIDX}
                     title={this.state.title}
+                    addCohort={this.props.addCohort}
                 />
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm cohortID={this.props.match.params.id} />

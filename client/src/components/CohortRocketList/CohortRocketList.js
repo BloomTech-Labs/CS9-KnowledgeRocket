@@ -43,7 +43,8 @@ const StyledCardContent = Styled(CardContent)`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    min-height: 16rem;
+    height: 15rem;
+    max-height: 15rem;
 `;
 
 const RocketCardTop = Styled.div`
@@ -61,7 +62,7 @@ const RocketCardMid = Styled.div`
 `;
 
 const AddRocketWrap = Styled(RocketListCard)`
-    min-height: 1rem;
+    height:15.5rem;
 `;
 
 const RocketAddWrapper = Styled.div`
@@ -79,8 +80,9 @@ const RocketAddWrapper = Styled.div`
 const RocketAddToggle = Styled.div`
     display: ${props => (props.toggleVis ? 'flex' : 'none')}
     overflow-y: scroll;
-    height: 12rem;
+    height: 10rem;
     flex-direction: column;
+    margin: 0;
 `;
 class RocketMenuItem extends Component {
 

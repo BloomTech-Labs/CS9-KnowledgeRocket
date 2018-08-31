@@ -82,8 +82,55 @@ function appendRocket(req, res) {
 }
 
 function post(req, res) {
-    const cohort = new Cohort(req.body.cohort);
-    const id = req.body.id;
+    const id = req.body.id; // USERS ID
+    const updateCohortId = req.body.cohort._id;
+    let cohort = req.body.cohort;
+    if (!updateCohortId) {
+        cohort = new Cohort(req.body.cohort);
+        cohort
+            .save()
+            .then(savedCohort => {
+                User.findOne({ _id: id })
+                    .populate('cohorts')
+                    .populate({
+                        path: 'cohorts',
+                        populate: { path: 'students', model: 'Students' },
+                    })
+                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                    .then(found => {
+                        found.cohorts.push(savedCohort._id);
+                        User.findByIdAndUpdate(id, { cohorts: found.cohorts })
+                            .then(() => {
+                                User.findOne({ _id: id })
+                                    .populate('cohorts')
+                                    .populate({
+                                        path: 'cohorts',
+                                        populate: { path: 'students', model: 'Students' },
+                                    })
+                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                                    .then(user => {
+                                        res.status(201).json(user); // sends user w/ populated cohorts
+                                    })
+                                    .catch();
+                            })
+                            .catch(err => {
+                                res.status(500).json({ errorMessage: err.message });
+                            });
+                    })
+                    .catch(err => {
+                        res.status(500).json({ errorMessage: err.message });
+                    });
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'There was an error in POST' });
+            });
+    } else {
+        // TODO: Implement: Updating Cohort
+    }
 
     cohort
         .save()
@@ -94,18 +141,22 @@ function post(req, res) {
                     path: 'cohorts',
                     populate: { path: 'students', model: 'Students' },
                 })
-                .populate('rockets')
-                .populate('questions')
-                .populate('rockets.questions.twoDay')
-                .populate('rockets.questions.twoWeek')
-                .populate('rockets.questions.twoMonth')
+                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                 .then(found => {
                     found.cohorts.push(savedCohort._id);
                     User.findByIdAndUpdate(id, { cohorts: found.cohorts })
                         .then(() => {
                             User.findOne({ _id: id })
                                 .populate('cohorts')
-                                .populate('rockets')
+                                .populate({
+                                    path: 'cohorts',
+                                    populate: { path: 'students', model: 'Students' },
+                                })
+                                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                 .then(user => {
                                     res.status(201).json(user); // sends user w/ populated cohorts
                                 })

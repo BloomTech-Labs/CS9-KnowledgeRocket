@@ -6,7 +6,7 @@ import Papa from 'papaparse';
 import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 // Actions
 import { importCSV } from '../../actions/';
 
@@ -18,10 +18,13 @@ function mapStateToProps(state) {
 
 const StylizedInput = styled(Input)`
     padding: 0.5rem;
-    min-width: 20rem;
     background-color: #f2f7ff;
     border-radius: 0.25rem;
     order: 0;
+    width: 100%;
+    @media (min-width: 500px) {
+        width: 50%
+    }
 `;
 
 const StylizedForm = styled.form`
@@ -65,11 +68,28 @@ const StyledFormControlLabel = styled(FormControlLabel)`
     margin-right: 0.5rem;
 `;
 
+const MyCheckBox = styled.div`
+    padding: .2rem;
+    border: #f2f7ff;
+`
+
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
     state = {
         csvData: [],
+        cohort: {
+            ccEmail: false,
+            rockets: { _id: '', rocketId: '', startDate: '', td: '', tw: '', tm: '' },
+            students: [{}],
+            title: '',
+            _id: '',
+        }
     };
+
+    componentDidMount() {
+        let cohort = this.props.state.user.cohorts[this.props.cohortIDX];
+        this.setState({cohort});
+    }
 
     handleFileSelect = event => {
         const teacherID = this.props.state.user._id;
@@ -91,17 +111,38 @@ class CohortSettingForm extends Component {
             return Papa.parse(file, config);
         }
     };
+
+    handleCheckBox = (one,two) => {
+        console.log('MADE IT TO handleCheckBox',one,two);
+        this.setState({ cohort:{...this.state.cohort, ccEmail: !this.state.cohort.ccEmail } });
+    };
+
+    handleNewInput = e => {
+        this.setState({  cohort:{...this.state.cohort, [e.target.name]: e.target.value }});
+    };
+
+    handleAddCohort = () => {
+        const cohort = {
+            title: this.state.cohort.title,
+            ccEmail: this.state.cohort.ccEmail,
+        };
+        if (this.state.cohort._id !== '') {
+            cohort._id = this.state.cohort._id;
+        }
+        this.props.addCohort(cohort, this.props.state.user._id);
+    };
+
     render() {
         // console.log(`USER IMPORTED CSV DATA ${JSON.stringify(this.state.csvData)}`);
 
         return (
             <div className={this.props.className}>
                 <StylizedInput
-                    placeholder="Class Name"
                     disableUnderline={true}
                     name="title"
-                    onChange={this.props.handleNewInput}
-                    value={this.props.title === '' ? null : this.props.title}
+                    onChange={this.handleNewInput}
+                    onBlur={this.handleNewInput}
+                    placeholder={this.state.cohort.title === '' ? 'Class Name' : this.state.cohort.title}
                 />
                 <StylizedForm>
                     <StyledLabel for="csv-file">Import CSV</StyledLabel>
@@ -113,13 +154,12 @@ class CohortSettingForm extends Component {
                     />
                 </StylizedForm>
                 <StyledFormControlLabel
-                    control={<Checkbox onChange={this.props.handleCheckBox} name="ccEmail" />}
+                    control={<Checkbox onChange={(e)=>this.handleCheckBox(e, this)} name="ccEmail" checked={this.state.cohort.ccEmail}/>}
                     label="CC Me on Rocket Emails"
                 />
-                {/* 
-				<Button variant="contained" color="primary">
-					Import CSV
-				</Button> */}
+                <Button variant="contained" color="primary" onClick={this.handleAddCohort}>
+                        Add this Cohort
+                </Button>
             </div>
         );
     }
