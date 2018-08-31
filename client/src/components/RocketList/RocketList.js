@@ -46,18 +46,6 @@ class RocketList extends Component {
         this.props.deleteRocket(element._id);
     };
 
-    calculateCohortsAssigned = element => {
-        let cohortsAssigned = 0;
-        this.props.state.user.cohorts.forEach(cohort => {
-            cohort.rockets.forEach(cohortRocket => {
-                if (cohortRocket._id === element._id) {
-                    cohortsAssigned++;
-                }
-            });
-        });
-        return cohortsAssigned;
-    };
-
     render() {
         console.log(this.state.rocketCounter);
         return (
@@ -69,10 +57,9 @@ class RocketList extends Component {
                         redirect="/rocket/new"
                         title="Add New Rocket"
                         label="Add"
-                        contents={[<FloatingAdd large click={this.handleNewRocket} />]}
+                        contents={[<FloatingAdd large click={this.handleNewRocket}/>]}
                     />
                     {this.props.state.user.rockets.map((rocket, index) => {
-                        const ca = this.calculateCohortsAssigned(rocket);
                         return (
                             <ListCard
                                 key={`RL_${index}`}
@@ -95,7 +82,6 @@ class RocketList extends Component {
                         );
                     })}
                 </RocketListContainer>
-                <FloatingAdd click={this.handleNewRocket} title={'Add Rocket'} floating />
             </ListWrapper>
         );
     }

@@ -15,17 +15,26 @@ function mapStateToProps(state) {
 }
 
 const FloatingAdd = Styled.div`
-    width: 3rem; 
+    h1 {
+        font-weight: 600;
+        font-size: 2rem;
+    }
+    h1 {
+        font-weight: 460;
+        font-size: 1.5rem;
+    }
     height: inherit;
+    min-height: 3rem;
     text-align: center;
-    color: white;
-    text-shadow: -1px -1px 0 #000 , 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 8px #000000dd;
+    color: #3f51b5;
+    font-family: 'Roboto', serif;
+    width: 100%;
 `;
 
 const RocketListCard = Styled(Card)`
-    margin: 1rem 1rem 0 0;
-    width: 20rem;
-    min-height: 16rem;
+    margin: .5rem;
+    width: 18rem;
+    min-height: 15rem;
 `;
 
 const StyledCardContent = Styled(CardContent)`
@@ -46,34 +55,37 @@ const RocketCardTop = Styled.div`
 const RocketCardMid = Styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    min-height: 10rem;
 `;
 
 const AddRocketWrap = Styled(RocketListCard)`
     min-height: 1rem;
 `;
 
-const HorizontalDivider = Styled.hr`
-    border: 1px solid black;
+const RocketAddWrapper = Styled.div`
+    display: flex;
+    flexWrap: nowrap;
+    width: 16rem;
+    height: 4rem;
+    min-height: 4rem;
+    border: 1px solid #9A9DA2;
+    background-color: #EEEEEE;
+    border-radius: 0.5rem;
+    margin-top: .5rem;
 `;
 
+const RocketAddToggle = Styled.div`
+    display: ${props => (props.toggleVis ? 'flex' : 'none')}
+    overflow-y: scroll;
+    height: 12rem;
+    flex-direction: column;
+`;
 class RocketMenuItem extends Component {
     render() {
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'nowrap',
-                    width: '100%',
-                    height: '4rem',
-                    border: '1px solid black',
-                    backgroundColor: '#000',
-                    borderRadius: '0.5rem',
-                    marginBottom: '0.3rem',
-                }}
-            >
+            <RocketAddWrapper>
                 <FloatingAdd
                     style={{
                         display: 'flex',
@@ -84,7 +96,7 @@ class RocketMenuItem extends Component {
                         padding: '0.5rem',
                     }}
                 >
-                    <h1>{this.props.rocket.title}</h1>
+                    <h2>{this.props.rocket.title}</h2>
                     <Button
                         variant="fab"
                         color="primary"
@@ -94,7 +106,7 @@ class RocketMenuItem extends Component {
                         <AddIcon />
                     </Button>
                 </FloatingAdd>
-            </div>
+            </RocketAddWrapper>
         );
     }
 }
@@ -102,18 +114,7 @@ class RocketMenuItem extends Component {
 class CreateNewRocketLink extends Component {
     render() {
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'nowrap',
-                    width: '100%',
-                    height: '4rem',
-                    border: '1px solid black',
-                    backgroundColor: '#000',
-                    borderRadius: '0.5rem',
-                    marginBottom: '0.3rem',
-                }}
-            >
+            <RocketAddWrapper>
                 <FloatingAdd
                     style={{
                         display: 'flex',
@@ -124,14 +125,14 @@ class CreateNewRocketLink extends Component {
                         padding: '0.5rem',
                     }}
                 >
-                    <h1>Create a New Rocket</h1>
+                    <h2>Create a New Rocket</h2>
                     <Link to="/rocket/new">
                         <Button variant="fab" color="primary" mini>
                             <AddIcon />
                         </Button>
                     </Link>
                 </FloatingAdd>
-            </div>
+            </RocketAddWrapper>
         );
     }
 }
@@ -148,7 +149,6 @@ class CohortRocketList extends Component {
     };
 
     rocketChoice = rocketID => {
-        // console.log(rocketID, this.props);
         this.props.handlePickRocket(rocketID);
     };
 
@@ -156,12 +156,10 @@ class CohortRocketList extends Component {
         const filteredCohort = this.props.state.user.cohorts[
             this.props.state.user.cohorts.reduce((acc, curr, index) => {
                 let myIndex = (acc = curr._id === this.props.cohortID ? index : 0);
-                // console.log('My INdex', myIndex);
                 return myIndex;
             }, 0)
         ];
 
-        // console.log(filteredCohort);
         if (filteredCohort.rockets !== undefined) {
             return filteredCohort.rockets.map(rocket => {
                 return (
@@ -189,7 +187,6 @@ class CohortRocketList extends Component {
     render() {
         return (
             <Card className={this.props.className}>
-                {this.generateRocketSelector()}
                 <AddRocketWrap>
                     <StyledCardContent>
                         <RocketCardTop>
@@ -199,9 +196,10 @@ class CohortRocketList extends Component {
                                     flexDirection: 'row',
                                     width: '100%',
                                     justifyContent: 'space-between',
+                                    alignItems: 'center',
                                 }}
                             >
-                                <h1 style={{ margin: '0 0 1rem 0' }}>ADD ROCKETS</h1>
+                                <h1>ADD ROCKETS</h1>
                                 <Button
                                     variant="fab"
                                     color="primary"
@@ -213,20 +211,13 @@ class CohortRocketList extends Component {
                             </FloatingAdd>
                         </RocketCardTop>
                         <RocketCardMid>
-                            <div
-                                style={
-                                    this.state.toggleVis
-                                        ? { display: 'flex', flexDirection: 'column' }
-                                        : { display: 'none' }
-                                }
-                            >
+                            <RocketAddToggle toggleVis={this.state.toggleVis}>
                                 {this.generateRocketAddLinks()}
-                            </div>
-
-                            <HorizontalDivider />
+                            </RocketAddToggle>
                         </RocketCardMid>
                     </StyledCardContent>
                 </AddRocketWrap>
+                {this.generateRocketSelector()}
             </Card>
         );
     }

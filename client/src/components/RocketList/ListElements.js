@@ -47,7 +47,7 @@ export const StyledCardContent = Styled(CardContent)`
 export const RocketCardTop = Styled.div`
     display: flex;
     width: 100%;
-    height: 24px;
+    height: 1rem;
     justify-content: flex-end;
 `;
 
@@ -56,7 +56,7 @@ export const RocketCardMid = Styled.div`
     flex-direction: column;
     align-items: ${props => (props.del ? 'flex-start' : 'center')};
     width: 100%;
-    height: 10rem;
+    height: 100%;
 `;
 
 export const RocketCardHeader = Styled.div`
@@ -68,11 +68,15 @@ export const HorizontalDivider = Styled.hr`
 `;
 
 export const AddButton = Styled.div`
+    .nestedAdd {
+        position: ${props => (props.floating ? 'absolute' : 'inherit')};
+        right: ${props => (props.floating ? '1rem' : 'none')};
+        bottom: ${props => (props.floating ? '1rem' : 'none')};
+    }
     width: 4rem;
     height: inherit;
-    position: ${props => (props.floating ? 'absolute' : 'inherit')}
-    right: 2.5rem;
-    bottom: 2.5rem;
+    position: ${props => (props.floating ? 'relative' : 'inherit')}
+    ${props => (props.floating ? 'margin-top: 100vh' : 'margin-top: 1.8rem')};
     text-align: center;
     color: white;
     text-shadow: -1px -1px 0 #000 , 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 8px #000000dd;
@@ -85,8 +89,6 @@ export const ListWrapper = Styled.div`
 `;
 
 export const DelButton = Styled.svg`
-    margin-right: -1.3rem;
-    margin-top: -1rem;
     &:hover {
         fill: red;
         cursor: pointer;
@@ -97,11 +99,13 @@ export const FloatingAdd = props => {
     let mini = props.large ? false : true;
     return (
         <AddButton floating={props.floating}>
-            <p style={{ marginBottom: '0.5rem' }}>{props.title}</p>
+            <div className="nestedAdd">
+                <p style={{ marginBottom: '0.5rem' }}>{props.title}</p>
 
-            <Button variant="fab" color="primary" mini={mini} onClick={props.click}>
-                <AddIcon />
-            </Button>
+                <Button variant="fab" color="primary" mini={mini} onClick={props.click}>
+                    <AddIcon />
+                </Button>
+            </div>
         </AddButton>
     );
 };
@@ -268,10 +272,35 @@ export const ListCard = props => {
                         <div>
                             <RocketCardHeader>{props.title}</RocketCardHeader>
                             <HorizontalDivider />
-                            {props.contents.map((Item, index) => {
-                                const key = generateKey(props.title, index);
-                                return <div key={key}>{Item}</div>;
-                            })}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                            >
+                                {props.contents.map((Item, index) => {
+                                    const key = generateKey(props.title, index);
+                                    return (
+                                        <div
+                                            key={key}
+                                            style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                width: '100%',
+                                                height: '100%',
+                                            }}
+                                        >
+                                            {Item}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </RocketCardMid>
                 ) : (
@@ -287,10 +316,17 @@ export const ListCard = props => {
                         >
                             <RocketCardHeader>{props.title}</RocketCardHeader>
                             <HorizontalDivider style={{ width: '100%' }} />
-                            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:'95px'}}>
-                            {props.contents.map(content => {
-                                return content;
-                            })}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    height: '95px',
+                                }}
+                            >
+                                {props.contents.map(content => {
+                                    return content;
+                                })}
                             </div>
                         </div>
                     </RocketCardMid>

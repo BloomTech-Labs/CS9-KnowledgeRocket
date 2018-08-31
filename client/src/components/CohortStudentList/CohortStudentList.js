@@ -15,12 +15,12 @@ function mapStateToProps(state) {
 class CohortStudentList extends Component {
 
     componentWillUpdate() {
-        console.log(`STUDENT LIST WILL UPDATE ${JSON.stringify(this.props)}`);
+        // console.log(`STUDENT LIST WILL UPDATE ${JSON.stringify(this.props)}`);
     }
 
     render() {
-        console.log('My StudentList State',this.state)
-        console.log('CohortList cohortID', this.props.cohortID)
+        // console.log('My StudentList State',this.state)
+        // console.log('CohortList cohortID', this.props.cohortID)
         return (
             <Card className={this.props.className}>
                 {/* Render all students added */}

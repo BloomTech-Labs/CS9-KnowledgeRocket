@@ -88,8 +88,7 @@ export class CohortList extends Component {
                     // user has at least one cohort, render a cohort card
                     <CohortCardContainer>
                         <ListCard
-                            del={false}
-                            add={true}
+                            add
                             redirect="/rocket/newclass"
                             title="Add New Cohort"
                             label="Add"
@@ -114,20 +113,8 @@ export class CohortList extends Component {
                                 ]}
                             />
                         ))}
-                        <FloatingAdd
-                            title={'Add New Cohort'}
-                            floating
-                            click={this.handleNewCohortRedirect}
-                            large
-                        />
                     </CohortCardContainer>
-                ) : (
-                    <FloatingAdd
-                        title={'Add New Cohort'}
-                        floating
-                        click={this.handleNewCohortRedirect}
-                        large
-                    />
+                ) : ( null
                 )}
             </ListWrapper>
         );

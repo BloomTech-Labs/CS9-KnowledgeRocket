@@ -17,13 +17,12 @@ function mapStateToProps(state) {
 }
 
 const StylizedRocket = styled(Card)`
-    width: 250px;
+    width: 18rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 20px;
-    margin: 10px;
+    margin: .5rem;
 `;
 
 const StylizedCohorts = styled.div`
@@ -43,8 +42,16 @@ const ClipQuestion = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 12rem;
+    width: 100%;
 `;
+
+const StyledCardContents = styled(CardContent)`
+    font-family: 'Roboto', serif;
+    h1 {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+`
 
 class CohortRocketCard extends Component {
     state = {
@@ -87,8 +94,8 @@ class CohortRocketCard extends Component {
             : Date.now();
         return (
             <StylizedRocket>
-                <CardContent>
-                    <p>{this.state.userRocket.title}</p>
+                <StyledCardContents>
+                    <h1>{this.state.userRocket.title}</h1>
                     <StylizedCohorts>
                         <ClipQuestion>{this.state.userRocket.twoDay.question}</ClipQuestion>
                         <ClipQuestion>{this.state.userRocket.twoWeek.question}</ClipQuestion>
@@ -98,9 +105,9 @@ class CohortRocketCard extends Component {
                         Date.parse(moment.tz(scheduledOn, this.state.timezone))
                     ).format('MMM Do YY')}`}</CohortLabel>
                     <TextField
-                        style={{ margin: '.5rem 0' }}
+                        style={{ width: '100%', marginBottom: '1rem' }}
                         id="date"
-                        label="Re-Schedule ?"
+                        label="Re-Schedule?"
                         type="date"
                         // className={classes.textField}
                         InputLabelProps={{
@@ -108,10 +115,10 @@ class CohortRocketCard extends Component {
                         }}
                         onChange={this.handleDateChange}
                     />
-                    <Button variant="contained" color="primary" onClick={this.reScheduleRocket}>
+                    <Button variant="contained" color="primary" onClick={this.reScheduleRocket} style={{float: 'right'}}>
                         Re-Schedule
                     </Button>
-                </CardContent>
+                </StyledCardContents>
             </StylizedRocket>
         );
     }

@@ -25,7 +25,7 @@ injectGlobal`
 `;
 
 const StyledContentContainer = styled.div`
-    height: inherit
+    height: inherit;
     width: 100%;
     padding: 0rem 0.8rem 0.8rem 10.6rem;
     display: flex;
