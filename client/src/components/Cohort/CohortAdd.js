@@ -12,7 +12,7 @@ import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../
 const StylizedInput = styled(Input)`
     padding: 0.5rem;
     width: 80%;
-    background-color: #FEFEFE;
+    background-color: #f2f7ff;
     border-radius: 0.25rem;
     margin-right: 1rem;
 `;
