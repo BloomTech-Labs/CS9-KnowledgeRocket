@@ -51,14 +51,14 @@ function modifyUser(req, res) {
                                 ccEmail,
                                 email: ccEmail,
                             })
-                                .populate('cohorts')
-                                .populate({
-                                    path: 'cohorts',
-                                    populate: { path: 'students', model: 'Students' },
-                                })
-                                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
+                                // .populate('cohorts')
+                                // .populate({
+                                //     path: 'cohorts',
+                                //     populate: { path: 'students', model: 'Students' },
+                                // })
+                                // .populate({ path: 'rockets', populate: { path: 'twoDay' } })
+                                // .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
+                                // .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                 .then(updatedUser => {
                                     if (newPW) {
                                         currentUser

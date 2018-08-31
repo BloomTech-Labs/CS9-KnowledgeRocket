@@ -25,10 +25,10 @@ class RocketList extends Component {
         let rocketCounter = {};
         this.props.state.user.cohorts.forEach((c, ci) => {
             c.rockets.forEach((r, ri) => {
-                if (rocketCounter[`${r.rocketId}`] === undefined) {
-                    rocketCounter[`${r.rocketId}`] = 1;
-                } else if (rocketCounter[`${r.rocketId}`]) {
-                    rocketCounter[`${r.rocketId}`] += 1;
+                if (rocketCounter[`${r.rocketId._id}`] === undefined) {
+                    rocketCounter[`${r.rocketId._id}`] = 1;
+                } else if (rocketCounter[`${r.rocketId._id}`]) {
+                    rocketCounter[`${r.rocketId._id}`] += 1;
                 }
             });
         });
@@ -47,7 +47,7 @@ class RocketList extends Component {
     };
 
     render() {
-        console.log(this.state.rocketCounter);
+        console.log('rocket counter',this.state.rocketCounter);
         return (
             <ListWrapper>
                 <RocketListContainer>
