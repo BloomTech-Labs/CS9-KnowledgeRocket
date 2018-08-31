@@ -38,7 +38,7 @@ const defaultState = {
     status: 'INITIAL',
     students: [],
     rockets: [],
-    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{}] }],
+    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{rocketId: {}}] }],
 };
 
 export default (state = defaultState, action) => {
@@ -56,7 +56,7 @@ export default (state = defaultState, action) => {
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
                 c.rockets.forEach((r, rIndex) => {
-                    if (r.rocketId === action.payload.rocketId) {
+                    if (r.rocketId._id === action.payload.rocketId._id) {
                         target.push([cIndex, rIndex]);
                     }
                 });
@@ -66,7 +66,7 @@ export default (state = defaultState, action) => {
             });
             // update user rockets
             StateCopy.rockets.forEach((rocket, index) => {
-                if (rocket._id === action.payload.rocketId) {
+                if (rocket._id === action.payload.rocketId._id) {
                     StateCopy.rockets.splice(index, 1);
                 }
             });
@@ -133,20 +133,18 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_STUDENT:
             StateCopy.status = DELETE_STUDENT;
-            const updatedStudents = [];
-            let targetIdx = 0;
+            let cohortIdx =  -1; // Initialize as a non index
+            let studentIdx = -1; // Initialize as a non index
             StateCopy.cohorts.forEach((cohort, index) => {
                 let students = cohort.students;
                 for (let i = 0; i < students.length; i++) {
                     if (students[i]._id === action.payload._id) {
-                        targetIdx = index;
-                    }
-                    if (students[i]._id !== action.payload._id) {
-                        updatedStudents.push(students[i]);
+                        cohortIdx = index; // When Found save Cohort Index
+                        studentIdx = i; // When Found save Student Index
                     }
                 }
             });
-            StateCopy.cohorts[targetIdx].students = updatedStudents;
+            StateCopy.cohorts[cohortIdx].students.splice(studentIdx, 1);
             StateCopy.authenticated = true;
             return StateCopy;
         case UPLOAD_CSV:

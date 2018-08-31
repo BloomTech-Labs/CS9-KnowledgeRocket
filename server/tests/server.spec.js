@@ -13,7 +13,10 @@ const testdb = process.env.TestDB_Url;
 describe('server', () => {
     beforeAll(() => {
         return mongoose
-            .connect(testdb, { useNewUrlParser: true })
+            .connect(
+                testdb,
+                { useNewUrlParser: true }
+            )
             .then(console.log('connected to test db'));
     });
 
@@ -144,10 +147,10 @@ describe('server', () => {
         // Fixing Rocket Delete Test
         // Make a User
         const mockUser = { email: 'bobtodd@gmail.com' };
-        const newUser = await User.create(mockUser);
+        await User.create(mockUser);
         // Make Cohort
         const mockCohort = { title: 'Cohort Tile' };
-        const newCohort = await Cohort.create(mockCohort);
+        await Cohort.create(mockCohort);
         //Make Question
         const mockQuestion = {
             title: 'some title',
@@ -155,11 +158,14 @@ describe('server', () => {
             question: 'what is life when you write backend code?',
             correct: 'The correct answer is: the matrix!',
         };
-        await Question.create(mockQuestion)
+        await Question.create(mockQuestion);
         // End of Prep before Rocket Creation and Deletion.
         const mockRocket = { title: 'bob todd loves extra letters' };
         const newRocket = await Rocket.create(mockRocket);
         const response = await request(server).delete(`/api/rocket/${newRocket._id}`);
+        // Debugging: 2 lines below, please do not delete yet.
+        // console.log(response.body.message)
+        // expect(response).toBe('')
         expect(response.status).toBe(204);
         await mongoose.connection.db.dropCollection('rockets');
         // Drop prep Collections

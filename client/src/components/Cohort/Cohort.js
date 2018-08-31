@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 // Material Components
-import Button from '@material-ui/core/Button';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
@@ -25,45 +24,58 @@ const StyledHeaders = styled.h2`
 `;
 
 const CohortFormMainContainer = styled.div`
-    padding: 1rem 0 0 0;
+    padding: 1rem 1rem 0 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
     min-height: 60rem;
 `;
 
 const StyledCohortSettingForm = styled(CohortSettingForm)`
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
     margin-bottom: 1rem;
     width: 100%;
     background-color: white;
     border-radius: 0.4rem;
     box-shadow: var(--grayRedBlue_shadow);
+    @media (max-width: 510px) {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 12rem;
+    }
 `;
 
 const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    height: 4rem;
-    padding: 1rem;
-    margin-bottom: 20px;
-`;
-
-const StyledCohortStudentList = styled(CohortStudentList)`
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 1rem;
+    margin-bottom: 20px;
+    @media (max-width: 800px) {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 16rem;
+    }
+`;
+
+const StyledCohortStudentList = styled(CohortStudentList)`
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
     margin-bottom: 1rem;
 `;
 
@@ -71,15 +83,11 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     margin-bottom: 2rem;
-`;
-
-const StyledAddCohortBtn = styled(Button)`
-    width: 10rem;
 `;
 
 class Cohort extends Component {
@@ -90,7 +98,7 @@ class Cohort extends Component {
             objectID: 0,
         },
         cohort: {
-            cc: false,
+            ccEmail: false,
             rockets: { _id: '', rocketId: '', startDate: '', td: '', tw: '', tm: '' },
             students: [{}],
             title: '',
@@ -98,16 +106,6 @@ class Cohort extends Component {
         },
         cohortIDX: 0,
     };
-
-    shouldComponentUpdate() {
-        console.log('shouldComponentUpdate: INSIDE COHORT');
-        this.forceUpdate()
-    }
-
-    componentWillReceiveProps() {
-        console.log('componentWillReceiveProps: INSIDE COHORT');
-        this.forceUpdate()
-    }
 
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -129,6 +127,7 @@ class Cohort extends Component {
             startDate: { objectID: Date.now() },
             cohort,
             cohortIDX: cohortIDX,
+            title: cohort.title,
         });
     }
 
@@ -138,7 +137,7 @@ class Cohort extends Component {
 
     handleCheckBox = e => {
         console.log('MADE IT TO handleCheckBox');
-        this.setState({ [e.target.name]: !!e.target.checked });
+        this.setState({ cohort:{ ccEmail: !!e.target.checked } });
     };
 
     handleAddCohort = () => {
@@ -184,54 +183,51 @@ class Cohort extends Component {
         // console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const cohortID = this.props.match.params.id;
         // console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
+        let cohortIDX;
+        this.props.state.user.cohorts.forEach((ch, index) => {
+            if (ch._id === this.props.match.params.id) {
+                cohortIDX = index;
+            }
+        });
 
         return (
             <CohortFormMainContainer>
-                <div>
-                    {this.props.state.user.cohorts.map(cohort =>{
-                        return <div>Cohort: {cohort.title} {cohort.students.map(student => {
-                            return <div>{`${student.firstName} ${student.lastName}`}</div>
-                        })}</div>
-                    })}
-                </div>
-                <StyledHeaders>Class Settings: {this.state.cohort.title}{this.state.cohort.title}</StyledHeaders>
+                <StyledHeaders>Class Settings</StyledHeaders>
                 <StyledCohortSettingForm
                     handleNewInput={this.handleNewInput}
                     handleCheckBox={this.handleCheckBox}
                     cohortID={cohortID}
+                    cohortIDX={cohortIDX}
+                    title={this.state.title}
+                    addCohort={this.props.addCohort}
                 />
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm cohortID={this.props.match.params.id} />
                 <StyledHeaders>Students</StyledHeaders>
-                <StyledCohortStudentList
+                {this.state.cohort.students.length > 0 ? (
+                    <StyledCohortStudentList
                         students={this.state.cohort.students}
                         match={this.props.match}
-                        status={this.props.state.status}
-                        studentID={this.props.state.user._id}
-                        cohortID={this.props.match.params.id}
-                        history={this.props.history}
-                />
+                        cohortID={cohortIDX}
+                    />
+                ) : (
+                    null
+                )} }
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
-
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
+                    cohortIDX={cohortIDX}
                 />
-
-                <StyledAddCohortBtn
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleAddCohort}
-                >
-                    Add this Cohort
-                </StyledAddCohortBtn>
             </CohortFormMainContainer>
         );
     }
 }
-
-export default connect(mapStateToProps, {
-    generateBreadCrumbs,
-    addCohort,
-    appendRocket,
-})(Cohort);
+export default connect(
+    mapStateToProps,
+    {
+        generateBreadCrumbs,
+        addCohort,
+        appendRocket,
+    }
+)(Cohort);

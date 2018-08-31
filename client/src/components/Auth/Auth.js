@@ -13,9 +13,7 @@ import {
 // MaterialComponents
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Input } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import Progress from '../Progress/Progress';
 import './Auth.css';
 
@@ -38,31 +36,11 @@ const styles = {
 };
 
 const StyledFormContainer = styled.div`
-    margin-top: 110px;
-    margin-right: 11.1rem;
-`;
-
-const StyledFormCard = styled(Card)`
+    margin: 0 auto;
     display: flex;
-    flex-direction: row;
-    height: 300px;
-    width: 800px;
-`;
-
-const StyledCardContent = styled(CardContent)`
-    background-color: #39d1b4;
-    width: 100%;
-    text-align: center;
-    font-size: 1.5rem;
-`;
-
-const StyledFormHeader = styled(StyledCardContent)`
-    background-color: #fff;
-    font-weight: 300;
-    line-height: 40px;
-    color: #39d1b4;
-    width: 100%;
-    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 `;
 
 class Auth extends Component {
@@ -129,10 +107,9 @@ class Auth extends Component {
     };
 
     render() {
-        const { classes } = this.props;
         return (
             <StyledFormContainer>
-                {/* <h1 className="Auth_header">Please Sign-in or Sign-up.</h1>
+                <h1 className="Auth_header">Please Sign-in or Sign-up</h1>
                 <div className="flex-column-centered">
                     <Input
                         className="Auth_input"
@@ -195,12 +172,7 @@ class Auth extends Component {
                             Twitter Log In
                         </Button>
                     </div>
-                </div> */}
-                <StyledFormCard>
-                    <StyledCardContent className={classes.root}>
-                        <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
-                    </StyledCardContent>
-                </StyledFormCard>
+                </div>
                 <div className="flex-row-centered Auth_prompt-fail">
                     {/* THIS SECTION WILL HANDLE USER AUTH ERROR MESSAGES */}
                     {this.props.user.status === 'FAILED' ? (
@@ -219,11 +191,14 @@ class Auth extends Component {
     }
 }
 
-export default connect(mapStateToProps, {
-    addUser,
-    loginUser,
-    loginUserGoogle,
-    loginUserFacebook,
-    loginUserTwitter,
-    generateBreadCrumbs,
-})(withStyles(styles)(Auth));
+export default connect(
+    mapStateToProps,
+    {
+        addUser,
+        loginUser,
+        loginUserGoogle,
+        loginUserFacebook,
+        loginUserTwitter,
+        generateBreadCrumbs,
+    }
+)(withStyles(styles)(Auth));

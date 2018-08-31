@@ -2,6 +2,7 @@ import React from 'react';
 import { withFormik } from 'formik';
 import { object, string, array } from 'yup';
 import { FormGroup, Blurb, QuestionChoices, ErrorText, errorHelper } from './FormGroup';
+import Button from '@material-ui/core/Button';
 
 const rocketBlurb =
     'Knowledge rockets are short paragraphs followed by a multiple choice question. These are automatically sent two days, two weeks, and two months after a lesson is taught and are intended to cause the student to recall what they have learned. The rockets should not be used to provide exhaustive review. Instead, they ask the student to "reload" the mental maps that acquired during the lesson.';
@@ -11,7 +12,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
     return (
         <form onSubmit={handleSubmit}>
             <FormGroup>
-                <label htmlFor="title" />
+                <label htmlFor="title"/>
                 <input
                     name="title"
                     value={values.title}
@@ -22,7 +23,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
             </FormGroup>
             <FormGroup>
                 <Blurb>{rocketBlurb}</Blurb>
-                <span style={{ color: 'red', marginBottom: '2%' }}>All fields are required.</span>
+                <div className="requiredFields">All fields are required.</div>
             </FormGroup>
 
             {/* ROCKET QUESTION SECTION 1*/}
@@ -54,8 +55,9 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
                 errors={errors.tm}
                 touched={touched.tm}
             />
-
-            <button type="submit">submit</button>
+            <Button type='submit' variant="contained" color="primary" style={{marginBottom: '1rem'}}>
+                Submit
+            </Button>
         </form>
     );
 };

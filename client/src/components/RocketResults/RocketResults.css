@@ -1,0 +1,14 @@
+.pieChartSection {
+    stroke: white;
+    stroke-width: 0.03;
+    stroke-linecap: round;
+    overflow:visible;
+    z-index: 1;
+}
+
+.pieChartSection:hover  {
+    fill-opacity: 0.5;
+    /* stroke: black; */
+    z-index: 1000;
+}
+

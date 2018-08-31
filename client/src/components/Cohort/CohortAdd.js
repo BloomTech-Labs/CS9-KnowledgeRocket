@@ -12,6 +12,9 @@ import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../
 const StylizedInput = styled(Input)`
     padding: 0.5rem;
     width: 80%;
+    background-color: #f2f7ff;
+    border-radius: 0.25rem;
+    margin-right: 1rem;
 `;
 // Actions
 
@@ -41,10 +44,10 @@ const StyledHeaders = styled.h2`
 `;
 
 const CohortFormMainContainer = styled.div`
-    padding: 1rem 0 0 0;
+    padding: 1rem 1rem 0 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
     min-height: 100vh;

@@ -7,20 +7,19 @@ import CohortStudentCard from '../CohortStudentCard/CohortStudentCard';
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
     };
 }
 
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortStudentList extends Component {
-
     componentWillUpdate() {
-        console.log(`STUDENT LIST WILL UPDATE ${JSON.stringify(this.props)}`);
+        // console.log(`STUDENT LIST WILL UPDATE ${JSON.stringify(this.props)}`);
     }
 
     render() {
-        console.log('My StudentList State',this.state)
-        console.log('CohortList cohortID', this.props.cohortID)
+        // console.log('My StudentList State',this.state)
+        // console.log('CohortList cohortID', this.props.cohortID)
         return (
             <Card className={this.props.className}>
                 {/* Render all students added */}
@@ -35,4 +34,3 @@ class CohortStudentList extends Component {
 }
 
 export default connect(mapStateToProps)(CohortStudentList);
-// export default CohortStudentList;
