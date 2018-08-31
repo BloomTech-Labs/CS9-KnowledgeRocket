@@ -54,9 +54,6 @@ const StyledFormCard = styled(Card)`
     backface-visibility: hidden;
     margin-top: 110px;
     margin-right: 11.1rem;
-`;
-
-const StyledFormCard = styled(Card)`
     display: flex;
     flex-direction: row;
     height: 400px;
