@@ -100,7 +100,6 @@ export const updateRocket = (rocket, uid) => async dispatch => {
 };
 
 export const deleteRocket = rocketId => async dispatch => {
-    console.log('rocket id in question', rocketId);
     dispatch({ type: DELETING_ROCKET });
     try {
         // Make sure Server gives the updated user with the rocket in it as response.
@@ -144,7 +143,6 @@ export const deleteStudent = studentID => async dispatch => {
 
 // User Actions
 export const importCSV = (teacherID, cohortID, studentData) => async dispatch => {
-    console.log('MADE IT TO IMPORT CSV ACTION CREATOR');
     dispatch({ type: UPLOADING_CSV });
     try {
         let response = await axios.post(`${url}/api/student/importcsv`, {
@@ -153,7 +151,6 @@ export const importCSV = (teacherID, cohortID, studentData) => async dispatch =>
             studentData,
         });
         dispatch({ type: UPLOAD_CSV, payload: response.data });
-        console.log(`IMPORT CSV RESPONSE ${JSON.stringify(response.data)}`);
     } catch (err) {
         dispatch({ type: UPLOAD_CSV_FAILURE });
     }

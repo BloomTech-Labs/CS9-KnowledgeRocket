@@ -97,6 +97,7 @@ class Cohort extends Component {
             _id: '',
         },
         cohortIDX: 0,
+        ccEmail: false,
     };
 
     componentDidMount() {
@@ -171,9 +172,7 @@ class Cohort extends Component {
     };
 
     render() {
-        console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const cohortID = this.props.match.params.id;
-        console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
 
         return (
             <CohortFormMainContainer>

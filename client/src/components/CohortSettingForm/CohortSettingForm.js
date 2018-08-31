@@ -69,7 +69,7 @@ class CohortSettingForm extends Component {
 					onChange={this.props.handleNewInput}
 				/>
 				<FormControlLabel
-					control={<Checkbox onChange={this.props.handleCheckBox} name="ccEmail" />}
+					control={<Checkbox onChange={this.props.handleCheckBox} name="ccEmail" checked={true} />}
 					label="CC Me on Rocket Emails"
 				/>
 				{/* 
