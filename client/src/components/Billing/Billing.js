@@ -52,7 +52,7 @@ class Billing extends Component {
                         <header className="title10">Billing and Subscriptions</header>
                         <Card className="radioGroup">
                             <FormLabel component="legend" className="legend">
-                                How much time do you wish you add?
+                                Add Premium Time
                             </FormLabel>
                             <RadioGroup
                                 aria-label="gender"
