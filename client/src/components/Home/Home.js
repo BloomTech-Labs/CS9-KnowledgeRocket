@@ -14,6 +14,10 @@ import {
     MidImg,
     MidSectionText,
     FooterSection,
+    FollowSection,
+    FollowButton,
+    CtaContainer,
+    HomeCtaHeader,
 } from './HomeStyled';
 
 export default class Home extends Component {
@@ -32,8 +36,7 @@ export default class Home extends Component {
     render() {
         return (
             <HomeContainer>
-                <HomeCTA>
-                    <HomeNav>
+                <HomeNav>
                         <div>
                             <NavLogo src="/img/Logo_BW_SML.svg" onClick={this.handleHome} />
                         </div>
@@ -41,8 +44,13 @@ export default class Home extends Component {
                             <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
                             <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
                         </div>
-                    </HomeNav>
-                </HomeCTA>
+                </HomeNav>
+                <CtaContainer>
+                    <HomeCTA>
+                        <img src='/img/KnowledgeRocket_Logo_Latest_Isolated.svg'/>
+                        <HomeCtaHeader>KNOWLEDGE ROCKET</HomeCtaHeader>
+                    </HomeCTA>
+                </CtaContainer>
                 <MidContainer>
                     <HomeHeader>What is a Knowledge Rocket?</HomeHeader>
                     <MidSectionWrapper>
@@ -84,29 +92,28 @@ export default class Home extends Component {
                     </MidSectionWrapper>
                 </MidContainer>
                 <FooterSection>
-                    <NavButton onClick={this.handleContact}>CONTACT US</NavButton>
-                    <NavButton onClick={this.handleAuthRedirect}>SIGN UP</NavButton>
-                    <NavButton onClick={this.handleAuthRedirect}>SIGN IN</NavButton>
-                    <p>
-                        Follow us on
+                    <FollowSection>
+                        <NavButton onClick={this.handleContact}>CONTACT US</NavButton>
+                        <NavButton onClick={this.handleAuthRedirect}>SIGN UP</NavButton>
+                        <NavButton onClick={this.handleAuthRedirect}>SIGN IN</NavButton>
+                    </FollowSection>
+                    <FollowSection>
+                        <h4>Follow us on:</h4>
+                    </FollowSection>
+                    <FollowSection>
                         <a
-                            style={{ textDecoration: 'none' }}
                             href="https://twitter.com/KnowledegeR"
                             title="Knowledge Rocket on Twitter"
                         >
-                            {' '}
-                            TWITTER
-                        </a>{' '}
-                        and
+                            <FollowButton>TWITTER</FollowButton>
+                        </a>
                         <a
-                            style={{ textDecoration: 'none' }}
                             href="https://www.facebook.com/Knowledge-Rocket-464965013986045"
                             title="Knowledge Rocket on Facebook"
                         >
-                            {' '}
-                            FACEBOOK
+                            <FollowButton>FACEBOOK</FollowButton>
                         </a>
-                    </p>
+                    </FollowSection>
                 </FooterSection>
             </HomeContainer>
         );

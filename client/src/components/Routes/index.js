@@ -48,8 +48,7 @@ const StyledContentContainer = styled.div`
 const RouteContainer = styled.div`
     background-color: #eeeeee;
     min-height: 100vh;
-    width: 100vw;
-    // max-width: 100vw;
+    width: 100%;
 `;
 
 class InnerRoutes extends Component {
