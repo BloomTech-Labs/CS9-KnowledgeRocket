@@ -64,7 +64,7 @@ const styles = theme => ({
 });
 
 const StyledNavBarContainer = styled(AppBar)`
-    padding: 0 .5rem 0 0;
+    padding: 0 0.5rem 0 0;
     z-index: 1000;
     display: flex;
     flex-direction: row !important;
@@ -73,7 +73,7 @@ const StyledNavBarContainer = styled(AppBar)`
     justify-content: space-between;
     align-items: center;
     position: fixed !important;
-    background-color: #2E3033 !important;
+    background-color: #2e3033 !important;
 `;
 
 const StyledBreadCrumbContainer = styled(Toolbar)`
@@ -176,17 +176,17 @@ class NavBar extends Component {
                                 </CPLink>
                             </ListItem>
                             <ListItem>
-                                <CPLink to="/rocket/classes"  onClick={this.handleDrawerToggle}>
+                                <CPLink to="/rocket/classes" onClick={this.handleDrawerToggle}>
                                     <CPCButton variant="outlined">Classes</CPCButton>
                                 </CPLink>
                             </ListItem>
                             <ListItem>
-                                <CPLink to="/rocket/billing"  onClick={this.handleDrawerToggle}>
+                                <CPLink to="/rocket/billing" onClick={this.handleDrawerToggle}>
                                     <CPCButton variant="outlined">Billing</CPCButton>
                                 </CPLink>
                             </ListItem>
                             <ListItem>
-                                <CPLink to="/rocket/settings"  onClick={this.handleDrawerToggle}>
+                                <CPLink to="/rocket/settings" onClick={this.handleDrawerToggle}>
                                     <CPCButton variant="outlined">Settings</CPCButton>
                                 </CPLink>
                             </ListItem>

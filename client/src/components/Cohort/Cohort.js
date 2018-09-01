@@ -105,6 +105,7 @@ class Cohort extends Component {
             _id: '',
         },
         cohortIDX: 0,
+        ccEmail: false,
     };
 
     componentDidMount() {
@@ -137,7 +138,7 @@ class Cohort extends Component {
 
     handleCheckBox = e => {
         console.log('MADE IT TO handleCheckBox');
-        this.setState({ cohort:{ ccEmail: !!e.target.checked } });
+        this.setState({ cohort: { ccEmail: !!e.target.checked } });
     };
 
     handleAddCohort = () => {
@@ -180,7 +181,6 @@ class Cohort extends Component {
     };
 
     render() {
-        // console.log(`COHORT PROPS ${JSON.stringify(this.props)}`);
         const cohortID = this.props.match.params.id;
         // console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
         let cohortIDX;
@@ -210,9 +210,8 @@ class Cohort extends Component {
                         match={this.props.match}
                         cohortID={cohortIDX}
                     />
-                ) : (
-                    null
-                )} }
+                ) : null}{' '}
+                }
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
@@ -223,11 +222,8 @@ class Cohort extends Component {
         );
     }
 }
-export default connect(
-    mapStateToProps,
-    {
-        generateBreadCrumbs,
-        addCohort,
-        appendRocket,
-    }
-)(Cohort);
+export default connect(mapStateToProps, {
+    generateBreadCrumbs,
+    addCohort,
+    appendRocket,
+})(Cohort);
