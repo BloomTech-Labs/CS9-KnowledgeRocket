@@ -90,7 +90,7 @@ export class CohortList extends Component {
                         <ListCard
                             add
                             redirect="/rocket/newclass"
-                            title="Add New Cohort"
+                            title="Add New Class"
                             label="Add"
                             contents={[
                                 <FloatingAdd
