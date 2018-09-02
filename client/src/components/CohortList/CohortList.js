@@ -107,9 +107,9 @@ export class CohortList extends Component {
                                 redirect={`/rocket/classform/${cohort._id}`}
                                 element={cohort}
                                 contents={[
-                                    <p>{`Total Students:\t`}<span style={{fontWeight: '900'}}>{`(${cohort.students.length})`}</span></p>,
-                                    <p>{`Participation:\t`}<span style={{fontWeight: '900'}}>{`(${'100%'})`}</span></p>,
-                                    <p>{`Rockets Sent:\t`}<span style={{fontWeight: '900'}}>{`(${0})`}</span></p>,
+                                    <p key={`TotalStudents_${cohort._id}`}>{`Total Students:\t`}<span style={{fontWeight: '900'}}>{`(${cohort.students.length})`}</span></p>,
+                                    <p key={`Participation_${cohort._id}`}>{`Participation:\t`}<span style={{fontWeight: '900'}}>{`(${'100%'})`}</span></p>,
+                                    <p key={`RocketsSent_${cohort._id}`}>{`Rockets Sent:\t`}<span style={{fontWeight: '900'}}>{`(${0})`}</span></p>,
                                 ]}
                             />
                         ))}
