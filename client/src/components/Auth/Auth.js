@@ -52,8 +52,6 @@ const StyledFormContainer = styled.div`
 
 const StyledFormCard = styled(Card)`
     backface-visibility: hidden;
-    margin-top: 110px;
-    margin-right: 11.1rem;
     display: flex;
     flex-direction: row;
     height: 400px;
@@ -84,7 +82,6 @@ const StyledFormHeader = styled(StyledCardContent)`
     width: 100%;
     padding: 0;
     flex-direction: row;
-    height: 300px;
     width: 800px;
 `;
 
