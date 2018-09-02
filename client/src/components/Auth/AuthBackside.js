@@ -40,7 +40,7 @@ const AuthBackside = props => {
         >
             {props.status === 'FAILED' ? (
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%'}}>
-                    <div>
+                    <div style={props.attempts > 2 ? {display: 'none'}:{display: 'block'}}>
                     <h2>Oops.</h2>
                     <br />
                     <h3>

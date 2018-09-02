@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import {resetUserPassword} from '../../actions';
+import { resetUserPassword } from '../../actions';
 import {
     StyledCardContent,
     StyledFormHeader,
@@ -29,6 +29,7 @@ const styles = {
 };
 
 export const StyledFormContainer = Styled.div`
+    font-family: 'Roboto', serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,6 +39,13 @@ export const StyledFormContainer = Styled.div`
     margin: 0;
     box-sizing: border-box;
     border-radius: 0.25rem;
+    h4 {
+        display: ${props => props.status === '' ? 'none': 'flex'};
+        font-size: .8rem;
+        color: red;
+        font-weight: bold;
+        padding: 1rem;
+    }
 `;
 
 class AuthResetPassword extends Component {
@@ -51,12 +59,19 @@ class AuthResetPassword extends Component {
     };
 
     handleReset = e => {
-        // Reset password logic here
-        this.props.resetUserPassword(this.state.email);
-        // Redirect to Home Page after Password Reset Link Success
-        this.props.tryAgain(e)
+        const regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+        // If the User Provided a Valid Email.
+        if (regVar.test(this.state.email)) {
+            // Reset password logic here
+            this.props.resetUserPassword(this.state.email);
+            // Redirect to Home Page after Password Reset Link Success
+            this.props.tryAgain(e);
+        } else {
+            this.setState({ status: 'Please provide a valid e-mail' });
+        }
     };
-    clearField = e => {
+
+    clearField = () => {
         if (this.state.email === 'Please enter your email') {
             this.setState({ email: '' });
         }
@@ -66,7 +81,7 @@ class AuthResetPassword extends Component {
         const { classes } = this.props;
         console.log(this.state);
         return (
-            <StyledFormContainer>
+            <StyledFormContainer status={this.state.status}>
                 <StyledCardContent className={classes.root}>
                     <StyledFormHeader>RESET YOUR PASSWORD?</StyledFormHeader>
                     <StyledInputContainer>
@@ -81,8 +96,12 @@ class AuthResetPassword extends Component {
                                 placeholder="Please enter your email"
                                 required
                             />
+                            <h4>{this.state.status === '' ? null : this.state.status}</h4>
                             <StyledButton style={{ marginTop: '20px' }} onClick={this.handleReset}>
                                 RESET MY PASSWORD
+                            </StyledButton>
+                            <StyledButton style={{ marginTop: '20px' }} onClick={this.props.tryAgain}>
+                                NO THANKS
                             </StyledButton>
                         </FieldSet>
                     </StyledInputContainer>
@@ -92,4 +111,7 @@ class AuthResetPassword extends Component {
     }
 }
 
-export default connect(mapStateToProps, {resetUserPassword})(withStyles(styles)(AuthResetPassword));
+export default connect(
+    mapStateToProps,
+    { resetUserPassword }
+)(withStyles(styles)(AuthResetPassword));
