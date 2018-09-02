@@ -46,6 +46,11 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATING_USER = 'UPDATING_USER';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
+export const RESETTING_USER_PASSWORD = 'RESETTING_USER_PASSWORD';
+export const USER_PASSWORD_RESET = 'USER_PASSWORD_RESET';
+export const USER_PASSWORD_RESET_FAILED = 'USER_PASSWORD_RESET_FAILED';
+
+// Student CSVs
 export const UPLOAD_CSV = 'UPLOAD_CSV';
 export const UPLOADING_CSV = 'UPLOADING_CSV';
 export const UPLOAD_CSV_FAILURE = 'UPLOAD_CSV_FAILURE';
@@ -268,6 +273,17 @@ export const loginUserTwitter = () => async dispatch => {
         dispatch({ type: LOGIN_USER_FAILURE });
     }
 };
+
+export const resetUserPassword = (email) => async dispatch => {
+    dispatch({ type: RESETTING_USER_PASSWORD });
+    try {
+        await Firebase.auth().sendPasswordResetEmail(email);
+        dispatch({ type: USER_PASSWORD_RESET });
+    } catch (err) {
+        dispatch({ type: USER_PASSWORD_RESET_FAILED });
+        console.log(err);
+    }
+}
 
 export const logOutUser = () => async dispatch => {
     try {
