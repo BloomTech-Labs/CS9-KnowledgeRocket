@@ -18,7 +18,8 @@ const StyledSection = styled.section`
     text-align: center;
     transform-style: preserve-3d;
 	transform: rotateX(180deg);
-	border-radius: 0.25rem;
+    border-radius: 0.25rem;
+    z-index: 1000;
     h2 {
         color: #39d1b4;
     }
@@ -30,12 +31,12 @@ const StyledSection = styled.section`
 
 const AuthBackside = props => {
     return (
-        <StyledSection>
+        <StyledSection onClick={props.tryAgain} onFocus={props.tryAgain} onBlur={props.tryAgain} onMouseDown={props.tryAgain}>
             {props.message === 'failed'
                 ? [
                       <h2>Oops.</h2>,
                       <br />,
-                      <h3>Your log in failed. Please check your username and password.</h3>,
+                      <h3>Your log in failed. Please check your username and password. Click here to try again. Thank you.</h3>,
                   ]
                 : props.message === 'loggingIn'
                     ? [<h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3>]

@@ -64,7 +64,7 @@ const StyledCardContent = styled(CardContent)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #3F51B5;
+    background-color: #3f51b5;
     width: 100%;
     font-size: 1.5rem;
     border-radius: 0.25rem;
@@ -102,8 +102,7 @@ const FieldSet = styled.div`
     }
 `;
 
-const FieldSetSocial = styled(FieldSet)`
-`;
+const FieldSetSocial = styled(FieldSet)``;
 
 const StyledInput = styled.input`
     background-color: white;
@@ -161,10 +160,11 @@ class Auth extends Component {
         authenticated: {},
         success: true,
         flipStatus: false,
+        attempts: 0,
     };
 
     componentDidMount() {
-        this.props.user.success === false
+        this.props.user.authenticated === false
             ? this.setState({ success: false })
             : this.setState({ success: true });
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
@@ -215,8 +215,19 @@ class Auth extends Component {
         this.handleFlip();
     };
 
+    returnToAuth = e => {
+        // If log-in fails, return user to auth page
+        // When they click the back card again.
+        // Stop Propagation to Ignore fields hidden beneath.
+        e.stopPropagation();
+        if (!this.state.success) {
+            this.setState({ flipStatus: false });
+        }
+    };
+
     render() {
         console.log(`AUTH PROPS ${JSON.stringify(this.props)}`);
+        console.log('Attempts Made to Log In', this.state.attempts);
         const { classes } = this.props;
         const flip = { transform: 'translate(0, 0) rotateX(180deg)' };
 
@@ -226,7 +237,7 @@ class Auth extends Component {
                     className={classes.root}
                     style={this.state.flipStatus ? flip : null}
                 >
-                    <StyledCardContent className={classes.root}>
+                    <StyledCardContent className={classes.root} style={this.state.flipStatus ? {userSelect: 'none', visibility: 'hidden'} : {userSelect: 'all', visibility: 'visible'}}>
                         <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
                         <StyledInputContainer>
                             <FieldSet>
@@ -275,11 +286,26 @@ class Auth extends Component {
                         </StyledInputContainer>
                     </StyledCardContent>
                     {this.props.user.status === 'FAILED' ? (
-                        <AuthBackside message={'failed'} />
+                        <AuthBackside
+                            message={'failed'}
+                            tryAgain={this.returnToAuth}
+                            key={'AuthBackCard'}
+                            style={this.state.flipStatus ? {userSelect: 'all'} : {userSelect: 'none'}}
+                        />
                     ) : this.props.user.status === 'LOGGING_IN_USER' ? (
-                        <AuthBackside message={'loggingIn'} />
+                        <AuthBackside
+                            message={'loggingIn'}
+                            tryAgain={this.returnToAuth}
+                            key={'AuthBackCard'}
+                            style={this.state.flipStatus ? {userSelect: 'all'} : {userSelect: 'none'}}
+                        />
                     ) : this.props.user.status === 'ADDING_USER' ? (
-                        <AuthBackside message={'addingUser'} />
+                        <AuthBackside
+                            message={'addingUser'}
+                            tryAgain={this.returnToAuth}
+                            key={'AuthBackCard'}
+                            style={this.state.flipStatus ? {userSelect: 'all'} : {userSelect: 'none'}}
+                        />
                     ) : null}
                 </StyledFormCard>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
