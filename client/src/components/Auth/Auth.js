@@ -242,7 +242,7 @@ class Auth extends Component {
                         style={
                             this.state.flipStatus
                                 ? { userSelect: 'none', visibility: 'hidden' }
-                                : { userSelect: 'all', visibility: 'visible' }
+                                : { userSelect: 'none', visibility: 'visible' }
                         }
                     >
                         <StyledFormHeader>{this.props.user.status === 'USER_PASSWORD_RESET' ? 'Check your E-Mail for your Password Reset Link' : 'Sign In or Sign Up'}</StyledFormHeader>

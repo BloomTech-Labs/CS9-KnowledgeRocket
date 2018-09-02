@@ -47,7 +47,7 @@ export default class Home extends Component {
                 </HomeNav>
                 <CtaContainer>
                     <HomeCTA>
-                        <img src='/img/KnowledgeRocket_Logo_Latest_Isolated.svg'/>
+                        <img src='/img/KnowledgeRocket_Logo_Latest_Isolated.svg' alt='Space Background'/>
                         <HomeCtaHeader>KNOWLEDGE ROCKET</HomeCtaHeader>
                     </HomeCTA>
                 </CtaContainer>
