@@ -226,8 +226,8 @@ class Auth extends Component {
     };
 
     render() {
-        console.log(`AUTH PROPS ${JSON.stringify(this.props)}`);
-        console.log('Attempts Made to Log In', this.state.attempts);
+        // console.log(`AUTH PROPS ${JSON.stringify(this.props)}`);
+        // console.log('Attempts Made to Log In', this.state.attempts);
         const { classes } = this.props;
         const flip = { transform: 'translate(0, 0) rotateX(180deg)' };
 
