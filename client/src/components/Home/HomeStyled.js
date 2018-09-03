@@ -57,7 +57,7 @@ export const HomeContainer = styled.div`
 export const CtaContainer = styled.div`
     width: 100%;
     padding: 3rem 0 0 0;
-`
+`;
 
 export const MidContainer = styled.div`
     font-family: 'Roboto', sans-serif;
@@ -148,7 +148,7 @@ export const FooterSection = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: black;    
+    background-color: black;
 `;
 
 export const FollowSection = styled.div`
@@ -156,22 +156,22 @@ export const FollowSection = styled.div`
     flex-grow: 1;
     flex-wrap: wrap;
     display: flex;
-    padding: .5rem .5rem;
+    padding: 0.5rem 0.5rem;
     align-items: center;
     width: 100%;
     justify-content: center;
     a {
-        text-decoration: none
+        text-decoration: none;
     }
 `;
 
 export const FollowButton = styled.div`
-	font-size: 0.875rem;
+    font-size: 0.875rem;
     min-width: 64px;
     transition: background-color 250ms darkgray 0ms;
     min-height: 36px;
     box-sizing: border-box;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 500;
     border-radius: 4px;
     color: white;
@@ -181,7 +181,6 @@ export const FollowButton = styled.div`
     justify-content: center;
     align-items: center;
     color: white;
-    padding: .25rem;
-    margin: .25rem;
-`
-
+    padding: 0.25rem;
+    margin: 0.25rem;
+`;

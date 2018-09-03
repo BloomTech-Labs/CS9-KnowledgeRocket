@@ -16,6 +16,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // Actions
 import { logOutUser } from '../../actions';
+import {smallBreakPoint} from '../Themes/Themes';
 
 function mapStateToProps(state) {
     return {
@@ -86,9 +87,9 @@ const StyledCrumb = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.1rem;
-    @media (max-width: 540px) {
+    ${smallBreakPoint(`
         display: none;
-    }
+    `)}
 `;
 
 const StyledSvg = styled(SvgIcon)`
