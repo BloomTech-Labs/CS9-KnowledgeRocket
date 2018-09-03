@@ -34,10 +34,10 @@ function getParticipationPerCohort(req, res) {
             // TODO: Implement Question to Submit Rocket ID with it as well.
         })
         .catch(err => {
-            console.log({
-                errorMessage: err.message,
-                type: `Error Finding ResponseRockets with CohortId: ${cohortId}`,
-            })
+            // console.log({
+            //     errorMessage: err.message,
+            //     type: `Error Finding ResponseRockets with CohortId: ${cohortId}`,
+            // })
             res.status(500).json({totalResponses});
         });
 }

@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter /*Link*/ } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import Button from '@material-ui/core/Button';
-// import AddIcon from '@material-ui/icons/Add';
-// Components
-// import CohortCard from '../CohortCard/CohortCard';
 import {
     FloatingAdd,
     ListCard,
-    ListWrapper /*RocketListContainer*/,
+    ListWrapper,
 } from '../RocketList/ListElements';
 import axios from 'axios';
 const url = process.env.REACT_APP_SERVER;
