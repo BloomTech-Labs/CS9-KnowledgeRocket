@@ -159,11 +159,11 @@ class SimpleDialog extends Component {
                 <DialogTitle id="DeleteDialog">Delete Rocket?</DialogTitle>
                 <div>
                     <List>
-                        {options.map(opt => (
+                        {options.map((opt, index) => (
                             <ListItem
                                 button
                                 onClick={() => this.handleListItemClick(opt)}
-                                key={opt}
+                                key={opt.id || `${opt}_${index}`}
                             >
                                 <ListItemAvatar>
                                     <Avatar

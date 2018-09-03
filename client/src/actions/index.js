@@ -281,7 +281,7 @@ export const resetUserPassword = (email) => async dispatch => {
         dispatch({ type: USER_PASSWORD_RESET });
     } catch (err) {
         dispatch({ type: USER_PASSWORD_RESET_FAILED });
-        console.log(err);
+        // console.log(err);
     }
 }
 
@@ -289,7 +289,7 @@ export const logOutUser = () => async dispatch => {
     try {
         dispatch({ type: LOGOUT_USER });
     } catch (err) {
-        console.log(err);
+        // console.log(err);
     }
 };
 

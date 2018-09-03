@@ -16,9 +16,9 @@ router
     .get(getid)
     .delete(deleteid);
 // ENDPOINT TO RECEIVE { ORG_COHORTID, USER_COHORTID, USERID=teacherID, SKIPVALIDATE } AND APPEND TO USER COHORT
-    // Find ORG_COHORT by ID => Which organization Cohort Belongs to.
-        // Parse into Object that looks like: [{ lastName, firstName, email },{ lastName, firstName, email }]
-        // Call => POSTCSV with const { teacherID, USER_COHORTID, ORG_COHORT }
+// Find ORG_COHORT by ID => Which organization Cohort Belongs to.
+// Parse into Object that looks like: [{ lastName, firstName, email },{ lastName, firstName, email }]
+// Call => POSTCSV with const { teacherID, USER_COHORTID, ORG_COHORT }
 function get(req, res) {
     Cohort.find()
         .then(expected => {
@@ -116,23 +116,12 @@ function post(req, res) {
             });
     } else {
         // TODO: Implement: Updating Cohort
-        User.findOne({ _id: id })
-            .then(found => {
-                // Filter the cohorts for the user
-                let cohortIndex = -1;
-                found.cohorts.forEach((ch, i) => {
-                    if (ch._id === updateCohortId) {
-                    }
-                });
-                // OverWrite / Update Cohort
-                found[cohortIndex] = cohort;
-                User.findByIdAndUpdate(found._id, found)
-                    .then(() => {
-                        User.findOne({ _id: id })
-                            .then(user => {
-                                res.status(201).json(user); // sends user w/ populated cohorts
-                            })
-                            .catch();
+        /// OverWrite / Update Cohort
+        Cohort.findByIdAndUpdate(updateCohortId, cohort)
+            .then(() => {
+                User.findOne({ _id: id })
+                    .then(user => {
+                        res.status(201).json(user); // sends user w/ populated cohorts
                     })
                     .catch(err => {
                         res.status(500).json({ errorMessage: err.message });
@@ -143,6 +132,7 @@ function post(req, res) {
             });
     }
 }
+
 function getid(req, res) {
     const id = req.params.id;
 

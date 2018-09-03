@@ -40,11 +40,20 @@ export const StyledFormContainer = Styled.div`
     box-sizing: border-box;
     border-radius: 0.25rem;
     h4 {
-        display: ${props => props.status === '' ? 'none': 'flex'};
-        font-size: .8rem;
+        display: ${props => (props.status === '' ? 'none' : 'flex')};
+        font-size: 1rem;
         color: red;
         font-weight: bold;
         padding: 1rem;
+        border-radius: 0.25rem;
+    }
+    h3 {
+        display: ${props => (props.resetStatus === 'USER_PASSWORD_RESET_FAILED' ? 'flex' : 'none')};
+        font-size: 1rem;
+        color: red;
+        font-weight: bold;
+        padding: 1rem;
+        border-radius: 0.25rem;
     }
 `;
 
@@ -59,13 +68,14 @@ class AuthResetPassword extends Component {
     };
 
     handleReset = e => {
+        e.stopPropagation();
+        e.preventDefault();
         const regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
         // If the User Provided a Valid Email.
         if (regVar.test(this.state.email)) {
             // Reset password logic here
             this.props.resetUserPassword(this.state.email);
             // Redirect to Home Page after Password Reset Link Success
-            this.props.tryAgain(e);
         } else {
             this.setState({ status: 'Please provide a valid e-mail' });
         }
@@ -79,11 +89,29 @@ class AuthResetPassword extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.state);
+        // console.log(this.state);
         return (
-            <StyledFormContainer status={this.state.status}>
+            <StyledFormContainer
+                status={this.state.status}
+                resetStatus={this.props.state.user.status}
+            >
                 <StyledCardContent className={classes.root}>
-                    <StyledFormHeader>RESET YOUR PASSWORD?</StyledFormHeader>
+                    <StyledFormHeader
+                        style={
+                            this.props.state.user.status === 'USER_PASSWORD_RESET_FAILED' ||
+                            this.state.status !== ''
+                                ? { color: 'red' }
+                                : (this.props.state.user.status === 'USER_PASSWORD_RESET'
+                                    ? { color: 'green' }
+                                    : {})
+                        }
+                    >
+                        {this.props.state.user.status === 'USER_PASSWORD_RESET_FAILED'
+                            ? 'That E-MAIL Is Not Affiliated With Any of Our Accounts'
+                            : this.state.status === ''
+                                ? this.props.state.user.status === 'USER_PASSWORD_RESET'? 'A Password Reset Link has been sent to your E-mail' :'RESET YOUR PASSWORD?'
+                                : this.state.status}
+                    </StyledFormHeader>
                     <StyledInputContainer>
                         <FieldSet>
                             <StyledInput
@@ -96,12 +124,14 @@ class AuthResetPassword extends Component {
                                 placeholder="Please enter your email"
                                 required
                             />
-                            <h4>{this.state.status === '' ? null : this.state.status}</h4>
                             <StyledButton style={{ marginTop: '20px' }} onClick={this.handleReset}>
                                 RESET MY PASSWORD
                             </StyledButton>
-                            <StyledButton style={{ marginTop: '20px' }} onClick={this.props.tryAgain}>
-                                NO THANKS
+                            <StyledButton
+                                style={{ marginTop: '20px' }}
+                                onClick={this.props.tryAgain}
+                            >
+                                GO BACK
                             </StyledButton>
                         </FieldSet>
                     </StyledInputContainer>

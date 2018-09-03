@@ -273,19 +273,19 @@ class Auth extends Component {
                             <FieldSetSocial>
                                 <StyledGoogleBtn onClick={this.handleSignInGoogle}>
                                     <span style={{ padding: '0 0.5rem' }}>
-                                        <i class="fab fa-google fa-lg" />
+                                        <i className="fab fa-google fa-lg" />
                                     </span>{' '}
                                     Sign In with Google
                                 </StyledGoogleBtn>
                                 <StyledButton onClick={this.handleSignInFacebook}>
                                     <span style={{ padding: '0 0.5rem' }}>
-                                        <i class="fab fa-facebook-f fa-lg" />
+                                        <i className="fab fa-facebook-f fa-lg" />
                                     </span>{' '}
                                     Sign In with Facebook
                                 </StyledButton>
                                 <StyledButton onClick={this.handleSignInTwitter}>
                                     <span style={{ padding: '0 0.5rem' }}>
-                                        <i class="fab fa-twitter fa-lg" />
+                                        <i className="fab fa-twitter fa-lg" />
                                     </span>{' '}
                                     Sign in with Twitter
                                 </StyledButton>
