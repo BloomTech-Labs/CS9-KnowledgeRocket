@@ -161,8 +161,6 @@ export class CohortList extends Component {
                                         ]}
                                     />
                                 );
-                            } else {
-                                null;
                             }
                         })}
                     </CohortCardContainer>
