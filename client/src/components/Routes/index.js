@@ -79,7 +79,10 @@ class Routes extends Component {
                     <Route path="/rocket" component={NavBar} />
                     <Route path="/rocket" component={InnerRoutes} />
                     <Route path="/" exact component={Home} />
+                    {/* THE OLD WAY OF DOING QUESTIONS */}
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
+                    {/* THE NEW WAY OF DOING QUESTIONS  */}
+                    <Route path="/question/:cohort/:question/:student" exact component={RocketQuestion} />
                     <Route path="/question/thankyou" exact component={ThankYou} />
                     <Route path="/forgot" component={AuthResetPassword} />
                 </RouteContainer>

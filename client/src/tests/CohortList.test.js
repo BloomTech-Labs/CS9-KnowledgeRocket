@@ -67,7 +67,8 @@ describe('CohortList', () => {
 			/>
 		);
 		expect(component.instance().state.cohort).toBeInstanceOf(Array);
-		expect(component.instance().state.cohort.length).toBe(0);
+		// Current CohortList is now initialized with a specific state.
+		expect(component.instance().state.cohort.length).toBe(1);
 	});
 
 	it('calls componentDidMount', () => {

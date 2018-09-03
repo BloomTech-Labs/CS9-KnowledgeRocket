@@ -6,15 +6,46 @@ router
     .get(get)
     .post(post);
 router.route('/answer').post(postAnswer);
+router.route('/participation/:cohortId').get(getParticipationPerCohort);
 router
     .route('/:id')
     .put(put)
     .get(getid)
     .delete(deleteid);
 
-function postAnswer(req, res) {    
-    const { studentId, questionId, answer } = req.body;
+function getParticipationPerCohort(req, res) {
+    const cohortId = req.params.cohortId;
+    // Object Map with Property: QuestionId: | Value: Total Number of Students that Answered.
+    const responsesPerQuestion = {};
+    let totalResponses = 0;
+    ResponseRocket.find({ cohortId })
+        .then(responsesFound => {
+            // console.log(responsesFound)
+            if (responsesFound.length > 0) {
+                responsesFound.forEach(r => {
+                    if (r.questionId) {
+                        responsesPerQuestion[String(r.questionId)] = r.students.length;
+                        totalResponses += r.students.length;
+                    }                    
+                });
+            }
+            // console.log('Total Responses Found:',totalResponses)
+            res.status(200).send({totalResponses, responsesPerQuestion});
+            // TODO: Implement Question to Submit Rocket ID with it as well.
+        })
+        .catch(err => {
+            console.log({
+                errorMessage: err.message,
+                type: `Error Finding ResponseRockets with CohortId: ${cohortId}`,
+            })
+            res.status(500).json({totalResponses});
+        });
+}
+
+function postAnswer(req, res) {
+    const { cohortId ,studentId, questionId, answer } = req.body;
     const responseObject = {
+        cohortId,
         questionId,
         students: [
             {
@@ -32,9 +63,9 @@ function postAnswer(req, res) {
     // Find a responseRocket
     // If exists: Update it
     // if does not exist: Save it.
-    ResponseRocket.find({ questionId })
+    ResponseRocket.find({ questionId, cohortId })
         .then(found => {
-            if (found.length > 0) {
+            if (found.length > 0 ) {
                 // If found one with the questionId provided, append to it.
                 // add student to found
                 let studentIncluded = false;

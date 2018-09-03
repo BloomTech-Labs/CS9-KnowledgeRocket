@@ -90,6 +90,10 @@ class RocketQuestion extends Component {
                 questionId: this.state.questionID,
                 studentId: this.state.studentID,
             };
+            if (this.props.match.params.cohort) {
+                packAge.cohortId = this.props.match.params.cohort;
+                axios;
+            }
             axios
                 .post(`${url}/api/responserocket/answer`, packAge)
                 .then(response => {
@@ -122,6 +126,7 @@ class RocketQuestion extends Component {
 
     render() {
         console.log('My state is:', this.state);
+        console.log('My Cohort', this.props.match.params.cohort);
         return (
             <QuestionHeader className="Question_container">
                 <div className="Question_Wrapper">
