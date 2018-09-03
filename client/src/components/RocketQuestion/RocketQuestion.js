@@ -92,7 +92,6 @@ class RocketQuestion extends Component {
             };
             if (this.props.match.params.cohort) {
                 packAge.cohortId = this.props.match.params.cohort;
-                axios;
             }
             axios
                 .post(`${url}/api/responserocket/answer`, packAge)
