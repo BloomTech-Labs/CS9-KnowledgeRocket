@@ -163,7 +163,7 @@ class Cohort extends Component {
     };
 
     handlePickRocket = rocketID => {
-        const today = new Date(new Date().setHours(0, 0, 0, 0));
+        const today = new Date(new Date().setUTCHours(0,0,0,0));
         // console.log(today.toDateString())
         this.handleAppendRocket(rocketID, Date.parse(today));
     };
