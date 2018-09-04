@@ -14,7 +14,11 @@ import App from './App';
 import { ThemeProvider } from 'styled-components';
 import { Themes } from './components/Themes/Themes';
 
-const reduxStore = createStore(reducers, applyMiddleware(thunk, logger));
+const loggerConfig = () => {
+    return process.env.NODE_ENV === 'production' ? null : logger
+}
+
+const reduxStore = createStore(reducers, applyMiddleware(thunk, loggerConfig()));
 
 // Wrapping our App with Redux Provider
 render(

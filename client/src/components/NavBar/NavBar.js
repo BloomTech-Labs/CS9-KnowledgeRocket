@@ -201,7 +201,7 @@ class NavBar extends Component {
                         </List>
                     </Drawer>
                 </Hidden>
-                <Hidden smDown implementation="css" style={this.props.state.user.authenticated ? {display: 'flex !important'} : {display: 'none !important'}}>
+                <Hidden smDown implementation="css">
                     <Drawer
                         variant="permanent"
                         open

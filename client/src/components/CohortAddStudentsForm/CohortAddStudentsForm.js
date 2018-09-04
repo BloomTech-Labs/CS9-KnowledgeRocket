@@ -74,9 +74,9 @@ class CohortAddStudentsForm extends Component {
     };
 
     render() {
-        console.log(`firstName ${this.state.firstName}, ${this.state.firstName.length}`);
-        console.log(`lastName ${this.state.lastName}, ${this.state.lastName.length}`);
-        console.log(`email ${this.state.email}, ${this.state.email.length}`);
+        // console.log(`firstName ${this.state.firstName}, ${this.state.firstName.length}`);
+        // console.log(`lastName ${this.state.lastName}, ${this.state.lastName.length}`);
+        // console.log(`email ${this.state.email}, ${this.state.email.length}`);
         return (
             <Card className={this.props.className}>
                 <StylizedInput

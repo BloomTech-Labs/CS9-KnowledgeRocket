@@ -76,7 +76,7 @@ class CohortRocketCard extends Component {
     }
 
     handleDateChange = e => {
-        const newDate = Date.parse(e.target.value);
+        let newDate = Date.parse(e.target.value)
         this.setState({ newDate });
     };
 
@@ -90,8 +90,6 @@ class CohortRocketCard extends Component {
 
     render() {
         let scheduledOn = this.props.rocket.startDate
-            ? this.props.rocket.startDate.slice(0, 10)
-            : Date.now();
         return (
             <StylizedRocket>
                 <StyledCardContents>
@@ -102,7 +100,7 @@ class CohortRocketCard extends Component {
                         <ClipQuestion>{this.state.userRocket.twoMonth.question}</ClipQuestion>
                     </StylizedCohorts>
                     <CohortLabel>{`Scheduled on ${moment(
-                        Date.parse(moment.tz(scheduledOn, this.state.timezone))
+                        moment.tz(scheduledOn, 'Etc/UTC')
                     ).format('MMM Do YY')}`}</CohortLabel>
                     <TextField
                         style={{ width: '100%', marginBottom: '1rem' }}

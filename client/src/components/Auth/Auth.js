@@ -82,7 +82,6 @@ export const StyledFormHeader = styled(StyledCardContent)`
     width: 100%;
     padding: 0;
     flex-direction: row;
-    width: 800px;
     border-radius: 0.25rem;
 `;
 
