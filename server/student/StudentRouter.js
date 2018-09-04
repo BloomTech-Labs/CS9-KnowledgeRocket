@@ -14,6 +14,7 @@ router
     .get(getid)
     .delete(deleteid);
 router.route('/importcsv').post(postCSV);
+router.route('/exportcsv/:id').get(getCSV);
 
 function get(req, res) {
     Student.find()
@@ -200,6 +201,16 @@ function postCSV(req, res) {
         .catch(err => {
             res.status(500).json({ errorMessage: 'There was an error saving the students' });
         });
+}
+
+function getCSV(req, res) {
+    console.log(`MADE IT TO THE GETCSV!!`);
+    const cohortID = req.params.id;
+    console.log(`COHORTID ${cohortID}`);
+    // find a cohort by id
+    // find a cohort's list of students
+    // populate and save students
+    // convert student data from JSON to csv format
 }
 
 module.exports = router;
