@@ -40,9 +40,12 @@ export default class Home extends Component {
                         <div>
                             <NavLogo src="/img/Logo_BW_SML.svg" onClick={this.handleHome} />
                         </div>
-                        <div>
+                        <div style={this.props.authenticated ? {display:'none'} : {display: 'block'}}>
                             <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
                             <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
+                        </div>
+                        <div style={this.props.authenticated ? {display: 'block'} : {display:'none'}}>
+                            <NavButton onClick={this.handleAuthRedirect}>Go Back To Rockets</NavButton>
                         </div>
                 </HomeNav>
                 <CtaContainer>
