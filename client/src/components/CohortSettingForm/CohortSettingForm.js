@@ -74,32 +74,32 @@ const StyledLabel = styled.label`
 	}
 `;
 
-const StyledCSVLabelButton = styled.label`
-    margin: 0 1rem 1rem 0rem !important;
-    font-size: 0.875rem;
-    min-width: 64px;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-        box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-        border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    min-height: 36px;
-    box-sizing: border-box;
-    line-height: 1.4em;
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    font-weight: 500;
-    border-radius: 4px;
+// const StyledCSVLabelButton = styled.label`
+//     margin: 0 1rem 1rem 0rem !important;
+//     font-size: 0.875rem;
+//     min-width: 64px;
+//     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+//         box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+//         border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+//     min-height: 36px;
+//     box-sizing: border-box;
+//     line-height: 1.4em;
+//     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+//     font-weight: 500;
+//     border-radius: 4px;
 
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    color: white;
-    background-color: #3f51b5;
-    padding: 1rem;
-    box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-    &:hover {
-        background-color: #303f9f;
-    }
-`;
+//     text-transform: uppercase;
+//     display: flex;
+//     justify-content: center;
+//     color: white;
+//     background-color: #3f51b5;
+//     padding: 1rem;
+//     box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+//         0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+//     &:hover {
+//         background-color: #303f9f;
+//     }
+// `;
 
 const StyledFormControlLabel = styled(FormControlLabel)`
     margin: 0 1rem 1rem 0rem !important;
