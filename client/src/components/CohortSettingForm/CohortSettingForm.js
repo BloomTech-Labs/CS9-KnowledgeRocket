@@ -104,27 +104,25 @@ class CohortSettingForm extends Component {
 	}
 
 	downloadCSV = () => {
-		console.log(`UNPARSED ${this.props.state.user.exportCSV}`);
-		console.log(`UNPARSED ${typeof this.props.state.user.exportCSV}`);
-		console.log(`UNPARSED ${'data:text/csv;charset=utf-8,' + this.props.state.user.exportCSV}`);
-
+		// prepare csv data for download
 		const csv = 'data:text/csv;charset=utf-8,' + this.props.state.user.exportCSV;
 		const encodedUri = encodeURI(csv);
+		// create an empty link to allow user to save csv
 		const link = document.createElement('a');
 		link.setAttribute('href', encodedUri);
 		link.setAttribute('download', 'students.csv');
-		document.body.appendChild(link); // Required for FF
-		link.click(); // This will download the data file named "my_data.csv".
+		document.body.appendChild(link);
+		link.click();
 		document.body.removeChild(link);
 	};
 
 	handleExportStudents = event => {
 		const teacherID = this.props.state.user._id;
 		const cohortID = this.props.cohortID;
-		console.log('MADE IT TO handleExportStudents IN CohortSettingForm');
 		this.props
 			.exportCSV(cohortID)
 			.then(() => {
+				// allow user to download csv only after successful export event
 				this.downloadCSV();
 			})
 			.catch(err => {

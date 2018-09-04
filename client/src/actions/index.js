@@ -161,12 +161,10 @@ export const importCSV = (teacherID, cohortID, studentData) => async dispatch =>
 };
 
 export const exportCSV = cohortID => async dispatch => {
-    console.log('MADE IT TO EXPORT CSV ACTION');
     dispatch({ type: EXPORTING_CSV });
     try {
         let response = await axios.get(`${url}/api/student/exportcsv/${cohortID}`);
         dispatch({ type: EXPORT_CSV, payload: response.data });
-        console.log(`EXPORT CSV ACTION RESPONSE DATA ${response.data}`);
     } catch (err) {
         dispatch({ type: EXPORT_CSV_FAILURE });
     }

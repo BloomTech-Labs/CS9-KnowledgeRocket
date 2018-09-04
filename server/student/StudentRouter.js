@@ -205,30 +205,22 @@ function postCSV(req, res) {
 }
 
 function getCSV(req, res) {
-    console.log(`MADE IT TO THE GETCSV!!`);
     const cohortID = req.params.id;
-    console.log(`COHORTID ${cohortID}`);
     // find a cohort by id
     // find a cohort's list of students
     // unparse list of students
-    // populate and save students
     // convert student data from JSON to csv format
 
     Cohort.findById({ _id: cohortID })
         .then(found => {
-            console.log('SUCCESSFULLY FOUND A COHORT BY ID');
-            console.log(`FOUND COHORT ${found}`);
             const students = found.students;
-
             const packed = [];
-
+            // extract student data
             students.forEach(student => {
                 let data = [student.lastName, student.firstName, student.email];
                 packed.push(data);
             });
-
-            console.log(`PACKED STUDENT DATA ${packed}`);
-
+            // describe how to create csv file
             const config = {
                 quotes: false,
                 quoteChar: '"',
@@ -237,11 +229,12 @@ function getCSV(req, res) {
                 header: true,
                 newline: '\r\n',
             };
+            // unparse JSON data to csv with specific fields
             let result = Papa.unparse(
                 { fields: ['Last Name', 'First Name', 'Email'], data: packed },
                 config
             );
-
+            // send csv data to client
             res.status(200).json(result);
         })
         .catch(err => {
