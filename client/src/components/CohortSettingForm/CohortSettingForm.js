@@ -142,7 +142,7 @@ class CohortSettingForm extends Component {
     };
 
     render() {
-        console.log('CC Email',this.state.cohort.cc)
+        // console.log('CC Email',this.state.cohort.cc)
         return (
             <div className={this.props.className}>
                 <StylizedInput
