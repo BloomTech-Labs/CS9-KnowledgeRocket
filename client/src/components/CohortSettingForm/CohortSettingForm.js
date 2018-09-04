@@ -117,7 +117,6 @@ class CohortSettingForm extends Component {
 	};
 
 	handleExportStudents = event => {
-		const teacherID = this.props.state.user._id;
 		const cohortID = this.props.cohortID;
 		this.props
 			.exportCSV(cohortID)
