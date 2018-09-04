@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Student = require('./Student.js');
 const User = require('../user/User');
 const Cohort = require('../cohort/Cohort');
+const Papa = require('papaparse');
 
 router
     .route('/')
@@ -209,8 +210,43 @@ function getCSV(req, res) {
     console.log(`COHORTID ${cohortID}`);
     // find a cohort by id
     // find a cohort's list of students
+    // unparse list of students
     // populate and save students
     // convert student data from JSON to csv format
+
+    Cohort.findById({ _id: cohortID })
+        .then(found => {
+            console.log('SUCCESSFULLY FOUND A COHORT BY ID');
+            console.log(`FOUND COHORT ${found}`);
+            const students = found.students;
+
+            const packed = [];
+
+            students.forEach(student => {
+                let data = [student.lastName, student.firstName, student.email];
+                packed.push(data);
+            });
+
+            console.log(`PACKED STUDENT DATA ${packed}`);
+
+            const config = {
+                quotes: false,
+                quoteChar: '"',
+                escapeChar: '"',
+                delimiter: ',',
+                header: true,
+                newline: '\r\n',
+            };
+            let result = Papa.unparse(
+                { fields: ['Last Name', 'First Name', 'Email'], data: packed },
+                config
+            );
+
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: 'There was an error finding the cohort' });
+        });
 }
 
 module.exports = router;
