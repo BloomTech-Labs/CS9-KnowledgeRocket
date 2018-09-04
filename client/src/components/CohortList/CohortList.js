@@ -1,34 +1,23 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter /*Link*/ } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import Button from '@material-ui/core/Button';
-// import AddIcon from '@material-ui/icons/Add';
-// Components
-// import CohortCard from '../CohortCard/CohortCard';
-import { FloatingAdd, ListCard , ListWrapper/*RocketListContainer*/ } from '../RocketList/ListElements';
+import {
+    FloatingAdd,
+    ListCard,
+    ListWrapper,
+} from '../RocketList/ListElements';
+import axios from 'axios';
+const url = process.env.REACT_APP_SERVER;
 
 function mapStateToProps(state) {
     return {
         state,
     };
 }
-
-// const CohortListContainer = styled.div`
-//   margin-left: 1rem;
-//   padding: 1rem;
-//   display: flex;
-//   flex-direction: row;
-//   align-items: flex-start;
-//   justify-content: space-around;
-//   width: 100%;
-//   border-radius: 0.4rem;
-// `;
 
 const CohortCardContainer = styled.div`
     display: flex;
@@ -37,33 +26,11 @@ const CohortCardContainer = styled.div`
     width: 100%;
 `;
 
-// const StyledCohortCard = styled(CohortCard)`
-//     margin: 20px;
-// `;
-
-// const AddButtonCard = styled(Card)`
-//     margin: 20px;
-//     width: 150px;
-//     text-align: center;
-// `;
-
-// const StyledCardContent = styled(CardContent)`
-//     margin: 10px 0.5rem;
-// `;
-
-// const AddButtonCardTitle = styled.h3`
-//     display: block;
-//     margin-bottom: 20px;
-// `;
-
-// const StyledAddButtonLink = styled(Link)`
-//     text-decoration: none;
-// `;
-
 // RENDERS A LIST OF COHORT CARDS
 export class CohortList extends Component {
     state = {
-        cohort: [],
+        cohort: [{ students: [] }],
+        PS: {},
     };
 
     componentDidMount() {
@@ -74,14 +41,68 @@ export class CohortList extends Component {
             this.props.history.push('/rocket/auth');
         }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
+        this.props.state.user.cohorts.forEach((cohort, index) => {
+            this.calculateParticipationAndSent(cohort, index);
+        });
     }
+
+    calculateParticipationAndSent = (cohort, index) => {
+        let participation = 0;
+        let totalAnswered = 0;
+        let totalShouldHaveAnswered = 0;
+        const totalStudents = cohort.students.length;
+        const today = Date.now();
+        // Until Otherwise Figured Out
+        // Going to assume that sent = students.length * questions due
+        // AKA Total students that Should have answered the questions.
+
+        // If the questions are past due, calculate expected
+        // Amount of students that should have answered them.
+        if (cohort._id) {
+            cohort.rockets.forEach((rocket, idx) => {
+                if (today > Date.parse(rocket.td)) {
+                    totalShouldHaveAnswered += totalStudents;
+                }
+                if (today > Date.parse(rocket.tw)) {
+                    totalShouldHaveAnswered += totalStudents;
+                }
+                if (today > Date.parse(rocket.tm)) {
+                    totalShouldHaveAnswered += totalStudents;
+                }
+            });
+
+            // Get Responses Per Questions for This Cohort
+            axios
+                .get(`${url}/api/responserocket/participation/${cohort._id}`)
+                .then(responsesPerQuestion => {
+                    totalAnswered = responsesPerQuestion.data.totalResponses;
+                    // Calculate the actual percentage that answered the questions
+                    // Versus the amount that should have answered them.
+                    participation =
+                        totalShouldHaveAnswered > 0
+                            ? ((totalAnswered * 100) / totalShouldHaveAnswered).toFixed(1)
+                            : '100';
+                    this.setState({
+                        [cohort._id]: { participation, sent: totalShouldHaveAnswered },
+                    });
+                })
+                .catch(err => {
+                    console.log(
+                        'Error Fetching Responses for This Cohort',
+                        cohort.title,
+                        err.message
+                    );
+                });
+        } else {
+            return {};
+        }
+    };
 
     handleNewCohortRedirect = () => {
         this.props.history.push('/rocket/newclass');
     };
 
     render() {
-        // console.log('Cohort re-rendered')
         return (
             <ListWrapper>
                 {this.state.cohort ? (
@@ -100,22 +121,44 @@ export class CohortList extends Component {
                                 />,
                             ]}
                         />
-                        {this.props.state.user.cohorts.map((cohort, index) => (
-                            <ListCard
-                                key={`CL_${index}`}
-                                title={cohort.title}
-                                redirect={`/rocket/classform/${cohort._id}`}
-                                element={cohort}
-                                contents={[
-                                    <p key={`TotalStudents_${cohort._id}`}>{`Total Students:\t`}<span style={{fontWeight: '900'}}>{`(${cohort.students.length})`}</span></p>,
-                                    <p key={`Participation_${cohort._id}`}>{`Participation:\t`}<span style={{fontWeight: '900'}}>{`(${'100%'})`}</span></p>,
-                                    <p key={`RocketsSent_${cohort._id}`}>{`Rockets Sent:\t`}<span style={{fontWeight: '900'}}>{`(${0})`}</span></p>,
-                                ]}
-                            />
-                        ))}
+                        {this.props.state.user.cohorts.map((cohort, index) => {
+                            if (cohort._id) {
+                                return (
+                                    <ListCard
+                                        key={`CL_${index}`}
+                                        title={cohort.title}
+                                        redirect={`/rocket/classform/${cohort._id}`}
+                                        element={cohort}
+                                        contents={[
+                                            <p key={`TotalStudents_${cohort._id}`}>
+                                                {`Total Students:\t`}
+                                                <span style={{ fontWeight: '900' }}>{`(${
+                                                    cohort.students.length
+                                                })`}</span>
+                                            </p>,
+                                            <p key={`Participation_${cohort._id}`}>
+                                                {`Participation:\t`}
+                                                <span style={{ fontWeight: '900' }}>{`(${
+                                                    this.state[cohort._id]
+                                                        ? this.state[cohort._id].participation
+                                                        : 0
+                                                }%)`}</span>
+                                            </p>,
+                                            <p key={`RocketsSent_${cohort._id}`}>
+                                                {`Rockets Sent:\t`}
+                                                <span style={{ fontWeight: '900' }}>{`(${
+                                                    this.state[cohort._id]
+                                                        ? this.state[cohort._id].sent
+                                                        : 0
+                                                })`}</span>
+                                            </p>,
+                                        ]}
+                                    />
+                                );
+                            } return null;
+                        })}
                     </CohortCardContainer>
-                ) : ( null
-                )}
+                ) : null}
             </ListWrapper>
         );
     }

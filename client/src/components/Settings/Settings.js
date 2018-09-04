@@ -42,7 +42,6 @@ class Settings extends Component {
     };
 
     render() {
-        console.log(this.state);
         if (this.state.authProvider === 'email') {
             return (
                 <div className="Main_container">

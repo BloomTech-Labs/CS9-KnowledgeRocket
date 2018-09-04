@@ -37,13 +37,13 @@ export default class Home extends Component {
         return (
             <HomeContainer>
                 <HomeNav>
-                    <div>
-                        <NavLogo src="/img/Logo_BW_SML.svg" onClick={this.handleHome} />
-                    </div>
-                    <div>
-                        <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
-                        <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
-                    </div>
+                        <div>
+                            <NavLogo src="/img/Logo_BW_SML.svg" onClick={this.handleHome} />
+                        </div>
+                        <div style={this.props.authenticated ? {display:'none'} : {display: 'block'}}>
+                            <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
+                            <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
+                        </div>
                 </HomeNav>
                 <CtaContainer>
                     <HomeCTA>

@@ -210,7 +210,11 @@ class Cohort extends Component {
                         match={this.props.match}
                         cohortID={cohortIDX}
                     />
-                ) : null}{' '}
+                ) : <StyledCohortStudentList
+                students={this.state.cohort.students}
+                match={this.props.match}
+                cohortID={cohortIDX}
+            />}{' '}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}

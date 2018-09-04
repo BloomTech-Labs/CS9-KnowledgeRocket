@@ -126,7 +126,7 @@ class NavBar extends Component {
     };
 
     handleDrawerToggle = () => {
-        console.log('MADE IT TO handleDrawerToggle  ');
+        // console.log('MADE IT TO handleDrawerToggle  ');
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
 
@@ -159,7 +159,7 @@ class NavBar extends Component {
                             </StyledCrumb>
                         ))}
                     </StyledBreadCrumbContainer>
-                    <Button onClick={this.handleLogOut} variant="contained" color="secondary">
+                    <Button onClick={this.handleLogOut} variant="contained" color="secondary" style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}>
                         Sign-Out
                     </Button>
                 </StyledNavBarContainer>
@@ -172,6 +172,7 @@ class NavBar extends Component {
                         classes={{
                             paper: classes.drawerPaper,
                         }}
+                        style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}
                         ModalProps={{
                             keepMounted: true, // Better open performance on mobile.
                         }}
@@ -200,13 +201,14 @@ class NavBar extends Component {
                         </List>
                     </Drawer>
                 </Hidden>
-                <Hidden smDown implementation="css">
+                <Hidden smDown implementation="css" style={this.props.state.user.authenticated ? {display: 'flex !important'} : {display: 'none !important'}}>
                     <Drawer
                         variant="permanent"
                         open
                         classes={{
                             paper: classes.drawerPaper,
                         }}
+                        style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}
                     >
                         <List>
                             <ListItem>
