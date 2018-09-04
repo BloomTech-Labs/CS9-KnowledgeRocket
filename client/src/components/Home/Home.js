@@ -44,13 +44,13 @@ export default class Home extends Component {
                             <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
                             <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
                         </div>
-                        <div style={this.props.authenticated ? {display: 'block'} : {display:'none'}}>
-                            <NavButton onClick={this.handleAuthRedirect}>Go Back To Rockets</NavButton>
-                        </div>
                 </HomeNav>
                 <CtaContainer>
                     <HomeCTA>
-                        <img src='/img/KnowledgeRocket_Logo_Latest_Isolated.svg' alt='Space Background'/>
+                        <img
+                            src="/img/KnowledgeRocket_Logo_Latest_Isolated.svg"
+                            alt="Space Background"
+                        />
                         <HomeCtaHeader>KNOWLEDGE ROCKET</HomeCtaHeader>
                     </HomeCTA>
                 </CtaContainer>

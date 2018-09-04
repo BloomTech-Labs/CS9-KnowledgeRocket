@@ -14,7 +14,10 @@ const Rocket = mongoose.Schema({
 
 
 function removeQuestions(next, model) {
+<<<<<<< HEAD
     // console.log('got to questions')
+=======
+>>>>>>> 5696c35ed13ca2145ad352d3246fa5e66b46c74d
     // Check that the questions assigned are valid!
     const question1 = model.twoDay;
     const question2 = model.twoWeek;

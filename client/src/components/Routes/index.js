@@ -86,8 +86,8 @@ class Routes extends Component {
                 <RouteContainer>
                     <Route path="/rocket" component={NavBar} />
                     <Route path="/rocket" component={connectedInnerRoutes} />
-                    {/* <Route path="/" exact component={Home}/> */}
-                    <Route path="/" exact render={props => (<Home {...props}/>)}/>
+                    <Route path="/" exact component={Home}/>
+                    {/* <Route path="/" exact render={props => (<Home {...props}/>)}/> */}
                     {/* THE OLD WAY OF DOING QUESTIONS */}
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
                     {/* THE NEW WAY OF DOING QUESTIONS  */}
