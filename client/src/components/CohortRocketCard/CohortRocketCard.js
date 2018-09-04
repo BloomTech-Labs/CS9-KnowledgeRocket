@@ -38,11 +38,12 @@ const CohortLabel = styled(FormLabel)`
 
 const ClipQuestion = styled.div`
     display: inline-flex;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 100%;
+    width: 16rem;
 `;
 
 const StyledCardContents = styled(CardContent)`
