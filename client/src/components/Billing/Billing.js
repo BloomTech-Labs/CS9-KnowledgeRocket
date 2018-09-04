@@ -43,8 +43,6 @@ class Billing extends Component {
         this.setState({ type: type });
     };
     render() {
-        console.log('Subscription type:', this.state.type);
-
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -91,9 +89,6 @@ class Billing extends Component {
     }
 }
 
-Billing.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default connect(
     mapStateToProps,

@@ -47,7 +47,6 @@ export const StyledFormContainer = styled.div`
 `;
 
 const StyledFormCard = styled(Card)`
-    backface-visibility: hidden;
     display: flex;
     flex-direction: row;
     min-width: 10rem;
