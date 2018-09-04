@@ -19,6 +19,7 @@ class CohortStudentList extends Component {
     render() {
         return (
             <Card className={this.props.className}>
+                {this.props.state.user.cohorts[this.props.cohortID].students.length === 0 ? 'Please add Students to your class' : null}
                 {/* Render all students added if the cohort exists with that index*/}
                 {this.props.state.user.cohorts[this.props.cohortID] ? this.props.state.user.cohorts[this.props.cohortID].students.map(
                     (student, index) => (
