@@ -3,18 +3,26 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Papa from 'papaparse';
 // Material Components
+import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 // Actions
-import { importCSV } from '../../actions/';
+import { importCSV, exportCSV } from '../../actions/';
 
 function mapStateToProps(state) {
     return {
         state,
     };
 }
+
+const styles = theme => ({
+	button: {
+		margin: theme.spacing.unit,
+		color: 'white',
+	},
+});
 
 const StylizedInput = styled(Input)`
     margin: 0 1rem 1rem 0rem !important;
@@ -45,31 +53,25 @@ const StylizedCSVInput = styled.input`
     height: 0.1px;
 `;
 
-const StyledCSVLabelButton = styled.label`
-    margin: 0 1rem 1rem 0rem !important;
-    font-size: 0.875rem;
-    min-width: 64px;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-        box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-        border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    min-height: 36px;
-    box-sizing: border-box;
-    line-height: 1.4em;
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    font-weight: 500;
-    border-radius: 4px;
+const ExportCSVBtn = styled(Button)`
+	background-color: #3f51b5 !important;
+`;
 
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    color: white;
-    background-color: #3f51b5;
-    padding: 1rem;
-    box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-    &:hover {
-        background-color: #303f9f;
-    }
+const StyledLabel = styled.label`
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	color: white;
+	background-color: #3f51b5;
+	border-radius: 0.25rem;
+	padding: 0.6rem 0.8rem;
+	order: 1;
+	box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+	&:hover {
+		background-color: #303f9f;
+	}
 `;
 
 const StyledFormControlLabel = styled(FormControlLabel)`
@@ -101,68 +103,100 @@ class CohortSettingForm extends Component {
         this.setState({ cohort });
     }
 
-    handleFileSelect = event => {
-        const teacherID = this.props.state.user._id;
-        const cohortID = this.props.cohortID;
-        let studentData;
+	downloadCSV = () => {
+		// prepare csv data for download
+		const csv = 'data:text/csv;charset=utf-8,' + this.props.state.user.exportCSV;
+		const encodedUri = encodeURI(csv);
+		// create an empty link to allow user to save csv
+		const link = document.createElement('a');
+		link.setAttribute('href', encodedUri);
+		link.setAttribute('download', 'students.csv');
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	};
 
-        const file = event.target.files[0];
-        const config = {
-            quoteChar: '"',
-            header: true,
-            preview: 0,
-            complete: (results, file) => {
-                studentData = results.data;
-                this.props.importCSV(teacherID, cohortID, studentData);
-                this.setState({ csvData: results });
-            },
-        };
-        if (file) {
-            return Papa.parse(file, config);
-        }
-    };
+	handleExportStudents = event => {
+		const cohortID = this.props.cohortID;
+		this.props
+			.exportCSV(cohortID)
+			.then(() => {
+				// allow user to download csv only after successful export event
+				this.downloadCSV();
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
 
-    handleCheckBox = () => {
-        this.setState({ cohort: { ...this.state.cohort, cc: !this.state.cohort.cc } });
-    };
+	handleFileSelect = event => {
+		const teacherID = this.props.state.user._id;
+		const cohortID = this.props.cohortID;
+		let studentData;
 
-    handleNewInput = e => {
-        this.setState({ cohort: { ...this.state.cohort, [e.target.name]: e.target.value } });
-    };
+		const file = event.target.files[0];
+		const config = {
+			quoteChar: '"',
+			header: true,
+			preview: 0,
+			complete: (results, file) => {
+				studentData = results.data;
+				this.props.importCSV(teacherID, cohortID, studentData);
+				this.setState({ csvData: results });
+			},
+		};
+		if (file) {
+			return Papa.parse(file, config);
+		}
+	};
 
-    handleAddCohort = () => {
-        const cohort = {
-            title: this.state.cohort.title,
-            cc: this.state.cohort.cc,
-        };
-        if (this.state.cohort._id !== '') {
-            cohort._id = this.state.cohort._id;
-        }
-        this.props.addCohort(cohort, this.props.state.user._id);
-    };
+	handleCheckBox = (one, two) => {
+		this.setState({ cohort: { ...this.state.cohort, ccEmail: !this.state.cohort.ccEmail } });
+	};
 
-    render() {
-        // console.log('CC Email',this.state.cohort.cc)
-        return (
-            <div className={this.props.className}>
-                <StylizedInput
-                    disableUnderline={true}
-                    name="title"
-                    onChange={this.handleNewInput}
-                    onBlur={this.handleNewInput}
-                    placeholder={
-                        this.state.cohort.title === '' ? 'Class Name' : this.state.cohort.title
-                    }
-                />
-                <StylizedForm>
-                    <StyledCSVLabelButton htmlFor={'csv-file'}>IMPORT CSV</StyledCSVLabelButton>
-                    <StylizedCSVInput
-                        type="file"
-                        id="csv-file"
-                        name="files"
-                        onChange={this.handleFileSelect}
-                    />
-                </StylizedForm>
+	handleNewInput = e => {
+		this.setState({ cohort: { ...this.state.cohort, [e.target.name]: e.target.value } });
+	};
+
+	handleAddCohort = () => {
+		const cohort = {
+			title: this.state.cohort.title,
+			ccEmail: this.state.cohort.ccEmail,
+		};
+		if (this.state.cohort._id !== '') {
+			cohort._id = this.state.cohort._id;
+		}
+		this.props.addCohort(cohort, this.props.state.user._id);
+	};
+
+	render() {
+		const { classes } = this.props;
+
+		return (
+			<div className={this.props.className}>
+				<StylizedInput
+					disableUnderline={true}
+					name="title"
+					onChange={this.handleNewInput}
+					onBlur={this.handleNewInput}
+					placeholder={this.state.cohort.title === '' ? 'Class Name' : this.state.cohort.title}
+				/>
+				<StylizedForm>
+					<StyledLabel for="csv-file">Import CSV</StyledLabel>
+					<StylizedCSVInput
+						type="file"
+						id="csv-file"
+						name="files"
+						onChange={this.handleFileSelect}
+					/>
+				</StylizedForm>
+				<ExportCSVBtn
+					variant="contained"
+					className={classes.button}
+					onClick={this.handleExportStudents}
+				>
+					Export CSV
+				</ExportCSVBtn>
                 <StyledFormControlLabel
                     control={
                         this.props.state.user.cohorts[this.props.cohortIDX].cc ? (
@@ -181,14 +215,12 @@ class CohortSettingForm extends Component {
                 >
                     Add / Edit Class
                 </StyledButton>
-            </div>
-        );
-    }
+			</div>
+		);
+	}
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        importCSV,
-    }
-)(CohortSettingForm);
+export default connect(mapStateToProps, {
+	importCSV,
+	exportCSV,
+})(withStyles(styles)(CohortSettingForm));

@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Student = require('./Student.js');
 const User = require('../user/User');
 const Cohort = require('../cohort/Cohort');
+const Papa = require('papaparse');
 
 router
     .route('/')
@@ -14,6 +15,7 @@ router
     .get(getid)
     .delete(deleteid);
 router.route('/importcsv').post(postCSV);
+router.route('/exportcsv/:id').get(getCSV);
 
 function get(req, res) {
     Student.find()
@@ -183,6 +185,44 @@ function postCSV(req, res) {
         })
         .catch(err => {
             res.status(500).json({ errorMessage: 'There was an error saving the students' });
+        });
+}
+
+function getCSV(req, res) {
+    const cohortID = req.params.id;
+    // find a cohort by id
+    // find a cohort's list of students
+    // unparse list of students
+    // convert student data from JSON to csv format
+
+    Cohort.findById({ _id: cohortID })
+        .then(found => {
+            const students = found.students;
+            const packed = [];
+            // extract student data
+            students.forEach(student => {
+                let data = [student.lastName, student.firstName, student.email];
+                packed.push(data);
+            });
+            // describe how to create csv file
+            const config = {
+                quotes: false,
+                quoteChar: '"',
+                escapeChar: '"',
+                delimiter: ',',
+                header: true,
+                newline: '\r\n',
+            };
+            // unparse JSON data to csv with specific fields
+            let result = Papa.unparse(
+                { fields: ['Last Name', 'First Name', 'Email'], data: packed },
+                config
+            );
+            // send csv data to client
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: 'There was an error finding the cohort' });
         });
 }
 
