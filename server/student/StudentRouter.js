@@ -47,14 +47,6 @@ function post(req, res) {
                             .then(() => {
                                 // find user and populate their data
                                 User.findById(teacherID)
-                                    .populate('cohorts')
-                                    .populate({
-                                        path: 'cohorts',
-                                        populate: { path: 'students', model: 'Students' },
-                                    })
-                                    .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                                    .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                                    .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                     .then(teacher => {
                                         res.status(201).json(teacher);
                                     })
@@ -125,9 +117,9 @@ function deleteid(req, res) {
 
 function postCSV(req, res) {
     const { teacherID, cohortID, studentData } = req.body;
-    console.log(`TEACHERID ${JSON.stringify(teacherID)}`);
-    console.log(`COHORTID ${JSON.stringify(cohortID)}`);
-    console.log(`STUDENTDATA ${JSON.stringify(studentData)}`);
+    // console.log(`TEACHERID ${JSON.stringify(teacherID)}`);
+    // console.log(`COHORTID ${JSON.stringify(cohortID)}`);
+    // console.log(`STUDENTDATA ${JSON.stringify(studentData)}`);
 
     const regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     let count = 0;
@@ -139,7 +131,7 @@ function postCSV(req, res) {
             student.email.length > 0 &&
             regVar.test(student.email)
         ) {
-            console.log('STUDENT VALIDATED');
+            // console.log('STUDENT VALIDATED');
         } else {
             console.log("ONE OR MORE STUDENTS DON'T HAVE THE CORRECT DATA");
         }
@@ -153,32 +145,24 @@ function postCSV(req, res) {
 
     Student.insertMany(studentData)
         .then(newStudents => {
-            console.log('SUCCESSFULLY INSERTED NEW STUDENTS');
-            console.log(studentData);
+            // console.log('SUCCESSFULLY INSERTED NEW STUDENTS');
+            // console.log(studentData);
             Cohort.findOne({ _id: cohortID })
                 .then(found => {
-                    console.log('SUCCESFULLY FOUND COHORT');
+                    // console.log('SUCCESFULLY FOUND COHORT');
                     newStudents.forEach(student => {
-                        console.log(`STUDENT ID ${student._id}`);
+                        // console.log(`STUDENT ID ${student._id}`);
                         found.students.push(student._id);
                     });
-                    console.log('SUCCESFULLY ADDED NEW STUDENTS');
+                    // console.log('SUCCESFULLY ADDED NEW STUDENTS');
                     Cohort.findByIdAndUpdate(cohortID, found)
                         .then(() => {
-                            console.log('SUCCESSFULLY UPDATED COHORT WITH NEW STUDENTS');
+                            // console.log('SUCCESSFULLY UPDATED COHORT WITH NEW STUDENTS');
                             User.findById(teacherID)
-                                .populate('cohorts')
-                                .populate({
-                                    path: 'cohorts',
-                                    populate: { path: 'students', model: 'Students' },
-                                })
-                                .populate({ path: 'rockets', populate: { path: 'twoDay' } })
-                                .populate({ path: 'rockets', populate: { path: 'twoWeek' } })
-                                .populate({ path: 'rockets', populate: { path: 'twoMonth' } })
                                 .then(teacher => {
-                                    console.log(
-                                        'SUCCESSFULLY FOUND A USER BY ID AND POPULATED DATA FIELDS'
-                                    );
+                                    // console.log(
+                                    //     'SUCCESSFULLY FOUND A USER BY ID AND POPULATED DATA FIELDS'
+                                    // );
                                     res.status(201).json(teacher);
                                 })
                                 .catch(err => {

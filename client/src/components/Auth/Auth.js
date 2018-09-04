@@ -33,7 +33,7 @@ const styles = {
     },
 };
 
-const StyledFormContainer = styled.div`
+export const StyledFormContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,7 +46,7 @@ const StyledFormContainer = styled.div`
     border-radius: 0.25rem;
 `;
 
-const StyledFormCard = styled(Card)`
+export const StyledFormCard = styled(Card)`
     display: flex;
     flex-direction: row;
     min-width: 10rem;
@@ -59,18 +59,18 @@ const StyledFormCard = styled(Card)`
     border-radius: 0.25rem;
 `;
 
-const StyledCardContent = styled(CardContent)`
+export const StyledCardContent = styled(CardContent)`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #3F51B5;
+    background-color: #3f51b5;
     width: 100%;
     font-size: 1.5rem;
     border-radius: 0.25rem;
 `;
 
-const StyledFormHeader = styled(StyledCardContent)`
+export const StyledFormHeader = styled(StyledCardContent)`
     display: flex;
     flex-direction: row;
     background-color: #fff;
@@ -83,7 +83,7 @@ const StyledFormHeader = styled(StyledCardContent)`
     border-radius: 0.25rem;
 `;
 
-const StyledInputContainer = styled.div`
+export const StyledInputContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -91,7 +91,7 @@ const StyledInputContainer = styled.div`
     aligh-items: center;
 `;
 
-const FieldSet = styled.div`
+export const FieldSet = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -102,10 +102,9 @@ const FieldSet = styled.div`
     }
 `;
 
-const FieldSetSocial = styled(FieldSet)`
-`;
+export const FieldSetSocial = styled(FieldSet)``;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
     background-color: white;
     width: 16rem;
     height: 3rem;
@@ -134,7 +133,7 @@ const StyledInput = styled.input`
     }
 `;
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
     margin: 1rem;
     font-weight: 600;
     font-size: 1rem;
@@ -152,7 +151,7 @@ const StyledButton = styled.button`
     }
 `;
 
-const StyledGoogleBtn = styled(StyledButton)``;
+export const StyledGoogleBtn = styled(StyledButton)``;
 
 class Auth extends Component {
     state = {
@@ -161,10 +160,11 @@ class Auth extends Component {
         authenticated: {},
         success: true,
         flipStatus: false,
+        attempts: 0,
     };
 
     componentDidMount() {
-        this.props.user.success === false
+        this.props.user.authenticated === false
             ? this.setState({ success: false })
             : this.setState({ success: true });
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
@@ -215,8 +215,19 @@ class Auth extends Component {
         this.handleFlip();
     };
 
+    returnToAuth = e => {
+        // If log-in fails, return user to auth page
+        // When they click the back card again.
+        // Stop Propagation to Ignore fields hidden beneath.
+        e.stopPropagation();
+        if (!this.state.success) {
+            this.setState({ flipStatus: false });
+        }
+    };
+
     render() {
-        console.log(`AUTH PROPS ${JSON.stringify(this.props)}`);
+        // console.log(`AUTH PROPS ${JSON.stringify(this.props)}`);
+        // console.log('Attempts Made to Log In', this.state.attempts);
         const { classes } = this.props;
         const flip = { transform: 'translate(0, 0) rotateX(180deg)' };
 
@@ -226,8 +237,15 @@ class Auth extends Component {
                     className={classes.root}
                     style={this.state.flipStatus ? flip : null}
                 >
-                    <StyledCardContent className={classes.root}>
-                        <StyledFormHeader>Sign In or Sign Up</StyledFormHeader>
+                    <StyledCardContent
+                        className={classes.root}
+                        style={
+                            this.state.flipStatus
+                                ? { userSelect: 'none', visibility: 'hidden' }
+                                : { userSelect: 'none', visibility: 'visible' }
+                        }
+                    >
+                        <StyledFormHeader>{this.props.user.status === 'USER_PASSWORD_RESET' ? 'Check your E-Mail for your Password Reset Link' : 'Sign In or Sign Up'}</StyledFormHeader>
                         <StyledInputContainer>
                             <FieldSet>
                                 <StyledInput
@@ -255,32 +273,35 @@ class Auth extends Component {
                             <FieldSetSocial>
                                 <StyledGoogleBtn onClick={this.handleSignInGoogle}>
                                     <span style={{ padding: '0 0.5rem' }}>
-                                        <i class="fab fa-google fa-lg" />
+                                        <i className="fab fa-google fa-lg" />
                                     </span>{' '}
                                     Sign In with Google
                                 </StyledGoogleBtn>
                                 <StyledButton onClick={this.handleSignInFacebook}>
                                     <span style={{ padding: '0 0.5rem' }}>
-                                        <i class="fab fa-facebook-f fa-lg" />
+                                        <i className="fab fa-facebook-f fa-lg" />
                                     </span>{' '}
                                     Sign In with Facebook
                                 </StyledButton>
                                 <StyledButton onClick={this.handleSignInTwitter}>
                                     <span style={{ padding: '0 0.5rem' }}>
-                                        <i class="fab fa-twitter fa-lg" />
+                                        <i className="fab fa-twitter fa-lg" />
                                     </span>{' '}
                                     Sign in with Twitter
                                 </StyledButton>
                             </FieldSetSocial>
                         </StyledInputContainer>
                     </StyledCardContent>
-                    {this.props.user.status === 'FAILED' ? (
-                        <AuthBackside message={'failed'} />
-                    ) : this.props.user.status === 'LOGGING_IN_USER' ? (
-                        <AuthBackside message={'loggingIn'} />
-                    ) : this.props.user.status === 'ADDING_USER' ? (
-                        <AuthBackside message={'addingUser'} />
-                    ) : null}
+                    <AuthBackside
+                        message={'failed'}
+                        tryAgain={this.returnToAuth}
+                        key={'AuthBackCard'}
+                        style={
+                            this.state.flipStatus ? { userSelect: 'all' } : { userSelect: 'none' }
+                        }
+                        status={this.props.user.status}
+                        attempts={this.state.attempts}
+                    />
                 </StyledFormCard>
                 {this.props.user.authenticated ? <Redirect to="/rocket" /> : null}
             </StyledFormContainer>

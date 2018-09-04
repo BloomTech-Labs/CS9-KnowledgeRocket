@@ -26,6 +26,9 @@ import {
     UPLOAD_CSV,
     UPLOADING_CSV,
     UPLOAD_CSV_FAILURE,
+    RESETTING_USER_PASSWORD,
+    USER_PASSWORD_RESET,
+    USER_PASSWORD_RESET_FAILED,
 } from '../actions';
 
 const defaultState = {
@@ -38,7 +41,7 @@ const defaultState = {
     status: 'INITIAL',
     students: [],
     rockets: [],
-    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{rocketId: {}}] }],
+    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{ rocketId: {} }] }],
 };
 
 export default (state = defaultState, action) => {
@@ -133,7 +136,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_STUDENT:
             StateCopy.status = DELETE_STUDENT;
-            let cohortIdx =  -1; // Initialize as a non index
+            let cohortIdx = -1; // Initialize as a non index
             let studentIdx = -1; // Initialize as a non index
             StateCopy.cohorts.forEach((cohort, index) => {
                 let students = cohort.students;
@@ -171,6 +174,15 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = LOGIN_USER;
+            return StateCopy;
+        case RESETTING_USER_PASSWORD:
+            StateCopy.status = RESETTING_USER_PASSWORD;
+            return StateCopy;
+        case USER_PASSWORD_RESET:
+            StateCopy.status = USER_PASSWORD_RESET;
+            return StateCopy;
+        case USER_PASSWORD_RESET_FAILED:
+            StateCopy.status = USER_PASSWORD_RESET_FAILED;
             return StateCopy;
         case LOGOUT_USER:
             return defaultState;

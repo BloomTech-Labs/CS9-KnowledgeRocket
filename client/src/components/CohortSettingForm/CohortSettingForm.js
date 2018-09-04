@@ -22,7 +22,7 @@ const StylizedInput = styled(Input)`
     background-color: #f2f7ff;
     border-radius: 0.25rem;
     order: 0;
-	flex-grow: 12;
+    flex-grow: 12;
 `;
 
 const StylizedForm = styled.form`
@@ -32,31 +32,33 @@ const StylizedForm = styled.form`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-	order: 3;
+    order: 3;
 `;
 
 const StylizedCSVInput = styled.input`
-	margin: 0 1rem 1rem 0rem !important;
+    margin: 0 1rem 1rem 0rem !important;
     overflow: hidden;
     position: absolute;
     width: 0.1px;
     opacity: 0;
     z-index: -10;
-	height: 0.1px;
+    height: 0.1px;
 `;
 
 const StyledCSVLabelButton = styled.label`
-	margin: 0 1rem 1rem 0rem !important;
-	font-size: 0.875rem;
+    margin: 0 1rem 1rem 0rem !important;
+    font-size: 0.875rem;
     min-width: 64px;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     min-height: 36px;
     box-sizing: border-box;
     line-height: 1.4em;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 500;
-	border-radius: 4px;
-	
+    border-radius: 4px;
+
     text-transform: uppercase;
     display: flex;
     justify-content: center;
@@ -86,7 +88,7 @@ class CohortSettingForm extends Component {
     state = {
         csvData: [],
         cohort: {
-            ccEmail: false,
+            cc: false,
             rockets: { _id: '', rocketId: '', startDate: '', td: '', tw: '', tm: '' },
             students: [{}],
             title: '',
@@ -120,8 +122,8 @@ class CohortSettingForm extends Component {
         }
     };
 
-    handleCheckBox = (one, two) => {
-        this.setState({ cohort: { ...this.state.cohort, ccEmail: !this.state.cohort.ccEmail } });
+    handleCheckBox = () => {
+        this.setState({ cohort: { ...this.state.cohort, cc: !this.state.cohort.cc } });
     };
 
     handleNewInput = e => {
@@ -131,7 +133,7 @@ class CohortSettingForm extends Component {
     handleAddCohort = () => {
         const cohort = {
             title: this.state.cohort.title,
-            ccEmail: this.state.cohort.ccEmail,
+            cc: this.state.cohort.cc,
         };
         if (this.state.cohort._id !== '') {
             cohort._id = this.state.cohort._id;
@@ -140,6 +142,7 @@ class CohortSettingForm extends Component {
     };
 
     render() {
+        console.log('CC Email',this.state.cohort.cc)
         return (
             <div className={this.props.className}>
                 <StylizedInput
@@ -152,7 +155,7 @@ class CohortSettingForm extends Component {
                     }
                 />
                 <StylizedForm>
-                    <StyledCSVLabelButton for="csv-file">IMPORT CSV</StyledCSVLabelButton>
+                    <StyledCSVLabelButton htmlFor={'csv-file'}>IMPORT CSV</StyledCSVLabelButton>
                     <StylizedCSVInput
                         type="file"
                         id="csv-file"
@@ -162,11 +165,11 @@ class CohortSettingForm extends Component {
                 </StylizedForm>
                 <StyledFormControlLabel
                     control={
-                        <Checkbox
-                            onChange={e => this.handleCheckBox(e, this)}
-                            name="ccEmail"
-                            checked={this.state.cohort.ccEmail}
-                        />
+                        this.props.state.user.cohorts[this.props.cohortIDX].cc ? (
+                            <Checkbox onChange={this.handleCheckBox} name="ccEmail" checked/>
+                        ) : (
+                            <Checkbox onChange={this.handleCheckBox} name="ccEmail" />
+                        )
                     }
                     label="CC Me on Rocket Emails"
                 />

@@ -18,6 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
+import {smallBreakPoint} from '../Themes/Themes';
 
 export const RocketListContainer = Styled.div`
     ${props => console.log(props.theme)};
@@ -27,9 +28,9 @@ export const RocketListContainer = Styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    @media (max-width: 540px) {
+    ${smallBreakPoint(`
         align-items: center;
-    }
+    `)}
 `;
 
 export const RocketListCard = Styled(Card)`
@@ -159,11 +160,11 @@ class SimpleDialog extends Component {
                 <DialogTitle id="DeleteDialog">Delete Rocket?</DialogTitle>
                 <div>
                     <List>
-                        {options.map(opt => (
+                        {options.map((opt, index) => (
                             <ListItem
                                 button
                                 onClick={() => this.handleListItemClick(opt)}
-                                key={opt}
+                                key={opt.id || `${opt}_${index}`}
                             >
                                 <ListItemAvatar>
                                     <Avatar

@@ -17,6 +17,7 @@ import RocketQuestion from '../RocketQuestion/RocketQuestion';
 import ThankYou from '../RocketQuestion/ThankYou';
 import CohortAdd from '../Cohort/CohortAdd';
 import RocketResults from '../RocketResults/RocketResults';
+import AuthResetPassword from '../Auth/AuthResetPassword';
 
 injectGlobal`
     * {
@@ -80,6 +81,7 @@ class Routes extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
                     <Route path="/question/thankyou" exact component={ThankYou} />
+                    <Route path="/forgot" component={AuthResetPassword} />
                 </RouteContainer>
             </BrowserRouter>
         );
