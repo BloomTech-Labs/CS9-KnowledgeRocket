@@ -38,7 +38,7 @@ exports[`CohortList renders correctly 1`] = `
             <div
               className="sc-EHOje cugktn"
             >
-              Add New Cohort
+              Add New Class
             </div>
             <hr
               className="sc-bZQynM ihzXMZ"

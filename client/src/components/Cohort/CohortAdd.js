@@ -11,10 +11,13 @@ import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../
 
 const StylizedInput = styled(Input)`
     padding: 0.5rem;
-    width: 80%;
+    flex-grow: 3;   
     background-color: #f2f7ff;
     border-radius: 0.25rem;
-    margin-right: 1rem;
+    margin: 0rem 1rem 1rem 0rem;
+    @media (max-width: 500px) {
+        margin: 0rem 0rem 1rem 0rem;
+    }
 `;
 // Actions
 
@@ -25,15 +28,20 @@ function mapStateToProps(state) {
 }
 
 const StyledCohortSettingForm = styled.div`
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     width: 100%;
     background-color: white;
     border-radius: 0.4rem;
-    box-shadow: var(--grayRedBlue_shadow);
+    box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
+
 `;
 
 const StyledHeaders = styled.h2`
@@ -47,11 +55,17 @@ const CohortFormMainContainer = styled.div`
     padding: 1rem 1rem 0 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: space-between;
     justify-content: flex-start;
     width: 100%;
     min-height: 100vh;
 `;
+
+const StyledButton = styled(Button)`
+    flex-grow: 0;
+    padding: 0.5rem;
+    margin: 0rem 0rem 1rem 0rem !important;
+`
 
 class CohortAdd extends Component {
     state = {
@@ -94,7 +108,7 @@ class CohortAdd extends Component {
         console.log('MADE IT TO COHORTADD');
         return (
             <CohortFormMainContainer>
-                <StyledHeaders>Create a new Cohort</StyledHeaders>
+                <StyledHeaders>Create a new Class</StyledHeaders>
                 <StyledCohortSettingForm>
                     <StylizedInput
                         placeholder="Please Enter a Name for your New Class"
@@ -102,9 +116,9 @@ class CohortAdd extends Component {
                         name="title"
                         onChange={this.handleNewInput}
                     />
-                    <Button variant="contained" color="primary" onClick={this.handleAddCohort}>
-                        Add this Cohort
-                    </Button>
+                    <StyledButton variant="contained" color="primary" onClick={this.handleAddCohort}>
+                        Add this Class
+                    </StyledButton>
                 </StyledCohortSettingForm>
             </CohortFormMainContainer>
         );

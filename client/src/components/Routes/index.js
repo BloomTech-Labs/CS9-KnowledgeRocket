@@ -38,13 +38,17 @@ const StyledContentContainer = styled.div`
         padding: 0rem 0.8rem 0.8rem 0.8rem;
         max-width: 100%;
     }
+    @media (max-width: 500px) {
+        padding: 0rem 0.8rem 0 0.8rem;
+        max-width: 100%;
+        justify-content: center;
+    }
 `;
 
 const RouteContainer = styled.div`
     background-color: #eeeeee;
     min-height: 100vh;
-    width: 100vw;
-    // max-width: 100vw;
+    width: 100%;
 `;
 
 class InnerRoutes extends Component {

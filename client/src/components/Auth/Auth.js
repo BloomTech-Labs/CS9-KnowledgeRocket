@@ -34,70 +34,68 @@ const styles = {
 };
 
 const StyledFormContainer = styled.div`
-    padding-top: 30px;
-    padding-right: 11.1rem;
     display: flex;
-
-    @media (max-width: 1150px) {
-        width: 40rem;
-        padding-right: 0.1rem;
-    }
-
-    @media (max-width: 500px) {
-        width: 80%;
-        margin: 0 auto;
-        padding-right: 0;
-    }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    min-height: 40rem;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
 `;
 
 const StyledFormCard = styled(Card)`
-    backface-visibility: hidden;
-    margin-top: 110px;
-    margin-right: 11.1rem;
     display: flex;
     flex-direction: row;
-    height: 400px;
-    width: 50rem;
+    min-width: 10rem;
+    max-width: 40rem;
+    width: 100%;
     overflow: visible;
     transform-origin: 25% 50%;
     transform-style: preserve-3d;
     transition: all 1s ease-in-out;
-
-    @media (max-width: 700px) {
-        height: 100%;
-    }
+    border-radius: 0.25rem;
 `;
 
 const StyledCardContent = styled(CardContent)`
-    background-color: #39d1b4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #3F51B5;
     width: 100%;
-    text-align: center;
     font-size: 1.5rem;
+    border-radius: 0.25rem;
 `;
 
 const StyledFormHeader = styled(StyledCardContent)`
-    display: block;
+    display: flex;
+    flex-direction: row;
     background-color: #fff;
-    font-weight: 300;
+    font-weight: 900;
     line-height: 40px;
-    color: #39d1b4;
+    color: #324151;
+    min-width: 10rem;
     width: 100%;
     padding: 0;
-    flex-direction: row;
-    height: 300px;
-    width: 800px;
+    border-radius: 0.25rem;
 `;
 
 const StyledInputContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
-    height: 100%;
-    padding: 10px;
+    justify-content: space-evenly;
+    aligh-items: center;
 `;
 
 const FieldSet = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     width: 50%;
     @media (max-width: 700px) {
         width: 20rem;
@@ -105,22 +103,22 @@ const FieldSet = styled.div`
 `;
 
 const FieldSetSocial = styled(FieldSet)`
-    padding-bottom: 80px;
 `;
 
 const StyledInput = styled.input`
-    background-color: inherit;
-    width: 250px;
-    height: 30px;
-    color: #5b7383;
+    background-color: white;
+    width: 16rem;
+    height: 3rem;
+    color: #white;
     font-weight: 600;
     font-size: 1rem;
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-    margin: 10px;
-
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.25rem;
     &:focus {
         outline: none;
     }
@@ -130,7 +128,6 @@ const StyledInput = styled.input`
         font-weight: 300;
         opacity: 0.7;
     }
-
     &:focus,
     &:valid {
         border-color: white;
@@ -138,32 +135,24 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
+    margin: 1rem;
     font-weight: 600;
     font-size: 1rem;
     color: #fff;
     background-color: inherit;
-    width: 250px;
-    height: 50px;
+    width: 16rem;
+    height: 3rem;
     border: 1px solid #fff;
-    border-radius: 25px;
-    margin: 10px 0;
-
+    border-radius: 2rem;
     &:focus {
         outline: none;
     }
-
     &:hover {
         background-color: HSLA(0, 0%, 100%, 0.2);
     }
 `;
 
-const StyledGoogleBtn = styled(StyledButton)`
-    margin-top: 50px;
-
-    @media (max-width: 700px) {
-        margin-top: 0;
-    }
-`;
+const StyledGoogleBtn = styled(StyledButton)``;
 
 class Auth extends Component {
     state = {
@@ -299,11 +288,14 @@ class Auth extends Component {
     }
 }
 
-export default connect(mapStateToProps, {
-    addUser,
-    loginUser,
-    loginUserGoogle,
-    loginUserFacebook,
-    loginUserTwitter,
-    generateBreadCrumbs,
-})(withStyles(styles)(Auth));
+export default connect(
+    mapStateToProps,
+    {
+        addUser,
+        loginUser,
+        loginUserGoogle,
+        loginUserFacebook,
+        loginUserTwitter,
+        generateBreadCrumbs,
+    }
+)(withStyles(styles)(Auth));

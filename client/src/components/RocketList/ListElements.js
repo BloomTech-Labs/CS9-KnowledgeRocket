@@ -27,6 +27,9 @@ export const RocketListContainer = Styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
+    @media (max-width: 540px) {
+        align-items: center;
+    }
 `;
 
 export const RocketListCard = Styled(Card)`

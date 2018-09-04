@@ -86,7 +86,7 @@ const StyledCrumb = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.1rem;
-    @media (max-width: 500px) {
+    @media (max-width: 540px) {
         display: none;
     }
 `;
@@ -112,6 +112,12 @@ class NavBar extends Component {
     state = {
         mobileOpen: false,
     };
+
+    componentDidMount() {
+        if (!this.props.state.user.authenticated) {
+            this.props.history.push('/rocket/auth');
+        }
+    }
 
     handleLogOut = () => {
         this.props.logOutUser();
@@ -230,6 +236,7 @@ class NavBar extends Component {
     }
 }
 
-export default connect(mapStateToProps, { logOutUser })(
-    withStyles(styles, { withTheme: true })(NavBar)
-);
+export default connect(
+    mapStateToProps,
+    { logOutUser }
+)(withStyles(styles, { withTheme: true })(NavBar));
