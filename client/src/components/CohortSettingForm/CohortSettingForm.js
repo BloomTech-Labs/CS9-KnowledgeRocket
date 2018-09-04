@@ -3,18 +3,26 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Papa from 'papaparse';
 // Material Components
+import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 // Actions
-import { importCSV } from '../../actions/';
+import { importCSV, exportCSV } from '../../actions/';
 
 function mapStateToProps(state) {
 	return {
 		state,
 	};
 }
+
+const styles = theme => ({
+	button: {
+		margin: theme.spacing.unit,
+		color: 'white',
+	},
+});
 
 const StylizedInput = styled(Input)`
 	padding: 0.5rem;
@@ -45,6 +53,10 @@ const StylizedCSVInput = styled.input`
 	height: 0.1px;
 `;
 
+const ExportCSVBtn = styled(Button)`
+	background-color: #3f51b5 !important;
+`;
+
 const StyledLabel = styled.label`
 	box-sizing: border-box;
 	display: flex;
@@ -53,7 +65,7 @@ const StyledLabel = styled.label`
 	color: white;
 	background-color: #3f51b5;
 	border-radius: 0.25rem;
-	padding: 1rem;
+	padding: 0.6rem 0.8rem;
 	order: 1;
 	box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 2px 1px -1px rgba(0, 0, 0, 0.12);
@@ -132,6 +144,8 @@ class CohortSettingForm extends Component {
 	};
 
 	render() {
+		const { classes } = this.props;
+
 		return (
 			<div className={this.props.className}>
 				<StylizedInput
@@ -150,6 +164,13 @@ class CohortSettingForm extends Component {
 						onChange={this.handleFileSelect}
 					/>
 				</StylizedForm>
+				<ExportCSVBtn
+					variant="contained"
+					className={classes.button}
+					onClick={this.handleExportStudents}
+				>
+					Export CSV
+				</ExportCSVBtn>
 				<StyledFormControlLabel
 					control={
 						<Checkbox
@@ -170,4 +191,5 @@ class CohortSettingForm extends Component {
 
 export default connect(mapStateToProps, {
 	importCSV,
-})(CohortSettingForm);
+	exportCSV,
+})(withStyles(styles)(CohortSettingForm));
