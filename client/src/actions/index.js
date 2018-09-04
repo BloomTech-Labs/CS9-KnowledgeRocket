@@ -55,6 +55,10 @@ export const UPLOAD_CSV = 'UPLOAD_CSV';
 export const UPLOADING_CSV = 'UPLOADING_CSV';
 export const UPLOAD_CSV_FAILURE = 'UPLOAD_CSV_FAILURE';
 
+export const EXPORT_CSV = 'EXPORT_CSV';
+export const EXPORTING_CSV = 'EXPORTING_CSV';
+export const EXPORT_CSV_FAILURE = 'EXPORT_CSV_FAILURE';
+
 // Breadcrumb Actions
 export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS';
 
@@ -158,6 +162,16 @@ export const importCSV = (teacherID, cohortID, studentData) => async dispatch =>
         dispatch({ type: UPLOAD_CSV, payload: response.data });
     } catch (err) {
         dispatch({ type: UPLOAD_CSV_FAILURE });
+    }
+};
+
+export const exportCSV = cohortID => async dispatch => {
+    dispatch({ type: EXPORTING_CSV });
+    try {
+        let response = await axios.get(`${url}/api/student/exportcsv/${cohortID}`);
+        dispatch({ type: EXPORT_CSV, payload: response.data });
+    } catch (err) {
+        dispatch({ type: EXPORT_CSV_FAILURE });
     }
 };
 
