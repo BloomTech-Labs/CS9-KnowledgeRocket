@@ -52,7 +52,7 @@ class Billing extends Component {
                         <header className="title10">Billing and Subscriptions</header>
                         <Card className="radioGroup">
                             <FormLabel component="legend" className="legend">
-                                Please Pick a Subscription
+                                Add Premium Time
                             </FormLabel>
                             <RadioGroup
                                 aria-label="gender"
@@ -63,13 +63,13 @@ class Billing extends Component {
                                 <FormControlLabel
                                     value="monthly"
                                     control={<Radio color="primary" />}
-                                    label="1 Month Subscription"
+                                    label="1 Month"
                                     labelPlacement="end"
                                 />
                                 <FormControlLabel
                                     value="yearly"
                                     control={<Radio color="primary" />}
-                                    label="1 Year Subscription"
+                                    label="1 Year"
                                     labelPlacement="end"
                                 />
                             </RadioGroup>

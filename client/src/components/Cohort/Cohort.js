@@ -39,7 +39,7 @@ const StyledCohortSettingForm = styled(CohortSettingForm)`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 0rem 0rem 1rem;
     margin-bottom: 1rem;
     width: 100%;
     background-color: white;
@@ -48,7 +48,6 @@ const StyledCohortSettingForm = styled(CohortSettingForm)`
     @media (max-width: 510px) {
         flex-direction: column;
         align-items: flex-start;
-        height: 12rem;
     }
 `;
 
@@ -69,6 +68,7 @@ const StyledCohortAddStudentForm = styled(CohortAddStudentsForm)`
 `;
 
 const StyledCohortStudentList = styled(CohortStudentList)`
+    position: relative;
     padding: 0.5rem 0.5rem;
     display: flex;
     flex-direction: row;
@@ -210,8 +210,11 @@ class Cohort extends Component {
                         match={this.props.match}
                         cohortID={cohortIDX}
                     />
-                ) : null}{' '}
-                }
+                ) : <StyledCohortStudentList
+                students={this.state.cohort.students}
+                match={this.props.match}
+                cohortID={cohortIDX}
+            />}{' '}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
@@ -222,8 +225,11 @@ class Cohort extends Component {
         );
     }
 }
-export default connect(mapStateToProps, {
-    generateBreadCrumbs,
-    addCohort,
-    appendRocket,
-})(Cohort);
+export default connect(
+    mapStateToProps,
+    {
+        generateBreadCrumbs,
+        addCohort,
+        appendRocket,
+    }
+)(Cohort);

@@ -3,15 +3,25 @@ import styled from 'styled-components';
 
 export const HomeCTA = styled.div`
     font-family: 'Roboto';
-    background: url('/img/HomePage_CTA_11.svg') no-repeat center center;
+    width: 100%;
+    background: url('/img/SpaceBG.jpg') no-repeat center center;
     background-size: cover;
+    height: 400px;
     background-repeat: no-repeat;
-    min-height: 600px;
     background-color: black;
-    @media (min-width: 2000px) {
-        & {
-            background-size: contain;
-        }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+        width: 15%;
+        min-width: 100px;
+    }
+    @media (max-width: 500px) {
+        height: 300px;
+    }
+    @media (min-width: 1024px) {
+        height: 600px;
     }
 `;
 
@@ -40,7 +50,13 @@ export const NavLogo = styled.img`
 `;
 
 export const HomeContainer = styled.div`
+    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+`;
+
+export const CtaContainer = styled.div`
+    width: 100%;
+    padding: 3rem 0 0 0;
 `;
 
 export const MidContainer = styled.div`
@@ -55,18 +71,28 @@ export const HomeHeader = styled.h2`
     font-size: 4rem;
     font-weight: 900;
     color: #232323;
-    min-width: 300px;
-    max-width: 800px;
+    width: 100%;
     text-align: center;
     margin: 3rem 0;
+    @media (max-width: 500px) {
+        font-size: 3rem;
+    }
+`;
+
+export const HomeCtaHeader = styled(HomeHeader)`
+    font-weight: 460;
+    color: white;
+    text-shadow: -2px 0px 3px black, 2px 0px 3px black, 0px -2px 3px black, 0px 2px 3px black;
+    @media (max-width: 500px) {
+        font-size: 2rem;
+    }
 `;
 
 export const MidHeader = styled.h3`
     font-size: 2rem;
     font-weight: 900;
     color: #232323;
-    min-width: 300px;
-    max-width: 800px;
+    max-width: 100%;
     text-align: center;
     margin: 3rem 0;
 `;
@@ -78,6 +104,7 @@ export const MidSectionWrapper = styled.div`
     width: 100%;
     justify-content: space-evenly;
     margin: 0 0 2rem 0;
+    padding: 1rem;
 `;
 
 export const MidColumn = styled.div`
@@ -85,41 +112,75 @@ export const MidColumn = styled.div`
     flex-direction: column;
     align-items: center;
     max-width: 410px;
-    min-width: 300px;
 `;
 
 export const MidSection = styled.div`
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
-    min-width: 300px;
-    max-width: 100%;
+    justify-content: flex-start;
+    align-items: center;
     background-color: #dfdfdf;
     border-radius: 0.5rem;
     border: 1px solid #232323;
-    margin: 1rem;
     height: 100%;
-    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
 `;
 
 export const MidImg = styled.img`
-    background: url(${props => {
-        return props.src;
-    }});
-    margin: 1rem;
+    padding: 1rem;
     height: 200px;
-    background-color: #fefefe;
+    width: 100%;
     border-radius: 0.3rem;
 `;
 
 export const MidSectionText = styled.p`
-    margin: 1rem;
+    padding: 1rem;
     font-size: 1.5rem;
     text-align: justify;
 `;
 
 export const FooterSection = styled.div`
+    box-sizing: border-box;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     width: 100%;
     background-color: black;
+`;
+
+export const FollowSection = styled.div`
+    color: white;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    display: flex;
+    padding: 0.5rem 0.5rem;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    a {
+        text-decoration: none;
+    }
+`;
+
+export const FollowButton = styled.div`
+    font-size: 0.875rem;
+    min-width: 64px;
+    transition: background-color 250ms darkgray 0ms;
+    min-height: 36px;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    border-radius: 4px;
+    color: white;
+    border: 1px solid white;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0.25rem;
+    margin: 0.25rem;
 `;

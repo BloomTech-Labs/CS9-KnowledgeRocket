@@ -47,7 +47,7 @@ class RocketList extends Component {
     };
 
     render() {
-        console.log('rocket counter',this.state.rocketCounter);
+        // console.log('rocket counter', this.state.rocketCounter);
         return (
             <ListWrapper>
                 <RocketListContainer>
@@ -57,14 +57,19 @@ class RocketList extends Component {
                         redirect="/rocket/new"
                         title="Add New Rocket"
                         label="Add"
-                        contents={[<FloatingAdd large click={this.handleNewRocket}/>]}
+                        contents={[
+                            <FloatingAdd id={'Floating_Add'} large click={this.handleNewRocket} />,
+                        ]}
                     />
                     {this.props.state.user.rockets.map((rocket, index) => {
                         return (
                             <ListCard
-                                key={`RL_${index}`}
+                                key={`RL_${index}_${rocket._id}`}
                                 contents={[
-                                    <p>
+                                    <p
+                                        id={`ClassesAssigned_${rocket._id}`}
+                                        key={`ClassesAssigned_${rocket._id}`}
+                                    >
                                         {`Classes Assigned:\t`}
                                         <span style={{ fontWeight: '900' }}>{`(${
                                             this.state.rocketCounter[rocket._id]

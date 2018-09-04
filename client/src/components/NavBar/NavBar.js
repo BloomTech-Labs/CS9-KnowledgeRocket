@@ -16,6 +16,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // Actions
 import { logOutUser } from '../../actions';
+import {smallBreakPoint} from '../Themes/Themes';
 
 function mapStateToProps(state) {
     return {
@@ -86,9 +87,9 @@ const StyledCrumb = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.1rem;
-    @media (max-width: 500px) {
+    ${smallBreakPoint(`
         display: none;
-    }
+    `)}
 `;
 
 const StyledSvg = styled(SvgIcon)`
@@ -113,13 +114,19 @@ class NavBar extends Component {
         mobileOpen: false,
     };
 
+    componentDidMount() {
+        if (!this.props.state.user.authenticated) {
+            this.props.history.push('/rocket/auth');
+        }
+    }
+
     handleLogOut = () => {
         this.props.logOutUser();
         this.props.history.push('/rocket/auth');
     };
 
     handleDrawerToggle = () => {
-        console.log('MADE IT TO handleDrawerToggle  ');
+        // console.log('MADE IT TO handleDrawerToggle  ');
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
 
@@ -152,7 +159,7 @@ class NavBar extends Component {
                             </StyledCrumb>
                         ))}
                     </StyledBreadCrumbContainer>
-                    <Button onClick={this.handleLogOut} variant="contained" color="secondary">
+                    <Button onClick={this.handleLogOut} variant="contained" color="secondary" style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}>
                         Sign-Out
                     </Button>
                 </StyledNavBarContainer>
@@ -165,6 +172,7 @@ class NavBar extends Component {
                         classes={{
                             paper: classes.drawerPaper,
                         }}
+                        style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}
                         ModalProps={{
                             keepMounted: true, // Better open performance on mobile.
                         }}
@@ -193,13 +201,14 @@ class NavBar extends Component {
                         </List>
                     </Drawer>
                 </Hidden>
-                <Hidden smDown implementation="css">
+                <Hidden smDown implementation="css" style={this.props.state.user.authenticated ? {display: 'flex !important'} : {display: 'none !important'}}>
                     <Drawer
                         variant="permanent"
                         open
                         classes={{
                             paper: classes.drawerPaper,
                         }}
+                        style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}
                     >
                         <List>
                             <ListItem>
@@ -230,6 +239,7 @@ class NavBar extends Component {
     }
 }
 
-export default connect(mapStateToProps, { logOutUser })(
-    withStyles(styles, { withTheme: true })(NavBar)
-);
+export default connect(
+    mapStateToProps,
+    { logOutUser }
+)(withStyles(styles, { withTheme: true })(NavBar));
