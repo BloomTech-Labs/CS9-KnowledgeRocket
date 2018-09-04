@@ -90,8 +90,6 @@ class CohortRocketCard extends Component {
 
     render() {
         let scheduledOn = this.props.rocket.startDate
-            // ? this.props.rocket.startDate.slice(0, 10)
-            // : Date.now();
         return (
             <StylizedRocket>
                 <StyledCardContents>
