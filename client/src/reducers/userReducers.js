@@ -26,6 +26,9 @@ import {
     UPLOAD_CSV,
     UPLOADING_CSV,
     UPLOAD_CSV_FAILURE,
+    EXPORT_CSV,
+    EXPORTING_CSV,
+    EXPORT_CSV_FAILURE,
 } from '../actions';
 
 const defaultState = {
@@ -38,7 +41,7 @@ const defaultState = {
     status: 'INITIAL',
     students: [],
     rockets: [],
-    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{rocketId: {}}] }],
+    cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{ rocketId: {} }] }],
 };
 
 export default (state = defaultState, action) => {
@@ -119,11 +122,9 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_COHORT;
             return StateCopy;
         case ADDING_STUDENT:
-            StateCopy.authenticated = true;
             StateCopy.status = ADDING_STUDENT;
             return StateCopy;
         case ADD_STUDENT_FAILURE:
-            StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT_FAILURE;
             return StateCopy;
         case ADD_STUDENT:
@@ -133,7 +134,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_STUDENT:
             StateCopy.status = DELETE_STUDENT;
-            let cohortIdx =  -1; // Initialize as a non index
+            let cohortIdx = -1; // Initialize as a non index
             let studentIdx = -1; // Initialize as a non index
             StateCopy.cohorts.forEach((cohort, index) => {
                 let students = cohort.students;
@@ -157,6 +158,15 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case UPLOAD_CSV_FAILURE:
             StateCopy.status = UPLOAD_CSV_FAILURE;
+            return StateCopy;
+        case EXPORT_CSV:
+            StateCopy['exportCSV'] = action.payload;
+            return StateCopy;
+        case EXPORTING_CSV:
+            StateCopy.status = EXPORTING_CSV;
+            return StateCopy;
+        case EXPORT_CSV_FAILURE:
+            StateCopy.status = EXPORT_CSV_FAILURE;
             return StateCopy;
         case ADD_USER_FAILURE:
             StateCopy.status = 'FAILED';
