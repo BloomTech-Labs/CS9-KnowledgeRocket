@@ -72,6 +72,7 @@ const StyledLabel = styled.label`
 	&:hover {
 		background-color: #303f9f;
 	}
+`;
 
 const StyledCSVLabelButton = styled.label`
     margin: 0 1rem 1rem 0rem !important;
