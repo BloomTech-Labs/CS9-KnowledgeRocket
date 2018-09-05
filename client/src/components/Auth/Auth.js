@@ -57,6 +57,8 @@ const StyledFormCard = styled(Card)`
     transform-style: preserve-3d;
     transition: all 1s ease-in-out;
     border-radius: 0.25rem;
+    box-shadow: 0px 1px 13px 0px rgba(15, 12, 12, 0.3), 0px 1px 13px 0px rgba(15, 12, 12,0.3),
+        0px 2px 13px -1px rgba(15, 12, 12, 0.3) !important;
 `;
 
 export const StyledCardContent = styled(CardContent)`

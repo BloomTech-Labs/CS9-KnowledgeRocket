@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import AuthResetPassword from './AuthResetPassword';
 
 const StyledSection = styled.section`
-    background-color: #5b7383;
+    justify-content: flex-start !important;
+    background-color: #3f51b5;
     font-size: 1rem;
     letter-spacing: 0.1rem;
-    padding: 15px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -30,6 +29,15 @@ const StyledSection = styled.section`
     border-radius: 0.25rem;
 `;
 
+const MessageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+`
+
 const AuthBackside = props => {
     return (
         <StyledSection
@@ -39,8 +47,8 @@ const AuthBackside = props => {
             onMouseDown={props.attempts > 2 ? null : props.tryAgain}
         >
             {props.status === 'FAILED' || props.status === 'USER_PASSWORD_RESET_FAILED' || props.status === 'USER_PASSWORD_RESET' ? (
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%'}}>
-                    <div style={props.attempts > 2 ? {display: 'none'}:{display: 'block'}}>
+                <MessageContainer res={props.attempts > 2 ? true : false}>
+                    <div style={props.attempts > 2 ? {display: 'none'}:{display: 'block', cursor: 'pointer', padding: '15px'}}>
                     <h2>Oops.</h2>
                     <br />
                     <h3>
@@ -49,7 +57,7 @@ const AuthBackside = props => {
                     </h3>
                     </div>
                     {props.attempts > 2 ? <AuthResetPassword tryAgain={props.tryAgain} /> : null }
-                </div>
+                </MessageContainer>
             ) : props.status === 'LOGGING_IN_USER' ? (
                 <div><h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3></div>
             ) : props.message === 'ADDING_USER' ? (
