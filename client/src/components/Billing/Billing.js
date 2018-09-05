@@ -10,7 +10,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import PropTypes from 'prop-types';
 // import Styled from 'styled-components';
 
 function mapStateToProps(state) {
@@ -43,11 +42,9 @@ class Billing extends Component {
         this.setState({ type: type });
     };
     render() {
-        console.log('Subscription type:', this.state.type);
-
         return (
             <StripeProvider apiKey={`${process.env.REACT_APP_PUBLIC_KEY}`}>
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <FormControl component="fieldset" className={`fieldset`}>
                         <header className="title10">Billing and Subscriptions</header>
                         <Card className="radioGroup">
@@ -90,10 +87,6 @@ class Billing extends Component {
         );
     }
 }
-
-Billing.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default connect(
     mapStateToProps,

@@ -32,10 +32,11 @@ export const StyledFormContainer = Styled.div`
     font-family: 'Roboto', serif;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: inherit;
     width: 100%;
+    height: 100%;
     margin: 0;
     box-sizing: border-box;
     border-radius: 0.25rem;
@@ -101,15 +102,17 @@ class AuthResetPassword extends Component {
                             this.props.state.user.status === 'USER_PASSWORD_RESET_FAILED' ||
                             this.state.status !== ''
                                 ? { color: 'red' }
-                                : (this.props.state.user.status === 'USER_PASSWORD_RESET'
+                                : this.props.state.user.status === 'USER_PASSWORD_RESET'
                                     ? { color: 'green' }
-                                    : {})
+                                    : {}
                         }
                     >
                         {this.props.state.user.status === 'USER_PASSWORD_RESET_FAILED'
                             ? 'That E-MAIL Is Not Affiliated With Any of Our Accounts'
                             : this.state.status === ''
-                                ? this.props.state.user.status === 'USER_PASSWORD_RESET'? 'A Password Reset Link has been sent to your E-mail' :'RESET YOUR PASSWORD?'
+                                ? this.props.state.user.status === 'USER_PASSWORD_RESET'
+                                    ? 'A Password Reset Link has been sent to your E-mail'
+                                    : 'RESET YOUR PASSWORD?'
                                 : this.state.status}
                     </StyledFormHeader>
                     <StyledInputContainer>
