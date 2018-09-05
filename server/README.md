@@ -10,8 +10,10 @@
 <p>The following are the dependencies you will need: </p>
 
 ```
+@sendgrid/mail
 cors
 cross-env
+date-fns
 dotenv
 express
 firebase
@@ -19,8 +21,11 @@ firebase-admin
 helmet
 jest
 mongoose
+mongoose-autopopulate
+papaparse
 stripe
 supertest
+yup
 ```
 
 <h3>Installation</h3>
