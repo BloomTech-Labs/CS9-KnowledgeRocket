@@ -248,7 +248,11 @@ class Auth extends Component {
                                 : { userSelect: 'none', visibility: 'visible' }
                         }
                     >
-                        <StyledFormHeader>{this.props.user.status === 'USER_PASSWORD_RESET' ? 'Check your E-Mail for your Password Reset Link' : 'Sign In or Sign Up'}</StyledFormHeader>
+                        <StyledFormHeader>
+                            {this.props.user.status === 'USER_PASSWORD_RESET'
+                                ? 'Check your E-Mail for your Password Reset Link'
+                                : 'Sign In or Sign Up'}
+                        </StyledFormHeader>
                         <StyledInputContainer>
                             <FieldSet>
                                 <StyledInput

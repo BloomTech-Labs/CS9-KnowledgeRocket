@@ -10,8 +10,10 @@
 <p>The following are the dependencies you will need: </p>
 
 ```
+@sendgrid/mail
 cors
 cross-env
+date-fns
 dotenv
 express
 firebase
@@ -19,8 +21,11 @@ firebase-admin
 helmet
 jest
 mongoose
+mongoose-autopopulate
+papaparse
 stripe
 supertest
+yup
 ```
 
 <h3>Installation</h3>
@@ -36,4 +41,25 @@ supertest
 
 <h2>Tests</h2>
 <p>This project uses the jest and supertest testing suites. All server-side tests can be found in the tests directory.</p>
-```yarn test``` or ```npm test```
+`yarn test` or `npm test`
+
+<h3>.env Variables And You</h3>
+```
+Database_Url = MongoDB URL
+TestDB_Url = Database used for Testing Back-End Functionality
+Secret_Key = Stripe Secret Key
+BASE_URL = Deployed Url for the Project
+REACT_APP_PUBLIC_KEY = Stripe Public Key
+REACT_APP_Stripe_Url = Stripe endpoint for Billing
+REACT_APP_FIRE_API= Firebase Api Key
+REACT_APP_FIRE_AUTH_DOMAIN = Firebase Auth Domain for the Project
+REACT_APP_FIRE_DB_URL = Firebase Database Url that holds Users
+REACT_APP_FIRE_PROJECT_ID = Firebase Project ID
+REACT_APP_FIRE_SENDER_ID = Firebase Sender ID
+REACT_APP_FIRE_STORAGE_BUCKET = Firebase Storage Bucket
+SERVER_FIRE_CLIENT_EMAIL = Firebase Email for Client
+SERVER_FIRE_PRIVATE_KEY = Firebase Private Key
+SG_API_KEY = Sendgrid API Key
+SG_TEMPLATE_ID = Sendgrid Template ID
+TZ = Etc/UTC 
+```
