@@ -63,6 +63,7 @@ yup
 `yarn test` or `jest`
 
 <h2>Front-End Routes</h2>
+
 ```
 '/' is the Home Page
 '/forgot' is the page to reset the password for an account
@@ -80,9 +81,11 @@ yup
 '/rocket/settings' is the settings page for the application
 '/rocket/view/:id' views a single rocket
 ```
+
 <h2>Styled Component Notes</h2>
 
 <h3>.env Variables And You</h3>
+
 ```
 REACT_APP_FIRE_API= Firebase Api Key
 REACT_APP_FIRE_AUTH_DOMAIN = Firebase Auth Domain for the Project

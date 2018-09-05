@@ -44,6 +44,7 @@ yup
 `yarn test` or `npm test`
 
 <h3>.env Variables And You</h3>
+
 ```
 Database_Url = MongoDB URL
 TestDB_Url = Database used for Testing Back-End Functionality
@@ -61,5 +62,5 @@ SERVER_FIRE_CLIENT_EMAIL = Firebase Email for Client
 SERVER_FIRE_PRIVATE_KEY = Firebase Private Key
 SG_API_KEY = Sendgrid API Key
 SG_TEMPLATE_ID = Sendgrid Template ID
-TZ = Etc/UTC 
+TZ = Etc/UTC
 ```
