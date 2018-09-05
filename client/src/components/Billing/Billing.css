@@ -5,6 +5,8 @@
 .checkout {
     width: 25rem;
 }
+
+
 .legend {
     margin-bottom: 10px;
 }
@@ -40,4 +42,9 @@
 .fieldset {
     margin: 1rem !important;
     width: 25rem;
+}
+@media (max-width: 500px){
+    .checkout, .fieldset {
+        width: 100%;
+    }
 }

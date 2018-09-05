@@ -63,7 +63,6 @@ class RocketView extends Component {
             this.props.history.push('/rocket/auth');
         }
         // Breadcrumb Generation Routine
-        // console.log(this.props.history.location.pathname)
         // Hard Coded the Path for the Breadcrumbs
         this.props.generateBreadCrumbs('/rocket/');
 
@@ -86,7 +85,6 @@ class RocketView extends Component {
     };
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <MainContainer>

@@ -55,7 +55,6 @@ class CohortStudentCard extends Component {
         const studentID = this.props.student._id;
         console.log(`STUDENT ID ${studentID}`);
         this.props.deleteStudent(studentID);
-        // this.props.history.push(`/rockets/cohort/${this.props.cohortID}`)
     };
 
     handleOnClick = () => {

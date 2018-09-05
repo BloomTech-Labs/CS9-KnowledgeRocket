@@ -17,6 +17,14 @@ import RocketQuestion from '../RocketQuestion/RocketQuestion';
 import ThankYou from '../RocketQuestion/ThankYou';
 import CohortAdd from '../Cohort/CohortAdd';
 import RocketResults from '../RocketResults/RocketResults';
+import AuthResetPassword from '../Auth/AuthResetPassword';
+import { connect } from 'react-redux';
+
+function mapStateToProps(state) {
+    return {
+        state,
+    };
+}
 
 injectGlobal`
     * {
@@ -28,29 +36,32 @@ injectGlobal`
 const StyledContentContainer = styled.div`
     height: inherit;
     width: 100%;
-    padding: 0rem 0.8rem 0.8rem 10.6rem;
+    padding: ${props => props.authenticated ? '0rem 0.8rem 0.8rem 10.6rem' : '0rem 0.8rem 0.8rem 0rem'};
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'Roboto', serif;
-
     @media (max-width: 960px) {
         padding: 0rem 0.8rem 0.8rem 0.8rem;
         max-width: 100%;
+    }
+    @media (max-width: 500px) {
+        padding: 0rem 0.8rem 0 0.8rem;
+        max-width: 100%;
+        justify-content: center;
     }
 `;
 
 const RouteContainer = styled.div`
     background-color: #eeeeee;
     min-height: 100vh;
-    width: 100vw;
-    // max-width: 100vw;
+    width: 100%;
 `;
 
 class InnerRoutes extends Component {
     render() {
         return (
-            <StyledContentContainer>
+            <StyledContentContainer authenticated={this.props.state.user.authenticated}>
                 <Route path="/rocket" exact component={RocketList} />
                 <Route path="/rocket/new" exact component={Rocket} />
                 <Route path="/rocket/view/:id" exact component={RocketView} />
@@ -66,20 +77,28 @@ class InnerRoutes extends Component {
     }
 }
 
+const connectedInnerRoutes = connect(mapStateToProps)(InnerRoutes)
+
 class Routes extends Component {
     render() {
         return (
             <BrowserRouter>
                 <RouteContainer>
                     <Route path="/rocket" component={NavBar} />
-                    <Route path="/rocket" component={InnerRoutes} />
-                    <Route path="/" exact component={Home} />
+                    <Route path="/rocket" component={connectedInnerRoutes} />
+                    <Route path="/" exact component={Home}/>
+                    {/* <Route path="/" exact render={props => (<Home {...props}/>)}/> */}
+                    {/* THE OLD WAY OF DOING QUESTIONS */}
                     <Route path="/question/:question/:student" exact component={RocketQuestion} />
+                    {/* THE NEW WAY OF DOING QUESTIONS  */}
+                    <Route path="/question/:cohort/:question/:student" exact component={RocketQuestion} />
                     <Route path="/question/thankyou" exact component={ThankYou} />
+                    <Route path="/forgot" component={AuthResetPassword} />
                 </RouteContainer>
             </BrowserRouter>
         );
     }
 }
 
-export default Routes;
+export default connect(mapStateToProps,{})(Routes);
+// export default Routes;

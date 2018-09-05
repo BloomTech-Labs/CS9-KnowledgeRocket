@@ -25,14 +25,12 @@ const styles = theme => ({
 });
 
 const StylizedInput = styled(Input)`
+	margin: 0 1rem 1rem 0rem !important;
 	padding: 0.5rem;
 	background-color: #f2f7ff;
 	border-radius: 0.25rem;
 	order: 0;
-	width: 100%;
-	@media (min-width: 500px) {
-		width: 50%;
-	}
+	flex-grow: 12;
 `;
 
 const StylizedForm = styled.form`
@@ -42,9 +40,11 @@ const StylizedForm = styled.form`
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+	order: 3;
 `;
 
 const StylizedCSVInput = styled.input`
+	margin: 0 1rem 1rem 0rem !important;
 	overflow: hidden;
 	position: absolute;
 	width: 0.1px;
@@ -53,20 +53,25 @@ const StylizedCSVInput = styled.input`
 	height: 0.1px;
 `;
 
-const ExportCSVBtn = styled(Button)`
-	background-color: #3f51b5 !important;
-`;
-
-const StyledLabel = styled.label`
+const StyledCSVLabelButton = styled.label`
+	margin: 0 1rem 1rem 0rem !important;
+	font-size: 0.875rem;
+	min-width: 64px;
+	transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+		box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+	min-height: 36px;
 	box-sizing: border-box;
+	line-height: 1.4em;
+	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+	font-weight: 500;
+	border-radius: 4px;
+
+	text-transform: uppercase;
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
 	color: white;
 	background-color: #3f51b5;
-	border-radius: 0.25rem;
-	padding: 0.6rem 0.8rem;
-	order: 1;
+	padding: 1rem;
 	box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 	&:hover {
@@ -75,15 +80,15 @@ const StyledLabel = styled.label`
 `;
 
 const StyledFormControlLabel = styled(FormControlLabel)`
+	margin: 0 1rem 1rem 0rem !important;
 	order: 2;
-	padding-right: 0.5rem;
-	margin-right: 0.5rem;
 `;
 
-// const MyCheckBox = styled.div`
-//     padding: .2rem;
-//     border: #f2f7ff;
-// `
+const StyledButton = styled(Button)`
+	margin: 0 1rem 1rem 0rem !important;
+	padding: 1rem !important;
+	order: 4;
+`;
 
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
@@ -199,17 +204,22 @@ class CohortSettingForm extends Component {
 				</ExportCSVBtn>
 				<StyledFormControlLabel
 					control={
-						<Checkbox
-							onChange={e => this.handleCheckBox(e, this)}
-							name="ccEmail"
-							checked={this.state.cohort.ccEmail}
-						/>
+						this.props.state.user.cohorts[this.props.cohortIDX].cc ? (
+							<Checkbox onChange={this.handleCheckBox} name="ccEmail" checked />
+						) : (
+							<Checkbox onChange={this.handleCheckBox} name="ccEmail" />
+						)
 					}
 					label="CC Me on Rocket Emails"
 				/>
-				<Button variant="contained" color="primary" onClick={this.handleAddCohort}>
-					Add this Cohort
-				</Button>
+				<StyledButton
+					variant="contained"
+					color="primary"
+					onClick={this.handleAddCohort}
+					style={{ order: '4' }}
+				>
+					Add / Edit Class
+				</StyledButton>
 			</div>
 		);
 	}

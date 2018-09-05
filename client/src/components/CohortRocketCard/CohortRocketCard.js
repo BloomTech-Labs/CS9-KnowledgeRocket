@@ -109,7 +109,6 @@ class CohortRocketCard extends Component {
                         id="date"
                         label="Re-Schedule?"
                         type="date"
-                        // className={classes.textField}
                         InputLabelProps={{
                             shrink: true,
                         }}

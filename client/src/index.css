@@ -170,6 +170,7 @@ table {
     font-size: 2rem;
     margin: 1rem;
     color: var(--grayRedBlue_header);
+    text-align: center;
 }
 
 /* Themes */

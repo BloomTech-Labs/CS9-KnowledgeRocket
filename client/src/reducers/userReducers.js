@@ -29,6 +29,9 @@ import {
     EXPORT_CSV,
     EXPORTING_CSV,
     EXPORT_CSV_FAILURE,
+    RESETTING_USER_PASSWORD,
+    USER_PASSWORD_RESET,
+    USER_PASSWORD_RESET_FAILED,
 } from '../actions';
 
 const defaultState = {
@@ -181,6 +184,15 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = LOGIN_USER;
+            return StateCopy;
+        case RESETTING_USER_PASSWORD:
+            StateCopy.status = RESETTING_USER_PASSWORD;
+            return StateCopy;
+        case USER_PASSWORD_RESET:
+            StateCopy.status = USER_PASSWORD_RESET;
+            return StateCopy;
+        case USER_PASSWORD_RESET_FAILED:
+            StateCopy.status = USER_PASSWORD_RESET_FAILED;
             return StateCopy;
         case LOGOUT_USER:
             return defaultState;
