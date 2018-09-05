@@ -27,7 +27,6 @@ export class CohortList extends Component {
     state = {
         cohort: [{ students: [] }],
         PS: {},
-        open: false,
     };
 
     componentDidMount() {
@@ -97,10 +96,6 @@ export class CohortList extends Component {
 
     handleNewCohortRedirect = () => {
         this.props.history.push('/rocket/newclass');
-    };
-
-    handleClick = () => {
-        this.setState({ open: false });
     };
 
     render() {
