@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import moment from 'moment-timezone';
-import { appendRocket } from '../../actions';
+import { appendRocket, getResponseRocketByRocketId } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -22,7 +22,7 @@ const StylizedRocket = styled(Card)`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin: .5rem;
+    margin: 0.5rem;
 `;
 
 const StylizedCohorts = styled.div`
@@ -52,7 +52,7 @@ const StyledCardContents = styled(CardContent)`
         font-weight: bold;
         font-size: 1.5rem;
     }
-`
+`;
 
 class CohortRocketCard extends Component {
     state = {
@@ -77,7 +77,7 @@ class CohortRocketCard extends Component {
     }
 
     handleDateChange = e => {
-        let newDate = Date.parse(e.target.value)
+        let newDate = Date.parse(e.target.value);
         this.setState({ newDate });
     };
 
@@ -89,8 +89,46 @@ class CohortRocketCard extends Component {
         this.props.appendRocket(rocketID, newDate, userID, cohortID);
     };
 
+    displayResults = () => {
+        // Find Response Rocket that Matches {rocketId: this.props.rocket.rocketId._id}
+        // Also has to match: { cohortId: this.props.cohortID }
+        // Respond from server is expected a whole populated ResponseRocket:
+        /*
+        const ResponseRocket = mongoose.Schema({
+            questionId: { type: ObjectId, ref: 'Question' },
+            cohortId: { type: ObjectId, ref: 'Cohort' },
+            students: [
+                {
+                    studentId: {
+                        type: ObjectId,
+                        ref: 'Student',
+                    },
+                    answer: [
+                        {
+                            choice: {
+                                // Choices are indices for the answers array.
+                                type: Number,
+                                default: 0,
+                            },
+                            submitted: {
+                                type: Date,
+                                default: Date.now,
+                            },
+                        },
+                    ],
+                },
+            ],
+            sent: { type: Number, default: 0 },
+        });
+        */
+        const rocketId = this.props.rocket.rocketId._id;
+        const cohortId = this.props.cohortID;
+        this.props.getResponseRocketByRocketId(rocketId, cohortId);
+    };
+
     render() {
-        let scheduledOn = this.props.rocket.startDate
+        console.log('Are these the droids I am looking for?', this.props.rocket);
+        let scheduledOn = this.props.rocket.startDate;
         return (
             <StylizedRocket>
                 <StyledCardContents>
@@ -100,9 +138,9 @@ class CohortRocketCard extends Component {
                         <ClipQuestion>{this.state.userRocket.twoWeek.question}</ClipQuestion>
                         <ClipQuestion>{this.state.userRocket.twoMonth.question}</ClipQuestion>
                     </StylizedCohorts>
-                    <CohortLabel>{`Scheduled on ${moment(
-                        moment.tz(scheduledOn, 'Etc/UTC')
-                    ).format('MMM Do YY')}`}</CohortLabel>
+                    <CohortLabel>{`Scheduled on ${moment(moment.tz(scheduledOn, 'Etc/UTC')).format(
+                        'MMM Do YY'
+                    )}`}</CohortLabel>
                     <TextField
                         style={{ width: '100%', marginBottom: '1rem' }}
                         id="date"
@@ -113,7 +151,20 @@ class CohortRocketCard extends Component {
                         }}
                         onChange={this.handleDateChange}
                     />
-                    <Button variant="contained" color="primary" onClick={this.reScheduleRocket} style={{float: 'right'}}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.displayResults}
+                        style={{ float: 'left' }}
+                    >
+                        Results
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.reScheduleRocket}
+                        style={{ float: 'right' }}
+                    >
                         Re-Schedule
                     </Button>
                 </StyledCardContents>
@@ -122,4 +173,7 @@ class CohortRocketCard extends Component {
     }
 }
 
-export default connect(mapStateToProps, { appendRocket })(CohortRocketCard);
+export default connect(
+    mapStateToProps,
+    { appendRocket, getResponseRocketByRocketId }
+)(CohortRocketCard);

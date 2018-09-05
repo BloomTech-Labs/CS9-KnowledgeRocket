@@ -72,6 +72,11 @@ export const ADDING_ROCKET = 'ADDING_ROCKET';
 export const DELETING_ROCKET = 'DELETING_ROCKET';
 export const DELETE_ROCKET = 'DELETE_ROCKET';
 
+// RESPONSE ROCKET ACTIONS FOR RESULTS
+export const FETCHING_RESPONSE = 'FETCHING_RESPONSE';
+export const RESPONSE_RECEIVED = 'RESPONSE_RECEIVED';
+export const FETCHING_RESPONSE_FAILED = 'FETCHING_RESPONSE_FAILED';
+
 // Add Rocket Actions
 export const addRocket = (rocket, uid) => async dispatch => {
     dispatch({ type: ADDING_ROCKET });
@@ -289,7 +294,7 @@ export const loginUserTwitter = () => async dispatch => {
     }
 };
 
-export const resetUserPassword = (email) => async dispatch => {
+export const resetUserPassword = email => async dispatch => {
     dispatch({ type: RESETTING_USER_PASSWORD });
     try {
         await Firebase.auth().sendPasswordResetEmail(email);
@@ -298,7 +303,7 @@ export const resetUserPassword = (email) => async dispatch => {
         dispatch({ type: USER_PASSWORD_RESET_FAILED });
         // console.log(err);
     }
-}
+};
 
 export const logOutUser = () => async dispatch => {
     try {
@@ -315,3 +320,18 @@ export const generateBreadCrumbs = path => {
         payload: path,
     };
 };
+
+/* RESPONSE ROCKETS FOR RESULTS */
+// 'FETCHING_RESPONSE'
+// 'RESPONSE_RECEIVED'
+// 'FETCHING_RESPONSE_FAILED'
+export const getResponseRocketByRocketId = (rocketId, cohortId) => async dispatch => {
+    dispatch({type: FETCHING_RESPONSE});
+    try {
+        let response = await axios.post(`${url}/api/responserocket/results/`,{rocketId, cohortId})
+        console.log(response)
+        dispatch({ type: RESPONSE_RECEIVED, payload: response.data });
+    } catch (err) {
+        dispatch({type: FETCHING_RESPONSE_FAILED});
+    }
+}
