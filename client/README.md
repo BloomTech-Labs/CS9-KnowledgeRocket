@@ -61,3 +61,16 @@ yup
 <h2>Views</h2>
 
 <h2>Styled Components Notes</h2>
+
+<h3>.env Variables And You</h3>
+```
+REACT_APP_PUBLIC_KEY = Stripe Public Key
+REACT_APP_Stripe_Url = Stripe endpoint for Billing
+REACT_APP_SERVER = Deployed Url for the Project
+REACT_APP_FIRE_API= Firebase Api Key
+REACT_APP_FIRE_AUTH_DOMAIN = Firebase Auth Domain for the Project
+REACT_APP_FIRE_DB_URL = Firebase Database Url that holds Users
+REACT_APP_FIRE_PROJECT_ID = Firebase Project ID
+REACT_APP_FIRE_SENDER_ID = Firebase Sender ID
+REACT_APP_FIRE_STORAGE_BUCKET = Firebase Storage Bucket
+```

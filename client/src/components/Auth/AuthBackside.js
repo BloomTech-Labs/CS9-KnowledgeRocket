@@ -38,22 +38,36 @@ const AuthBackside = props => {
             onBlur={props.attempts > 2 ? null : props.tryAgain}
             onMouseDown={props.attempts > 2 ? null : props.tryAgain}
         >
-            {props.status === 'FAILED' || props.status === 'USER_PASSWORD_RESET_FAILED' || props.status === 'USER_PASSWORD_RESET' ? (
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%'}}>
-                    <div style={props.attempts > 2 ? {display: 'none'}:{display: 'block'}}>
-                    <h2>Oops.</h2>
-                    <br />
-                    <h3>
-                        Your log in failed. Please check your username and password. Click here to
-                        try again. Thank you.
-                    </h3>
+            {props.status === 'FAILED' ||
+            props.status === 'USER_PASSWORD_RESET_FAILED' ||
+            props.status === 'USER_PASSWORD_RESET' ? (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '100%',
+                    }}
+                >
+                    <div style={props.attempts > 2 ? { display: 'none' } : { display: 'block' }}>
+                        <h2>Oops.</h2>
+                        <br />
+                        <h3>
+                            Your log in failed. Please check your username and password. Click here
+                            to try again. Thank you.
+                        </h3>
                     </div>
-                    {props.attempts > 2 ? <AuthResetPassword tryAgain={props.tryAgain} /> : null }
+                    {props.attempts > 2 ? <AuthResetPassword tryAgain={props.tryAgain} /> : null}
                 </div>
             ) : props.status === 'LOGGING_IN_USER' ? (
-                <div><h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3></div>
+                <div>
+                    <h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3>
+                </div>
             ) : props.message === 'ADDING_USER' ? (
-                <div><h2>Please wait.</h2>, <br />, <h3>We are creating your account.</h3></div>
+                <div>
+                    <h2>Please wait.</h2>, <br />, <h3>We are creating your account.</h3>
+                </div>
             ) : null}
         </StyledSection>
     );
