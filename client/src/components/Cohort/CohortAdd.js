@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
 // Material Components
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 // Actions
 import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
+
+function mapStateToProps(state) {
+    return {
+        state,
+    };
+}
 
 const StylizedInput = styled(Input)`
     padding: 0.5rem;
@@ -21,13 +24,6 @@ const StylizedInput = styled(Input)`
         margin: 0rem 0rem 1rem 0rem;
     }
 `;
-// Actions
-
-function mapStateToProps(state) {
-    return {
-        state,
-    };
-}
 
 const StyledCohortSettingForm = styled.div`
     display: flex;
@@ -68,6 +64,13 @@ const StyledButton = styled(Button)`
     margin: 0rem 0rem 1rem 0rem !important;
 `;
 
+const styles = theme => ({
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
+
 class CohortAdd extends Component {
     state = {
         title: '',
@@ -79,7 +82,6 @@ class CohortAdd extends Component {
             objectID: 0,
         },
         open: false,
-        message: '',
     };
 
     componentDidMount() {
@@ -103,16 +105,9 @@ class CohortAdd extends Component {
         const cohort = {
             title: this.state.title,
         };
+        this.handleActionClick('You added a cohort!');
         this.props.addCohort(cohort, this.props.state.user._id);
         this.props.history.push('/rocket/classes');
-    };
-
-    handleActionClick = () => {
-        this.setState({ open: false });
-    };
-
-    handleRequestClose = () => {
-        this.setState({ open: false });
     };
 
     render() {
@@ -135,30 +130,6 @@ class CohortAdd extends Component {
                     </StyledButton>
                 </StyledCohortSettingForm>
             </CohortFormMainContainer>,
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                open={this.state.open}
-                autoHideDuration={6000}
-                onClose={this.handleRequestClose}
-                ContentProps={{
-                    'aria-describedby': 'message-id',
-                }}
-                message={<span id="message-id">{this.state.message}</span>}
-                action={[
-                    <IconButton
-                        key="close"
-                        aria-label="Close"
-                        color="inherit"
-                        className={classes.close}
-                        onClick={this.handleRequestClose}
-                    >
-                        <CloseIcon />
-                    </IconButton>,
-                ]}
-            />,
         ];
     }
 }
