@@ -122,7 +122,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
-            StateCopy['message'] = 'You added a cohort!';
+            StateCopy.message = 'You added a class!';
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
             return StateCopy;
@@ -134,6 +134,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_STUDENT:
             StateCopy = action.payload;
+            StateCopy.message = 'You added a student to your class!';
             StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
