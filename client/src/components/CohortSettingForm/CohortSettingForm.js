@@ -53,6 +53,17 @@ const StylizedCSVInput = styled.input`
 	height: 0.1px;
 `;
 
+const ExportCSVBtn = styled(Button)`
+	background-color: #3f51b5 !important;
+	margin: 0 1rem 1rem 0rem !important;
+	overflow: hidden;
+	position: absolute;
+	width: 0.1px;
+	opacity: 0;
+	z-index: -10;
+	height: 0.1px;
+`;
+
 const StyledCSVLabelButton = styled.label`
 	margin: 0 1rem 1rem 0rem !important;
 	font-size: 0.875rem;
@@ -72,6 +83,23 @@ const StyledCSVLabelButton = styled.label`
 	color: white;
 	background-color: #3f51b5;
 	padding: 1rem;
+	box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+	&:hover {
+		background-color: #303f9f;
+	}
+`;
+
+const StyledLabel = styled.label`
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	color: white;
+	background-color: #3f51b5;
+	border-radius: 0.25rem;
+	padding: 0.6rem 0.8rem;
+	order: 1;
 	box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 	&:hover {

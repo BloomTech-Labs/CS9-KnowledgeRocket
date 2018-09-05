@@ -46,10 +46,8 @@ export const StyledFormContainer = styled.div`
     border-radius: 0.25rem;
 `;
 
-export const StyledFormCard = styled(Card)`
+const StyledFormCard = styled(Card)`
     backface-visibility: hidden;
-    margin-top: 110px;
-    margin-right: 11.1rem;
     display: flex;
     flex-direction: row;
     min-width: 10rem;
@@ -84,7 +82,6 @@ export const StyledFormHeader = styled(StyledCardContent)`
     width: 100%;
     padding: 0;
     flex-direction: row;
-    height: 300px;
     width: 800px;
     border-radius: 0.25rem;
 `;
