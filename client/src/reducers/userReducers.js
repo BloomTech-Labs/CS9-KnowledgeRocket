@@ -45,6 +45,7 @@ const defaultState = {
     students: [],
     rockets: [],
     cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{ rocketId: {} }] }],
+    message: '',
 };
 
 export default (state = defaultState, action) => {
