@@ -5,11 +5,7 @@ import { withRouter } from 'react-router-dom';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
-import {
-    FloatingAdd,
-    ListCard,
-    ListWrapper,
-} from '../RocketList/ListElements';
+import { FloatingAdd, ListCard, ListWrapper } from '../RocketList/ListElements';
 import axios from 'axios';
 const url = process.env.REACT_APP_SERVER;
 
@@ -31,6 +27,7 @@ export class CohortList extends Component {
     state = {
         cohort: [{ students: [] }],
         PS: {},
+        open: false,
     };
 
     componentDidMount() {
@@ -80,7 +77,7 @@ export class CohortList extends Component {
                     // Versus the amount that should have answered them.
                     participation =
                         totalShouldHaveAnswered > 0
-                            ? ((totalAnswered * 100) / totalShouldHaveAnswered).toFixed(1)
+                            ? (totalAnswered * 100 / totalShouldHaveAnswered).toFixed(1)
                             : '100';
                     this.setState({
                         [cohort._id]: { participation, sent: totalShouldHaveAnswered },
@@ -100,6 +97,10 @@ export class CohortList extends Component {
 
     handleNewCohortRedirect = () => {
         this.props.history.push('/rocket/newclass');
+    };
+
+    handleClick = () => {
+        this.setState({ open: false });
     };
 
     render() {
@@ -155,7 +156,8 @@ export class CohortList extends Component {
                                         ]}
                                     />
                                 );
-                            } return null;
+                            }
+                            return null;
                         })}
                     </CohortCardContainer>
                 ) : null}
@@ -164,9 +166,4 @@ export class CohortList extends Component {
     }
 }
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        { generateBreadCrumbs }
-    )(CohortList)
-);
+export default withRouter(connect(mapStateToProps, { generateBreadCrumbs })(CohortList));
