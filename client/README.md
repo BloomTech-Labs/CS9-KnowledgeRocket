@@ -62,9 +62,25 @@ yup
 
 `yarn test` or `jest`
 
-<h2>Views</h2>
-
-<h2>Styled Components Notes</h2>
+<h2>Front-End Routes</h2>
+```
+'/' is the Home Page
+'/forgot' is the page to reset the password for an account
+'/question/:cohort/:question/:student' is the endpoint for students to respond
+'/question/thankyou' thanks user for their submission after completing a response rocket
+'/rocket' passes the NavBar to all further routes.
+'/rocket' includes the Rocket list component
+'/rocket/auth' includes the Auth component which allows the user to sign in/up
+'/rocket/billing' includes the Billing Form used for Account Upgrades
+'/rocket/classes' includes the Cohort list component
+'/rocket/classform/:id' views a single cohort
+'/rocket/new' is the form for adding a new rocket to the Rocket list
+'/rocket/newclass' is the form for adding a new cohort to the Cohort list
+'/rocket/results' is the page for viewing Individual Knowledge Rocket results
+'/rocket/settings' is the settings page for the application
+'/rocket/view/:id' views a single rocket
+```
+<h2>Styled Component Notes</h2>
 
 <h3>.env Variables And You</h3>
 ```
