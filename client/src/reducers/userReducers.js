@@ -121,6 +121,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy['message'] = 'You added a cohort!';
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
             return StateCopy;
