@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AuthResetPassword from './AuthResetPassword';
 
 const StyledSection = styled.section`
-    justify-content: flex-start !important;
+    justify-content: flex-start;
     background-color: #3f51b5;
     font-size: 1rem;
     letter-spacing: 0.1rem;
@@ -47,7 +47,7 @@ const AuthBackside = props => {
             onMouseDown={props.attempts > 2 ? null : props.tryAgain}
         >
             {props.status === 'FAILED' || props.status === 'USER_PASSWORD_RESET_FAILED' || props.status === 'USER_PASSWORD_RESET' ? (
-                <MessageContainer res={props.attempts > 2 ? true : false}>
+                <MessageContainer>
                     <div style={props.attempts > 2 ? {display: 'none'}:{display: 'block', cursor: 'pointer', padding: '15px'}}>
                     <h2>Oops.</h2>
                     <br />
@@ -59,9 +59,9 @@ const AuthBackside = props => {
                     {props.attempts > 2 ? <AuthResetPassword tryAgain={props.tryAgain} /> : null }
                 </MessageContainer>
             ) : props.status === 'LOGGING_IN_USER' ? (
-                <div><h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3></div>
+                <MessageContainer><h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3></MessageContainer>
             ) : props.message === 'ADDING_USER' ? (
-                <div><h2>Please wait.</h2>, <br />, <h3>We are creating your account.</h3></div>
+                <MessageContainer><h2>Please wait.</h2>, <br />, <h3>We are creating your account.</h3></MessageContainer>
             ) : null}
         </StyledSection>
     );
