@@ -6,6 +6,8 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 // Actions
 import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
 
@@ -77,6 +79,7 @@ class CohortAdd extends Component {
             objectID: 0,
         },
         open: false,
+        message: '',
     };
 
     componentDidMount() {
@@ -113,7 +116,7 @@ class CohortAdd extends Component {
     };
 
     render() {
-        return (
+        return [
             <CohortFormMainContainer>
                 <StyledHeaders>Create a new Class</StyledHeaders>
                 <StyledCohortSettingForm>
@@ -131,8 +134,32 @@ class CohortAdd extends Component {
                         Add this Class
                     </StyledButton>
                 </StyledCohortSettingForm>
-            </CohortFormMainContainer>
-        );
+            </CohortFormMainContainer>,
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={this.state.open}
+                autoHideDuration={6000}
+                onClose={this.handleRequestClose}
+                ContentProps={{
+                    'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">{this.state.message}</span>}
+                action={[
+                    <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={classes.close}
+                        onClick={this.handleRequestClose}
+                    >
+                        <CloseIcon />
+                    </IconButton>,
+                ]}
+            />,
+        ];
     }
 }
 
