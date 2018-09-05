@@ -192,6 +192,12 @@ class Cohort extends Component {
         this.props.addStudent(student, teacherID, cohortID);
     };
 
+    handleActionClick = () => {
+        console.log(`MADE IT TO handleActionClick`);
+        console.log(`SNACKBAR OPEN`);
+        this.setState({ open: true });
+    };
+
     handleRequestClose = () => {
         console.log(`SNACKBAR CLOSE`);
         this.setState({ open: false });
@@ -223,7 +229,10 @@ class Cohort extends Component {
                     addCohort={this.props.addCohort}
                 />
                 <StyledHeaders>Add Students</StyledHeaders>
-                <StyledCohortAddStudentForm cohortID={this.props.match.params.id} />
+                <StyledCohortAddStudentForm
+                    cohortID={this.props.match.params.id}
+                    actionClick={this.handleActionClick}
+                />
                 <StyledHeaders>Students</StyledHeaders>
                 {this.state.cohort.students.length > 0 ? (
                     <StyledCohortStudentList
