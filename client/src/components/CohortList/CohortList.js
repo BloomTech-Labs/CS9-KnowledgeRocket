@@ -40,6 +40,7 @@ export class CohortList extends Component {
     state = {
         cohort: [{ students: [] }],
         PS: {},
+        open: true,
     };
 
     componentDidMount() {
@@ -53,8 +54,6 @@ export class CohortList extends Component {
         this.props.state.user.cohorts.forEach((cohort, index) => {
             this.calculateParticipationAndSent(cohort, index);
         });
-
-        this.handleActionClick();
     }
 
     calculateParticipationAndSent = (cohort, index) => {
@@ -113,10 +112,11 @@ export class CohortList extends Component {
         this.props.history.push('/rocket/newclass');
     };
 
-    handleActionClick = () => {
-        console.log(`SNACKBAR OPEN`);
-        this.setState({ open: true });
-    };
+    // handleActionClick = () => {
+    //     console.log(`MADE IT TO handleActionClick`);
+    //     console.log(`SNACKBAR OPEN`);
+    //     this.setState({ open: true });
+    // };
 
     handleRequestClose = () => {
         console.log(`SNACKBAR CLOSE`);
@@ -126,7 +126,7 @@ export class CohortList extends Component {
     render() {
         const { classes } = this.props;
         const { message } = this.props.state.user;
-        console.log(`SNACKBAR MESSAGE ${JSON.stringify(message)}`);
+        const { status } = this.props.state.user;
 
         return (
             <ListWrapper>
@@ -183,30 +183,32 @@ export class CohortList extends Component {
                             }
                             return null;
                         })}
-                        <Snackbar
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            open={this.state.open}
-                            autoHideDuration={6000}
-                            onClose={this.handleRequestClose}
-                            ContentProps={{
-                                'aria-describedby': 'message-id',
-                            }}
-                            message={<span id="message-id">{message}</span>}
-                            action={[
-                                <IconButton
-                                    key="close"
-                                    aria-label="Close"
-                                    color="inherit"
-                                    className={classes.close}
-                                    onClick={this.handleRequestClose}
-                                >
-                                    <CloseIcon />
-                                </IconButton>,
-                            ]}
-                        />
+                        {status === 'ADD_COHORT' ? (
+                            <Snackbar
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                open={this.state.open}
+                                autoHideDuration={5000}
+                                onClose={this.handleRequestClose}
+                                ContentProps={{
+                                    'aria-describedby': 'message-id',
+                                }}
+                                message={<span id="message-id">{message}</span>}
+                                action={[
+                                    <IconButton
+                                        key="close"
+                                        aria-label="Close"
+                                        color="inherit"
+                                        className={classes.close}
+                                        onClick={this.handleRequestClose}
+                                    >
+                                        <CloseIcon />
+                                    </IconButton>,
+                                ]}
+                            />
+                        ) : null}
                     </CohortCardContainer>
                 ) : null}
             </ListWrapper>

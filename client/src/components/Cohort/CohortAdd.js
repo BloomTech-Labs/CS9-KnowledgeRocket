@@ -105,7 +105,7 @@ class CohortAdd extends Component {
         const cohort = {
             title: this.state.title,
         };
-        this.handleActionClick('You added a cohort!');
+
         this.props.addCohort(cohort, this.props.state.user._id);
         this.props.history.push('/rocket/classes');
     };
