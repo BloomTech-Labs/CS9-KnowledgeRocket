@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 // Material Components
 import Input from '@material-ui/core/Input';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
-// Components
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+// Actions
 import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
 
 const StylizedInput = styled(Input)`
