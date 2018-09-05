@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 // Material Components
+import { withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 // Components
 import CohortSettingForm from '../CohortSettingForm/CohortSettingForm';
 import CohortAddStudentsForm from '../CohortAddStudentsForm/CohortAddStudentsForm';
@@ -90,6 +94,13 @@ const StyledCohortRocketList = styled(CohortRocketList)`
     margin-bottom: 2rem;
 `;
 
+const styles = theme => ({
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
+
 class Cohort extends Component {
     state = {
         title: '',
@@ -106,6 +117,7 @@ class Cohort extends Component {
         },
         cohortIDX: 0,
         ccEmail: false,
+        open: true,
     };
 
     componentDidMount() {
@@ -163,7 +175,7 @@ class Cohort extends Component {
     };
 
     handlePickRocket = rocketID => {
-        const today = new Date(new Date().setUTCHours(0,0,0,0));
+        const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
         // console.log(today.toDateString())
         this.handleAppendRocket(rocketID, Date.parse(today));
     };
@@ -180,7 +192,16 @@ class Cohort extends Component {
         this.props.addStudent(student, teacherID, cohortID);
     };
 
+    handleRequestClose = () => {
+        console.log(`SNACKBAR CLOSE`);
+        this.setState({ open: false });
+    };
+
     render() {
+        const { classes } = this.props;
+        const { message } = this.props.state.user;
+        const { status } = this.props.state.user;
+
         const cohortID = this.props.match.params.id;
         // console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
         let cohortIDX;
@@ -210,26 +231,49 @@ class Cohort extends Component {
                         match={this.props.match}
                         cohortID={cohortIDX}
                     />
-                ) : <StyledCohortStudentList
-                students={this.state.cohort.students}
-                match={this.props.match}
-                cohortID={cohortIDX}
-            />}{' '}
+                ) : (
+                    <StyledCohortStudentList
+                        students={this.state.cohort.students}
+                        match={this.props.match}
+                        cohortID={cohortIDX}
+                    />
+                )}{' '}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
                     cohortIDX={cohortIDX}
                 />
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={5000}
+                    onClose={this.handleRequestClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{message}</span>}
+                    action={[
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            className={classes.close}
+                            onClick={this.handleRequestClose}
+                        >
+                            <CloseIcon />
+                        </IconButton>,
+                    ]}
+                />
             </CohortFormMainContainer>
         );
     }
 }
-export default connect(
-    mapStateToProps,
-    {
-        generateBreadCrumbs,
-        addCohort,
-        appendRocket,
-    }
-)(Cohort);
+export default connect(mapStateToProps, {
+    generateBreadCrumbs,
+    addCohort,
+    appendRocket,
+})(withStyles(styles)(Cohort));
