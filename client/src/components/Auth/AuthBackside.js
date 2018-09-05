@@ -59,9 +59,9 @@ const AuthBackside = props => {
                     {props.attempts > 2 ? <AuthResetPassword tryAgain={props.tryAgain} /> : null }
                 </MessageContainer>
             ) : props.status === 'LOGGING_IN_USER' ? (
-                <MessageContainer><h2>Please wait.</h2>, <br />, <h3>We are logging you in.</h3></MessageContainer>
+                <MessageContainer><h2>Please wait.</h2><br /><h3>We are logging you in.</h3></MessageContainer>
             ) : props.message === 'ADDING_USER' ? (
-                <MessageContainer><h2>Please wait.</h2>, <br />, <h3>We are creating your account.</h3></MessageContainer>
+                <MessageContainer><h2>Please wait.</h2><br /><h3>We are creating your account.</h3></MessageContainer>
             ) : null}
         </StyledSection>
     );
