@@ -126,7 +126,12 @@ function postCSV(req, res) {
     const regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     let count = 0;
     // validate students
-    studentData.forEach(student => {
+    studentData.forEach((student, index) => {
+        // Conditional Statement to Carch Trailing empty lines in
+        // Excel saved CSV files
+        if (student.lastName === '') {
+            studentData.splice(index, 1);
+        }
         if (
             student.lastName.length > 0 &&
             student.firstName.length > 0 &&
@@ -215,7 +220,7 @@ function getCSV(req, res) {
             };
             // unparse JSON data to csv with specific fields
             let result = Papa.unparse(
-                { fields: ['Last Name', 'First Name', 'Email'], data: packed },
+                { fields: ['lastName', 'firstName', 'email'], data: packed },
                 config
             );
             // send csv data to client

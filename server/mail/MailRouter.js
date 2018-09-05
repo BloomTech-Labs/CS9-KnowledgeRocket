@@ -47,10 +47,10 @@ router.route('/').get(async (_, res) => {
 
         // generate api request
 
-        const createPersonalization = (studentId, questionId, email) => ({
+        const createPersonalization = (studentId, questionId, email, cohortId) => ({
             to: [{ email }],
             dynamic_template_data: {
-                url: `https://${BASE_URL}/question/${questionId}/${studentId}`,
+                url: `https://${BASE_URL}/question/${cohortId}/${questionId}/${studentId}`,
             },
         });
 
@@ -96,7 +96,12 @@ module.exports = router;
 function handleEmailCreation(createPersonalization, createEmail) {
     return cohort => {
         const personalizations = cohort.students.map(student =>
-            createPersonalization(student.id, cohort.selectedRockets[0].id, student.email)
+            createPersonalization(
+                student.id,
+                cohort.selectedRockets[0].id,
+                student.email,
+                cohort._id
+            )
         );
         return createEmail(personalizations, cohort.selectedRockets[0].title);
     };

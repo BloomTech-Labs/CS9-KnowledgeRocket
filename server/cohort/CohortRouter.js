@@ -33,16 +33,16 @@ function appendRocket(req, res) {
     //rocketID, startDate, userID, cohortID
     const { rocketID, startDate, userID, cohortID } = req.body;
     const parsedStartDate = Number(startDate);
-    const timeMinusOffset = Number(
-        subHours(new Date(parsedStartDate), timeOffset.UTCToPSTHourOffset)
-    );
+    // const timeMinusOffset = Number(
+    //     subHours(new Date(parsedStartDate), timeOffset.UTCToPSTHourOffset)
+    // );
     // Had to add 10 MS to the dates for actual moment to interpret past midnight
     const rocketObject = {
         rocketId: rocketID,
-        startDate: timeMinusOffset,
-        td: timeMinusOffset + 48 * 60 * 60 * 1000,
-        tw: timeMinusOffset + 14 * 24 * 60 * 60 * 1000,
-        tm: timeMinusOffset + 60 * 24 * 60 * 60 * 1000,
+        startDate: parsedStartDate,
+        td: parsedStartDate + 48 * 60 * 60 * 1000,
+        tw: parsedStartDate + 14 * 24 * 60 * 60 * 1000,
+        tm: parsedStartDate + 60 * 24 * 60 * 60 * 1000,
     };
     Cohort.findById(cohortID)
         .populate('rockets')

@@ -14,12 +14,18 @@ import App from './App';
 import { ThemeProvider } from 'styled-components';
 import { Themes } from './components/Themes/Themes';
 
-const reduxStore = createStore(reducers, applyMiddleware(thunk, logger));
+const middlewares = [];
+middlewares.push(thunk);
+if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
+
+const reduxStore = createStore(reducers, applyMiddleware(...middlewares));
 
 // Wrapping our App with Redux Provider
 render(
     <Provider store={reduxStore}>
-        <ThemeProvider theme={Themes}><App /></ThemeProvider>
+        <ThemeProvider theme={Themes}>
+            <App />
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root')
 );

@@ -44,6 +44,9 @@ export default class Home extends Component {
                             <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
                             <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
                         </div>
+                        <div style={this.props.authenticated ? {display: 'block'} : {display:'none'} }>
+                            <NavButton onClick={this.handleAuthRedirect}>To Dashboard</NavButton>
+                        </div>
                 </HomeNav>
                 <CtaContainer>
                     <HomeCTA>

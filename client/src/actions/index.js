@@ -1,5 +1,6 @@
 import axios from 'axios';
-import Firebase from 'firebase';
+import Firebase from 'firebase/app';
+import 'firebase/auth';
 // Set Up Back End URL: Change config for deployment or switch to ENV
 // process.env.server set to heroku deployment root, already set on deployed version.
 const url = process.env.REACT_APP_SERVER;

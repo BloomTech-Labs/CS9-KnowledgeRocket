@@ -60,7 +60,6 @@ class Settings extends Component {
                                 type="password"
                                 margin="normal"
                                 onChange={this.handleInput}
-                                value={this.state.currentPW}
                             />
                             <TextField
                                 id="newPW"
@@ -69,7 +68,6 @@ class Settings extends Component {
                                 type="password"
                                 margin="normal"
                                 onChange={this.handleInput}
-                                value={this.state.newPW}
                             />
                             <TextField
                                 id="ccEmail"
