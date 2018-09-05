@@ -10,6 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 // Actions
 import { importCSV, exportCSV } from '../../actions/';
+import { smallBreakPoint } from '../Themes/Themes';
 
 function mapStateToProps(state) {
     return {
@@ -87,6 +88,25 @@ const ExportCSVBtn = styled(StyledButton)`
     background-color: #3f51b5 !important;
 `;
 
+const StyledHelp = styled.div`
+    display: ${props => (props.hovered ? 'block' : 'none')};
+    opacity: ${props => (props.hovered ? 1 : 0)};
+    background-image: url('/img/ExcelFormatHelp.PNG');
+    border-radius: 0.25rem;
+    margin-top: 140px;
+    position: absolute;
+    width: 300px;
+    height: 225px;
+    background-size: cover;
+    z-index: 99;
+    border: 1px solid lightgray;
+    box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    ${smallBreakPoint(`
+        margin-left: 120px;
+    `)};
+`;
+
 // CONTAINS SETTINGS: CLASS NAME, CC CHECKBOX, IMPORT CSV
 class CohortSettingForm extends Component {
     state = {
@@ -98,6 +118,7 @@ class CohortSettingForm extends Component {
             title: '',
             _id: '',
         },
+        hoverCSV: false,
     };
 
     componentDidMount() {
@@ -171,6 +192,10 @@ class CohortSettingForm extends Component {
         this.props.addCohort(cohort, this.props.state.user._id);
     };
 
+    hoverCSV = () => {
+        this.setState({ hoverCSV: !this.state.hoverCSV });
+    };
+
     render() {
         const { classes } = this.props;
 
@@ -186,13 +211,20 @@ class CohortSettingForm extends Component {
                     }
                 />
                 <StylizedForm>
-                    <StyledLabel for="csv-file">Import CSV</StyledLabel>
+                    <StyledLabel
+                        htmlFor="csv-file"
+                        onMouseEnter={this.hoverCSV}
+                        onMouseLeave={this.hoverCSV}
+                    >
+                        Import CSV
+                    </StyledLabel>
                     <StylizedCSVInput
                         type="file"
                         id="csv-file"
                         name="files"
                         onChange={this.handleFileSelect}
                     />
+                    <StyledHelp hovered={this.state.hoverCSV} />
                 </StylizedForm>
                 <ExportCSVBtn
                     variant="contained"
