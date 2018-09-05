@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
+import { withStyles } from '@material-ui/core/styles';
 import { FloatingAdd, ListCard, ListWrapper } from '../RocketList/ListElements';
-import axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 const url = process.env.REACT_APP_SERVER;
 
 function mapStateToProps(state) {
@@ -21,6 +27,13 @@ const CohortCardContainer = styled.div`
     flex-wrap: wrap;
     width: 100%;
 `;
+
+const styles = theme => ({
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
 
 // RENDERS A LIST OF COHORT CARDS
 export class CohortList extends Component {
@@ -40,6 +53,8 @@ export class CohortList extends Component {
         this.props.state.user.cohorts.forEach((cohort, index) => {
             this.calculateParticipationAndSent(cohort, index);
         });
+
+        this.handleActionClick();
     }
 
     calculateParticipationAndSent = (cohort, index) => {
@@ -98,7 +113,21 @@ export class CohortList extends Component {
         this.props.history.push('/rocket/newclass');
     };
 
+    handleActionClick = () => {
+        console.log(`SNACKBAR OPEN`);
+        this.setState({ open: true });
+    };
+
+    handleRequestClose = () => {
+        console.log(`SNACKBAR CLOSE`);
+        this.setState({ open: false });
+    };
+
     render() {
+        const { classes } = this.props;
+        const { message } = this.props.state.user;
+        console.log(`SNACKBAR MESSAGE ${JSON.stringify(message)}`);
+
         return (
             <ListWrapper>
                 {this.state.cohort ? (
@@ -154,6 +183,30 @@ export class CohortList extends Component {
                             }
                             return null;
                         })}
+                        <Snackbar
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            open={this.state.open}
+                            autoHideDuration={6000}
+                            onClose={this.handleRequestClose}
+                            ContentProps={{
+                                'aria-describedby': 'message-id',
+                            }}
+                            message={<span id="message-id">{message}</span>}
+                            action={[
+                                <IconButton
+                                    key="close"
+                                    aria-label="Close"
+                                    color="inherit"
+                                    className={classes.close}
+                                    onClick={this.handleRequestClose}
+                                >
+                                    <CloseIcon />
+                                </IconButton>,
+                            ]}
+                        />
                     </CohortCardContainer>
                 ) : null}
             </ListWrapper>
@@ -161,4 +214,6 @@ export class CohortList extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps, { generateBreadCrumbs })(CohortList));
+export default withRouter(
+    connect(mapStateToProps, { generateBreadCrumbs })(withStyles(styles)(CohortList))
+);
