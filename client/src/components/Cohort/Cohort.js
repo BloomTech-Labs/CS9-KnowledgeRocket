@@ -220,6 +220,7 @@ class Cohort extends Component {
                     handlePickRocket={this.handlePickRocket}
                     cohortID={this.props.match.params.id}
                     cohortIDX={cohortIDX}
+                    history={this.props.history}
                 />
             </CohortFormMainContainer>
         );

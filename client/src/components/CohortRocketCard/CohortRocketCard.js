@@ -9,6 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import moment from 'moment-timezone';
 import { appendRocket, getResponseRocketByRocketId } from '../../actions';
+import {Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {
@@ -124,6 +125,7 @@ class CohortRocketCard extends Component {
         const rocketId = this.props.rocket.rocketId._id;
         const cohortId = this.props.cohortID;
         this.props.getResponseRocketByRocketId(rocketId, cohortId);
+        this.props.history.push(`/rocket/results/${cohortId}/${rocketId}`);
     };
 
     render() {
