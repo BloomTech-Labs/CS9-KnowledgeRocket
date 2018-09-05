@@ -121,10 +121,6 @@ const StyledButton = styled(Button)`
 	order: 4;
 `;
 
-const ExportCSVBtn = styled(StyledButton)`
-	background-color: #3f51b5 !important;
-`;
-
 const StyledHelp = styled.div`
 	display: ${props => (props.hovered ? 'block' : 'none')};
 	opacity: ${props => (props.hovered ? 1 : 0)};
