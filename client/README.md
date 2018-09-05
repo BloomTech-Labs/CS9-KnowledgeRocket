@@ -17,6 +17,8 @@ REACT_APP_SERVER=https://urlofserver.com
 <p>The following are the dependencies you will need: </p>
 
 ```
+@material-ui/core
+@material-ui/icons
 axios
 dotenv
 enzyme
@@ -26,6 +28,8 @@ formik
 jest
 material-ui
 moment
+moment-timezone
+papaparse
 react
 react-dom
 react-redux
@@ -34,8 +38,8 @@ react-scripts
 react-stripe-elements
 react-test-renderer
 redux
-redux-thunk
 redux-logger
+redux-thunk
 styled-components
 yup
 ```
