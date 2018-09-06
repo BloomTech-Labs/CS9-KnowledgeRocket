@@ -200,6 +200,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case USER_PASSWORD_RESET:
             StateCopy.status = USER_PASSWORD_RESET;
+            StateCopy.message = 'You successfully reset your password!';
             return StateCopy;
         case USER_PASSWORD_RESET_FAILED:
             StateCopy.status = USER_PASSWORD_RESET_FAILED;
