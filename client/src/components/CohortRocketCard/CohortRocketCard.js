@@ -9,7 +9,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import moment from 'moment-timezone';
 import { appendRocket, getResponseRocketByRocketId } from '../../actions';
-import {Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {
@@ -91,37 +90,6 @@ class CohortRocketCard extends Component {
     };
 
     displayResults = () => {
-        // Find Response Rocket that Matches {rocketId: this.props.rocket.rocketId._id}
-        // Also has to match: { cohortId: this.props.cohortID }
-        // Respond from server is expected a whole populated ResponseRocket:
-        /*
-        const ResponseRocket = mongoose.Schema({
-            questionId: { type: ObjectId, ref: 'Question' },
-            cohortId: { type: ObjectId, ref: 'Cohort' },
-            students: [
-                {
-                    studentId: {
-                        type: ObjectId,
-                        ref: 'Student',
-                    },
-                    answer: [
-                        {
-                            choice: {
-                                // Choices are indices for the answers array.
-                                type: Number,
-                                default: 0,
-                            },
-                            submitted: {
-                                type: Date,
-                                default: Date.now,
-                            },
-                        },
-                    ],
-                },
-            ],
-            sent: { type: Number, default: 0 },
-        });
-        */
         const rocketId = this.props.rocket.rocketId._id;
         const cohortId = this.props.cohortID;
         this.props.getResponseRocketByRocketId(rocketId, cohortId);
@@ -129,7 +97,6 @@ class CohortRocketCard extends Component {
     };
 
     render() {
-        console.log('Are these the droids I am looking for?', this.props.rocket);
         let scheduledOn = this.props.rocket.startDate;
         return (
             <StylizedRocket>

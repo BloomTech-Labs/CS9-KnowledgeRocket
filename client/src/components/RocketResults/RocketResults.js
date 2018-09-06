@@ -23,12 +23,14 @@ const PaperHeader = styled.div`
     align-content: flex-start;
     margin: auto auto;
     padding-top: 1rem;
+    font-size: 1rem !important;
+    user-select: none !important;
 `;
 
 const ColorBlock = styled.div`
     width: 65px;
     height: 40px;
-    background-color: ${props => props.bgcolor};
+    background-color: ${props => props.bgcolor}88;
     border-radius: 0.25rem;
     border: 1px solid #cfcfcf;
 `;
@@ -43,7 +45,12 @@ const ColorLabel = styled.p`
     text-align: center;
     font-weight: 900;
     font-size: 1rem;
-    color: white;
+    color: black;
+`;
+
+const StyledTableCell = styled(TableCell)`
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
 `;
 
 const styles = theme => ({
@@ -73,7 +80,7 @@ class RocketResult extends Component {
         ],
         cohortTitle: '',
         rocketTitle: '',
-        colors: ['red', 'green', 'blue', 'orange'],
+        colors: ['#1B75BB', '#2E3033', '#EEEEEE', '#F50057'],
     };
     componentDidMount() {
         // For Nav Bar
@@ -105,10 +112,10 @@ class RocketResult extends Component {
         let fourth = 0;
         if (students) {
             students.forEach(st => {
-                if (Number(st.answer[0].choice) === 0) first++;
-                if (Number(st.answer[0].choice) === 1) second++;
-                if (Number(st.answer[0].choice) === 2) third++;
-                if (Number(st.answer[0].choice) === 3) fourth++;
+                if (st.answer[0].choice === 0) first++;
+                if (st.answer[0].choice === 1) second++;
+                if (st.answer[0].choice === 2) third++;
+                if (st.answer[0].choice === 3) fourth++;
             });
         }
 
@@ -131,6 +138,7 @@ class RocketResult extends Component {
                 second,
                 third,
                 fourth,
+                questionId,
             };
         }
         return {
@@ -141,10 +149,11 @@ class RocketResult extends Component {
             second,
             third,
             fourth,
+            questionId,
         };
     };
 
-    generateChart = (first, second, third, fourth) => {
+    generateChart = (first, second, third, fourth, questionId) => {
         let choices = [first, second, third, fourth];
         const svgs = [];
 
@@ -152,7 +161,6 @@ class RocketResult extends Component {
         for (let i = 0; i < choices.length; i++) {
             sum += choices[i];
         }
-        let colors = ['red', 'green', 'blue', 'orange'];
 
         let cumulativePercent = 0;
         for (let i = 0; i < choices.length; i++) {
@@ -172,7 +180,12 @@ class RocketResult extends Component {
                 `L 0 0`, // Line
             ].join(' ');
             svgs.push(
-                <path d={pathData} fill={this.state.colors[i]} className="pieChartSection" />
+                <path
+                    d={pathData}
+                    fill={this.state.colors[i]}
+                    className="pieChartSection"
+                    key={`${questionId}_${i}`}
+                />
             );
         }
 
@@ -195,7 +208,6 @@ class RocketResult extends Component {
         const tw = this.calculateParticipation('twoWeek');
         const tm = this.calculateParticipation('twoMonth');
         const keys = [td, tw, tm];
-        console.log('TD TW TM:', td, tw, tm);
         const rows = [
             createTableItem(
                 'TWO DAY QUESTION',
@@ -216,31 +228,32 @@ class RocketResult extends Component {
                 tm.totalStudentsInCohort
             ),
         ];
-        console.log(rows);
         return (
             <PaperHeader>
                 <Paper>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>
+                                <StyledTableCell>
                                     {`${this.state.cohortTitle}: ${this.state.rocketTitle}`}
-                                </TableCell>
-                                <TableCell numeric>Participation</TableCell>
-                                <TableCell numeric>Sent</TableCell>
-                                <TableCell numeric>Students</TableCell>
-                                <TableCell numeric>Legend</TableCell>
+                                </StyledTableCell>
+                                <StyledTableCell numeric>Participation</StyledTableCell>
+                                <StyledTableCell numeric>Sent</StyledTableCell>
+                                <StyledTableCell numeric>Students</StyledTableCell>
+                                <StyledTableCell numeric>Legend</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {rows.map((row, idx) => {
                                 return (
                                     <TableRow key={row.id}>
-                                        <TableCell>{row.label}</TableCell>
-                                        <TableCell numeric>{row.participation}%</TableCell>
-                                        <TableCell numeric>{row.sent}</TableCell>
-                                        <TableCell numeric>{row.students}</TableCell>
-                                        <TableCell>
+                                        <StyledTableCell>{row.label}</StyledTableCell>
+                                        <StyledTableCell numeric>
+                                            {row.participation}%
+                                        </StyledTableCell>
+                                        <StyledTableCell numeric>{row.sent}</StyledTableCell>
+                                        <StyledTableCell numeric>{row.students}</StyledTableCell>
+                                        <StyledTableCell>
                                             <div
                                                 name="LEGEND"
                                                 style={{
@@ -273,10 +286,11 @@ class RocketResult extends Component {
                                                     keys[idx].first,
                                                     keys[idx].second,
                                                     keys[idx].third,
-                                                    keys[idx].fourth
+                                                    keys[idx].fourth,
+                                                    keys[idx].questionId
                                                 )}
                                             </div>
-                                        </TableCell>
+                                        </StyledTableCell>
                                     </TableRow>
                                 );
                             })}
