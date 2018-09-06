@@ -119,9 +119,6 @@ function deleteid(req, res) {
 
 function postCSV(req, res) {
     const { teacherID, cohortID, studentData } = req.body;
-    // console.log(`TEACHERID ${JSON.stringify(teacherID)}`);
-    // console.log(`COHORTID ${JSON.stringify(cohortID)}`);
-    // console.log(`STUDENTDATA ${JSON.stringify(studentData)}`);
 
     const regVar = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
     let count = 0;
@@ -152,24 +149,15 @@ function postCSV(req, res) {
 
     Student.insertMany(studentData)
         .then(newStudents => {
-            // console.log('SUCCESSFULLY INSERTED NEW STUDENTS');
-            // console.log(studentData);
             Cohort.findOne({ _id: cohortID })
                 .then(found => {
-                    // console.log('SUCCESFULLY FOUND COHORT');
                     newStudents.forEach(student => {
-                        // console.log(`STUDENT ID ${student._id}`);
                         found.students.push(student._id);
                     });
-                    // console.log('SUCCESFULLY ADDED NEW STUDENTS');
                     Cohort.findByIdAndUpdate(cohortID, found)
                         .then(() => {
-                            // console.log('SUCCESSFULLY UPDATED COHORT WITH NEW STUDENTS');
                             User.findById(teacherID)
                                 .then(teacher => {
-                                    // console.log(
-                                    //     'SUCCESSFULLY FOUND A USER BY ID AND POPULATED DATA FIELDS'
-                                    // );
                                     res.status(201).json(teacher);
                                 })
                                 .catch(err => {
