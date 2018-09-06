@@ -154,14 +154,20 @@ class RocketResult extends Component {
             });
         }
         const totalStudentsInCohort = this.state.cohort.students.length;
+        console.log(`FOR COHORT: ${this.state.cohortTitle}\ntwoDaySchedule: ${this.state.twoDaySchedule}\ntwoWeekSchedule: ${this.state.twoWeekSchedule}\ntwoMonthSchedule: ${this.state.twoMonthSchedule}`)
         let sent = 0;
         if (which === 'twoDay' && Date.now() > Date.parse(this.state.twoDaySchedule)) {
+            console.log(`FOR TwoDay\ntwoDaySchedule: ${Date.parse(this.state.twoDaySchedule)}\ntoday's Date: ${Date.now()}\nIs Today Newer? ${Date.now() > Date.parse(this.state.twoDaySchedule)}`)
             sent = totalStudentsInCohort;
-        } else if (which === 'twoWeek' && Date.now() > Date.parse(this.state.twoWeekSchedule)) {
-            sent = totalStudentsInCohort;
-        } else if (which === 'twoMonth' && Date.now() > Date.parse(this.state.twoMonthSchedule)) {
+            console.log(`THE VALUE OF SENT IS NOW: ${sent}`)
+        }
+        if (which === 'twoWeek' && Date.now() > Date.parse(this.state.twoWeekSchedule)) {
             sent = totalStudentsInCohort;
         }
+        if (which === 'twoMonth' && Date.now() > Date.parse(this.state.twoMonthSchedule)) {
+            sent = totalStudentsInCohort;
+        }
+        console.log(`THE VALUE OF SENT CHANGED NOW?: ${sent}`)
         if (cohortId) {
             const participation = ((students.length * 100) / totalStudentsInCohort).toFixed(2);
             // Check if questions should have been sent by now, and set sent to number of students if so.

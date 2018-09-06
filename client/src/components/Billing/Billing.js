@@ -80,6 +80,7 @@ class Billing extends Component {
                             id={this.props.state.user._id}
                             uid={this.props.state.user.uid}
                             type={this.state.type}
+                            refreshUser={this.props.refreshUser}
                         />
                     </Elements>
                 </div>

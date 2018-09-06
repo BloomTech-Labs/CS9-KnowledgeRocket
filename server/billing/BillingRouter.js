@@ -32,7 +32,7 @@ async function post(req, res) {
                     expiration: newExpiration,
                 })
                     .then(found => {
-                        res.status(201).json({ status });
+                        res.status(201).json({ status, user: found });
                     })
                     .catch(err => {
                         res.status(500).json(err);
