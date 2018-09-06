@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 // actions
 import { generateBreadCrumbs } from '../../actions';
@@ -41,6 +40,10 @@ export class CohortList extends Component {
         PS: {},
         open: true,
     };
+
+    componentWillUnmount() {
+        this.isCancelled = true;
+    }
 
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -91,9 +94,10 @@ export class CohortList extends Component {
                         totalShouldHaveAnswered > 0
                             ? (totalAnswered * 100 / totalShouldHaveAnswered).toFixed(1)
                             : '100';
-                    this.setState({
-                        [cohort._id]: { participation, sent: totalShouldHaveAnswered },
-                    });
+                    !this.isCancelled &&
+                        this.setState({
+                            [cohort._id]: { participation, sent: totalShouldHaveAnswered },
+                        });
                 })
                 .catch(err => {
                     console.log(
@@ -208,6 +212,4 @@ export class CohortList extends Component {
     }
 }
 
-export default withRouter(
-    connect(mapStateToProps, { generateBreadCrumbs })(withStyles(styles)(CohortList))
-);
+export default connect(mapStateToProps, { generateBreadCrumbs })(withStyles(styles)(CohortList));

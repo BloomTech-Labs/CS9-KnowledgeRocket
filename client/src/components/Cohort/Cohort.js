@@ -228,21 +228,12 @@ class Cohort extends Component {
                     actionClick={this.handleActionClick}
                 />
                 <StyledHeaders>Students</StyledHeaders>
-                {this.state.cohort.students.length > 0 ? (
-                    <StyledCohortStudentList
-                        students={this.state.cohort.students}
-                        match={this.props.match}
-                        cohortID={cohortIDX}
-                        actionClick={this.handleActionClick}
-                    />
-                ) : (
-                    <StyledCohortStudentList
-                        students={this.state.cohort.students}
-                        match={this.props.match}
-                        cohortID={cohortIDX}
-                        actionClick={this.handleActionClick}
-                    />
-                )}{' '}
+                <StyledCohortStudentList
+                    students={this.state.cohort.students}
+                    match={this.props.match}
+                    cohortID={cohortIDX}
+                    actionClick={this.handleActionClick}
+                />
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
                 <StyledCohortRocketList
                     handlePickRocket={this.handlePickRocket}
