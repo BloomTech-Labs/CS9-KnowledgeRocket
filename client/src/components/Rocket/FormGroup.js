@@ -138,7 +138,8 @@ export const QuestionChoices = ({
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[0].text === values[interval].correct}
+                        checked={0 === Number(values[interval].correct)}
+                        defaultChecked={true}
                         value={0}
                         type="radio"
                         onChange={handleChange}
@@ -156,7 +157,7 @@ export const QuestionChoices = ({
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[1].text === values[interval].correct}
+                        checked={1 === Number(values[interval].correct)}
                         value={1}
                         type="radio"
                         onChange={handleChange}
@@ -174,7 +175,7 @@ export const QuestionChoices = ({
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[2].text === values[interval].correct}
+                        checked={2 === Number(values[interval].correct)}
                         value={2}
                         type="radio"
                         onChange={handleChange}
@@ -192,7 +193,7 @@ export const QuestionChoices = ({
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[3].text === values[interval].correct}
+                        checked={3 === Number(values[interval].correct)}
                         value={3}
                         type="radio"
                         onChange={handleChange}
