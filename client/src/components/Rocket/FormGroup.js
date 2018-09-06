@@ -76,10 +76,20 @@ const verbageDictionary = {
 };
 
 /**
+ * @callback handleBlur
+ * @param {*} event
+ */
+
+/**
+ * @callback handleChange
+ * @param {*} event
+ */
+
+/**
  *
  * @param {object} props
- * @param {Function} props.handleBlur
- * @param {Function} props.handleChange
+ * @param {handleBlur} props.handleBlur
+ * @param {handleChange} props.handleChange
  * @param {object} props.values
  * @param {string} props.interval
  * @param {object} props.errors
@@ -94,8 +104,8 @@ export const QuestionChoices = ({
     touched,
 }) => {
     const displayError = errorHelper(errors, touched);
-
     const a11yIdFor = label => generateErrorIdFrom(interval, label);
+    const displayCorrectChoiceErrorAtIndex = i => displayCorrectChoiceError(errors, touched, i);
     return (
         <section>
             <FormGroup>
@@ -128,8 +138,8 @@ export const QuestionChoices = ({
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[0].text === values[interval].correct}
-                        value={values[interval].choices[0].text}
+                        checked={0 === Number(values[interval].correct)}
+                        value={0}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -142,12 +152,15 @@ export const QuestionChoices = ({
                         value={values[interval].choices[0].text}
                         placeholder={'Answer 1'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[0].text`)}>
+                        {displayCorrectChoiceErrorAtIndex(0)}
+                    </ErrorText>
                 </label>
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[1].text === values[interval].correct}
-                        value={values[interval].choices[1].text}
+                        checked={1 === Number(values[interval].correct)}
+                        value={1}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -160,12 +173,15 @@ export const QuestionChoices = ({
                         value={values[interval].choices[1].text}
                         placeholder={'Answer 2'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[1].text`)}>
+                        {displayCorrectChoiceErrorAtIndex(1)}
+                    </ErrorText>
                 </label>
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[2].text === values[interval].correct}
-                        value={values[interval].choices[2].text}
+                        checked={2 === Number(values[interval].correct)}
+                        value={2}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -178,12 +194,15 @@ export const QuestionChoices = ({
                         value={values[interval].choices[2].text}
                         placeholder={'Answer 3'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[2].text`)}>
+                        {displayCorrectChoiceErrorAtIndex(2)}
+                    </ErrorText>
                 </label>
                 <label>
                     <input
                         name={`${interval}.correct`}
-                        checked={values[interval].choices[3].text === values[interval].correct}
-                        value={values[interval].choices[3].text}
+                        checked={3 === Number(values[interval].correct)}
+                        value={3}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -196,11 +215,25 @@ export const QuestionChoices = ({
                         value={values[interval].choices[3].text}
                         placeholder={'Answer 4'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[3].text`)}>
+                        {displayCorrectChoiceErrorAtIndex(3)}
+                    </ErrorText>
                 </label>
             </QuestionWrapper>
             <ErrorText id={a11yIdFor('correct')}>{displayError('correct')}</ErrorText>
         </section>
     );
 };
+
+const displayCorrectChoiceError = (error, touched, index) =>
+    touched &&
+    touched.choices &&
+    touched.choices[index] &&
+    touched.choices[index].text &&
+    error &&
+    error.choices &&
+    error.choices[index] &&
+    error.choices[index].text;
+
 export const generateErrorIdFrom = (attr, identifier = '') =>
     `${attr}-${identifier}-ErrorDescription`;

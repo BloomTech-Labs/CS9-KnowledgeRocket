@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs, updateRocket } from '../../actions';
-import RocketForm from './RocketForm';
+import RocketForm, { generateDefaults } from './RocketForm';
 import styled from 'styled-components';
 
 function mapStateToProps(state) {
@@ -23,25 +23,7 @@ const MainContainer = styled.div`
     -ms-overflow-style: -ms-autohiding-scrollbar;
 `;
 
-const questionTemplate = {
-    explanation: '',
-    question: '',
-    choices: [
-        {
-            text: '',
-        },
-        {
-            text: '',
-        },
-        {
-            text: '',
-        },
-        {
-            text: '',
-        },
-    ],
-    correct: '',
-};
+const questionTemplate = generateDefaults();
 
 class RocketView extends Component {
     state = {
@@ -102,4 +84,7 @@ class RocketView extends Component {
     }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs, updateRocket })(RocketView);
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs, updateRocket }
+)(RocketView);

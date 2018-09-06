@@ -1,6 +1,6 @@
 import React from 'react';
 import { withFormik } from 'formik';
-import { object, string, array } from 'yup';
+import { object, string, array, number } from 'yup';
 import { FormGroup, Blurb, QuestionChoices, ErrorText, errorHelper } from './FormGroup';
 import Button from '@material-ui/core/Button';
 
@@ -12,7 +12,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
     return (
         <form onSubmit={handleSubmit}>
             <FormGroup>
-                <label htmlFor="title"/>
+                <label htmlFor="title" />
                 <input
                     name="title"
                     value={values.title}
@@ -55,11 +55,38 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
                 errors={errors.tm}
                 touched={touched.tm}
             />
-            <Button type='submit' variant="contained" color="primary" style={{marginBottom: '1rem'}}>
+            <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                style={{ marginBottom: '1rem' }}
+            >
                 Submit
             </Button>
         </form>
     );
+};
+
+export const generateDefaults = () => {
+    return {
+        explanation: '',
+        question: '',
+        choices: [
+            {
+                text: '',
+            },
+            {
+                text: '',
+            },
+            {
+                text: '',
+            },
+            {
+                text: '',
+            },
+        ],
+        correct: 0,
+    };
 };
 
 const defaultProps = {
@@ -100,36 +127,14 @@ function rocketShape() {
         question: string()
             .trim()
             .required('You must include a question.'),
-        correct: string()
-            .trim()
-            .required('You must choose a correct answer.'),
+        correct: number().required('You must choose a correct answer.'),
         choices: array().of(
-            string()
-                .trim()
-                .min(1)
-                .required()
+            object().shape({
+                text: string()
+                    .trim()
+                    .min(1)
+                    .required(`Answer text can't be empty`),
+            })
         ),
     });
-}
-
-function generateDefaults() {
-    return {
-        explanation: '',
-        question: '',
-        choices: [
-            {
-                text: '',
-            },
-            {
-                text: '',
-            },
-            {
-                text: '',
-            },
-            {
-                text: '',
-            },
-        ],
-        correct: '',
-    };
 }
