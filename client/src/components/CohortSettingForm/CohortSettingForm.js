@@ -56,13 +56,6 @@ const StylizedCSVInput = styled.input`
 
 const ExportCSVBtn = styled(Button)`
 	background-color: #3f51b5 !important;
-	margin: 0 1rem 1rem 0rem !important;
-	overflow: hidden;
-	position: absolute;
-	width: 0.1px;
-	opacity: 0;
-	z-index: -10;
-	height: 0.1px;
 `;
 
 const StyledCSVLabelButton = styled.label`
@@ -257,13 +250,15 @@ class CohortSettingForm extends Component {
 					/>
 					<StyledHelp hovered={this.state.hoverCSV} />
 				</StylizedForm>
-				<ExportCSVBtn
+				<StylizedForm
 					variant="contained"
 					className={classes.button}
 					onClick={this.handleExportStudents}
 				>
-					Export CSV
-				</ExportCSVBtn>
+					<StyledLabel>
+						Export CSV
+					</StyledLabel>
+				</StylizedForm>
 				<StyledFormControlLabel
 					control={
 						this.props.state.user.cohorts[this.props.cohortIDX].cc ? (
