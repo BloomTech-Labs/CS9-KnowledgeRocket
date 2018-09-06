@@ -197,12 +197,14 @@ class CohortSettingForm extends Component {
 			preview: 0,
 			complete: (results, file) => {
 				studentData = results.data;
-				this.props.actionClick();
 				this.props.importCSV(teacherID, cohortID, studentData);
-				this.setState({ csvData: results });
+				this.setState({ csvData: results }, () => {
+					this.props.actionClick();
+				});
 			},
 		};
 		if (file) {
+			this.props.actionClick();
 			return Papa.parse(file, config);
 		}
 	};
