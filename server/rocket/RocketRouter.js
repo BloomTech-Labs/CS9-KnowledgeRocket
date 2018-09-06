@@ -122,8 +122,9 @@ function updateRocket(req, res) {
 
     // Update Correct Choices
     const updateAndSaveFormattedQuestions = question => {
-        question.choices.forEach(choice => {
-            if (choice.text === question.correct) {
+        question.choices.forEach((choice, idx) => {
+            // Fixes bug where there was no correct answer.
+            if (idx === Number(question.correct)) {
                 choice.correct = true;
             } else {
                 choice.correct = false;

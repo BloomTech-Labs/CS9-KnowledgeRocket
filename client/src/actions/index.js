@@ -77,6 +77,9 @@ export const FETCHING_RESPONSE = 'FETCHING_RESPONSE';
 export const RESPONSE_RECEIVED = 'RESPONSE_RECEIVED';
 export const FETCHING_RESPONSE_FAILED = 'FETCHING_RESPONSE_FAILED';
 
+// SNACKBAR TYPES
+export const SNACK_CLEAR = 'SNACK_CLEAR';
+
 // Add Rocket Actions
 export const addRocket = (rocket, uid) => async dispatch => {
     dispatch({ type: ADDING_ROCKET });
@@ -326,12 +329,20 @@ export const generateBreadCrumbs = path => {
 // 'RESPONSE_RECEIVED'
 // 'FETCHING_RESPONSE_FAILED'
 export const getResponseRocketByRocketId = (rocketId, cohortId) => async dispatch => {
-    dispatch({type: FETCHING_RESPONSE});
+    dispatch({ type: FETCHING_RESPONSE });
     try {
-        let response = await axios.post(`${url}/api/responserocket/results/`,{rocketId, cohortId})
-        console.log(response)
+        let response = await axios.post(`${url}/api/responserocket/results/`, {
+            rocketId,
+            cohortId,
+        });
+        // console.log(response);
         dispatch({ type: RESPONSE_RECEIVED, payload: response.data });
     } catch (err) {
-        dispatch({type: FETCHING_RESPONSE_FAILED});
+        dispatch({ type: FETCHING_RESPONSE_FAILED });
     }
-}
+};
+
+// SNACKBAR ACTIONS
+export const clearSnackMessage = () => {
+    return { type: SNACK_CLEAR };
+};
