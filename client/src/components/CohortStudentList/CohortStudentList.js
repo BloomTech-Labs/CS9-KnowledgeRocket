@@ -49,6 +49,11 @@ class CohortStudentList extends Component {
     //         ))
     //       : null}
     //   </Card>
+
+    return (
+      <ExpansionPanel className={classes.root}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>Your Students</ExpansionPanelSummary>
+      </ExpansionPanel>
     );
   }
 }
