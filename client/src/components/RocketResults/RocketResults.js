@@ -154,20 +154,18 @@ class RocketResult extends Component {
             });
         }
         const totalStudentsInCohort = this.state.cohort.students.length;
+        let sent = 0;
+        if (which === 'twoDay' && Date.now() > Date.parse(this.state.twoDaySchedule)) {
+            sent = totalStudentsInCohort;
+        } else if (which === 'twoWeek' && Date.now() > Date.parse(this.state.twoWeekSchedule)) {
+            sent = totalStudentsInCohort;
+        } else if (which === 'twoMonth' && Date.now() > Date.parse(this.state.twoMonthSchedule)) {
+            sent = totalStudentsInCohort;
+        }
         if (cohortId) {
             const participation = ((students.length * 100) / totalStudentsInCohort).toFixed(2);
             // Check if questions should have been sent by now, and set sent to number of students if so.
-            let sent = 0;
-            if (which === 'twoDay' && Date.now() > Date.parse(this.state.twoDaySchedule)) {
-                sent = totalStudentsInCohort;
-            } else if (which === 'twoWeek' && Date.now() > Date.parse(this.state.twoWeekSchedule)) {
-                sent = totalStudentsInCohort;
-            } else if (
-                which === 'twoMonth' &&
-                Date.now() > Date.parse(this.state.twoMonthSchedule)
-            ) {
-                sent = totalStudentsInCohort;
-            }
+
             return {
                 participation,
                 sent,
