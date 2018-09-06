@@ -50,7 +50,7 @@ router.route('/').get(async (_, res) => {
         const createPersonalization = (studentId, questionId, email, cohortId) => ({
             to: [{ email }],
             dynamic_template_data: {
-                url: `https://${BASE_URL}/question/${cohortId}/${questionId}/${studentId}`,
+                url: `${BASE_URL}/question/${cohortId}/${questionId}/${studentId}`,
             },
         });
 
@@ -95,14 +95,15 @@ module.exports = router;
 
 function handleEmailCreation(createPersonalization, createEmail) {
     return cohort => {
+        const selectedRocket = cohort.selectedRockets[0];
         const personalizations = cohort.students.map(student =>
             createPersonalization(
                 student.id,
-                cohort.selectedRockets[0].id,
+                selectedRocket.id,
                 student.email,
-                cohort._id
+                selectedRocket.cohortId
             )
         );
-        return createEmail(personalizations, cohort.selectedRockets[0].title);
+        return createEmail(personalizations, selectedRocket.title);
     };
 }
