@@ -45,6 +45,8 @@ const defaultState = {
     students: [],
     rockets: [],
     cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{ rocketId: {} }] }],
+    message: '',
+    exportCSV: [],
 };
 
 export default (state = defaultState, action) => {
@@ -58,6 +60,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_ROCKET:
             StateCopy.status = ADD_ROCKET;
+
             // update cohort rockets
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
@@ -76,12 +79,13 @@ export default (state = defaultState, action) => {
                     StateCopy.rockets.splice(index, 1);
                 }
             });
+            StateCopy.message = 'You deleted a rocket from your account!';
             StateCopy.authenticated = true;
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
-            // console.log('Payload inside ADD_Rocket Reducer', action.payload)
             StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.message = 'You added a rocket!';
             StateCopy.authenticated = true;
             return StateCopy;
         case APPEND_ROCKETS:
@@ -121,6 +125,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.message = 'You added a class!';
             StateCopy.authenticated = true;
             StateCopy.status = ADD_COHORT;
             return StateCopy;
@@ -132,11 +137,13 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_STUDENT:
             StateCopy = action.payload;
+            StateCopy.message = 'You added a student to your class!';
             StateCopy.authenticated = true;
             StateCopy.status = ADD_STUDENT;
             return StateCopy;
         case DELETE_STUDENT:
             StateCopy.status = DELETE_STUDENT;
+            StateCopy.message = 'You deleted a student from your class!';
             let cohortIdx = -1; // Initialize as a non index
             let studentIdx = -1; // Initialize as a non index
             StateCopy.cohorts.forEach((cohort, index) => {
@@ -153,6 +160,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case UPLOAD_CSV:
             StateCopy = action.payload;
+            StateCopy.message = 'You succesfully uploaded your students!';
             StateCopy.authenticated = true;
             StateCopy.status = UPLOAD_CSV;
             return StateCopy;
@@ -163,7 +171,8 @@ export default (state = defaultState, action) => {
             StateCopy.status = UPLOAD_CSV_FAILURE;
             return StateCopy;
         case EXPORT_CSV:
-            StateCopy['exportCSV'] = action.payload;
+            StateCopy.exportCSV = action.payload;
+            StateCopy.message = 'You sucessfully downloaded a list of your students!';
             return StateCopy;
         case EXPORTING_CSV:
             StateCopy.status = EXPORTING_CSV;
@@ -195,6 +204,7 @@ export default (state = defaultState, action) => {
             StateCopy.status = USER_PASSWORD_RESET_FAILED;
             return StateCopy;
         case LOGOUT_USER:
+            StateCopy.message = 'You succesfully logged out!';
             return defaultState;
         default:
             return state;

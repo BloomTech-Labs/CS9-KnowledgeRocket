@@ -316,14 +316,11 @@ class Auth extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        addUser,
-        loginUser,
-        loginUserGoogle,
-        loginUserFacebook,
-        loginUserTwitter,
-        generateBreadCrumbs,
-    }
-)(withStyles(styles)(Auth));
+export default connect(mapStateToProps, {
+    addUser,
+    loginUser,
+    loginUserGoogle,
+    loginUserFacebook,
+    loginUserTwitter,
+    generateBreadCrumbs,
+})(withStyles(styles)(Auth));

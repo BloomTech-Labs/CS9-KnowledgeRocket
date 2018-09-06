@@ -3,15 +3,19 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 // Material Components
 import Input from '@material-ui/core/Input';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
-// Components
+// Actions
 import { generateBreadCrumbs, addCohort, addStudent, appendRocket } from '../../actions';
+
+function mapStateToProps(state) {
+    return {
+        state,
+    };
+}
 
 const StylizedInput = styled(Input)`
     padding: 0.5rem;
-    flex-grow: 3;   
+    flex-grow: 3;
     background-color: #f2f7ff;
     border-radius: 0.25rem;
     margin: 0rem 1rem 1rem 0rem;
@@ -19,13 +23,6 @@ const StylizedInput = styled(Input)`
         margin: 0rem 0rem 1rem 0rem;
     }
 `;
-// Actions
-
-function mapStateToProps(state) {
-    return {
-        state,
-    };
-}
 
 const StyledCohortSettingForm = styled.div`
     display: flex;
@@ -37,11 +34,10 @@ const StyledCohortSettingForm = styled.div`
     background-color: white;
     border-radius: 0.4rem;
     box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-    0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
     @media (max-width: 500px) {
         flex-direction: column;
     }
-
 `;
 
 const StyledHeaders = styled.h2`
@@ -65,7 +61,7 @@ const StyledButton = styled(Button)`
     flex-grow: 0;
     padding: 0.5rem;
     margin: 0rem 0rem 1rem 0rem !important;
-`
+`;
 
 class CohortAdd extends Component {
     state = {
@@ -77,6 +73,7 @@ class CohortAdd extends Component {
             /* objectID : date*/
             objectID: 0,
         },
+        open: false,
     };
 
     componentDidMount() {
@@ -100,13 +97,13 @@ class CohortAdd extends Component {
         const cohort = {
             title: this.state.title,
         };
+
         this.props.addCohort(cohort, this.props.state.user._id);
         this.props.history.push('/rocket/classes');
     };
 
     render() {
-        console.log('MADE IT TO COHORTADD');
-        return (
+        return [
             <CohortFormMainContainer>
                 <StyledHeaders>Create a new Class</StyledHeaders>
                 <StyledCohortSettingForm>
@@ -116,12 +113,16 @@ class CohortAdd extends Component {
                         name="title"
                         onChange={this.handleNewInput}
                     />
-                    <StyledButton variant="contained" color="primary" onClick={this.handleAddCohort}>
+                    <StyledButton
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleAddCohort}
+                    >
                         Add this Class
                     </StyledButton>
                 </StyledCohortSettingForm>
-            </CohortFormMainContainer>
-        );
+            </CohortFormMainContainer>,
+        ];
     }
 }
 

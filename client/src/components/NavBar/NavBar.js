@@ -14,9 +14,11 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
 // Actions
 import { logOutUser } from '../../actions';
-import {smallBreakPoint} from '../Themes/Themes';
+import { smallBreakPoint } from '../Themes/Themes';
 
 function mapStateToProps(state) {
     return {
@@ -62,6 +64,10 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing.unit * 3,
     },
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
 });
 
 const StyledNavBarContainer = styled(AppBar)`
@@ -89,7 +95,7 @@ const StyledCrumb = styled.div`
     padding: 0.1rem;
     ${smallBreakPoint(`
         display: none;
-    `)}
+    `)};
 `;
 
 const StyledSvg = styled(SvgIcon)`
@@ -112,6 +118,7 @@ const CPLink = styled(Link)`
 class NavBar extends Component {
     state = {
         mobileOpen: false,
+        open: false,
     };
 
     componentDidMount() {
@@ -122,12 +129,24 @@ class NavBar extends Component {
 
     handleLogOut = () => {
         this.props.logOutUser();
+        this.handleActionClick();
         this.props.history.push('/rocket/auth');
     };
 
     handleDrawerToggle = () => {
         // console.log('MADE IT TO handleDrawerToggle  ');
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+    };
+
+    handleActionClick = () => {
+        console.log(`MADE IT TO handleActionClick`);
+        console.log(`SNACKBAR OPEN`);
+        this.setState({ open: true });
+    };
+
+    handleRequestClose = () => {
+        console.log(`SNACKBAR CLOSE`);
+        this.setState({ open: false });
     };
 
     render() {
@@ -159,7 +178,16 @@ class NavBar extends Component {
                             </StyledCrumb>
                         ))}
                     </StyledBreadCrumbContainer>
-                    <Button onClick={this.handleLogOut} variant="contained" color="secondary" style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}>
+                    <Button
+                        onClick={this.handleLogOut}
+                        variant="contained"
+                        color="secondary"
+                        style={
+                            this.props.state.user.authenticated
+                                ? { display: 'flex' }
+                                : { display: 'none' }
+                        }
+                    >
                         Sign-Out
                     </Button>
                 </StyledNavBarContainer>
@@ -172,7 +200,11 @@ class NavBar extends Component {
                         classes={{
                             paper: classes.drawerPaper,
                         }}
-                        style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}
+                        style={
+                            this.props.state.user.authenticated
+                                ? { display: 'flex' }
+                                : { display: 'none' }
+                        }
                         ModalProps={{
                             keepMounted: true, // Better open performance on mobile.
                         }}
@@ -208,7 +240,11 @@ class NavBar extends Component {
                         classes={{
                             paper: classes.drawerPaper,
                         }}
-                        style={this.props.state.user.authenticated ? {display: 'flex'} : {display: 'none'}}
+                        style={
+                            this.props.state.user.authenticated
+                                ? { display: 'flex' }
+                                : { display: 'none' }
+                        }
                     >
                         <List>
                             <ListItem>
@@ -234,12 +270,35 @@ class NavBar extends Component {
                         </List>
                     </Drawer>
                 </Hidden>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={5000}
+                    onClose={this.handleRequestClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">You successfully logged out!</span>}
+                    action={[
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            className={classes.close}
+                            onClick={this.handleRequestClose}
+                        >
+                            <CloseIcon />
+                        </IconButton>,
+                    ]}
+                />
             </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { logOutUser }
-)(withStyles(styles, { withTheme: true })(NavBar));
+export default connect(mapStateToProps, { logOutUser })(
+    withStyles(styles, { withTheme: true })(NavBar)
+);

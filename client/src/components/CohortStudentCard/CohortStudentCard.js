@@ -43,25 +43,6 @@ class CohortStudentCard extends Component {
         status: '',
     };
 
-    handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
-
-    handleDeleteStudent = () => {
-        const studentID = this.props.student._id;
-        console.log(`STUDENT ID ${studentID}`);
-        this.props.deleteStudent(studentID);
-    };
-
-    handleOnClick = () => {
-        this.handleDeleteStudent();
-        this.handleClose();
-    };
-
     componentDidMount() {
         let myStudent = {};
         let listOfStudents = [];
@@ -84,6 +65,26 @@ class CohortStudentCard extends Component {
         });
     }
 
+    triggerMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+
+    handleDeleteStudent = () => {
+        const studentID = this.props.student._id;
+        console.log(`STUDENT ID ${studentID}`);
+        this.props.deleteStudent(studentID);
+    };
+
+    handleOnClick = () => {
+        this.props.trigger();
+        this.handleDeleteStudent();
+        this.handleClose();
+    };
+
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
@@ -97,7 +98,7 @@ class CohortStudentCard extends Component {
                     aria-label="More"
                     aria-owns={open ? 'long-menu' : null}
                     aria-haspopup="true"
-                    onClick={this.handleClick}
+                    onClick={this.triggerMenu}
                 >
                     <MoreVertIcon />
                 </IconButton>
@@ -120,9 +121,6 @@ class CohortStudentCard extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        deleteStudent,
-    }
-)(CohortStudentCard);
+export default connect(mapStateToProps, {
+    deleteStudent,
+})(CohortStudentCard);

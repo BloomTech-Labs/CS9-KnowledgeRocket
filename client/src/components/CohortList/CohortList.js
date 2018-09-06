@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 // actions
 import { generateBreadCrumbs } from '../../actions';
 // Material Components
-import {
-    FloatingAdd,
-    ListCard,
-    ListWrapper,
-} from '../RocketList/ListElements';
-import axios from 'axios';
+import { withStyles } from '@material-ui/core/styles';
+import { FloatingAdd, ListCard, ListWrapper } from '../RocketList/ListElements';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 const url = process.env.REACT_APP_SERVER;
 
 function mapStateToProps(state) {
@@ -26,11 +27,19 @@ const CohortCardContainer = styled.div`
     width: 100%;
 `;
 
+const styles = theme => ({
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
+
 // RENDERS A LIST OF COHORT CARDS
 export class CohortList extends Component {
     state = {
         cohort: [{ students: [] }],
         PS: {},
+        open: true,
     };
 
     componentDidMount() {
@@ -80,7 +89,7 @@ export class CohortList extends Component {
                     // Versus the amount that should have answered them.
                     participation =
                         totalShouldHaveAnswered > 0
-                            ? ((totalAnswered * 100) / totalShouldHaveAnswered).toFixed(1)
+                            ? (totalAnswered * 100 / totalShouldHaveAnswered).toFixed(1)
                             : '100';
                     this.setState({
                         [cohort._id]: { participation, sent: totalShouldHaveAnswered },
@@ -102,7 +111,15 @@ export class CohortList extends Component {
         this.props.history.push('/rocket/newclass');
     };
 
+    handleRequestClose = () => {
+        this.setState({ open: false });
+    };
+
     render() {
+        const { classes } = this.props;
+        const { message } = this.props.state.user;
+        const { status } = this.props.state.user;
+
         return (
             <ListWrapper>
                 {this.state.cohort ? (
@@ -155,8 +172,35 @@ export class CohortList extends Component {
                                         ]}
                                     />
                                 );
-                            } return null;
+                            }
+                            return null;
                         })}
+                        {status === 'ADD_COHORT' ? (
+                            <Snackbar
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                open={this.state.open}
+                                autoHideDuration={5000}
+                                onClose={this.handleRequestClose}
+                                ContentProps={{
+                                    'aria-describedby': 'message-id',
+                                }}
+                                message={<span id="message-id">{message}</span>}
+                                action={[
+                                    <IconButton
+                                        key="close"
+                                        aria-label="Close"
+                                        color="inherit"
+                                        className={classes.close}
+                                        onClick={this.handleRequestClose}
+                                    >
+                                        <CloseIcon />
+                                    </IconButton>,
+                                ]}
+                            />
+                        ) : null}
                     </CohortCardContainer>
                 ) : null}
             </ListWrapper>
@@ -165,8 +209,5 @@ export class CohortList extends Component {
 }
 
 export default withRouter(
-    connect(
-        mapStateToProps,
-        { generateBreadCrumbs }
-    )(CohortList)
+    connect(mapStateToProps, { generateBreadCrumbs })(withStyles(styles)(CohortList))
 );

@@ -18,10 +18,10 @@ const StylizedInput = styled(Input)`
     padding: 0.5rem;
     background-color: #f2f7ff;
     border-radius: 0.25rem;
-	margin-right: 0.5rem;
-	@media (max-width: 800px) {
-		width: 100%;
-	}
+    margin-right: 0.5rem;
+    @media (max-width: 800px) {
+        width: 100%;
+    }
 `;
 
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
@@ -73,6 +73,11 @@ class CohortAddStudentsForm extends Component {
         this.handleNewInput(e);
     };
 
+    handleOnClick = () => {
+        this.handleAddStudent();
+        this.props.actionClick();
+    };
+
     render() {
         // console.log(`firstName ${this.state.firstName}, ${this.state.firstName.length}`);
         // console.log(`lastName ${this.state.lastName}, ${this.state.lastName.length}`);
@@ -106,7 +111,7 @@ class CohortAddStudentsForm extends Component {
                     variant="contained"
                     color="primary"
                     disabled={this.state.disabled}
-                    onClick={this.handleAddStudent}
+                    onClick={this.handleOnClick}
                 >
                     Add
                 </Button>
@@ -115,9 +120,6 @@ class CohortAddStudentsForm extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        addStudent,
-    }
-)(CohortAddStudentsForm);
+export default connect(mapStateToProps, {
+    addStudent,
+})(CohortAddStudentsForm);

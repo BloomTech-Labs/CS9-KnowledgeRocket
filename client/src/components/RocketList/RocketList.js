@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs, deleteRocket } from '../../actions';
-
 import { RocketListContainer, FloatingAdd, ListWrapper, ListCard } from './ListElements';
+// Material Components
+import { withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 function mapStateToProps(state) {
     return {
@@ -10,9 +14,17 @@ function mapStateToProps(state) {
     };
 }
 
+const styles = theme => ({
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
+
 class RocketList extends Component {
     state = {
         rocketCounter: {},
+        open: true,
     };
     componentDidMount() {
         // Checks for User to be Authenticated
@@ -46,7 +58,15 @@ class RocketList extends Component {
         this.props.deleteRocket(element._id);
     };
 
+    handleRequestClose = () => {
+        console.log(`SNACKBAR CLOSE`);
+        this.setState({ open: false });
+    };
+
     render() {
+        const { classes } = this.props;
+        const { message } = this.props.state.user;
+        const { status } = this.props.state.user;
         // console.log('rocket counter', this.state.rocketCounter);
         return (
             <ListWrapper>
@@ -86,13 +106,39 @@ class RocketList extends Component {
                             />
                         );
                     })}
+
+                    {status === 'ADD_ROCKET' || status === 'DELETE_ROCKET' ? (
+                        <Snackbar
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            open={this.state.open}
+                            autoHideDuration={5000}
+                            onClose={this.handleRequestClose}
+                            ContentProps={{
+                                'aria-describedby': 'message-id',
+                            }}
+                            message={<span id="message-id">{message}</span>}
+                            action={[
+                                <IconButton
+                                    key="close"
+                                    aria-label="Close"
+                                    color="inherit"
+                                    className={classes.close}
+                                    onClick={this.handleRequestClose}
+                                >
+                                    <CloseIcon />
+                                </IconButton>,
+                            ]}
+                        />
+                    ) : null}
                 </RocketListContainer>
             </ListWrapper>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { generateBreadCrumbs, deleteRocket }
-)(RocketList);
+export default connect(mapStateToProps, { generateBreadCrumbs, deleteRocket })(
+    withStyles(styles)(RocketList)
+);

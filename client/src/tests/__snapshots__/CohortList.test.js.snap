@@ -8,10 +8,10 @@ exports[`CohortList renders correctly 1`] = `
     className="sc-iwsKbI cUACTR"
   >
     <div
-      className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 sc-bwzfXH kDnGSd"
+      className="MuiPaper-root-3 MuiPaper-elevation1-6 MuiPaper-rounded-4 MuiCard-root-2 sc-bwzfXH kDnGSd"
     >
       <div
-        className="MuiCardContent-root-29 sc-htpNat dHKBck"
+        className="MuiCardContent-root-30 sc-htpNat dHKBck"
       >
         <div
           className="sc-bxivhb eSNphu"
@@ -81,7 +81,7 @@ exports[`CohortList renders correctly 1`] = `
                       }
                     />
                     <button
-                      className="MuiButtonBase-root-56 MuiButton-root-30 MuiButton-fab-47 MuiButton-contained-41 MuiButton-containedPrimary-42 MuiButton-raised-44 MuiButton-raisedPrimary-45"
+                      className="MuiButtonBase-root-57 MuiButton-root-31 MuiButton-fab-48 MuiButton-contained-42 MuiButton-containedPrimary-43 MuiButton-raised-45 MuiButton-raisedPrimary-46"
                       disabled={false}
                       onBlur={[Function]}
                       onClick={[Function]}
@@ -98,11 +98,11 @@ exports[`CohortList renders correctly 1`] = `
                       type="button"
                     >
                       <span
-                        className="MuiButton-label-31"
+                        className="MuiButton-label-32"
                       >
                         <svg
                           aria-hidden="true"
-                          className="MuiSvgIcon-root-59"
+                          className="MuiSvgIcon-root-60"
                           color={undefined}
                           focusable="false"
                           viewBox="0 0 24 24"
@@ -117,7 +117,7 @@ exports[`CohortList renders correctly 1`] = `
                         </svg>
                       </span>
                       <span
-                        className="MuiTouchRipple-root-66"
+                        className="MuiTouchRipple-root-67"
                       />
                     </button>
                   </div>
