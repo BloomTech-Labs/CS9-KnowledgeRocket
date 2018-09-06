@@ -135,7 +135,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={0}
       />
       <input
         name="tm.choices[0].text"
@@ -153,7 +153,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={1}
       />
       <input
         name="tm.choices[1].text"
@@ -171,7 +171,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={2}
       />
       <input
         name="tm.choices[2].text"
@@ -189,7 +189,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={3}
       />
       <input
         name="tm.choices[3].text"
