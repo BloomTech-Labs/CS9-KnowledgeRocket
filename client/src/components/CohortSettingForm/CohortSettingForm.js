@@ -170,6 +170,7 @@ class CohortSettingForm extends Component {
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
+		this.props.actionClick();
 	};
 
 	handleExportStudents = event => {
