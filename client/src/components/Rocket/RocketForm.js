@@ -67,6 +67,28 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
     );
 };
 
+export const generateDefaults = () => {
+    return {
+        explanation: '',
+        question: '',
+        choices: [
+            {
+                text: '',
+            },
+            {
+                text: '',
+            },
+            {
+                text: '',
+            },
+            {
+                text: '',
+            },
+        ],
+        correct: 0,
+    };
+};
+
 const defaultProps = {
     td: generateDefaults(),
     tw: generateDefaults(),
@@ -107,32 +129,12 @@ function rocketShape() {
             .required('You must include a question.'),
         correct: number().required('You must choose a correct answer.'),
         choices: array().of(
-            string()
-                .trim()
-                .min(1)
-                .required()
+            object().shape({
+                text: string()
+                    .trim()
+                    .min(1)
+                    .required(`Answer text can't be empty`),
+            })
         ),
     });
-}
-
-function generateDefaults() {
-    return {
-        explanation: '',
-        question: '',
-        choices: [
-            {
-                text: '',
-            },
-            {
-                text: '',
-            },
-            {
-                text: '',
-            },
-            {
-                text: '',
-            },
-        ],
-        correct: '',
-    };
 }
