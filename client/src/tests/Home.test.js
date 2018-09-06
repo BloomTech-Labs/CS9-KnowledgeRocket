@@ -36,24 +36,14 @@ describe('<Home />', () => {
             ReactDOM.render(<HomeContainer />, div);
         });
 
-        it('renders a Sign Up button', () => {
+        it('renders a Get Started button', () => {
             expect(
                 wrapper
                     .find(NavButton)
                     .at(0)
                     .render()
                     .text()
-            ).toBe('Sign Up');
-        });
-
-        it('renders a Sign In button', () => {
-            expect(
-                wrapper
-                    .find(NavButton)
-                    .at(1)
-                    .render()
-                    .text()
-            ).toBe('Sign In');
+            ).toBe('Get Started');
         });
 
         it('Displays What is a Knowledge Rocket?', () => {

@@ -188,7 +188,7 @@ class NavBar extends Component {
                                 : { display: 'none' }
                         }
                     >
-                        Sign-Out
+                        Sign Out
                     </Button>
                 </StyledNavBarContainer>
                 <Hidden mdUp>
@@ -299,6 +299,7 @@ class NavBar extends Component {
     }
 }
 
-export default connect(mapStateToProps, { logOutUser })(
-    withStyles(styles, { withTheme: true })(NavBar)
-);
+export default connect(
+    mapStateToProps,
+    { logOutUser }
+)(withStyles(styles, { withTheme: true })(NavBar));
