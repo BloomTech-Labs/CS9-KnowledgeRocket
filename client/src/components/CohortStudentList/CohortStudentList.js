@@ -53,6 +53,21 @@ class CohortStudentList extends Component {
     return (
       <ExpansionPanel className={classes.root}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>Your Students</ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          {this.props.state.user.cohorts[this.props.cohortID].students.length === 0
+            ? 'Please add Students to your class'
+            : null}
+          {/* Render all students added if the cohort exists with that index*/}
+          {this.props.state.user.cohorts[this.props.cohortID]
+            ? this.props.state.user.cohorts[this.props.cohortID].students.map((student, index) => (
+                <CohortStudentCard
+                  student={student}
+                  key={`student_${index}`}
+                  trigger={this.props.actionClick}
+                />
+              ))
+            : null}
+        </ExpansionPanelDetails>
       </ExpansionPanel>
     );
   }
