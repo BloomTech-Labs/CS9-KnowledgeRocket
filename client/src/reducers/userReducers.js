@@ -204,6 +204,7 @@ export default (state = defaultState, action) => {
             StateCopy.status = USER_PASSWORD_RESET_FAILED;
             return StateCopy;
         case LOGOUT_USER:
+            StateCopy.message = 'You succesfully logged out!';
             return defaultState;
         default:
             return state;
