@@ -117,7 +117,7 @@ class Cohort extends Component {
         },
         cohortIDX: 0,
         ccEmail: false,
-        open: true,
+        open: false,
     };
 
     componentDidMount() {
@@ -239,12 +239,14 @@ class Cohort extends Component {
                         students={this.state.cohort.students}
                         match={this.props.match}
                         cohortID={cohortIDX}
+                        actionClick={this.handleActionClick}
                     />
                 ) : (
                     <StyledCohortStudentList
                         students={this.state.cohort.students}
                         match={this.props.match}
                         cohortID={cohortIDX}
+                        actionClick={this.handleActionClick}
                     />
                 )}{' '}
                 <StyledHeaders>Knowledge Rockets</StyledHeaders>
