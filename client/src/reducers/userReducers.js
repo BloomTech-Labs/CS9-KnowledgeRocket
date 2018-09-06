@@ -60,6 +60,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_ROCKET:
             StateCopy.status = ADD_ROCKET;
+
             // update cohort rockets
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
@@ -82,8 +83,8 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
-            // console.log('Payload inside ADD_Rocket Reducer', action.payload)
             StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.message = 'You added a rocket!';
             StateCopy.authenticated = true;
             return StateCopy;
         case APPEND_ROCKETS:
