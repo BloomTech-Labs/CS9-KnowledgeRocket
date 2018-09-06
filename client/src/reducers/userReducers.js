@@ -157,6 +157,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case UPLOAD_CSV:
             StateCopy = action.payload;
+            StateCopy.message = 'You succesfully uploaded your students!';
             StateCopy.authenticated = true;
             StateCopy.status = UPLOAD_CSV;
             return StateCopy;
