@@ -46,6 +46,7 @@ const defaultState = {
     rockets: [],
     cohorts: [{ title: '', students: [{}], teacher: {}, rockets: [{ rocketId: {} }] }],
     message: '',
+    exportCSV: [],
 };
 
 export default (state = defaultState, action) => {
@@ -168,7 +169,8 @@ export default (state = defaultState, action) => {
             StateCopy.status = UPLOAD_CSV_FAILURE;
             return StateCopy;
         case EXPORT_CSV:
-            StateCopy['exportCSV'] = action.payload;
+            StateCopy.exportCSV = action.payload;
+            StateCopy.message = 'You sucessfully downloaded a list of your students!';
             return StateCopy;
         case EXPORTING_CSV:
             StateCopy.status = EXPORTING_CSV;
