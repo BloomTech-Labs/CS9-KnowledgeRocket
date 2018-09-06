@@ -9,7 +9,6 @@ import { generateBreadCrumbs } from '../../actions';
 import { withStyles } from '@material-ui/core/styles';
 import { FloatingAdd, ListCard, ListWrapper } from '../RocketList/ListElements';
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -112,14 +111,7 @@ export class CohortList extends Component {
         this.props.history.push('/rocket/newclass');
     };
 
-    // handleActionClick = () => {
-    //     console.log(`MADE IT TO handleActionClick`);
-    //     console.log(`SNACKBAR OPEN`);
-    //     this.setState({ open: true });
-    // };
-
     handleRequestClose = () => {
-        console.log(`SNACKBAR CLOSE`);
         this.setState({ open: false });
     };
 

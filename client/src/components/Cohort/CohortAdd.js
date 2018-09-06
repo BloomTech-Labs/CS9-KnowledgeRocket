@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
 // Material Components
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
@@ -63,13 +62,6 @@ const StyledButton = styled(Button)`
     padding: 0.5rem;
     margin: 0rem 0rem 1rem 0rem !important;
 `;
-
-const styles = theme => ({
-    close: {
-        width: theme.spacing.unit * 4,
-        height: theme.spacing.unit * 4,
-    },
-});
 
 class CohortAdd extends Component {
     state = {

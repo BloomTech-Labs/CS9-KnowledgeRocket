@@ -149,7 +149,6 @@ class Cohort extends Component {
     };
 
     handleCheckBox = e => {
-        console.log('MADE IT TO handleCheckBox');
         this.setState({ cohort: { ccEmail: !!e.target.checked } });
     };
 
@@ -176,7 +175,6 @@ class Cohort extends Component {
 
     handlePickRocket = rocketID => {
         const today = new Date(new Date().setUTCHours(0, 0, 0, 0));
-        // console.log(today.toDateString())
         this.handleAppendRocket(rocketID, Date.parse(today));
     };
     handleAddStudent = () => {
@@ -193,23 +191,18 @@ class Cohort extends Component {
     };
 
     handleActionClick = () => {
-        console.log(`MADE IT TO handleActionClick`);
-        console.log(`SNACKBAR OPEN`);
         this.setState({ open: true });
     };
 
     handleRequestClose = () => {
-        console.log(`SNACKBAR CLOSE`);
         this.setState({ open: false });
     };
 
     render() {
         const { classes } = this.props;
         const { message } = this.props.state.user;
-        const { status } = this.props.state.user;
 
         const cohortID = this.props.match.params.id;
-        // console.log(`COHORTID ${JSON.stringify(this.props.match)}, ${cohortID}`);
         let cohortIDX;
         this.props.state.user.cohorts.forEach((ch, index) => {
             if (ch._id === this.props.match.params.id) {
