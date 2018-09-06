@@ -12,7 +12,7 @@ import './RocketQuestion.css';
 const url = process.env.REACT_APP_SERVER;
 
 const defaultState = {
-    answer: 0,
+    value: 0,
     questionID: '',
     studentID: '',
     rocketQuestion: {
@@ -65,8 +65,6 @@ class RocketQuestion extends Component {
 
     componentDidMount() {
         const questionID = this.props.match.params.question;
-        // Get stuff about the question from the server
-        console.log(this.props);
         axios
             .get(`${url}/api/question/${questionID}`)
             .then(response => {
@@ -86,7 +84,7 @@ class RocketQuestion extends Component {
     handleSubmit = e => {
         if (!this.state.submitted) {
             const packAge = {
-                answer: this.state.answer,
+                answer: this.state.value,
                 questionId: this.state.questionID,
                 studentId: this.state.studentID,
             };
@@ -112,20 +110,12 @@ class RocketQuestion extends Component {
 
     handleRadio = e => {
         this.setState({
-            value: e.target.value,
+            value: Number(e.target.name),
+            select: e.target.value
         });
-    };
-    handleInput = e => {
-        if (!this.state.submitted) {
-            this.setState({ [e.target.id]: e.target.value });
-        } else {
-            // Do not allow changing answers
-        }
     };
 
     render() {
-        console.log('My state is:', this.state);
-        console.log('My Cohort', this.props.match.params.cohort);
         return (
             <QuestionHeader className="Question_container">
                 <div className="Question_Wrapper">
@@ -145,8 +135,8 @@ class RocketQuestion extends Component {
                             {this.state.rocketQuestion.choices.map((answer, index) => {
                                 return (
                                     <RadioGroup
-                                        value={this.state.value}
-                                        name={'value' + index}
+                                        value={this.state.select}
+                                        name={`${index}`}
                                         onChange={this.handleRadio}
                                         key={index}
                                         className={
