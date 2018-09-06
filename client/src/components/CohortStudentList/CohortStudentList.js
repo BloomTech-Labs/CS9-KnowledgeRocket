@@ -19,10 +19,17 @@ function mapStateToProps(state) {
 const styles = theme => ({
   root: {
     width: '100%',
+    margin: '0 0 1.5rem 0',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
+  },
+  expansion: {
+    display: 'flex',
+    padding: '1rem',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
 });
 
@@ -53,7 +60,7 @@ class CohortStudentList extends Component {
     return (
       <ExpansionPanel className={classes.root}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>Your Students</ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className={classes.expansion}>
           {this.props.state.user.cohorts[this.props.cohortID].students.length === 0
             ? 'Please add Students to your class'
             : null}
