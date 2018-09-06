@@ -76,10 +76,20 @@ const verbageDictionary = {
 };
 
 /**
+ * @callback handleBlur
+ * @param {*} event
+ */
+
+/**
+ * @callback handleChange
+ * @param {*} event
+ */
+
+/**
  *
  * @param {object} props
- * @param {Function} props.handleBlur
- * @param {Function} props.handleChange
+ * @param {handleBlur} props.handleBlur
+ * @param {handleChange} props.handleChange
  * @param {object} props.values
  * @param {string} props.interval
  * @param {object} props.errors
@@ -129,7 +139,7 @@ export const QuestionChoices = ({
                     <input
                         name={`${interval}.correct`}
                         checked={values[interval].choices[0].text === values[interval].correct}
-                        value={values[interval].choices[0].text}
+                        value={0}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -147,7 +157,7 @@ export const QuestionChoices = ({
                     <input
                         name={`${interval}.correct`}
                         checked={values[interval].choices[1].text === values[interval].correct}
-                        value={values[interval].choices[1].text}
+                        value={1}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -165,7 +175,7 @@ export const QuestionChoices = ({
                     <input
                         name={`${interval}.correct`}
                         checked={values[interval].choices[2].text === values[interval].correct}
-                        value={values[interval].choices[2].text}
+                        value={2}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -183,7 +193,7 @@ export const QuestionChoices = ({
                     <input
                         name={`${interval}.correct`}
                         checked={values[interval].choices[3].text === values[interval].correct}
-                        value={values[interval].choices[3].text}
+                        value={3}
                         type="radio"
                         onChange={handleChange}
                         onBlur={handleBlur}
