@@ -106,7 +106,8 @@ class RocketList extends Component {
                             />
                         );
                     })}
-                    {status === 'ADD_ROCKET' ? (
+
+                    {status === 'ADD_ROCKET' || status === 'DELETE_ROCKET' ? (
                         <Snackbar
                             anchorOrigin={{
                                 vertical: 'bottom',
