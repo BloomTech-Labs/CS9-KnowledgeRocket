@@ -19,9 +19,38 @@ function mapStateToProps(state) {
 const PaperHeader = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
+    justify-content: flex-start;
+    align-content: flex-start;
     margin: auto auto;
+    padding-top: 1rem;
+    font-size: 1rem !important;
+    user-select: none !important;
+`;
+
+const ColorBlock = styled.div`
+    width: 65px;
+    height: 40px;
+    background-color: ${props => props.bgcolor}88;
+    border-radius: 0.25rem;
+    border: 1px solid #cfcfcf;
+`;
+const ColorLabel = styled.p`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', serif;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1rem;
+    color: black;
+`;
+
+const StyledTableCell = styled(TableCell)`
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
 `;
 
 const styles = theme => ({
@@ -30,84 +59,113 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         overflowX: 'auto',
     },
-    table: {
-        minWidth: 700,
+    tr: {
+        maxWidth: 150,
     },
 });
+
 let id = 0;
-function createGraph(label, participation, sent, students) {
+function createTableItem(label, participation, sent, students) {
     id += 1;
     return { id, label, participation, sent, students };
 }
-const rows = [
-    createGraph('TWODAY TEST QUESTION', 100, 83, 83),
-    createGraph('TWO WEEK TEST QUESTION', 10, 83, 83),
-    createGraph('TWO MONTH TEST QUESTION', 99, 83, 83),
-];
 class RocketResult extends Component {
-    state = { canvas: '', ctx: '' };
+    state = {
+        canvas: '',
+        ctx: '',
+        rows: [
+            { id: 0, label: '', participation: '', sent: '', students: 0 },
+            { id: 0, label: '', participation: '', sent: '', students: 0 },
+            { id: 0, label: '', participation: '', sent: '', students: 0 },
+        ],
+        cohortTitle: '',
+        rocketTitle: '',
+        colors: ['#1B75BB', '#2E3033', '#EEEEEE', '#F50057'],
+    };
     componentDidMount() {
+        // For Nav Bar
         this.props.generateBreadCrumbs('/rocket/results');
-
-        // this.setState({
-        //     canvas,
-        //     ctx,
-        // });
-        // this.piChart();
+        const cohortId = this.props.match.params.cohortId;
+        const cohortTitle = this.props.state.user.cohorts.reduce((acc, next) => {
+            if (next._id === cohortId) {
+                acc = next.title;
+            }
+            return acc;
+        }, '');
+        const rocketId = this.props.match.params.rocketId;
+        const rocketTitle = this.props.state.user.rockets.reduce((acc, next) => {
+            if (next._id === rocketId) {
+                acc = next.title;
+            }
+            return acc;
+        }, '');
+        this.setState({ cohortTitle, rocketTitle });
+        // Helper Function for Generating Table Items.
     }
-    // piChart = () => {
-    //     //  ctx.arc(200 + offsetX, 200 + offsetY, 120(dont forget the offset), beginAngle, endAngle);
-    //     let choices = [22, 33, 12, 35];
-    //     let canvas = this.refs.canvas;
-    //     let ctx = canvas.getContext('2d');
-    //     let sum = 0;
-    //     for (let i = 0; i < choices.length; i++) {
-    //         sum += choices[i];
-    //     }
-    //     let colors = ['red', 'green', 'blue', 'orange'];
-    //     let bias = 0.15;
-    //     let offset = 8;
-    //     let beginAngle = 0;
-    //     let endAngle = 0;
-    //     let offsetX, offsetY, medianAngle;
-    //     for (let i = 0; i < choices.length; i++) {
-    //         //Converting to radians aka percentages of 2
-    //         let radians = Math.PI * ((choices[i] / sum) * 2);
-    //         beginAngle = endAngle + bias;
-    //         endAngle = endAngle + radians;
-    //         medianAngle = (endAngle + beginAngle) / 2;
-    //         offsetX = Math.cos(medianAngle) * offset;
-    //         offsetY = Math.sin(medianAngle) * offset;
-    //         ctx.beginPath();
-    //         ctx.fillStyle = colors[i % colors.length];
-    //         ctx.moveTo(200 + offsetX, 200 + offsetY);
-    //         ctx.arc(200, 200, 60 + offset * 2, beginAngle, endAngle);
-    //         ctx.lineTo(200 + offsetX, 200 + offsetY);
-    //         ctx.stroke();
-    //         ctx.fill();
-    //     }
-    //     ctx.fillstyle = 'white';
-    // };
 
-    generateChart = () => {
+    calculateParticipation = which => {
+        const question = this.props.state.rocket.responseRockets[which];
+        const { cohortId, questionId, students } = question;
+        let first = 0;
+        let second = 0;
+        let third = 0;
+        let fourth = 0;
+        if (students) {
+            students.forEach(st => {
+                if (st.answer[0].choice === 0) first++;
+                if (st.answer[0].choice === 1) second++;
+                if (st.answer[0].choice === 2) third++;
+                if (st.answer[0].choice === 3) fourth++;
+            });
+        }
+
+        if (cohortId) {
+            const cohortFromUser = this.props.state.user.cohorts.reduce((acc, next) => {
+                if (next._id === cohortId) {
+                    acc = next;
+                }
+                return acc;
+            }, {});
+            const totalStudentsInCohort = cohortFromUser.students.length;
+            const participation = ((students.length * 100) / totalStudentsInCohort).toFixed(2);
+            const sent = totalStudentsInCohort;
+            return {
+                participation,
+                sent,
+                totalStudentsInCohort,
+                cohortFromUser,
+                first,
+                second,
+                third,
+                fourth,
+                questionId,
+            };
+        }
+        return {
+            participation: 0,
+            sent: 0,
+            totalStudentsInCohort: 0,
+            first,
+            second,
+            third,
+            fourth,
+            questionId,
+        };
+    };
+
+    generateChart = (first, second, third, fourth, questionId) => {
+        let choices = [first, second, third, fourth];
         const svgs = [];
-        let choices = [22, 33, 12, 35];
+
         let sum = 0;
         for (let i = 0; i < choices.length; i++) {
             sum += choices[i];
         }
-        let colors = ['red', 'green', 'blue', 'orange'];
-        // let bias = 0.15;
-        // let offset = 8;
-        // let beginAngle = 0;
-        // let endAngle = 0;
-        // let offsetX, offsetY, medianAngle;
 
         let cumulativePercent = 0;
         for (let i = 0; i < choices.length; i++) {
-            //Converting to radians aka percentages of 2
             let offset = 0;
-            let percent = choices[i] / sum;
+            let percent = choices[i] === 0 ? 0 : choices[i] / sum;
             const startX = Math.cos(2 * Math.PI * (cumulativePercent + offset));
             const startY = Math.sin(2 * Math.PI * (cumulativePercent + offset));
             cumulativePercent += percent;
@@ -122,7 +180,12 @@ class RocketResult extends Component {
                 `L 0 0`, // Line
             ].join(' ');
             svgs.push(
-                <path d={pathData} fill={colors[i % colors.length]} className="pieChartSection" />
+                <path
+                    d={pathData}
+                    fill={this.state.colors[i]}
+                    className="pieChartSection"
+                    key={`${questionId}_${i}`}
+                />
             );
         }
 
@@ -139,39 +202,100 @@ class RocketResult extends Component {
             </svg>
         );
     };
+
     render() {
+        const td = this.calculateParticipation('twoDay');
+        const tw = this.calculateParticipation('twoWeek');
+        const tm = this.calculateParticipation('twoMonth');
+        const keys = [td, tw, tm];
+        const rows = [
+            createTableItem(
+                'TWO DAY QUESTION',
+                td.participation,
+                td.sent,
+                td.totalStudentsInCohort
+            ),
+            createTableItem(
+                'TWO WEEK QUESTION',
+                tw.participation,
+                tw.sent,
+                tw.totalStudentsInCohort
+            ),
+            createTableItem(
+                'TWO MONTH QUESTION',
+                tm.participation,
+                tm.sent,
+                tm.totalStudentsInCohort
+            ),
+        ];
         return (
             <PaperHeader>
                 <Paper>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>
-                                    Some Name for this Data likely a template literal
-                                </TableCell>
-                                <TableCell numeric>Participation</TableCell>
-                                <TableCell numeric>Sent</TableCell>
-                                <TableCell numeric>Students</TableCell>
+                                <StyledTableCell>
+                                    {`${this.state.cohortTitle}: ${this.state.rocketTitle}`}
+                                </StyledTableCell>
+                                <StyledTableCell numeric>Participation</StyledTableCell>
+                                <StyledTableCell numeric>Sent</StyledTableCell>
+                                <StyledTableCell numeric>Students</StyledTableCell>
+                                <StyledTableCell numeric>Legend</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map(row => {
+                            {rows.map((row, idx) => {
                                 return (
                                     <TableRow key={row.id}>
-                                        <TableCell>{row.label}</TableCell>
-                                        <TableCell numeric>{row.participation}%</TableCell>
-                                        <TableCell numeric>{row.sent}</TableCell>
-                                        <TableCell numeric>{row.students}</TableCell>
+                                        <StyledTableCell>{row.label}</StyledTableCell>
+                                        <StyledTableCell numeric>
+                                            {row.participation}%
+                                        </StyledTableCell>
+                                        <StyledTableCell numeric>{row.sent}</StyledTableCell>
+                                        <StyledTableCell numeric>{row.students}</StyledTableCell>
+                                        <StyledTableCell>
+                                            <div
+                                                name="LEGEND"
+                                                style={{
+                                                    display: 'inline-flex',
+                                                    width: '100%',
+                                                    justifyContent: 'space-evenly',
+                                                }}
+                                            >
+                                                {this.state.colors.map((color, cidx) => {
+                                                    return (
+                                                        <ColorBlock
+                                                            bgcolor={color}
+                                                            key={`choice_${cidx}`}
+                                                        >
+                                                            <ColorLabel>
+                                                                {`Choice: ${cidx + 1}`}
+                                                            </ColorLabel>
+                                                        </ColorBlock>
+                                                    );
+                                                })}
+                                            </div>
+                                            <div
+                                                style={{
+                                                    width: '300px',
+                                                    height: '300px',
+                                                    padding: '1rem',
+                                                }}
+                                            >
+                                                {this.generateChart(
+                                                    keys[idx].first,
+                                                    keys[idx].second,
+                                                    keys[idx].third,
+                                                    keys[idx].fourth,
+                                                    keys[idx].questionId
+                                                )}
+                                            </div>
+                                        </StyledTableCell>
                                     </TableRow>
                                 );
                             })}
                         </TableBody>
                     </Table>
-                </Paper>
-                <Paper>
-                    <div style={{ width: '300px', height: '300px', padding: '1rem' }}>
-                        {this.generateChart()}
-                    </div>
                 </Paper>
             </PaperHeader>
         );

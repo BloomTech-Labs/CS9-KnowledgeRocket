@@ -21,7 +21,6 @@ import green from '@material-ui/core/colors/green';
 import {smallBreakPoint} from '../Themes/Themes';
 
 export const RocketListContainer = Styled.div`
-    ${props => console.log(props.theme)};
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
