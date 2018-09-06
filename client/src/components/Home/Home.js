@@ -37,16 +37,23 @@ export default class Home extends Component {
         return (
             <HomeContainer>
                 <HomeNav>
-                        <div>
-                            <NavLogo src="/img/Logo_BW_SML.svg" onClick={this.handleHome} />
-                        </div>
-                        <div style={this.props.authenticated ? {display:'none'} : {display: 'block'}}>
-                            <NavButton onClick={this.handleAuthRedirect}>Sign Up</NavButton>
-                            <NavButton onClick={this.handleAuthRedirect}>Sign In</NavButton>
-                        </div>
-                        <div style={this.props.authenticated ? {display: 'block'} : {display:'none'} }>
-                            <NavButton onClick={this.handleAuthRedirect}>To Dashboard</NavButton>
-                        </div>
+                    <div>
+                        <NavLogo src="/img/Logo_BW_SML.svg" onClick={this.handleHome} />
+                    </div>
+                    <div
+                        style={
+                            this.props.authenticated ? { display: 'none' } : { display: 'block' }
+                        }
+                    >
+                        <NavButton onClick={this.handleAuthRedirect}>Get Started</NavButton>
+                    </div>
+                    <div
+                        style={
+                            this.props.authenticated ? { display: 'block' } : { display: 'none' }
+                        }
+                    >
+                        <NavButton onClick={this.handleAuthRedirect}>To Dashboard</NavButton>
+                    </div>
                 </HomeNav>
                 <CtaContainer>
                     <HomeCTA>
@@ -100,13 +107,6 @@ export default class Home extends Component {
                 <FooterSection>
                     <FollowSection>
                         <NavButton onClick={this.handleContact}>CONTACT US</NavButton>
-                        <NavButton onClick={this.handleAuthRedirect}>SIGN UP</NavButton>
-                        <NavButton onClick={this.handleAuthRedirect}>SIGN IN</NavButton>
-                    </FollowSection>
-                    <FollowSection>
-                        <h4>Follow us on:</h4>
-                    </FollowSection>
-                    <FollowSection>
                         <a
                             href="https://twitter.com/KnowledegeR"
                             title="Knowledge Rocket on Twitter"
