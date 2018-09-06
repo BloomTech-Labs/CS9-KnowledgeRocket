@@ -62,7 +62,7 @@ export default (state = defaultState, action) => {
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
                 c.rockets.forEach((r, rIndex) => {
-                    console.log(r.rocketId, action.payload.rocketId);
+                    //console.log(r.rocketId, action.payload.rocketId);
                     if (r.rocketId._id === action.payload.rocketId._id) {
                         target.push([cIndex, rIndex]);
                     }
