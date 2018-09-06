@@ -140,6 +140,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_STUDENT:
             StateCopy.status = DELETE_STUDENT;
+            StateCopy.message = 'You deleted a student from your class!';
             let cohortIdx = -1; // Initialize as a non index
             let studentIdx = -1; // Initialize as a non index
             StateCopy.cohorts.forEach((cohort, index) => {
