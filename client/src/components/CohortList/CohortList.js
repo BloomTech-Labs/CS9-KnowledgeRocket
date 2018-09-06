@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 // actions
 import { generateBreadCrumbs } from '../../actions';
@@ -208,6 +207,4 @@ export class CohortList extends Component {
     }
 }
 
-export default withRouter(
-    connect(mapStateToProps, { generateBreadCrumbs })(withStyles(styles)(CohortList))
-);
+export default connect(mapStateToProps, { generateBreadCrumbs })(withStyles(styles)(CohortList));
