@@ -120,13 +120,12 @@ class RocketResult extends Component {
 
         // Set scheduled dates for TD TW TM on state
         cohort.rockets.forEach((cr, idx) => {
-            if (cr.rocketId === rocketId) {
+            if (cr.rocketId._id === rocketId) {
                 twoDaySchedule = cr.td;
                 twoWeekSchedule = cr.tm;
                 twoMonthSchedule = cr.tw;
             }
         });
-        console.log('Setting state on CDM', cohortTitle, rocketTitle, totalStudents, cohort);
         this.setState({
             cohortTitle,
             rocketTitle,
@@ -157,8 +156,18 @@ class RocketResult extends Component {
         const totalStudentsInCohort = this.state.cohort.students.length;
         if (cohortId) {
             const participation = ((students.length * 100) / totalStudentsInCohort).toFixed(2);
-            //TODO: FIX SENT BASED ON this.state.twoDaySchedule / twoWeekSchedule /twoMonthSchedule
-            const sent = totalStudentsInCohort;
+            // Check if questions should have been sent by now, and set sent to number of students if so.
+            let sent = 0;
+            if (which === 'twoDay' && Date.now() > Date.parse(this.state.twoDaySchedule)) {
+                sent = totalStudentsInCohort;
+            } else if (which === 'twoWeek' && Date.now() > Date.parse(this.state.twoWeekSchedule)) {
+                sent = totalStudentsInCohort;
+            } else if (
+                which === 'twoMonth' &&
+                Date.now() > Date.parse(this.state.twoMonthSchedule)
+            ) {
+                sent = totalStudentsInCohort;
+            }
             return {
                 participation,
                 sent,
