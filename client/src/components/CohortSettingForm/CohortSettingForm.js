@@ -163,7 +163,6 @@ class CohortSettingForm extends Component {
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
-		this.props.actionClick();
 	};
 
 	handleExportStudents = event => {
@@ -173,6 +172,7 @@ class CohortSettingForm extends Component {
 			.then(() => {
 				// allow user to download csv only after successful export event
 				this.downloadCSV();
+				this.props.actionClick();
 			})
 			.catch(err => {
 				console.log(err);
@@ -255,9 +255,7 @@ class CohortSettingForm extends Component {
 					className={classes.button}
 					onClick={this.handleExportStudents}
 				>
-					<StyledLabel>
-						Export CSV
-					</StyledLabel>
+					<StyledLabel>Export CSV</StyledLabel>
 				</StylizedForm>
 				<StyledFormControlLabel
 					control={
