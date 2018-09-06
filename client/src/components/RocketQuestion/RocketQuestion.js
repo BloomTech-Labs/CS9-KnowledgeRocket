@@ -25,7 +25,7 @@ const defaultState = {
             { text: '', correct: false },
             { text: '', correct: false },
         ],
-        correct: '',
+        correct: 0,
     },
     submitted: false,
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generateBreadCrumbs, deleteRocket } from '../../actions';
+import { generateBreadCrumbs, deleteRocket, clearSnackMessage } from '../../actions';
 import { RocketListContainer, FloatingAdd, ListWrapper, ListCard } from './ListElements';
 // Material Components
 import { withStyles } from '@material-ui/core/styles';
@@ -61,6 +61,7 @@ class RocketList extends Component {
     handleRequestClose = () => {
         console.log(`SNACKBAR CLOSE`);
         this.setState({ open: false });
+        this.props.clearSnackMessage();
     };
 
     render() {
@@ -139,6 +140,7 @@ class RocketList extends Component {
     }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs, deleteRocket })(
-    withStyles(styles)(RocketList)
-);
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs, deleteRocket, clearSnackMessage }
+)(withStyles(styles)(RocketList));

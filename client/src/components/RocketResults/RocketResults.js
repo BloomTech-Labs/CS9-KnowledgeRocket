@@ -32,7 +32,8 @@ const ColorBlock = styled.div`
     height: 40px;
     background-color: ${props => props.bgcolor};
     border-radius: 0.25rem;
-    border: 1px solid #cfcfcf;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+        0px 3px 1px -2px rgba(0, 0, 0, 0.12);
 `;
 const ColorLabel = styled.p`
     display: flex;
@@ -49,6 +50,8 @@ const ColorLabel = styled.p`
 `;
 
 const StyledTableCell = styled(TableCell)`
+    justify-content: center !important;
+    text-align: center !important;
     font-size: 1.5rem !important;
     font-weight: bold !important;
 `;
@@ -80,26 +83,59 @@ class RocketResult extends Component {
         ],
         cohortTitle: '',
         rocketTitle: '',
-        colors: ['#1B75BB', '#2E3033', '#EEEEEE', '#F50057'],
+        colors: ['#1B75BB', '#FFC628', '#74A752', '#F50057'],
+        totalStudents: 0,
+        cohort: { students: [] },
+        twoDaySchedule: '00/00/00',
+        twoWeekSchedule: '00/00/00',
+        twoMonthSchedule: '00/00/00',
     };
     componentDidMount() {
         // For Nav Bar
-        this.props.generateBreadCrumbs('/rocket/results');
+        this.props.generateBreadCrumbs('/rocket/classes');
         const cohortId = this.props.match.params.cohortId;
-        const cohortTitle = this.props.state.user.cohorts.reduce((acc, next) => {
-            if (next._id === cohortId) {
-                acc = next.title;
-            }
-            return acc;
-        }, '');
+        let cohortTitle = '';
+        let totalStudents = 0;
+        let cohort = { students: [] };
         const rocketId = this.props.match.params.rocketId;
+        let twoDaySchedule = '00/00/00';
+        let twoWeekSchedule = '00/00/00';
+        let twoMonthSchedule = '00/00/00';
+
+        // Find the right cohort and set data on state.
+        this.props.state.user.cohorts.forEach(item => {
+            if (item._id === cohortId) {
+                cohortTitle = item.title;
+                totalStudents = item.students.length;
+                cohort = item;
+            }
+        });
+
         const rocketTitle = this.props.state.user.rockets.reduce((acc, next) => {
             if (next._id === rocketId) {
                 acc = next.title;
             }
             return acc;
         }, '');
-        this.setState({ cohortTitle, rocketTitle });
+
+        // Set scheduled dates for TD TW TM on state
+        cohort.rockets.forEach((cr, idx) => {
+            if (cr.rocketId === rocketId) {
+                twoDaySchedule = cr.td;
+                twoWeekSchedule = cr.tm;
+                twoMonthSchedule = cr.tw;
+            }
+        });
+        console.log('Setting state on CDM', cohortTitle, rocketTitle, totalStudents, cohort);
+        this.setState({
+            cohortTitle,
+            rocketTitle,
+            totalStudents,
+            cohort,
+            twoDaySchedule,
+            twoWeekSchedule,
+            twoMonthSchedule,
+        });
         // Helper Function for Generating Table Items.
     }
 
@@ -118,22 +154,15 @@ class RocketResult extends Component {
                 if (st.answer[0].choice === 3) fourth++;
             });
         }
-
+        const totalStudentsInCohort = this.state.cohort.students.length;
         if (cohortId) {
-            const cohortFromUser = this.props.state.user.cohorts.reduce((acc, next) => {
-                if (next._id === cohortId) {
-                    acc = next;
-                }
-                return acc;
-            }, {});
-            const totalStudentsInCohort = cohortFromUser.students.length;
             const participation = ((students.length * 100) / totalStudentsInCohort).toFixed(2);
+            //TODO: FIX SENT BASED ON this.state.twoDaySchedule / twoWeekSchedule /twoMonthSchedule
             const sent = totalStudentsInCohort;
             return {
                 participation,
                 sent,
                 totalStudentsInCohort,
-                cohortFromUser,
                 first,
                 second,
                 third,
@@ -144,7 +173,7 @@ class RocketResult extends Component {
         return {
             participation: 0,
             sent: 0,
-            totalStudentsInCohort: 0,
+            totalStudentsInCohort,
             first,
             second,
             third,
