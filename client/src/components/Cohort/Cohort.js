@@ -227,6 +227,7 @@ class Cohort extends Component {
                     cohortIDX={cohortIDX}
                     title={this.state.title}
                     addCohort={this.props.addCohort}
+                    actionClick={this.handleActionClick}
                 />
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm
