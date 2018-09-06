@@ -65,6 +65,7 @@ export default (state = defaultState, action) => {
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
                 c.rockets.forEach((r, rIndex) => {
+                    //console.log(r.rocketId, action.payload.rocketId);
                     if (r.rocketId._id === action.payload.rocketId._id) {
                         target.push([cIndex, rIndex]);
                     }
@@ -75,7 +76,7 @@ export default (state = defaultState, action) => {
             });
             // update user rockets
             StateCopy.rockets.forEach((rocket, index) => {
-                if (rocket._id === action.payload.rocketId._id) {
+                if (rocket._id === action.payload.rocketId /*DO NOT INCLUDE ._ID*/) {
                     StateCopy.rockets.splice(index, 1);
                 }
             });
