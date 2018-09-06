@@ -139,7 +139,6 @@ export const QuestionChoices = ({
                     <input
                         name={`${interval}.correct`}
                         checked={0 === Number(values[interval].correct)}
-                        defaultChecked={true}
                         value={0}
                         type="radio"
                         onChange={handleChange}
@@ -153,6 +152,9 @@ export const QuestionChoices = ({
                         value={values[interval].choices[0].text}
                         placeholder={'Answer 1'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[0].text`)}>
+                        {errors && errors.choices && errors.choices[0] && errors.choices[0].text}
+                    </ErrorText>
                 </label>
                 <label>
                     <input
@@ -171,6 +173,9 @@ export const QuestionChoices = ({
                         value={values[interval].choices[1].text}
                         placeholder={'Answer 2'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[1].text`)}>
+                        {errors && errors.choices && errors.choices[1] && errors.choices[1].text}
+                    </ErrorText>
                 </label>
                 <label>
                     <input
@@ -189,6 +194,9 @@ export const QuestionChoices = ({
                         value={values[interval].choices[2].text}
                         placeholder={'Answer 3'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[2].text`)}>
+                        {errors && errors.choices && errors.choices[2] && errors.choices[2].text}
+                    </ErrorText>
                 </label>
                 <label>
                     <input
@@ -207,6 +215,9 @@ export const QuestionChoices = ({
                         value={values[interval].choices[3].text}
                         placeholder={'Answer 4'}
                     />
+                    <ErrorText id={a11yIdFor(`choices[3].text`)}>
+                        {errors && errors.choices && errors.choices[3] && errors.choices[3].text}
+                    </ErrorText>
                 </label>
             </QuestionWrapper>
             <ErrorText id={a11yIdFor('correct')}>{displayError('correct')}</ErrorText>
