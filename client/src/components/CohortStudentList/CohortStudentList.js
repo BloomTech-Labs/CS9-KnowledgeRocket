@@ -25,6 +25,9 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  expandIcon: {
+    fontSize: '2.5rem',
+  },
   expansion: {
     display: 'flex',
     padding: '1rem',
@@ -40,7 +43,9 @@ class CohortStudentList extends Component {
 
     return (
       <ExpansionPanel className={classes.root}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>Your Students</ExpansionPanelSummary>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon className={classes.expandIcon} />}>
+          Your Students
+        </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expansion}>
           {this.props.state.user.cohorts[this.props.cohortID].students.length === 0
             ? 'Please add Students to your class'
