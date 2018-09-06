@@ -30,7 +30,7 @@ const PaperHeader = styled.div`
 const ColorBlock = styled.div`
     width: 65px;
     height: 40px;
-    background-color: ${props => props.bgcolor}88;
+    background-color: ${props => props.bgcolor};
     border-radius: 0.25rem;
     border: 1px solid #cfcfcf;
 `;
