@@ -36,7 +36,7 @@ const styles = theme => ({
   },
 });
 
-// RENDERS A CARD FOR EACH STUDENT
+// CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortStudentList extends Component {
   render() {
     const { classes } = this.props;
