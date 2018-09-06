@@ -216,7 +216,10 @@ class CohortSettingForm extends Component {
 						type="file"
 						id="csv-file"
 						name="files"
-						onChange={this.handleFileSelect}
+						onChange={event => {
+							this.handleFileSelect(event);
+							event.target.value = null;
+						}}
 					/>
 					<StyledHelp hovered={this.state.hoverCSV} />
 				</StylizedForm>
