@@ -142,11 +142,6 @@ const styles = {
     },
 };
 
-function mapStateToProps(state) {
-    return {
-        state,
-    };
-}
 class SimpleDialog extends Component {
     handleClose = () => {
         this.props.onClose(this.props.selectedValue);

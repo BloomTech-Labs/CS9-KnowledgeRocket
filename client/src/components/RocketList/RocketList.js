@@ -47,7 +47,7 @@ class RocketList extends Component {
     };
 
     render() {
-        console.log('rocket counter', this.state);
+        // console.log('rocket counter', this.state.rocketCounter);
         return (
             <ListWrapper>
                 <RocketListContainer>
