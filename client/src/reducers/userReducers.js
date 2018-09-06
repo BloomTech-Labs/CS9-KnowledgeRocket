@@ -79,6 +79,7 @@ export default (state = defaultState, action) => {
                     StateCopy.rockets.splice(index, 1);
                 }
             });
+            StateCopy.message = 'You deleted a rocket from your account!';
             StateCopy.authenticated = true;
             return StateCopy;
         case ADD_ROCKET:
