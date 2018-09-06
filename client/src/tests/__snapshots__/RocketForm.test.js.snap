@@ -178,7 +178,7 @@ exports[`<RocketForm /> renders correctly 1`] = `
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={0}
         />
         <input
           name="td.choices[0].text"
@@ -187,16 +187,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="td-choices[0].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="td-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="td.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={1}
         />
         <input
           name="td.choices[1].text"
@@ -205,16 +209,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="td-choices[1].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="td-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="td.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={2}
         />
         <input
           name="td.choices[2].text"
@@ -223,16 +231,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="td-choices[2].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="td-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="td.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={3}
         />
         <input
           name="td.choices[3].text"
@@ -240,6 +252,10 @@ exports[`<RocketForm /> renders correctly 1`] = `
           placeholder="Answer 4"
           type="text"
           value=""
+        />
+        <div
+          className="c1"
+          id="td-choices[3].text-ErrorDescription"
         />
       </label>
     </div>
@@ -302,7 +318,7 @@ exports[`<RocketForm /> renders correctly 1`] = `
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={0}
         />
         <input
           name="tw.choices[0].text"
@@ -311,16 +327,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="tw-choices[0].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="tw-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="tw.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={1}
         />
         <input
           name="tw.choices[1].text"
@@ -329,16 +349,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="tw-choices[1].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="tw-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="tw.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={2}
         />
         <input
           name="tw.choices[2].text"
@@ -347,16 +371,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="tw-choices[2].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="tw-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="tw.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={3}
         />
         <input
           name="tw.choices[3].text"
@@ -364,6 +392,10 @@ exports[`<RocketForm /> renders correctly 1`] = `
           placeholder="Answer 4"
           type="text"
           value=""
+        />
+        <div
+          className="c1"
+          id="tw-choices[3].text-ErrorDescription"
         />
       </label>
     </div>
@@ -426,7 +458,7 @@ exports[`<RocketForm /> renders correctly 1`] = `
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={0}
         />
         <input
           name="tm.choices[0].text"
@@ -435,16 +467,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="tm-choices[0].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="tm-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="tm.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={1}
         />
         <input
           name="tm.choices[1].text"
@@ -453,16 +489,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="tm-choices[1].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="tm-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="tm.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={2}
         />
         <input
           name="tm.choices[2].text"
@@ -471,16 +511,20 @@ exports[`<RocketForm /> renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="c1"
+          id="tm-choices[2].text-ErrorDescription"
+        />
       </label>
       <label>
         <input
           aria-describedby="tm-correct-ErrorDescription"
-          checked={true}
+          checked={false}
           name="tm.correct"
           onBlur={[Function]}
           onChange={[Function]}
           type="radio"
-          value=""
+          value={3}
         />
         <input
           name="tm.choices[3].text"
@@ -488,6 +532,10 @@ exports[`<RocketForm /> renders correctly 1`] = `
           placeholder="Answer 4"
           type="text"
           value=""
+        />
+        <div
+          className="c1"
+          id="tm-choices[3].text-ErrorDescription"
         />
       </label>
     </div>

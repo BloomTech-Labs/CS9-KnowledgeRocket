@@ -135,7 +135,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={0}
       />
       <input
         name="tm.choices[0].text"
@@ -144,6 +144,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         type="text"
         value=""
       />
+      <div
+        className="c2"
+        id="tm-choices[0].text-ErrorDescription"
+      />
     </label>
     <label>
       <input
@@ -153,7 +157,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={1}
       />
       <input
         name="tm.choices[1].text"
@@ -162,6 +166,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         type="text"
         value=""
       />
+      <div
+        className="c2"
+        id="tm-choices[1].text-ErrorDescription"
+      />
     </label>
     <label>
       <input
@@ -171,7 +179,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={2}
       />
       <input
         name="tm.choices[2].text"
@@ -180,6 +188,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         type="text"
         value=""
       />
+      <div
+        className="c2"
+        id="tm-choices[2].text-ErrorDescription"
+      />
     </label>
     <label>
       <input
@@ -189,7 +201,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         onBlur={undefined}
         onChange={undefined}
         type="radio"
-        value=""
+        value={3}
       />
       <input
         name="tm.choices[3].text"
@@ -197,6 +209,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         placeholder="Answer 4"
         type="text"
         value=""
+      />
+      <div
+        className="c2"
+        id="tm-choices[3].text-ErrorDescription"
       />
     </label>
   </div>
