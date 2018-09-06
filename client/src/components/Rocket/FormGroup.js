@@ -104,8 +104,8 @@ export const QuestionChoices = ({
     touched,
 }) => {
     const displayError = errorHelper(errors, touched);
-
     const a11yIdFor = label => generateErrorIdFrom(interval, label);
+    const displayCorrectChoiceErrorAtIndex = i => displayCorrectChoiceError(errors, touched, i);
     return (
         <section>
             <FormGroup>
@@ -153,7 +153,7 @@ export const QuestionChoices = ({
                         placeholder={'Answer 1'}
                     />
                     <ErrorText id={a11yIdFor(`choices[0].text`)}>
-                        {errors && errors.choices && errors.choices[0] && errors.choices[0].text}
+                        {displayCorrectChoiceErrorAtIndex(0)}
                     </ErrorText>
                 </label>
                 <label>
@@ -174,7 +174,7 @@ export const QuestionChoices = ({
                         placeholder={'Answer 2'}
                     />
                     <ErrorText id={a11yIdFor(`choices[1].text`)}>
-                        {errors && errors.choices && errors.choices[1] && errors.choices[1].text}
+                        {displayCorrectChoiceErrorAtIndex(1)}
                     </ErrorText>
                 </label>
                 <label>
@@ -195,7 +195,7 @@ export const QuestionChoices = ({
                         placeholder={'Answer 3'}
                     />
                     <ErrorText id={a11yIdFor(`choices[2].text`)}>
-                        {errors && errors.choices && errors.choices[2] && errors.choices[2].text}
+                        {displayCorrectChoiceErrorAtIndex(2)}
                     </ErrorText>
                 </label>
                 <label>
@@ -216,7 +216,7 @@ export const QuestionChoices = ({
                         placeholder={'Answer 4'}
                     />
                     <ErrorText id={a11yIdFor(`choices[3].text`)}>
-                        {errors && errors.choices && errors.choices[3] && errors.choices[3].text}
+                        {displayCorrectChoiceErrorAtIndex(3)}
                     </ErrorText>
                 </label>
             </QuestionWrapper>
@@ -224,5 +224,16 @@ export const QuestionChoices = ({
         </section>
     );
 };
+
+const displayCorrectChoiceError = (error, touched, index) =>
+    touched &&
+    touched.choices &&
+    touched.choices[index] &&
+    touched.choices[index].text &&
+    error &&
+    error.choices &&
+    error.choices[index] &&
+    error.choices[index].text;
+
 export const generateErrorIdFrom = (attr, identifier = '') =>
     `${attr}-${identifier}-ErrorDescription`;
