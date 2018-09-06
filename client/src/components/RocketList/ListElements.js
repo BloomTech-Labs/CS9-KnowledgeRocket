@@ -18,7 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
-import {smallBreakPoint} from '../Themes/Themes';
+import { smallBreakPoint } from '../Themes/Themes';
 
 export const RocketListContainer = Styled.div`
     display: flex;
@@ -142,6 +142,11 @@ const styles = {
     },
 };
 
+function mapStateToProps(state) {
+    return {
+        state,
+    };
+}
 class SimpleDialog extends Component {
     handleClose = () => {
         this.props.onClose(this.props.selectedValue);
