@@ -144,6 +144,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         type="text"
         value=""
       />
+      <div
+        className="c2"
+        id="tm-choices[0].text-ErrorDescription"
+      />
     </label>
     <label>
       <input
@@ -161,6 +165,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         placeholder="Answer 2"
         type="text"
         value=""
+      />
+      <div
+        className="c2"
+        id="tm-choices[1].text-ErrorDescription"
       />
     </label>
     <label>
@@ -180,6 +188,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         type="text"
         value=""
       />
+      <div
+        className="c2"
+        id="tm-choices[2].text-ErrorDescription"
+      />
     </label>
     <label>
       <input
@@ -197,6 +209,10 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         placeholder="Answer 4"
         type="text"
         value=""
+      />
+      <div
+        className="c2"
+        id="tm-choices[3].text-ErrorDescription"
       />
     </label>
   </div>
