@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { generateBreadCrumbs, addRocket } from '../../actions';
-import RocketForm from './RocketForm';
+import RocketForm, { generateDefaults } from './RocketForm';
 import Styled from 'styled-components';
 
 function mapStateToProps(state) {
@@ -9,26 +9,6 @@ function mapStateToProps(state) {
         state,
     };
 }
-
-const questionTemplate = {
-    explanation: '',
-    question: '',
-    choices: [
-        {
-            text: '',
-        },
-        {
-            text: '',
-        },
-        {
-            text: '',
-        },
-        {
-            text: '',
-        },
-    ],
-    correct: '',
-};
 
 const MainContainer = Styled.div`
     padding: 0 1.2rem;
@@ -84,12 +64,14 @@ class Rocket extends Component {
             <div className="Main_container">
                 <MainContainer height={this.state.height}>
                     {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
-                    <RocketForm handleSubmit={this.handleAddRocket} 
-                    history={this.props.history}
-                    title={''}
-                    td={questionTemplate}
-                    tw={questionTemplate}
-                    tm={questionTemplate} />
+                    <RocketForm
+                        handleSubmit={this.handleAddRocket}
+                        history={this.props.history}
+                        title=""
+                        td={generateDefaults()}
+                        tw={generateDefaults()}
+                        tm={generateDefaults()}
+                    />
                 </MainContainer>
             </div>
         );
