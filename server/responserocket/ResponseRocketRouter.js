@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const ResponseRocket = require('./ResponseRocket');
+const Rocket = require('../rocket/Rocket');
 
 router
     .route('/')
@@ -7,11 +8,53 @@ router
     .post(post);
 router.route('/answer').post(postAnswer);
 router.route('/participation/:cohortId').get(getParticipationPerCohort);
+router.route('/results/').post(results);
 router
     .route('/:id')
     .put(put)
     .get(getid)
     .delete(deleteid);
+// Get results for RocketResults
+function results(req, res) {
+    const { cohortId, rocketId } = req.body;
+
+    // Find the rocket by Id and get all 3 question Ids from it.
+    Rocket.findOne({ _id: rocketId })
+        .then(foundRocket => {
+            const twoDay = foundRocket.twoDay._id;
+            const twoWeek = foundRocket.twoWeek._id;
+            const twoMonth = foundRocket.twoMonth._id;
+
+            // Find the Response Rockets for All Questions inside the FoundRocket
+            const unresolvedArray = [
+                ResponseRocket.find({ cohortId, questionId: twoDay }).exec(),
+                ResponseRocket.find({ cohortId, questionId: twoWeek }).exec(),
+                ResponseRocket.find({ cohortId, questionId: twoMonth }).exec(),
+            ];
+
+            Promise.all(unresolvedArray)
+                .then(resolvedArray => {
+                    const responseObject = {
+                        twoDay: resolvedArray[0][0] ? resolvedArray[0][0] : {},
+                        twoWeek: resolvedArray[1][0] ? resolvedArray[1][0] : {},
+                        twoMonth: resolvedArray[2][0] ? resolvedArray[2][0] : {},
+                    };
+                    res.send(responseObject);
+                })
+                .catch(errorResolvingPromises => {
+                    res.status(500).json({
+                        errorMessage: errorResolvingPromises.message,
+                        text: `Error Finding ResponseRockets for Question Id's: ${twoDay} ${twoWeek} ${twoMonth}`,
+                    });
+                });
+        })
+        .catch(errorFindingRocketsById => {
+            res.status(500).json({
+                errorMessage: errorFindingRocketsById.message,
+                text: `Error finding Response Rocket using cohortId: ${cohortId} and questionId: ${questionId}`,
+            });
+        });
+}
 
 function getParticipationPerCohort(req, res) {
     const cohortId = req.params.cohortId;
@@ -26,11 +69,11 @@ function getParticipationPerCohort(req, res) {
                     if (r.questionId) {
                         responsesPerQuestion[String(r.questionId)] = r.students.length;
                         totalResponses += r.students.length;
-                    }                    
+                    }
                 });
             }
             // console.log('Total Responses Found:',totalResponses)
-            res.status(200).send({totalResponses, responsesPerQuestion});
+            res.status(200).send({ totalResponses, responsesPerQuestion });
             // TODO: Implement Question to Submit Rocket ID with it as well.
         })
         .catch(err => {
@@ -38,12 +81,12 @@ function getParticipationPerCohort(req, res) {
             //     errorMessage: err.message,
             //     type: `Error Finding ResponseRockets with CohortId: ${cohortId}`,
             // })
-            res.status(500).json({totalResponses});
+            res.status(500).json({ totalResponses });
         });
 }
 
 function postAnswer(req, res) {
-    const { cohortId ,studentId, questionId, answer } = req.body;
+    const { cohortId, studentId, questionId, answer } = req.body;
     const responseObject = {
         cohortId,
         questionId,
@@ -65,7 +108,7 @@ function postAnswer(req, res) {
     // if does not exist: Save it.
     ResponseRocket.find({ questionId, cohortId })
         .then(found => {
-            if (found.length > 0 ) {
+            if (found.length > 0) {
                 // If found one with the questionId provided, append to it.
                 // add student to found
                 let studentIncluded = false;

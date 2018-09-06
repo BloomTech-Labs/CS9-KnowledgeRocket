@@ -71,7 +71,7 @@ class InnerRoutes extends Component {
                 <Route path="/rocket/classes" exact component={CohortList} />
                 <Route path="/rocket/settings" exact component={Settings} />
                 <Route path="/rocket/auth" exact component={Auth} />
-                <Route path="/rocket/results" exact component={RocketResults} />
+                <Route path="/rocket/results/:cohortId/:rocketId" exact component={RocketResults} />
             </StyledContentContainer>
         );
     }

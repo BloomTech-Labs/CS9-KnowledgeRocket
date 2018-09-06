@@ -165,6 +165,7 @@ class CohortRocketList extends Component {
                         key={rocket._id}
                         rocket={rocket}
                         cohortID={this.props.cohortID}
+                        history={this.props.history}
                     />
                 );
             });
