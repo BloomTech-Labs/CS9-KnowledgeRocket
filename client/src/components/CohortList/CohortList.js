@@ -41,6 +41,10 @@ export class CohortList extends Component {
         open: true,
     };
 
+    componentWillUnmount() {
+        this.isCancelled = true;
+    }
+
     componentDidMount() {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
@@ -90,9 +94,10 @@ export class CohortList extends Component {
                         totalShouldHaveAnswered > 0
                             ? (totalAnswered * 100 / totalShouldHaveAnswered).toFixed(1)
                             : '100';
-                    this.setState({
-                        [cohort._id]: { participation, sent: totalShouldHaveAnswered },
-                    });
+                    !this.isCancelled &&
+                        this.setState({
+                            [cohort._id]: { participation, sent: totalShouldHaveAnswered },
+                        });
                 })
                 .catch(err => {
                     console.log(
