@@ -151,7 +151,6 @@ class NavBar extends Component {
 
     render() {
         const { classes, theme } = this.props;
-        const { message } = this.props.state.user;
 
         return (
             <div className={classes.root}>
@@ -282,7 +281,7 @@ class NavBar extends Component {
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
-                    message={<span id="message-id">{message}</span>}
+                    message={<span id="message-id">You successfully logged out!</span>}
                     action={[
                         <IconButton
                             key="close"
