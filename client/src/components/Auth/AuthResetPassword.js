@@ -77,7 +77,7 @@ class AuthResetPassword extends Component {
         if (regVar.test(this.state.email)) {
             // Reset password logic here
             this.props.resetUserPassword(this.state.email);
-            // Redirect to Home Page after Password Reset Link Success
+            this.handleActionClick();
         } else {
             this.setState({ status: 'Please provide a valid e-mail' });
         }
@@ -101,7 +101,7 @@ class AuthResetPassword extends Component {
         const { classes } = this.props;
         const { status } = this.props.state.user;
 
-        return (
+        return [
             <StyledFormContainer status={this.state.status} resetStatus={status}>
                 <StyledCardContent className={classes.root}>
                     <StyledFormHeader
@@ -143,8 +143,32 @@ class AuthResetPassword extends Component {
                         </FieldSet>
                     </StyledInputContainer>
                 </StyledCardContent>
-            </StyledFormContainer>
-        );
+            </StyledFormContainer>,
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={this.state.open}
+                autoHideDuration={5000}
+                onClose={this.handleRequestClose}
+                ContentProps={{
+                    'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">{message}</span>}
+                action={[
+                    <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={classes.close}
+                        onClick={this.handleRequestClose}
+                    >
+                        <CloseIcon />
+                    </IconButton>,
+                ]}
+            />,
+        ];
     }
 }
 
