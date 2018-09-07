@@ -31,8 +31,15 @@ async function post(req, res) {
                     account: type,
                     expiration: newExpiration,
                 })
-                    .then(found => {
-                        res.status(201).json({ status, user: found });
+                    .then(() => {
+                        // Find the updated user and return it.
+                        User.findById(req.body.id)
+                            .then(updatedUser => {
+                                res.status(201).json({ status, user: updatedUser });
+                            })
+                            .catch(err => {
+                                res.status(500).json(err);
+                            });
                     })
                     .catch(err => {
                         res.status(500).json(err);

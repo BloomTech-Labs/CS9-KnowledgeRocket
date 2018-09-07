@@ -169,13 +169,13 @@ class NavBar extends Component {
     };
 
     handleActionClick = () => {
-        console.log(`MADE IT TO handleActionClick`);
-        console.log(`SNACKBAR OPEN`);
+        // console.log(`MADE IT TO handleActionClick`);
+        // console.log(`SNACKBAR OPEN`);
         this.setState({ open: true });
     };
 
     handleRequestClose = () => {
-        console.log(`SNACKBAR CLOSE`);
+        // console.log(`SNACKBAR CLOSE`);
         this.setState({ open: false });
     };
 

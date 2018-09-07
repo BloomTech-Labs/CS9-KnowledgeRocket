@@ -121,7 +121,7 @@ export default (state = defaultState, action) => {
         case REFRESHED_USER:
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
-            StateCopy.status = UPGRADE_USER;
+            StateCopy.status = REFRESHED_USER;
             return StateCopy;
         case UPDATING_USER:
             StateCopy.status = UPDATING_USER;

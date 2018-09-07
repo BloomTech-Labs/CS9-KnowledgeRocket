@@ -73,21 +73,18 @@ class CheckoutForm extends Component {
     submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
         if (token) {
-            let response = await axios
+            axios
                 .post(`${serverURL}/${this.props.type}`, {
                     token: token.id,
                     uid: this.props.uid,
                     id: this.props.id,
+                }).then(receivedPackage => {
+                    this.props.refreshUser(receivedPackage.data.user);
+                    this.setState({ complete: true });
                 })
                 .catch(() => {
                     this.setState({ transactionStatus: false });
                 });
-            if (response) {
-                if (response.user) {
-                    this.props.refreshUser(response.user);
-                }
-                this.setState({ complete: true });
-            }
         } else {
             this.setState({ ccStatus: false });
         }
