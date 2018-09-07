@@ -111,7 +111,6 @@ export const StyledInput = styled.input`
     background-color: white;
     width: 16rem;
     height: 3rem;
-    color: white;
     font-weight: 600;
     font-size: 1rem;
     border-top: none;
