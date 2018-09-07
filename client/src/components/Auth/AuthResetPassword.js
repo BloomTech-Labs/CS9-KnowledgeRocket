@@ -62,6 +62,7 @@ class AuthResetPassword extends Component {
     state = {
         email: 'Please enter your email',
         status: '',
+        open: false,
     };
 
     handleInput = e => {
@@ -86,6 +87,14 @@ class AuthResetPassword extends Component {
         if (this.state.email === 'Please enter your email') {
             this.setState({ email: '' });
         }
+    };
+
+    handleActionClick = () => {
+        this.setState({ open: true });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ open: false });
     };
 
     render() {
@@ -134,7 +143,6 @@ class AuthResetPassword extends Component {
                         </FieldSet>
                     </StyledInputContainer>
                 </StyledCardContent>
-                {<Snackbar />}
             </StyledFormContainer>
         );
     }
