@@ -36,17 +36,17 @@ injectGlobal`
 const StyledContentContainer = styled.div`
     height: inherit;
     width: 100%;
-    padding: ${props => props.authenticated ? '0rem 0.8rem 0.8rem 10.6rem' : '0rem 0.8rem 0.8rem 0rem'};
+    padding: ${props => props.authenticated ? '0 0.8rem 0 10.6rem' : '0 0.8rem 0 0'};
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'Roboto', serif;
     @media (max-width: 960px) {
-        padding: 0rem 0.8rem 0.8rem 0.8rem;
+        padding: 0rem 0.8rem;
         max-width: 100%;
     }
     @media (max-width: 500px) {
-        padding: 0rem 0.8rem 0 0.8rem;
+        padding: 0rem 0.8rem;
         max-width: 100%;
         justify-content: center;
     }

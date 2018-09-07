@@ -1,7 +1,14 @@
 import React from 'react';
 import { withFormik } from 'formik';
 import { object, string, array, number } from 'yup';
-import { FormGroup, Blurb, QuestionChoices, ErrorText, errorHelper } from './FormGroup';
+import {
+    FormGroup,
+    Blurb,
+    QuestionChoices,
+    ErrorText,
+    errorHelper,
+    StyledSection,
+} from './FormGroup';
 import Button from '@material-ui/core/Button';
 
 const rocketBlurb =
@@ -19,21 +26,23 @@ const RocketFormBase = ({
     const displayError = errorHelper(errors, touched);
     return (
         <form onSubmit={handleSubmit}>
-            <FormGroup>
-                <label htmlFor="title" />
-                <input
-                    name="title"
-                    value={values.title}
-                    placeholder="Title"
-                    onChange={handleChange}
-                />
-                <ErrorText>{displayError('title')}</ErrorText>
-            </FormGroup>
-            <FormGroup>
-                <Blurb>{rocketBlurb}</Blurb>
-                {newForm && <div className="requiredFields">All fields are required.</div>}
-            </FormGroup>
-
+            <StyledSection>
+                <FormGroup>
+                    <div htmlFor="title" className="mainTitle">
+                        <input
+                            name="title"
+                            value={values.title}
+                            placeholder="Title"
+                            onChange={handleChange}
+                        />
+                        <ErrorText left>{displayError('title')}</ErrorText>
+                    </div>
+                </FormGroup>
+                <FormGroup>
+                    <Blurb>{rocketBlurb}</Blurb>
+                    {newForm && <div className="requiredFields">All fields are required.</div>}
+                </FormGroup>
+            </StyledSection>
             {/* ROCKET QUESTION SECTION 1*/}
             <QuestionChoices
                 values={values}

@@ -149,6 +149,9 @@ const AccountType = styled(Link)`
     @media (max-width: 570px) {
         font-size: 0.7rem;
     }
+    @media (max-width: 420px) {
+        display: none;
+    }
 `;
 
 class NavBar extends Component {
