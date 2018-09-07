@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 // Material Components
 import Card from '@material-ui/core/Card';
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 // Actions
 import { addStudent } from '../../actions';
@@ -89,7 +88,7 @@ class CohortAddStudentsForm extends Component {
             firstName: '',
             lastName: '',
             email: '',
-        })
+        });
         document.getElementById('lastNameField').focus();
     };
 
@@ -120,9 +119,9 @@ class CohortAddStudentsForm extends Component {
                     value={this.state.firstName}
                 />
                 <StylizedInput2
-                    className='emailInput'
-                    id='emailInputField'
-                    key='emailInputField'
+                    className="emailInput"
+                    id="emailInputField"
+                    key="emailInputField"
                     disableUnderline={true}
                     placeholder="Email"
                     name="email"
