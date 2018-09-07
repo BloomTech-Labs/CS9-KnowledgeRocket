@@ -11,7 +11,6 @@ import {
     StyledInput,
     StyledButton,
 } from './Auth';
-import Snackbar from '../Snackbar';
 
 function mapStateToProps(state) {
     return {
