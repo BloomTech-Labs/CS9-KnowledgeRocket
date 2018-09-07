@@ -6,6 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
 import { generateBreadCrumbs } from '../../actions';
 import './RocketResults.css';
@@ -27,13 +28,29 @@ const PaperHeader = styled.div`
     user-select: none !important;
 `;
 
+const stdShadow = `0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+0px 3px 1px -2px rgba(0, 0, 0, 0.12)`;
+
+const svgShadow = (
+    <filter id="dropshadow" height="130%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="0.4" />
+        <feOffset dx="0.5" dy="1" result="offsetblur" />
+        <feComponentTransfer>
+            <feFuncA type="linear" slope="0.5" />
+        </feComponentTransfer>
+        <feMerge>
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+        </feMerge>
+    </filter>
+);
+
 const ColorBlock = styled.div`
     width: 65px;
     height: 40px;
     background-color: ${props => props.bgcolor};
     border-radius: 0.25rem;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-        0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+    box-shadow: ${stdShadow};
 `;
 const ColorLabel = styled.p`
     display: flex;
@@ -45,7 +62,7 @@ const ColorLabel = styled.p`
     height: 100%;
     text-align: center;
     font-weight: 900;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: black;
 `;
 
@@ -72,6 +89,19 @@ function createTableItem(label, participation, sent, students) {
     id += 1;
     return { id, label, participation, sent, students };
 }
+
+const defaultQuestion = {
+    title: '',
+    explanation: '',
+    question: '',
+    choices: [
+        { text: '', correct: false },
+        { text: '', correct: false },
+        { text: '', correct: false },
+        { text: '', correct: false },
+    ],
+    correct: '',
+};
 class RocketResult extends Component {
     state = {
         canvas: '',
@@ -89,15 +119,23 @@ class RocketResult extends Component {
         twoDaySchedule: '00/00/00',
         twoWeekSchedule: '00/00/00',
         twoMonthSchedule: '00/00/00',
+        rocket: {
+            twoDay: defaultQuestion,
+            twoWeek: defaultQuestion,
+            twoMonth: defaultQuestion,
+        },
     };
     componentDidMount() {
         // For Nav Bar
         this.props.generateBreadCrumbs('/rocket/classes');
+
         const cohortId = this.props.match.params.cohortId;
+        const rocketId = this.props.match.params.rocketId;
+        let rocketTitle = '';
+        let rocket = {};
         let cohortTitle = '';
         let totalStudents = 0;
         let cohort = { students: [] };
-        const rocketId = this.props.match.params.rocketId;
         let twoDaySchedule = '00/00/00';
         let twoWeekSchedule = '00/00/00';
         let twoMonthSchedule = '00/00/00';
@@ -111,12 +149,12 @@ class RocketResult extends Component {
             }
         });
 
-        const rocketTitle = this.props.state.user.rockets.reduce((acc, next) => {
-            if (next._id === rocketId) {
-                acc = next.title;
+        this.props.state.user.rockets.forEach(r => {
+            if (r._id === rocketId) {
+                rocketTitle = r.title;
+                rocket = r;
             }
-            return acc;
-        }, '');
+        });
 
         // Set scheduled dates for TD TW TM on state
         cohort.rockets.forEach((cr, idx) => {
@@ -134,17 +172,23 @@ class RocketResult extends Component {
             twoDaySchedule,
             twoWeekSchedule,
             twoMonthSchedule,
+            rocket,
         });
         // Helper Function for Generating Table Items.
     }
 
     calculateParticipation = which => {
         const question = this.props.state.rocket.responseRockets[which];
-        const { cohortId, questionId, students } = question;
+        const { questionId, students } = question;
+        const totalStudentsInCohort = this.state.cohort.students.length;
+        const choices = this.state.rocket[which].choices;
+        let participation = 0;
         let first = 0;
         let second = 0;
         let third = 0;
         let fourth = 0;
+        let sent = 0;
+
         if (students) {
             students.forEach(st => {
                 if (st.answer[0].choice === 0) first++;
@@ -153,13 +197,9 @@ class RocketResult extends Component {
                 if (st.answer[0].choice === 3) fourth++;
             });
         }
-        const totalStudentsInCohort = this.state.cohort.students.length;
-        console.log(`FOR COHORT: ${this.state.cohortTitle}\ntwoDaySchedule: ${this.state.twoDaySchedule}\ntwoWeekSchedule: ${this.state.twoWeekSchedule}\ntwoMonthSchedule: ${this.state.twoMonthSchedule}`)
-        let sent = 0;
+
         if (which === 'twoDay' && Date.now() > Date.parse(this.state.twoDaySchedule)) {
-            console.log(`FOR TwoDay\ntwoDaySchedule: ${Date.parse(this.state.twoDaySchedule)}\ntoday's Date: ${Date.now()}\nIs Today Newer? ${Date.now() > Date.parse(this.state.twoDaySchedule)}`)
             sent = totalStudentsInCohort;
-            console.log(`THE VALUE OF SENT IS NOW: ${sent}`)
         }
         if (which === 'twoWeek' && Date.now() > Date.parse(this.state.twoWeekSchedule)) {
             sent = totalStudentsInCohort;
@@ -167,31 +207,21 @@ class RocketResult extends Component {
         if (which === 'twoMonth' && Date.now() > Date.parse(this.state.twoMonthSchedule)) {
             sent = totalStudentsInCohort;
         }
-        console.log(`THE VALUE OF SENT CHANGED NOW?: ${sent}`)
-        if (cohortId) {
-            const participation = ((students.length * 100) / totalStudentsInCohort).toFixed(2);
-            // Check if questions should have been sent by now, and set sent to number of students if so.
-
-            return {
-                participation,
-                sent,
-                totalStudentsInCohort,
-                first,
-                second,
-                third,
-                fourth,
-                questionId,
-            };
+        if (questionId) {
+            // Update participation taking into consideration the amount of students in cohort
+            // versus the amount of answers each student submitted in the response rocket.
+            participation = ((students.length * 100) / totalStudentsInCohort).toFixed(2);
         }
         return {
-            participation: 0,
-            sent: 0,
+            participation,
+            sent,
             totalStudentsInCohort,
             first,
             second,
             third,
             fourth,
             questionId,
+            choices,
         };
     };
 
@@ -270,6 +300,35 @@ class RocketResult extends Component {
                 tm.totalStudentsInCohort
             ),
         ];
+        const checkMark = (
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                {svgShadow}
+                <path
+                    style={{
+                        fill: 'white',
+                        stroke: 'white',
+                        marginLeft: '4px',
+                        filter: 'url(#dropshadow)',
+                    }}
+                    d="M6.61 11.89L3.5 8.78 2.44 9.84 6.61 14l8.95-8.95L14.5 4z"
+                />
+            </svg>
+        );
+
+        const cross = (
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                {svgShadow}
+                <path
+                    style={{
+                        fill: 'white',
+                        stroke: 'white',
+                        marginLeft: '4px',
+                        filter: 'url(#dropshadow)',
+                    }}
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+            </svg>
+        );
         return (
             <PaperHeader>
                 <Paper>
@@ -306,14 +365,31 @@ class RocketResult extends Component {
                                             >
                                                 {this.state.colors.map((color, cidx) => {
                                                     return (
-                                                        <ColorBlock
-                                                            bgcolor={color}
+                                                        <Tooltip
+                                                            title={`${
+                                                                keys[idx].choices[cidx].correct
+                                                                    ? 'Correct: '
+                                                                    : ''
+                                                            }${keys[idx].choices[cidx].text}`}
                                                             key={`choice_${cidx}`}
                                                         >
-                                                            <ColorLabel>
-                                                                {`Choice: ${cidx + 1}`}
-                                                            </ColorLabel>
-                                                        </ColorBlock>
+                                                            <ColorBlock bgcolor={color}>
+                                                                <ColorLabel>
+                                                                    {keys[idx].choices[cidx]
+                                                                        .correct ? (
+                                                                        <div>
+                                                                            {`Choice: ${cidx + 1}`}
+                                                                            {checkMark}
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div>
+                                                                            {`Choice: ${cidx + 1}`}
+                                                                            {cross}
+                                                                        </div>
+                                                                    )}
+                                                                </ColorLabel>
+                                                            </ColorBlock>
+                                                        </Tooltip>
                                                     );
                                                 })}
                                             </div>
