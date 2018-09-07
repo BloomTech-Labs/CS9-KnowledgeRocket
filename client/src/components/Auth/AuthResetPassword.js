@@ -90,7 +90,6 @@ class AuthResetPassword extends Component {
 
     render() {
         const { classes } = this.props;
-        // console.log(this.state);
         return (
             <StyledFormContainer
                 status={this.state.status}

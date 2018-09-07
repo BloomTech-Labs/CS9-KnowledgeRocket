@@ -31,7 +31,7 @@ export const TextArea = Styled.textarea`
     border-radius: 0.25rem;
     padding: .25rem;
 `;
-export const Blurb = TextArea.extend`
+export const Blurb = Styled(TextArea)`
     margin: 1rem 0;
     text-align: justify;
     font-size: 1.1rem;

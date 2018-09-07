@@ -311,16 +311,13 @@ export const resetUserPassword = email => async dispatch => {
         dispatch({ type: USER_PASSWORD_RESET });
     } catch (err) {
         dispatch({ type: USER_PASSWORD_RESET_FAILED });
-        // console.log(err);
     }
 };
 
 export const logOutUser = () => async dispatch => {
     try {
         dispatch({ type: LOGOUT_USER });
-    } catch (err) {
-        // console.log(err);
-    }
+    } catch (err) {}
 };
 
 /* BREADCRUMBS GENERATION */
@@ -342,7 +339,6 @@ export const getResponseRocketByRocketId = (rocketId, cohortId) => async dispatc
             rocketId,
             cohortId,
         });
-        // console.log(response);
         dispatch({ type: RESPONSE_RECEIVED, payload: response.data });
     } catch (err) {
         dispatch({ type: FETCHING_RESPONSE_FAILED });

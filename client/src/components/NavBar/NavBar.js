@@ -164,18 +164,14 @@ class NavBar extends Component {
     };
 
     handleDrawerToggle = () => {
-        // console.log('MADE IT TO handleDrawerToggle  ');
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
 
     handleActionClick = () => {
-        // console.log(`MADE IT TO handleActionClick`);
-        // console.log(`SNACKBAR OPEN`);
         this.setState({ open: true });
     };
 
     handleRequestClose = () => {
-        // console.log(`SNACKBAR CLOSE`);
         this.setState({ open: false });
     };
 

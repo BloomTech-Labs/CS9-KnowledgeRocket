@@ -225,10 +225,6 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
 
 exports[`RocketFormGroup testing styled components render <Blurb /> renders correctly 1`] = `
 .c0 {
-  width: 100%;
-  min-height: 4rem;
-  border-radius: 0.25rem;
-  padding: .25rem;
   margin: 1rem 0;
   text-align: justify;
   font-size: 1.1rem;

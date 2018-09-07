@@ -92,7 +92,7 @@ export class CohortList extends Component {
                     // Versus the amount that should have answered them.
                     participation =
                         totalShouldHaveAnswered > 0
-                            ? (totalAnswered * 100 / totalShouldHaveAnswered).toFixed(1)
+                            ? ((totalAnswered * 100) / totalShouldHaveAnswered).toFixed(1)
                             : '100';
                     !this.isCancelled &&
                         this.setState({
@@ -100,7 +100,7 @@ export class CohortList extends Component {
                         });
                 })
                 .catch(err => {
-                    console.log(
+                    console.error(
                         'Error Fetching Responses for This Cohort',
                         cohort.title,
                         err.message
@@ -212,4 +212,7 @@ export class CohortList extends Component {
     }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs })(withStyles(styles)(CohortList));
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs }
+)(withStyles(styles)(CohortList));
