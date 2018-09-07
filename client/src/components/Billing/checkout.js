@@ -34,7 +34,6 @@ class CheckoutForm extends Component {
         }
     };
     render() {
-        // console.log(this.props.type)
         if (this.state.complete)
             return (
                 <div>
