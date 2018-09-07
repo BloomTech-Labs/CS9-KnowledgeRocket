@@ -59,7 +59,6 @@ class RocketList extends Component {
     };
 
     handleRequestClose = () => {
-        console.log(`SNACKBAR CLOSE`);
         this.setState({ open: false });
         this.props.clearSnackMessage();
     };
@@ -68,7 +67,6 @@ class RocketList extends Component {
         const { classes } = this.props;
         const { message } = this.props.state.user;
         const { status } = this.props.state.user;
-        // console.log('rocket counter', this.state.rocketCounter);
         return (
             <ListWrapper>
                 <RocketListContainer>

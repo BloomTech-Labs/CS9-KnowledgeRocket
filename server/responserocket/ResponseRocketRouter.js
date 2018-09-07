@@ -63,7 +63,6 @@ function getParticipationPerCohort(req, res) {
     let totalResponses = 0;
     ResponseRocket.find({ cohortId })
         .then(responsesFound => {
-            // console.log(responsesFound)
             if (responsesFound.length > 0) {
                 responsesFound.forEach(r => {
                     if (r.questionId) {
@@ -72,15 +71,10 @@ function getParticipationPerCohort(req, res) {
                     }
                 });
             }
-            // console.log('Total Responses Found:',totalResponses)
             res.status(200).send({ totalResponses, responsesPerQuestion });
             // TODO: Implement Question to Submit Rocket ID with it as well.
         })
         .catch(err => {
-            // console.log({
-            //     errorMessage: err.message,
-            //     type: `Error Finding ResponseRockets with CohortId: ${cohortId}`,
-            // })
             res.status(500).json({ totalResponses });
         });
 }
