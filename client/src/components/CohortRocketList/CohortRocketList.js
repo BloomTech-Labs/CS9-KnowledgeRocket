@@ -68,6 +68,7 @@ const RocketCardMid = Styled.div`
 `;
 
 const AddRocketWrap = Styled(RocketListCard)`
+    margin: .5rem;
     height:15.5rem;
 `;
 
