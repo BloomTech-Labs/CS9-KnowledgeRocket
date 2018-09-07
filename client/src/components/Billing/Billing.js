@@ -4,7 +4,7 @@ import './Billing.css';
 import CheckoutForm from './checkout';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import { Card } from '../../../node_modules/@material-ui/core';
-import { generateBreadCrumbs } from '../../actions';
+import { generateBreadCrumbs, refreshUser } from '../../actions';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -91,5 +91,5 @@ class Billing extends Component {
 
 export default connect(
     mapStateToProps,
-    { generateBreadCrumbs }
+    { generateBreadCrumbs, refreshUser }
 )(Billing);

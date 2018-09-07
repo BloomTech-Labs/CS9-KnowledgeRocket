@@ -83,6 +83,9 @@ class CheckoutForm extends Component {
                     this.setState({ transactionStatus: false });
                 });
             if (response) {
+                if (response.user) {
+                    this.props.refreshUser(response.user);
+                }
                 this.setState({ complete: true });
             }
         } else {

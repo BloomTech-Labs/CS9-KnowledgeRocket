@@ -115,6 +115,36 @@ const CPLink = styled(Link)`
     width: 100%;
 `;
 
+const AccountSection = styled.div`
+    display: ${props => (props.authenticated ? 'inline-flex' : 'none')} !important;
+    justify-content: flex-end;
+    align-items: center;
+`;
+
+const Avatar = styled.svg`
+    path {
+        fill: ${props => (props.type === 'free' ? 'white' : 'rgb(220, 253, 198)')};
+    }
+    height: 2rem;
+    width: 2rem;
+`;
+
+const AccountType = styled(Link)`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 2rem;
+    font-family: 'Roboto', serif;
+    font-size: 0.9rem;
+    margin: 0 1rem;
+    text-decoration: none;
+    color: ${props => (props.type === 'free' ? 'white' : 'rgb(116, 167, 82)')};
+    &:hover {
+        color: rgb(220, 253, 198);
+    }
+`;
+
 class NavBar extends Component {
     state = {
         mobileOpen: false,
@@ -149,6 +179,37 @@ class NavBar extends Component {
         this.setState({ open: false });
     };
 
+    generateAccountText = () => {
+        let timeLeft = 0;
+        const today = Date.now();
+        const expiration = Date.parse(this.props.state.user.expiration);
+        // Calculate remaining time
+        const remainingTime = (expiration - today) / 1000 / 60 / 60 / 24;
+        timeLeft = remainingTime > 0 ? remainingTime : 0;
+        timeLeft = timeLeft.toFixed();
+
+        if (this.props.state.user.account === 'monthly') {
+            return (
+                <div>
+                    <div>{`Account: Premium`}</div>
+                    <div>{`Time Left: ${timeLeft} days`}</div>
+                </div>
+            );
+        }
+        if (this.props.state.user.account === 'yearly') {
+            return (
+                <div>
+                    <div>{`Account: Premium`}</div>
+                    <div>{`Time Left: ${timeLeft} days`}</div>
+                </div>
+            );
+        }
+
+        if (this.props.state.user.account === 'free') {
+            return `Account: Free`;
+        }
+    };
+
     render() {
         const { classes, theme } = this.props;
 
@@ -178,18 +239,32 @@ class NavBar extends Component {
                             </StyledCrumb>
                         ))}
                     </StyledBreadCrumbContainer>
-                    <Button
-                        onClick={this.handleLogOut}
-                        variant="contained"
-                        color="secondary"
-                        style={
-                            this.props.state.user.authenticated
-                                ? { display: 'flex' }
-                                : { display: 'none' }
-                        }
-                    >
-                        Sign Out
-                    </Button>
+                    <AccountSection authenticated={this.props.state.user.authenticated}>
+                        <Avatar
+                            type={this.props.state.user.account}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 18 18"
+                        >
+                            <path d="M9 1C4.58 1 1 4.58 1 9s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.75c1.24 0 2.25 1.01 2.25 2.25S10.24 8.25 9 8.25 6.75 7.24 6.75 6 7.76 3.75 9 3.75zM9 14.5c-1.86 0-3.49-.92-4.49-2.33C4.62 10.72 7.53 10 9 10c1.47 0 4.38.72 4.49 2.17-1 1.41-2.63 2.33-4.49 2.33z" />
+                        </Avatar>
+                        <AccountType to="/rocket/billing" type={this.props.state.user.account}>
+                            {this.generateAccountText()}
+                        </AccountType>
+                        <Button
+                            onClick={this.handleLogOut}
+                            variant="contained"
+                            color="secondary"
+                            style={
+                                this.props.state.user.authenticated
+                                    ? { display: 'flex' }
+                                    : { display: 'none' }
+                            }
+                        >
+                            Sign Out
+                        </Button>
+                    </AccountSection>
                 </StyledNavBarContainer>
                 <Hidden mdUp>
                     <Drawer
