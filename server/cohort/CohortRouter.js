@@ -65,7 +65,6 @@ function appendRocket(req, res) {
                     User.findById(userID)
 
                         .then(populatedUser => {
-                            // console.log(populatedUser);
                             res.status(201).json(populatedUser);
                         })
                         .catch(failureToPopulateUser => {
