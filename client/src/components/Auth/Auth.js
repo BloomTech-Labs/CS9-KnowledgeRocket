@@ -124,7 +124,7 @@ export const StyledInput = styled.input`
         outline: none;
     }
 
-    &::placeholder {
+    &:placeholder {
         color: #fff;
         font-weight: 300;
         opacity: 0.7;
