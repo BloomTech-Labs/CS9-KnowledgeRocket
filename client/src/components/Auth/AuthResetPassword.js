@@ -11,6 +11,7 @@ import {
     StyledInput,
     StyledButton,
 } from './Auth';
+import Snackbar from '../Snackbar';
 
 function mapStateToProps(state) {
     return {
@@ -90,27 +91,22 @@ class AuthResetPassword extends Component {
 
     render() {
         const { classes } = this.props;
-        // console.log(this.state);
+        const { status } = this.props.state.user;
+
         return (
-            <StyledFormContainer
-                status={this.state.status}
-                resetStatus={this.props.state.user.status}
-            >
+            <StyledFormContainer status={this.state.status} resetStatus={status}>
                 <StyledCardContent className={classes.root}>
                     <StyledFormHeader
                         style={
-                            this.props.state.user.status === 'USER_PASSWORD_RESET_FAILED' ||
-                            this.state.status !== ''
+                            status === 'USER_PASSWORD_RESET_FAILED' || this.state.status !== ''
                                 ? { color: 'red' }
-                                : this.props.state.user.status === 'USER_PASSWORD_RESET'
-                                    ? { color: 'green' }
-                                    : {}
+                                : status === 'USER_PASSWORD_RESET' ? { color: 'green' } : {}
                         }
                     >
-                        {this.props.state.user.status === 'USER_PASSWORD_RESET_FAILED'
+                        {status === 'USER_PASSWORD_RESET_FAILED'
                             ? 'That E-MAIL Is Not Affiliated With Any of Our Accounts'
                             : this.state.status === ''
-                                ? this.props.state.user.status === 'USER_PASSWORD_RESET'
+                                ? status === 'USER_PASSWORD_RESET'
                                     ? 'A Password Reset Link has been sent to your E-mail'
                                     : 'RESET YOUR PASSWORD?'
                                 : this.state.status}
@@ -139,12 +135,12 @@ class AuthResetPassword extends Component {
                         </FieldSet>
                     </StyledInputContainer>
                 </StyledCardContent>
+                {<Snackbar />}
             </StyledFormContainer>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { resetUserPassword }
-)(withStyles(styles)(AuthResetPassword));
+export default connect(mapStateToProps, { resetUserPassword })(
+    withStyles(styles)(AuthResetPassword)
+);
