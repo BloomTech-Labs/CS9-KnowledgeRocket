@@ -83,6 +83,7 @@ class CohortAddStudentsForm extends Component {
     handleOnClick = () => {
         this.handleAddStudent();
         this.props.actionClick();
+        this.props.expand(true);
         this.setState({
             disabled: true,
             firstName: '',

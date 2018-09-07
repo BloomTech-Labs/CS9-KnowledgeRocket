@@ -118,6 +118,7 @@ class Cohort extends Component {
         cohortIDX: 0,
         ccEmail: false,
         open: false,
+        expand: false,
     };
 
     componentDidMount() {
@@ -198,6 +199,10 @@ class Cohort extends Component {
         this.setState({ open: false });
     };
 
+    handleExpandStudentList = (value) => {
+        this.setState({expand: value});
+    }
+
     render() {
         const { classes } = this.props;
         const { message } = this.props.state.user;
@@ -224,11 +229,14 @@ class Cohort extends Component {
                 />
                 <StyledHeaders>Add Students</StyledHeaders>
                 <StyledCohortAddStudentForm
+                    expand={this.handleExpandStudentList}
                     cohortID={this.props.match.params.id}
                     actionClick={this.handleActionClick}
                 />
                 <StyledHeaders>Students</StyledHeaders>
                 <StyledCohortStudentList
+                    handleExpand={this.handleExpandStudentList}
+                    expand={this.state.expand}
                     students={this.state.cohort.students}
                     match={this.props.match}
                     cohortID={cohortIDX}
