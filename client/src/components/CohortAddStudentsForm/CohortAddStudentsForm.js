@@ -14,11 +14,18 @@ function mapStateToProps(state) {
     };
 }
 
-const StylizedInput = styled(Input)`
-    padding: 0.5rem;
+const StylizedInput2 = styled.input`
     background-color: #f2f7ff;
+    color: black;
     border-radius: 0.25rem;
+    border: 0;
     margin-right: 0.5rem;
+    padding: 0.9rem 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    &::placeholder {
+        color: #9a9da2;
+    }
     @media (max-width: 800px) {
         width: 100%;
     }
@@ -26,12 +33,15 @@ const StylizedInput = styled(Input)`
 
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortAddStudentsForm extends Component {
-    state = {
-        disabled: true,
-        firstName: '',
-        lastName: '',
-        email: '',
-    };
+    constructor() {
+        super();
+        this.state = {
+            disabled: true,
+            firstName: '',
+            lastName: '',
+            email: '',
+        };
+    }
 
     handleNewInput = e => {
         this.setState({ [e.target.name]: e.target.value });
@@ -73,33 +83,53 @@ class CohortAddStudentsForm extends Component {
     handleOnClick = () => {
         this.handleAddStudent();
         this.props.actionClick();
+        this.setState({
+            disabled: true,
+            firstName: '',
+            lastName: '',
+            email: '',
+        })
+        document.getElementById('lastNameField').focus();
+    };
+
+    handleEnter = e => {
+        if (e.keyCode === 13) {
+            this.handleOnClick();
+        }
     };
 
     render() {
         return (
             <Card className={this.props.className}>
-                <StylizedInput
+                <StylizedInput2
+                    id="lastNameField"
                     placeholder="Last Name"
                     disableUnderline={true}
                     name="lastName"
                     onChange={this.handleOnChange}
                     required={true}
+                    value={this.state.lastName}
                 />
-                <StylizedInput
+                <StylizedInput2
                     placeholder="First Name"
                     disableUnderline={true}
                     name="firstName"
                     onChange={this.handleOnChange}
                     required={true}
+                    value={this.state.firstName}
                 />
-                <StylizedInput
-                    placeholder="Email"
+                <StylizedInput2
+                    className='emailInput'
+                    id='emailInputField'
+                    key='emailInputField'
                     disableUnderline={true}
+                    placeholder="Email"
                     name="email"
                     onChange={this.handleOnChange}
+                    onKeyDown={this.handleEnter}
+                    value={this.state.email}
                     type="email"
                     required={true}
-                    pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])"
                 />
                 <Button
                     variant="contained"

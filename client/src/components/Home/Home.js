@@ -107,7 +107,7 @@ export default class Home extends Component {
                             <FollowButton>TWITTER</FollowButton>
                         </a>
                         <a
-                            href="https://www.facebook.com/Knowledge-Rocket-464965013986045"
+                            href="https://www.facebook.com/knowledgerocket"
                             title="Knowledge Rocket on Facebook"
                         >
                             <FollowButton>FACEBOOK</FollowButton>
