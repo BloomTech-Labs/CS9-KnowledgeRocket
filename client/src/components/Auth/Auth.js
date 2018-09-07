@@ -123,7 +123,7 @@ export const StyledInput = styled.input`
     &:focus {
         outline: none;
     }
-
+//Only use 1 colon
     &:placeholder {
         color: #fff;
         font-weight: 300;
