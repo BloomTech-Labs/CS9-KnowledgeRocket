@@ -57,7 +57,7 @@ const StyledFormCard = styled(Card)`
     transform-style: preserve-3d;
     transition: all 1s ease-in-out;
     border-radius: 0.25rem;
-    box-shadow: 0px 1px 13px 0px rgba(15, 12, 12, 0.3), 0px 1px 13px 0px rgba(15, 12, 12,0.3),
+    box-shadow: 0px 1px 13px 0px rgba(15, 12, 12, 0.3), 0px 1px 13px 0px rgba(15, 12, 12, 0.3),
         0px 2px 13px -1px rgba(15, 12, 12, 0.3) !important;
 `;
 
@@ -91,7 +91,7 @@ export const StyledInputContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    aligh-items: center;
+    align-items: center;
 `;
 
 export const FieldSet = styled.div`
@@ -111,7 +111,7 @@ export const StyledInput = styled.input`
     background-color: white;
     width: 16rem;
     height: 3rem;
-    color: #white;
+    color: white;
     font-weight: 600;
     font-size: 1rem;
     border-top: none;
@@ -229,8 +229,6 @@ class Auth extends Component {
     };
 
     render() {
-        // console.log(`AUTH PROPS ${JSON.stringify(this.props)}`);
-        // console.log('Attempts Made to Log In', this.state.attempts);
         const { classes } = this.props;
         const flip = { transform: 'translate(0, 0) rotateX(180deg)' };
 
@@ -316,11 +314,14 @@ class Auth extends Component {
     }
 }
 
-export default connect(mapStateToProps, {
-    addUser,
-    loginUser,
-    loginUserGoogle,
-    loginUserFacebook,
-    loginUserTwitter,
-    generateBreadCrumbs,
-})(withStyles(styles)(Auth));
+export default connect(
+    mapStateToProps,
+    {
+        addUser,
+        loginUser,
+        loginUserGoogle,
+        loginUserFacebook,
+        loginUserTwitter,
+        generateBreadCrumbs,
+    }
+)(withStyles(styles)(Auth));
