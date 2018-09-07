@@ -170,8 +170,9 @@ class CohortRocketList extends Component {
 
     toggleModal = e => {
         this.setState(prevstate => {
-            return { toggleVis: !prevstate.toggleVis };
+            return { toggleVis: !prevstate.toggleVis, rocketSearch: '' };
         });
+        this.generateRocketAddLinks();
     };
 
     rocketChoice = rocketID => {
