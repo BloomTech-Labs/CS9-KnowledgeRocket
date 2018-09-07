@@ -33,7 +33,7 @@ import {
     USER_PASSWORD_RESET,
     USER_PASSWORD_RESET_FAILED,
     SNACK_CLEAR,
-    REFRESHED_USER
+    REFRESHED_USER,
 } from '../actions';
 
 const defaultState = {
@@ -97,6 +97,7 @@ export default (state = defaultState, action) => {
             StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = APPEND_ROCKETS;
+            StateCopy.message = 'You successfully set a rocket for your class!';
             return StateCopy;
         case APPENDING_ROCKETS:
             StateCopy.status = APPENDING_ROCKETS;
