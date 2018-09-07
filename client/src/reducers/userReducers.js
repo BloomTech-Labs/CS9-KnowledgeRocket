@@ -33,6 +33,7 @@ import {
     USER_PASSWORD_RESET,
     USER_PASSWORD_RESET_FAILED,
     SNACK_CLEAR,
+    REFRESHED_USER
 } from '../actions';
 
 const defaultState = {
@@ -112,9 +113,14 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_USER;
             return StateCopy;
         case UPGRADE_USER:
-            StateCopy = { ...StateCopy, user: [...action.payload] };
+            StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = UPGRADE_USER;
+            return StateCopy;
+        case REFRESHED_USER:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.authenticated = true;
+            StateCopy.status = REFRESHED_USER;
             return StateCopy;
         case UPDATING_USER:
             StateCopy.status = UPDATING_USER;

@@ -71,7 +71,7 @@ class Settings extends Component {
                             />
                             <TextField
                                 id="ccEmail"
-                                label="Change CC Email?"
+                                label="Change Rocket Email?"
                                 className="Settings_input"
                                 type="email"
                                 margin="normal"
@@ -104,7 +104,7 @@ class Settings extends Component {
                             </FormLabel>
                             <TextField
                                 id="ccEmail"
-                                label="Change CC Email?"
+                                label="Change Rocket Email?"
                                 className="Settings_input"
                                 type="email"
                                 margin="normal"

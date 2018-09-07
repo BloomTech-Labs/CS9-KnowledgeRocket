@@ -51,6 +51,8 @@ export const RESETTING_USER_PASSWORD = 'RESETTING_USER_PASSWORD';
 export const USER_PASSWORD_RESET = 'USER_PASSWORD_RESET';
 export const USER_PASSWORD_RESET_FAILED = 'USER_PASSWORD_RESET_FAILED';
 
+export const REFRESHED_USER = 'REFRESHED_USER';
+
 // Student CSVs
 export const UPLOAD_CSV = 'UPLOAD_CSV';
 export const UPLOADING_CSV = 'UPLOADING_CSV';
@@ -222,6 +224,11 @@ export const updateUser = user => async dispatch => {
     } catch (err) {
         dispatch({ type: UPDATE_USER_FAILURE });
     }
+};
+
+// ATTEMPT AT REFRESH USER AFTER BILLING CHANGE
+export const refreshUser = userObject => {
+    return { type: REFRESHED_USER, payload: userObject };
 };
 
 // extract uid, email, token from response.user
