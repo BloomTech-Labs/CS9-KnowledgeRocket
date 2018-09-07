@@ -18,8 +18,7 @@ const CPCButton = styled(Button)`
     color: #eeeeee !important;
     border: 1px solid rgb(119, 136, 153);
     background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;
-    width: 100%;
-    margin-bottom: 1rem !important;
+    margin: 1rem 0 !important;
 `;
 
 const ErrorMessage = styled.div`
@@ -29,15 +28,37 @@ const ErrorMessage = styled.div`
     color: red;
     font-size: 1rem;
     margin-bottom: 1rem;
-`
+`;
 
 const SuccessWindow = styled(Card)`
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1rem;
     border: 1px solid black;
+    text-decoration: none;
+    h1 {
+        display: flex;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: bold;
+        color: rgb(116, 167, 82);
+        width: 100%;
+        padding: 1rem;
+        background-color: rgb(220, 253, 198) !important;
+        border-radius: 0.5rem;
+        border: 2px solid rgb(116, 167, 82) !important;
+    }
+`;
+
+const SuccessButton = styled(CPCButton)`
+    text-decoration: none;
+`;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
 `
 
 class CheckoutForm extends Component {
@@ -52,13 +73,15 @@ class CheckoutForm extends Component {
     submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
         if (token) {
-            let response = await axios.post(`${serverURL}/${this.props.type}`, {
-                token: token.id,
-                uid: this.props.uid,
-                id: this.props.id,
-            }).catch(() =>{
-                this.setState({ transactionStatus: false });
-            })
+            let response = await axios
+                .post(`${serverURL}/${this.props.type}`, {
+                    token: token.id,
+                    uid: this.props.uid,
+                    id: this.props.id,
+                })
+                .catch(() => {
+                    this.setState({ transactionStatus: false });
+                });
             if (response) {
                 this.setState({ complete: true });
             }
@@ -69,10 +92,14 @@ class CheckoutForm extends Component {
     render() {
         if (this.state.complete)
             return (
-                <SuccessWindow>
-                    <h1>Transaction Complete! Thank you!</h1>
-                    <Link to="/rocket"><CPCButton>Return To Rockets</CPCButton></Link>
-                </SuccessWindow>
+                <div className="checkout">
+                    <SuccessWindow>
+                        <h1>Transaction Complete! Thank you!</h1>
+                        <StyledLink to="/rocket">
+                            <SuccessButton>Return To Rockets</SuccessButton>
+                        </StyledLink>
+                    </SuccessWindow>
+                </div>
             );
         return (
             <div className="checkout">
@@ -88,9 +115,7 @@ class CheckoutForm extends Component {
                     </FormLabel>
                     <CardElement className="checkoutBoxes" />
                 </Card>
-                <CPCButton onClick={this.submit}>
-                    Buy Now
-                </CPCButton>
+                <CPCButton onClick={this.submit}>Buy Now</CPCButton>
             </div>
         );
     }
