@@ -111,7 +111,6 @@ export const StyledInput = styled.input`
     background-color: white;
     width: 16rem;
     height: 3rem;
-    color: white;
     font-weight: 600;
     font-size: 1rem;
     border-top: none;
@@ -124,8 +123,8 @@ export const StyledInput = styled.input`
     &:focus {
         outline: none;
     }
-
-    &::placeholder {
+//Only use 1 colon
+    &:placeholder {
         color: #fff;
         font-weight: 300;
         opacity: 0.7;
