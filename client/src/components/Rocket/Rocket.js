@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 }
 
 const MainContainer = Styled.div`
-    padding: 1.5rem .5rem 0 .5rem;
+    padding: 1rem 0 0 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
