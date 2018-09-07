@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
-.c0 {
+.c1 {
   font-family: 'Roboto',serif;
   display: -webkit-box;
   display: -webkit-flex;
@@ -18,72 +18,173 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
+  width: 100%;
 }
 
-.c0 label {
+.c1 label {
   padding: .25rem;
   font-weight: bold;
   font-size: 1.3rem;
   margin-bottom: .5rem;
 }
 
-.c0 .requiredFields {
+.c1 .requiredFields {
   color: red;
   margin-bottom: .5rem;
 }
 
-.c0 input[name="title"] {
-  border: 0.5px solid #A9A9A9;
+.c1 input[name="title"] {
+  border: 1px solid #8BB8D488 !important;
   width: 50%;
   min-height: 2rem;
+  padding: 0.5rem;
+  background-color: #f2f7ff;
   border-radius: 0.25rem;
-  padding: .25rem;
 }
 
-.c1 {
+.c1 .mainTitle {
   width: 100%;
-  min-height: 4rem;
-  border-radius: 0.25rem;
-  padding: .25rem;
-}
-
-.c3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  width: 100%;
-}
-
-.c3 input[type="text"] {
-  border-radius: 0.25rem;
-  border: 0.5px solid #A9A9A9;
-  width: 91%;
-  min-height: 2rem;
-  padding: .25rem .5rem;
-  margin: .25rem;
-}
-
-.c3 input[type="radio"] {
-  padding: .25rem;
 }
 
 .c2 {
+  width: 100%;
+  min-height: 4rem;
+  padding: .5rem;
+  background-color: #f2f7ff;
+  border-radius: 0.25rem;
+  border: 1px solid #8BB8D488 !important;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.c4 label {
+  width: 45%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 0.25rem 0;
+}
+
+.c4 input[type="text"] {
+  -webkit-box-flex: 3;
+  -webkit-flex-grow: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  border: 1px solid #8BB8D488 !important;
+  min-height: 2rem;
+  padding: 0.5rem;
+  background-color: #f2f7ff;
+  border-radius: 0.25rem;
+}
+
+.c4 input[type="radio"] {
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  padding: .25rem;
+  margin: 0 .5rem;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: red;
   font-size: .8rem;
-  height: 1rem;
+  margin: 0.35rem 0 0 0;
+  width: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: red;
+  font-size: .8rem;
+  margin: 0.35rem 0 0 0;
+  width: 100%;
+}
+
+.c0 {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
   margin-bottom: 1rem;
+  box-shadow: 0px 1px 3px 0px rgba(15,12,12,0.2),0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
 }
 
 @media (max-width:600px) {
-  .c3 {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+  .c1 input[name="title"] {
+    width: 100%;
   }
 }
 
-<section>
+@media (max-width:600px) {
+  .c4 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width:600px) {
+  .c4 label {
+    width: 100%;
+  }
+}
+
+<section
+  className="c0"
+>
   <div
-    className="c0"
+    className="c1"
   >
     <label
       htmlFor="tm.explanation"
@@ -92,19 +193,19 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
     </label>
     <textarea
       aria-describedby="tm-explanation-ErrorDescription"
-      className="c1"
+      className="c2"
       name="tm.explanation"
       onChange={undefined}
       placeholder="Two Day Review Text"
       value=""
     />
     <div
-      className="c2"
+      className="c3"
       id="tm-explanation-ErrorDescription"
     />
   </div>
   <div
-    className="c0"
+    className="c1"
   >
     <label
       htmlFor="tm.question"
@@ -113,19 +214,19 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
     </label>
     <textarea
       aria-describedby="tm-question-ErrorDescription"
-      className="c1"
+      className="c2"
       name="tm.question"
       onChange={undefined}
       placeholder="Two Day Review Text"
       value={undefined}
     />
     <div
-      className="c2"
+      className="c3"
       id="tm-question-ErrorDescription"
     />
   </div>
   <div
-    className="c3"
+    className="c4"
   >
     <label>
       <input
@@ -145,7 +246,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         value=""
       />
       <div
-        className="c2"
+        className="c5"
         id="tm-choices[0].text-ErrorDescription"
       />
     </label>
@@ -167,7 +268,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         value=""
       />
       <div
-        className="c2"
+        className="c5"
         id="tm-choices[1].text-ErrorDescription"
       />
     </label>
@@ -189,7 +290,7 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         value=""
       />
       <div
-        className="c2"
+        className="c5"
         id="tm-choices[2].text-ErrorDescription"
       />
     </label>
@@ -211,13 +312,13 @@ exports[`RocketFormGroup <QuestionChoices /> renders correctly 1`] = `
         value=""
       />
       <div
-        className="c2"
+        className="c5"
         id="tm-choices[3].text-ErrorDescription"
       />
     </label>
   </div>
   <div
-    className="c2"
+    className="c5"
     id="tm-correct-ErrorDescription"
   />
 </section>
@@ -237,10 +338,22 @@ exports[`RocketFormGroup testing styled components render <Blurb /> renders corr
 
 exports[`RocketFormGroup testing styled components render <ErrorText /> renders correctly 1`] = `
 .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: red;
   font-size: .8rem;
-  height: 1rem;
-  margin-bottom: 1rem;
+  margin: 0.35rem 0 0 0;
+  width: 100%;
 }
 
 <div
@@ -266,6 +379,7 @@ exports[`RocketFormGroup testing styled components render <FormGroup /> renders 
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
+  width: 100%;
 }
 
 .c0 label {
@@ -281,11 +395,22 @@ exports[`RocketFormGroup testing styled components render <FormGroup /> renders 
 }
 
 .c0 input[name="title"] {
-  border: 0.5px solid #A9A9A9;
+  border: 1px solid #8BB8D488 !important;
   width: 50%;
   min-height: 2rem;
+  padding: 0.5rem;
+  background-color: #f2f7ff;
   border-radius: 0.25rem;
-  padding: .25rem;
+}
+
+.c0 .mainTitle {
+  width: 100%;
+}
+
+@media (max-width:600px) {
+  .c0 input[name="title"] {
+    width: 100%;
+  }
 }
 
 <div
@@ -295,29 +420,75 @@ exports[`RocketFormGroup testing styled components render <FormGroup /> renders 
 
 exports[`RocketFormGroup testing styled components render <QuestionWrapper /> renders correctly 1`] = `
 .c0 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   width: 100%;
 }
 
+.c0 label {
+  width: 45%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 0.25rem 0;
+}
+
 .c0 input[type="text"] {
-  border-radius: 0.25rem;
-  border: 0.5px solid #A9A9A9;
-  width: 91%;
+  -webkit-box-flex: 3;
+  -webkit-flex-grow: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  border: 1px solid #8BB8D488 !important;
   min-height: 2rem;
-  padding: .25rem .5rem;
-  margin: .25rem;
+  padding: 0.5rem;
+  background-color: #f2f7ff;
+  border-radius: 0.25rem;
 }
 
 .c0 input[type="radio"] {
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
   padding: .25rem;
+  margin: 0 .5rem;
 }
 
 @media (max-width:600px) {
   .c0 {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width:600px) {
+  .c0 label {
+    width: 100%;
   }
 }
 
@@ -330,8 +501,10 @@ exports[`RocketFormGroup testing styled components render <TextArea /> renders c
 .c0 {
   width: 100%;
   min-height: 4rem;
+  padding: .5rem;
+  background-color: #f2f7ff;
   border-radius: 0.25rem;
-  padding: .25rem;
+  border: 1px solid #8BB8D488 !important;
 }
 
 <textarea
