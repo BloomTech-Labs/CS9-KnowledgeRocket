@@ -127,6 +127,9 @@ const Avatar = styled.svg`
     }
     height: 2rem;
     width: 2rem;
+    @media (max-width: 620px) {
+        display: none;
+    }
 `;
 
 const AccountType = styled(Link)`
@@ -142,6 +145,9 @@ const AccountType = styled(Link)`
     color: ${props => (props.type === 'free' ? 'white' : 'rgb(116, 167, 82)')};
     &:hover {
         color: rgb(220, 253, 198);
+    }
+    @media (max-width: 570px) {
+        font-size: 0.7rem;
     }
 `;
 

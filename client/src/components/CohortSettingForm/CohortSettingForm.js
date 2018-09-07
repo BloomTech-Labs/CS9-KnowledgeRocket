@@ -89,17 +89,17 @@ const StyledHelp = styled.div`
     opacity: ${props => (props.hovered ? 1 : 0)};
     background-image: url('/img/ExcelFormatHelp.PNG');
     border-radius: 0.25rem;
-    margin-top: 140px;
+    margin-top: 80px;
     position: absolute;
     width: 300px;
-    height: 225px;
+    height: 100px;
     background-size: cover;
     z-index: 99;
     border: 1px solid lightgray;
     box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
         0px 2px 1px -1px rgba(0, 0, 0, 0.12);
     ${smallBreakPoint(`
-        margin-left: 120px;
+        margin-left: 65px;
     `)};
 `;
 
