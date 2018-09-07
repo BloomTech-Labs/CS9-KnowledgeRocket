@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import Styled from 'styled-components';
 import { connect } from 'react-redux';
+// Material Components
 import { withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+// Actions
 import { resetUserPassword } from '../../actions';
+// Components
 import {
     StyledCardContent,
     StyledFormHeader,
@@ -18,7 +24,7 @@ function mapStateToProps(state) {
     };
 }
 
-const styles = {
+const styles = theme => ({
     root: {
         padding: 0,
         overflow: 'visible !important',
@@ -26,7 +32,11 @@ const styles = {
     media: {
         height: 140,
     },
-};
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
 
 export const StyledFormContainer = Styled.div`
     font-family: 'Roboto', serif;
