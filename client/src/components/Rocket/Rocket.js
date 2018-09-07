@@ -71,6 +71,7 @@ class Rocket extends Component {
                         td={generateDefaults()}
                         tw={generateDefaults()}
                         tm={generateDefaults()}
+                        newForm
                     />
                 </MainContainer>
             </div>

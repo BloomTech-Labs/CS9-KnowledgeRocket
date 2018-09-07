@@ -7,7 +7,15 @@ import Button from '@material-ui/core/Button';
 const rocketBlurb =
     'Knowledge rockets are short paragraphs followed by a multiple choice question. These are automatically sent two days, two weeks, and two months after a lesson is taught and are intended to cause the student to recall what they have learned. The rockets should not be used to provide exhaustive review. Instead, they ask the student to "reload" the mental maps that acquired during the lesson.';
 
-const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors, touched }) => {
+const RocketFormBase = ({
+    values,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    errors,
+    touched,
+    newForm,
+}) => {
     const displayError = errorHelper(errors, touched);
     return (
         <form onSubmit={handleSubmit}>
@@ -23,7 +31,7 @@ const RocketFormBase = ({ values, handleSubmit, handleChange, handleBlur, errors
             </FormGroup>
             <FormGroup>
                 <Blurb>{rocketBlurb}</Blurb>
-                <div className="requiredFields">All fields are required.</div>
+                {newForm && <div className="requiredFields">All fields are required.</div>}
             </FormGroup>
 
             {/* ROCKET QUESTION SECTION 1*/}
