@@ -137,7 +137,7 @@ export const MidImg = styled.img`
 export const MidSectionText = styled.p`
     padding: 1rem;
     font-size: 1.5rem;
-    text-align: justify;
+    text-align: left;
 `;
 
 export const FooterSection = styled.div`

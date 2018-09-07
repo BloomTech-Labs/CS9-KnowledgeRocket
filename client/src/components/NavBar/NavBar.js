@@ -184,7 +184,7 @@ class NavBar extends Component {
                                 : { display: 'none' }
                         }
                     >
-                        Sign-Out
+                        Sign Out
                     </Button>
                 </StyledNavBarContainer>
                 <Hidden mdUp>
