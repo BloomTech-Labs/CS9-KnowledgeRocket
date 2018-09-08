@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 // Material Components
-import { withStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import { Card } from '../../../node_modules/@material-ui/core';
 import Button from '@material-ui/core/Button';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -66,13 +62,6 @@ const StyledLink = styled(Link)`
     text-decoration: none;
 `;
 
-const styles = theme => ({
-    close: {
-        width: theme.spacing.unit * 4,
-        height: theme.spacing.unit * 4,
-    },
-});
-
 class CheckoutForm extends Component {
     constructor(props) {
         super(props);
@@ -80,8 +69,10 @@ class CheckoutForm extends Component {
             complete: false,
             ccStatus: true,
             transactionStatus: true,
+            open: false,
         };
     }
+
     submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
         if (token) {
@@ -92,6 +83,7 @@ class CheckoutForm extends Component {
                     id: this.props.id,
                 })
                 .then(receivedPackage => {
+                    this.props.actionClick();
                     this.props.refreshUser(receivedPackage.data.user);
                     this.setState({ complete: true });
                 })
@@ -102,6 +94,7 @@ class CheckoutForm extends Component {
             this.setState({ ccStatus: false });
         }
     };
+
     render() {
         if (this.state.complete)
             return (
@@ -114,6 +107,7 @@ class CheckoutForm extends Component {
                     </SuccessWindow>
                 </div>
             );
+
         return (
             <div className="checkout">
                 {this.state.ccStatus ? null : (
@@ -133,4 +127,4 @@ class CheckoutForm extends Component {
         );
     }
 }
-export default injectStripe(withStyles(styles)(CheckoutForm));
+export default injectStripe(CheckoutForm);
