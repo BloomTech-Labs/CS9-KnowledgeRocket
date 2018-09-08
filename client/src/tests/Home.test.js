@@ -150,13 +150,6 @@ describe('<Home />', () => {
         });
     });
 
-    describe('MidImg', () => {
-        it('renders without crashing', () => {
-            const div = document.createElement('div');
-            ReactDOM.render(<MidImg />, div);
-        });
-    });
-
     describe('MidSectionText', () => {
         it('renders without crashing', () => {
             const div = document.createElement('div');

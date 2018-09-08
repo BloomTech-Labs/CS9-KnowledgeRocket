@@ -10,59 +10,71 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CohortStudentCard from '../CohortStudentCard/CohortStudentCard';
 
 function mapStateToProps(state) {
-  return {
-    state,
-  };
+    return {
+        state,
+    };
 }
 
 const styles = theme => ({
-  root: {
-    width: '100%',
-    margin: '0 0 1.5rem 0',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-  expandIcon: {
-    fontSize: '2.5rem',
-  },
-  expansion: {
-    display: 'flex',
-    padding: '1rem',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
+    root: {
+        width: '100%',
+        margin: '0 0 1.5rem 0',
+        borderRadius: '0.25rem',
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+    expandIcon: {
+        fontSize: '2.5rem',
+    },
+    expansion: {
+        display: 'flex',
+        padding: '1rem',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+    },
 });
 
 // CONTAINS THE LAST NAME, FIRST NAME, EMAIL, ADD BTN TO ADD STUDENTS
 class CohortStudentList extends Component {
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <ExpansionPanel className={classes.root}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon className={classes.expandIcon} />}>
-          Your Students
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.expansion}>
-          {this.props.state.user.cohorts[this.props.cohortID].students.length === 0
-            ? 'Please add Students to your class'
-            : null}
-          {/* Render all students added if the cohort exists with that index*/}
-          {this.props.state.user.cohorts[this.props.cohortID]
-            ? this.props.state.user.cohorts[this.props.cohortID].students.map((student, index) => (
-                <CohortStudentCard
-                  student={student}
-                  key={`student_${index}`}
-                  trigger={this.props.actionClick}
-                />
-              ))
-            : null}
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    );
-  }
+    handleExpand = () => {
+        this.props.handleExpand(!this.props.expand);
+    };
+    render() {
+        const { classes } = this.props;
+        return (
+            <ExpansionPanel className={classes.root} expanded={this.props.expand}>
+                <ExpansionPanelSummary
+                    expandIcon={
+                        <ExpandMoreIcon
+                            className={classes.expandIcon}
+                            onClick={this.handleExpand}
+                        />
+                    }
+                >
+                    Your Students
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className={classes.expansion}>
+                    {this.props.state.user.cohorts[this.props.cohortID].students.length === 0
+                        ? 'Please add Students to your class'
+                        : null}
+                    {/* Render all students added if the cohort exists with that index*/}
+                    {this.props.state.user.cohorts[this.props.cohortID]
+                        ? this.props.state.user.cohorts[this.props.cohortID].students.map(
+                              (student, index) => (
+                                  <CohortStudentCard
+                                      student={student}
+                                      key={`student_${index}`}
+                                      trigger={this.props.actionClick}
+                                  />
+                              )
+                          )
+                        : null}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+        );
+    }
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(CohortStudentList));

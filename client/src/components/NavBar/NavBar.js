@@ -102,7 +102,7 @@ const StyledSvg = styled(SvgIcon)`
     color: #f50057 !important;
 `;
 
-const CPCButton = styled(Button)`
+export const CPCButton = styled(Button)`
     color: #eeeeee !important;
     border: 1px solid rgb(119, 136, 153);
     background-color: ${props => (props.warning ? 'orange' : '#000000')} !important;

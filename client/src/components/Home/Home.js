@@ -11,14 +11,22 @@ import {
     MidColumn,
     MidContainer,
     MidHeader,
-    MidImg,
     MidSectionText,
     FooterSection,
     FollowSection,
     FollowButton,
     CtaContainer,
     HomeCtaHeader,
+    StyledAssignmentIcon,
+    CtaSectionWrapper,
+    CtaSmallHeader,
+    CtaSection,
+    CtaColumn,
+    CtaText,
+    PreviewSection,
+    BottomHeader,
 } from './HomeStyled';
+import Button from '@material-ui/core/Button';
 
 export default class Home extends Component {
     handleAuthRedirect = e => {
@@ -50,20 +58,42 @@ export default class Home extends Component {
                 </HomeNav>
                 <CtaContainer>
                     <HomeCTA>
+                        <div>
+                            <HomeCtaHeader>Launch Your Learning</HomeCtaHeader>
+                            <CtaSectionWrapper>
+                                <CtaColumn>
+                                    <CtaSmallHeader>Join The future of teaching</CtaSmallHeader>
+                                    <CtaSection>
+                                        <CtaText>
+                                            Take the edge off handing out assignments, and improve
+                                            the learning process.
+                                        </CtaText>
+                                    </CtaSection>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={this.handleAuthRedirect}
+                                    >
+                                        BEGIN NOW
+                                    </Button>
+                                </CtaColumn>
+                            </CtaSectionWrapper>
+                        </div>
                         <img
                             src="/img/KnowledgeRocket_Logo_Latest_Isolated.svg"
                             alt="Space Background"
                         />
-                        <HomeCtaHeader>KNOWLEDGE ROCKET</HomeCtaHeader>
                     </HomeCTA>
                 </CtaContainer>
                 <MidContainer>
                     <HomeHeader>What is a Knowledge Rocket?</HomeHeader>
                     <MidSectionWrapper>
                         <MidColumn>
-                            <MidHeader>Implementation</MidHeader>
+                            <MidHeader>
+                                <StyledAssignmentIcon />
+                                Implementation
+                            </MidHeader>
                             <MidSection>
-                                <MidImg src="/img/amanda-sandlin-10508-unsplash.jpg" />
                                 <MidSectionText>
                                     Knowledge Rockets are customizable quizzes that you create and
                                     send to your students on scheduled intervals of 2 days, 2 weeks
@@ -73,9 +103,11 @@ export default class Home extends Component {
                             </MidSection>
                         </MidColumn>
                         <MidColumn>
-                            <MidHeader>Practice</MidHeader>
+                            <MidHeader>
+                                <StyledAssignmentIcon />
+                                Practice
+                            </MidHeader>
                             <MidSection>
-                                <MidImg src="/img/erik-nielsen-783260-unsplash.jpg" />
                                 <MidSectionText>
                                     Lectures can be sometimes difficult for students to follow.
                                     Knowledge Rockets reinforce lecture information and helps
@@ -84,9 +116,11 @@ export default class Home extends Component {
                             </MidSection>
                         </MidColumn>
                         <MidColumn>
-                            <MidHeader>Results</MidHeader>
+                            <MidHeader>
+                                <StyledAssignmentIcon />
+                                Results
+                            </MidHeader>
                             <MidSection>
-                                <MidImg src="/img/bryan-minear-315814-unsplash.jpg" />
                                 <MidSectionText>
                                     Studies show that familiarity of class lecture retention works
                                     with reinforcement. Knowledge Rocket, with its ease of use,
@@ -97,6 +131,10 @@ export default class Home extends Component {
                         </MidColumn>
                     </MidSectionWrapper>
                 </MidContainer>
+                <PreviewSection>
+                <BottomHeader>Our New and Improved Interface</BottomHeader>
+                    <img src='/img/KR_UI_SLIDESHOW.gif' alt='preview of interface'/>
+                </PreviewSection>
                 <FooterSection>
                     <FollowSection>
                         <NavButton onClick={this.handleContact}>CONTACT US</NavButton>
@@ -107,7 +145,7 @@ export default class Home extends Component {
                             <FollowButton>TWITTER</FollowButton>
                         </a>
                         <a
-                            href="https://www.facebook.com/Knowledge-Rocket-464965013986045"
+                            href="https://www.facebook.com/knowledgerocket"
                             title="Knowledge Rocket on Facebook"
                         >
                             <FollowButton>FACEBOOK</FollowButton>

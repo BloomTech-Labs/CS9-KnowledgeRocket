@@ -123,7 +123,7 @@ export const StyledInput = styled.input`
     &:focus {
         outline: none;
     }
-//Only use 1 colon
+    //Only use 1 colon
     &:placeholder {
         color: #fff;
         font-weight: 300;
@@ -241,8 +241,20 @@ class Auth extends Component {
                         className={classes.root}
                         style={
                             this.state.flipStatus
-                                ? { userSelect: 'none', visibility: 'hidden' }
-                                : { userSelect: 'none', visibility: 'visible' }
+                                ? {
+                                      userSelect: 'none',
+                                      visibility: 'hidden',
+                                      opacity: '0',
+                                      transition: 'visibility 0s linear 1000ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
+                                : {
+                                      userSelect: 'none',
+                                      visibility: 'visible',
+                                      opacity: '1',
+                                      transition: 'visibility 0s linear 0ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
                         }
                     >
                         <StyledFormHeader>
@@ -301,7 +313,21 @@ class Auth extends Component {
                         tryAgain={this.returnToAuth}
                         key={'AuthBackCard'}
                         style={
-                            this.state.flipStatus ? { userSelect: 'all' } : { userSelect: 'none' }
+                            this.state.flipStatus
+                                ? {
+                                      userSelect: 'all',
+                                      opacity: '0',
+                                      visibility: 'hidden',
+                                      transition: 'visibility 0s linear 1000ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
+                                : {
+                                      userSelect: 'none',
+                                      visibility: 'visible',
+                                      opacity: '1',
+                                      transition: 'visibility 0s linear 1000ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
                         }
                         status={this.props.user.status}
                         attempts={this.state.attempts}
