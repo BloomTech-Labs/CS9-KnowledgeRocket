@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
+// Material Components
+import { withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import { Card } from '../../../node_modules/@material-ui/core';
 import Button from '@material-ui/core/Button';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -59,7 +64,14 @@ const SuccessButton = styled(CPCButton)`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-`
+`;
+
+const styles = theme => ({
+    close: {
+        width: theme.spacing.unit * 4,
+        height: theme.spacing.unit * 4,
+    },
+});
 
 class CheckoutForm extends Component {
     constructor(props) {
@@ -78,7 +90,8 @@ class CheckoutForm extends Component {
                     token: token.id,
                     uid: this.props.uid,
                     id: this.props.id,
-                }).then(receivedPackage => {
+                })
+                .then(receivedPackage => {
                     this.props.refreshUser(receivedPackage.data.user);
                     this.setState({ complete: true });
                 })
@@ -120,4 +133,4 @@ class CheckoutForm extends Component {
         );
     }
 }
-export default injectStripe(CheckoutForm);
+export default injectStripe(withStyles(styles)(CheckoutForm));

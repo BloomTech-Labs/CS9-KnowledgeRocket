@@ -60,6 +60,7 @@ class CohortRocketCard extends Component {
         scheduledRocket: {},
         newDate: '',
         timezone: '',
+        snackBarMessage: '',
     };
 
     componentDidMount() {
@@ -142,7 +143,6 @@ class CohortRocketCard extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { appendRocket, getResponseRocketByRocketId }
-)(CohortRocketCard);
+export default connect(mapStateToProps, { appendRocket, getResponseRocketByRocketId })(
+    CohortRocketCard
+);
