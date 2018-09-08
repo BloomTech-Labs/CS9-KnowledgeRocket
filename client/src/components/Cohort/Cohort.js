@@ -137,6 +137,7 @@ class Cohort extends Component {
                 cohortIDX = index;
             }
         });
+        
         this.setState({
             startDate: { objectID: Date.now() },
             cohort,

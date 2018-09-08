@@ -1,5 +1,6 @@
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 export const HomeCTA = styled.div`
     font-family: 'Roboto';
@@ -10,12 +11,13 @@ export const HomeCTA = styled.div`
     background-repeat: no-repeat;
     background-color: black;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     img {
         width: 15%;
         min-width: 100px;
+        @media ()
     }
     @media (max-width: 500px) {
         height: 300px;
@@ -24,6 +26,11 @@ export const HomeCTA = styled.div`
         height: 600px;
     }
 `;
+
+export const StyledAssignmentIcon = styled(AssignmentIcon)`
+    color: #3F51B5;
+    margin-right: 1rem;
+`
 
 export const HomeNav = styled.div`
     display: flex;
@@ -94,7 +101,6 @@ export const MidHeader = styled.h3`
     color: #232323;
     max-width: 100%;
     text-align: center;
-    margin: 3rem 0;
 `;
 
 export const MidSectionWrapper = styled.div`
@@ -111,7 +117,10 @@ export const MidColumn = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 410px;
+    max-width: 360px;
+    @media (max-width: 1120px) {
+        max-width: 300px;
+    }
 `;
 
 export const MidSection = styled.div`
@@ -120,24 +129,16 @@ export const MidSection = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: #dfdfdf;
-    border-radius: 0.5rem;
-    border: 1px solid #232323;
     height: 100%;
-    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
-`;
-
-export const MidImg = styled.img`
-    padding: 1rem;
-    height: 200px;
-    width: 100%;
-    border-radius: 0.3rem;
 `;
 
 export const MidSectionText = styled.p`
     padding: 1rem;
     font-size: 1.5rem;
     text-align: left;
+    @media (max-width: 1120px) {
+        font-size: 1rem;
+    }
 `;
 
 export const FooterSection = styled.div`

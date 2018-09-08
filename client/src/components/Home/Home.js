@@ -11,13 +11,13 @@ import {
     MidColumn,
     MidContainer,
     MidHeader,
-    MidImg,
     MidSectionText,
     FooterSection,
     FollowSection,
     FollowButton,
     CtaContainer,
     HomeCtaHeader,
+    StyledAssignmentIcon,
 } from './HomeStyled';
 
 export default class Home extends Component {
@@ -50,20 +50,40 @@ export default class Home extends Component {
                 </HomeNav>
                 <CtaContainer>
                     <HomeCTA>
+                        <div>
+                            <HomeCtaHeader>Launch Your Learning</HomeCtaHeader>
+                            <MidSectionWrapper>
+                                <MidColumn>
+                                    <MidHeader>
+                                        Implementation
+                                    </MidHeader>
+                                    <MidSection>
+                                        <MidSectionText>
+                                            Knowledge Rockets are customizable quizzes that you
+                                            create and send to your students on scheduled intervals
+                                            of 2 days, 2 weeks and 2 months after the initial
+                                            lecture. Rocket templates are provided for ease of
+                                            creation.
+                                        </MidSectionText>
+                                    </MidSection>
+                                </MidColumn>
+                            </MidSectionWrapper>
+                        </div>
                         <img
                             src="/img/KnowledgeRocket_Logo_Latest_Isolated.svg"
                             alt="Space Background"
                         />
-                        <HomeCtaHeader>KNOWLEDGE ROCKET</HomeCtaHeader>
                     </HomeCTA>
                 </CtaContainer>
                 <MidContainer>
                     <HomeHeader>What is a Knowledge Rocket?</HomeHeader>
                     <MidSectionWrapper>
                         <MidColumn>
-                            <MidHeader>Implementation</MidHeader>
+                            <MidHeader>
+                                <StyledAssignmentIcon />
+                                Implementation
+                            </MidHeader>
                             <MidSection>
-                                <MidImg src="/img/amanda-sandlin-10508-unsplash.jpg" />
                                 <MidSectionText>
                                     Knowledge Rockets are customizable quizzes that you create and
                                     send to your students on scheduled intervals of 2 days, 2 weeks
@@ -73,9 +93,11 @@ export default class Home extends Component {
                             </MidSection>
                         </MidColumn>
                         <MidColumn>
-                            <MidHeader>Practice</MidHeader>
+                            <MidHeader>
+                                <StyledAssignmentIcon />
+                                Practice
+                            </MidHeader>
                             <MidSection>
-                                <MidImg src="/img/erik-nielsen-783260-unsplash.jpg" />
                                 <MidSectionText>
                                     Lectures can be sometimes difficult for students to follow.
                                     Knowledge Rockets reinforce lecture information and helps
@@ -84,9 +106,11 @@ export default class Home extends Component {
                             </MidSection>
                         </MidColumn>
                         <MidColumn>
-                            <MidHeader>Results</MidHeader>
+                            <MidHeader>
+                                <StyledAssignmentIcon />
+                                Results
+                            </MidHeader>
                             <MidSection>
-                                <MidImg src="/img/bryan-minear-315814-unsplash.jpg" />
                                 <MidSectionText>
                                     Studies show that familiarity of class lecture retention works
                                     with reinforcement. Knowledge Rocket, with its ease of use,
