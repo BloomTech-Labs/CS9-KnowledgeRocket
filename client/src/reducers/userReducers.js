@@ -32,6 +32,8 @@ import {
     RESETTING_USER_PASSWORD,
     USER_PASSWORD_RESET,
     USER_PASSWORD_RESET_FAILED,
+    SNACK_CLEAR,
+    REFRESHED_USER,
 } from '../actions';
 
 const defaultState = {
@@ -52,6 +54,10 @@ const defaultState = {
 export default (state = defaultState, action) => {
     let StateCopy = JSON.parse(JSON.stringify(state));
     switch (action.type) {
+        case SNACK_CLEAR:
+            StateCopy.message = '';
+            StateCopy.status = SNACK_CLEAR;
+            return StateCopy;
         case ADDING_ROCKET:
             StateCopy.status = ADDING_ROCKET;
             return StateCopy;
@@ -60,12 +66,10 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case DELETE_ROCKET:
             StateCopy.status = ADD_ROCKET;
-
             // update cohort rockets
             let target = [];
             StateCopy.cohorts.forEach((c, cIndex) => {
                 c.rockets.forEach((r, rIndex) => {
-                    //console.log(r.rocketId, action.payload.rocketId);
                     if (r.rocketId._id === action.payload.rocketId._id) {
                         target.push([cIndex, rIndex]);
                     }
@@ -86,13 +90,14 @@ export default (state = defaultState, action) => {
         case ADD_ROCKET:
             StateCopy.status = ADD_ROCKET;
             StateCopy = { ...StateCopy, ...action.payload };
-            StateCopy.message = 'You added a rocket!';
+            StateCopy.message = 'You added or updated a rocket!';
             StateCopy.authenticated = true;
             return StateCopy;
         case APPEND_ROCKETS:
             StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = APPEND_ROCKETS;
+            StateCopy.message = 'You successfully set a rocket for your class!';
             return StateCopy;
         case APPENDING_ROCKETS:
             StateCopy.status = APPENDING_ROCKETS;
@@ -109,9 +114,15 @@ export default (state = defaultState, action) => {
             StateCopy.status = ADD_USER;
             return StateCopy;
         case UPGRADE_USER:
-            StateCopy = { ...StateCopy, user: [...action.payload] };
+            StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = UPGRADE_USER;
+            return StateCopy;
+        case REFRESHED_USER:
+            StateCopy = { ...StateCopy, ...action.payload };
+            StateCopy.authenticated = true;
+            StateCopy.status = REFRESHED_USER;
+            StateCopy.message = 'You successfully made a payment!';
             return StateCopy;
         case UPDATING_USER:
             StateCopy.status = UPDATING_USER;
@@ -123,6 +134,7 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.status = UPDATE_USER;
             StateCopy.authenticated = true;
+            StateCopy.message = 'You successfully updated your credentials';
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
@@ -161,7 +173,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case UPLOAD_CSV:
             StateCopy = action.payload;
-            StateCopy.message = 'You succesfully uploaded your students!';
+            StateCopy.message = 'You successfully uploaded your students!';
             StateCopy.authenticated = true;
             StateCopy.status = UPLOAD_CSV;
             return StateCopy;
@@ -173,7 +185,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case EXPORT_CSV:
             StateCopy.exportCSV = action.payload;
-            StateCopy.message = 'You sucessfully downloaded a list of your students!';
+            StateCopy.message = 'You successfully downloaded a list of your students!';
             return StateCopy;
         case EXPORTING_CSV:
             StateCopy.status = EXPORTING_CSV;
@@ -200,12 +212,13 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case USER_PASSWORD_RESET:
             StateCopy.status = USER_PASSWORD_RESET;
+            StateCopy.message = 'You successfully reset your password!';
             return StateCopy;
         case USER_PASSWORD_RESET_FAILED:
             StateCopy.status = USER_PASSWORD_RESET_FAILED;
             return StateCopy;
         case LOGOUT_USER:
-            StateCopy.message = 'You succesfully logged out!';
+            StateCopy.message = 'You successfully logged out!';
             return defaultState;
         default:
             return state;

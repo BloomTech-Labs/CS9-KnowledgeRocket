@@ -7,6 +7,7 @@ export const FormGroup = Styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    width: 100%;
     label {
         padding: .25rem;
         font-weight: bold;
@@ -18,53 +19,88 @@ export const FormGroup = Styled.div`
         margin-bottom: .5rem;
     }
     input[name="title"] {
-        border: 0.5px solid #A9A9A9;
+        border: 1px solid #8BB8D488 !important;
         width: 50%;
         min-height: 2rem;
+        padding: 0.5rem;
+        background-color: #f2f7ff;
         border-radius: 0.25rem;
-        padding: .25rem;
+        @media (max-width: 600px) {
+            width: 100%;
+        }
+    }
+    .mainTitle {
+        width: 100%;
     }
 `;
 export const TextArea = Styled.textarea`
     width: 100%;
     min-height: 4rem;
+    padding: .5rem;
+    background-color: #f2f7ff;
     border-radius: 0.25rem;
-    padding: .25rem;
+    border: 1px solid #8BB8D488 !important;
 `;
-export const Blurb = TextArea.extend`
+
+export const Blurb = Styled(TextArea)`
     margin: 1rem 0;
     text-align: justify;
     font-size: 1.1rem;
 `.withComponent('p');
 
 export const QuestionWrapper = Styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
     @media (max-width: 600px) {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
+        flex-direction: column;
+    }
+    label {
+        width: 45%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0.25rem 0;
+        @media (max-width: 600px) {
+            width: 100%;
+        }
     }
     input[type="text"]{
-        border-radius: 0.25rem;
-        border: 0.5px solid #A9A9A9;
-        width: 91%;
+        flex-grow: 3;
+        border: 1px solid #8BB8D488 !important;
         min-height: 2rem;
-        padding: .25rem .5rem;
-        margin: .25rem;
+        padding: 0.5rem;
+        background-color: #f2f7ff;
+        border-radius: 0.25rem;
     }
     input[type="radio"] {
+        flex-grow: 0;
         padding: .25rem;
+        margin:  0 .5rem;
     }
-`;
+`;//border: 0.5px solid #A9A9A9;
 
 export const ErrorText = Styled.div`
+    display: flex;
+    justify-content: ${props => (props.left ? 'flex-start' : 'center')};
+    align-items: center;
     color: red;
     font-size: .8rem;
-    height: 1rem;
-    margin-bottom: 1rem;
+    margin: 0.35rem 0 0 0;
+    width: 100%;
 `;
+
+export const StyledSection = Styled.section`
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+`
 
 export const errorHelper = (error, touched) => property =>
     touched && touched[property] && error && error[property];
@@ -107,7 +143,7 @@ export const QuestionChoices = ({
     const a11yIdFor = label => generateErrorIdFrom(interval, label);
     const displayCorrectChoiceErrorAtIndex = i => displayCorrectChoiceError(errors, touched, i);
     return (
-        <section>
+        <StyledSection>
             <FormGroup>
                 <label htmlFor={`${interval}.explanation`}>{`${
                     verbageDictionary[interval]
@@ -119,7 +155,9 @@ export const QuestionChoices = ({
                     onChange={handleChange}
                     aria-describedby={a11yIdFor('explanation')}
                 />
-                <ErrorText id={a11yIdFor('explanation')}>{displayError('explanation')}</ErrorText>
+                <ErrorText left id={a11yIdFor('explanation')}>
+                    {displayError('explanation')}
+                </ErrorText>
             </FormGroup>
             <FormGroup>
                 <label htmlFor={`${interval}.question`}>{`${
@@ -132,7 +170,9 @@ export const QuestionChoices = ({
                     onChange={handleChange}
                     aria-describedby={a11yIdFor('question')}
                 />
-                <ErrorText id={a11yIdFor('question')}>{displayError('question')}</ErrorText>
+                <ErrorText left id={a11yIdFor('question')}>
+                    {displayError('question')}
+                </ErrorText>
             </FormGroup>
             <QuestionWrapper>
                 <label>
@@ -221,7 +261,7 @@ export const QuestionChoices = ({
                 </label>
             </QuestionWrapper>
             <ErrorText id={a11yIdFor('correct')}>{displayError('correct')}</ErrorText>
-        </section>
+        </StyledSection>
     );
 };
 

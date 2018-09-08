@@ -91,7 +91,7 @@ export const StyledInputContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    aligh-items: center;
+    align-items: center;
 `;
 
 export const FieldSet = styled.div`
@@ -111,7 +111,6 @@ export const StyledInput = styled.input`
     background-color: white;
     width: 16rem;
     height: 3rem;
-    color: #white;
     font-weight: 600;
     font-size: 1rem;
     border-top: none;
@@ -124,8 +123,8 @@ export const StyledInput = styled.input`
     &:focus {
         outline: none;
     }
-
-    &::placeholder {
+    //Only use 1 colon
+    &:placeholder {
         color: #fff;
         font-weight: 300;
         opacity: 0.7;
@@ -242,8 +241,20 @@ class Auth extends Component {
                         className={classes.root}
                         style={
                             this.state.flipStatus
-                                ? { userSelect: 'none', visibility: 'hidden' }
-                                : { userSelect: 'none', visibility: 'visible' }
+                                ? {
+                                      userSelect: 'none',
+                                      visibility: 'hidden',
+                                      opacity: '0',
+                                      transition: 'visibility 0s linear 1000ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
+                                : {
+                                      userSelect: 'none',
+                                      visibility: 'visible',
+                                      opacity: '1',
+                                      transition: 'visibility 0s linear 0ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
                         }
                     >
                         <StyledFormHeader>
@@ -302,7 +313,21 @@ class Auth extends Component {
                         tryAgain={this.returnToAuth}
                         key={'AuthBackCard'}
                         style={
-                            this.state.flipStatus ? { userSelect: 'all' } : { userSelect: 'none' }
+                            this.state.flipStatus
+                                ? {
+                                      userSelect: 'all',
+                                      opacity: '0',
+                                      visibility: 'hidden',
+                                      transition: 'visibility 0s linear 1000ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
+                                : {
+                                      userSelect: 'none',
+                                      visibility: 'visible',
+                                      opacity: '1',
+                                      transition: 'visibility 0s linear 1000ms, opacity 1000ms',
+                                      backgroundColor: '#3f51b5',
+                                  }
                         }
                         status={this.props.user.status}
                         attempts={this.state.attempts}
@@ -314,11 +339,14 @@ class Auth extends Component {
     }
 }
 
-export default connect(mapStateToProps, {
-    addUser,
-    loginUser,
-    loginUserGoogle,
-    loginUserFacebook,
-    loginUserTwitter,
-    generateBreadCrumbs,
-})(withStyles(styles)(Auth));
+export default connect(
+    mapStateToProps,
+    {
+        addUser,
+        loginUser,
+        loginUserGoogle,
+        loginUserFacebook,
+        loginUserTwitter,
+        generateBreadCrumbs,
+    }
+)(withStyles(styles)(Auth));

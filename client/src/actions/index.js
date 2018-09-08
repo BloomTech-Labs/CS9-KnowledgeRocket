@@ -51,6 +51,8 @@ export const RESETTING_USER_PASSWORD = 'RESETTING_USER_PASSWORD';
 export const USER_PASSWORD_RESET = 'USER_PASSWORD_RESET';
 export const USER_PASSWORD_RESET_FAILED = 'USER_PASSWORD_RESET_FAILED';
 
+export const REFRESHED_USER = 'REFRESHED_USER';
+
 // Student CSVs
 export const UPLOAD_CSV = 'UPLOAD_CSV';
 export const UPLOADING_CSV = 'UPLOADING_CSV';
@@ -76,6 +78,9 @@ export const DELETE_ROCKET = 'DELETE_ROCKET';
 export const FETCHING_RESPONSE = 'FETCHING_RESPONSE';
 export const RESPONSE_RECEIVED = 'RESPONSE_RECEIVED';
 export const FETCHING_RESPONSE_FAILED = 'FETCHING_RESPONSE_FAILED';
+
+// SNACKBAR TYPES
+export const SNACK_CLEAR = 'SNACK_CLEAR';
 
 // Add Rocket Actions
 export const addRocket = (rocket, uid) => async dispatch => {
@@ -221,6 +226,11 @@ export const updateUser = user => async dispatch => {
     }
 };
 
+// ATTEMPT AT REFRESH USER AFTER BILLING CHANGE
+export const refreshUser = userObject => {
+    return { type: REFRESHED_USER, payload: userObject };
+};
+
 // extract uid, email, token from response.user
 export const handleGoogleResponse = (res, correctToken) => {
     const { uid, email } = res.user;
@@ -301,16 +311,13 @@ export const resetUserPassword = email => async dispatch => {
         dispatch({ type: USER_PASSWORD_RESET });
     } catch (err) {
         dispatch({ type: USER_PASSWORD_RESET_FAILED });
-        // console.log(err);
     }
 };
 
 export const logOutUser = () => async dispatch => {
     try {
         dispatch({ type: LOGOUT_USER });
-    } catch (err) {
-        // console.log(err);
-    }
+    } catch (err) {}
 };
 
 /* BREADCRUMBS GENERATION */
@@ -326,12 +333,19 @@ export const generateBreadCrumbs = path => {
 // 'RESPONSE_RECEIVED'
 // 'FETCHING_RESPONSE_FAILED'
 export const getResponseRocketByRocketId = (rocketId, cohortId) => async dispatch => {
-    dispatch({type: FETCHING_RESPONSE});
+    dispatch({ type: FETCHING_RESPONSE });
     try {
-        let response = await axios.post(`${url}/api/responserocket/results/`,{rocketId, cohortId})
-        console.log(response)
+        let response = await axios.post(`${url}/api/responserocket/results/`, {
+            rocketId,
+            cohortId,
+        });
         dispatch({ type: RESPONSE_RECEIVED, payload: response.data });
     } catch (err) {
-        dispatch({type: FETCHING_RESPONSE_FAILED});
+        dispatch({ type: FETCHING_RESPONSE_FAILED });
     }
-}
+};
+
+// SNACKBAR ACTIONS
+export const clearSnackMessage = () => {
+    return { type: SNACK_CLEAR };
+};

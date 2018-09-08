@@ -12,7 +12,6 @@ export default (state = defaultState, action) => {
         case UPDATE_BREADCRUMBS:
             let path = action.payload;
             const crumbs = path.split('/');
-            // console.log(crumbs);
             const currentLabels = [...defaultState.labels];
             const currentPaths = [...defaultState.paths];
             crumbs.forEach(item => {
@@ -25,7 +24,7 @@ export default (state = defaultState, action) => {
             // Generate The BreadCrumbs Path from action.payload
             // Excluding the very last path, because it will be the current location.
             for (let i = 0; i < crumbs.length - 1; i++) {
-                if (crumbs[i] !== '') currentPaths.push('/'+crumbs[i]);
+                if (crumbs[i] !== '') currentPaths.push('/' + crumbs[i]);
             }
             // Push the current location last into the currentPaths Array
             currentPaths.push(action.payload);

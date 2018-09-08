@@ -17,7 +17,7 @@ describe('server', () => {
                 testdb,
                 { useNewUrlParser: true }
             )
-            .then(console.log('connected to test db'));
+            .then(() => console.log('connected to test db'));
     });
 
     afterAll(() => {
@@ -83,10 +83,7 @@ describe('server', () => {
                 teacherID: id,
                 cohortID: cohortID,
             });
-        // console.log(newCohort);
-        // console.log(mockStudent);
 
-        // console.log(mockStudent);
         expect(mockStudent.email).toEqual(fakeMail);
         expect(response.status).toBe(201);
         await mongoose.connection.db.dropCollection('students');

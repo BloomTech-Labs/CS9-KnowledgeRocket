@@ -19,8 +19,6 @@ router
     .delete(deleteid);
 
 function postRocket(req, res) {
-    // console.log(req.body);
-
     const { rocket, uid } = req.body;
     const postRocket = rocket;
     let { td, tw, tm } = rocket;
@@ -34,7 +32,6 @@ function postRocket(req, res) {
                 choice.correct = false;
             }
         });
-        // checking correct console.log(question.choices)
         return {
             title: postRocket.title,
             explanation: question.explanation,
@@ -68,7 +65,6 @@ function postRocket(req, res) {
                             .then(foundUser => {
                                 // append to foundUser's array of rockets...
                                 if (foundUser) {
-                                    // console.log(foundUser)
                                     let rocketArray = foundUser.rockets;
                                     rocketArray.push(createdRocket._id);
                                     // Update currently found user's rocket's array..
@@ -95,7 +91,6 @@ function postRocket(req, res) {
                                             })
                                             .then(modifiedUser => {
                                                 // Hopefully return the modified user with the new rocket's array to the front end.
-                                                // console.log(JSON.stringify(modifiedUser))
                                                 res.status(201).json(modifiedUser);
                                             });
                                     });
@@ -122,14 +117,14 @@ function updateRocket(req, res) {
 
     // Update Correct Choices
     const updateAndSaveFormattedQuestions = question => {
-        question.choices.forEach(choice => {
-            if (choice.text === question.correct) {
+        question.choices.forEach((choice, idx) => {
+            // Fixes bug where there was no correct answer.
+            if (idx === Number(question.correct)) {
                 choice.correct = true;
             } else {
                 choice.correct = false;
             }
         });
-        // checking correct console.log(question.choices)
         return {
             title: postRocket.title,
             explanation: question.explanation,
@@ -148,14 +143,12 @@ function updateRocket(req, res) {
                 tmQuestion => {
                     tm_id = tmQuestion._id;
                     // Format Rocket
-                    // console.log('ids', td_id, tw_id, tm_id)
                     const rocketToSave = {
                         title: postRocket.title,
                         twoDay: td_id,
                         twoWeek: tw_id,
                         twoMonth: tm_id,
                     };
-                    // console.log('rocket to save', rocketToSave)
                     // Save Rocket to MongoDB
                     Rocket.findByIdAndUpdate(rocket._id, rocketToSave)
                         .then(createdRocket => {

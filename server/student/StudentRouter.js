@@ -135,9 +135,8 @@ function postCSV(req, res) {
             student.email.length > 0 &&
             regVar.test(student.email)
         ) {
-            // console.log('STUDENT VALIDATED');
         } else {
-            console.log("ONE OR MORE STUDENTS DON'T HAVE THE CORRECT DATA");
+            console.error("ONE OR MORE STUDENTS DON'T HAVE THE CORRECT DATA");
         }
     });
 
@@ -167,9 +166,9 @@ function postCSV(req, res) {
                                 });
                         })
                         .catch(err => {
-                            res
-                                .status(500)
-                                .json({ errorMessage: 'There was an error updating the cohort' });
+                            res.status(500).json({
+                                errorMessage: 'There was an error updating the cohort',
+                            });
                         });
                 })
                 .catch(err => {

@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 }
 
 const MainContainer = Styled.div`
-    padding: 0 1.2rem;
+    padding: 1rem 0 0 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -27,7 +27,6 @@ const MainContainer = Styled.div`
 class Rocket extends Component {
     state = {
         user: {},
-        height: '0px',
     };
     handleAddRocket = rocket => {
         this.props.addRocket(rocket, this.props.state.user.uid);
@@ -36,44 +35,25 @@ class Rocket extends Component {
         // Checks for User to be Authenticated
         // If not authenticated it will send the user to <login/>
         // If authenticated it will set the state with the current user.
-        if (!this.props.state.user.authenticated) {
-            this.props.history.push('/rocket/auth');
-        }
         this.props.generateBreadCrumbs(this.props.history.location.pathname);
-        this.updateDimensions();
-        window.addEventListener('resize', this.updateDimensions.bind(this));
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateDimensions.bind(this));
     }
 
-    updateDimensions = () => {
-        if (window.windowState === 1) {
-            this.setState({
-                height: window.innerHeight - 124 + 'px',
-            });
-        } else {
-            this.setState({
-                height: document.documentElement.clientHeight - 124 + 'px',
-            });
-        }
-    };
+
 
     render() {
         return (
-            <div className="Main_container">
-                <MainContainer height={this.state.height}>
-                    {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
-                    <RocketForm
-                        handleSubmit={this.handleAddRocket}
-                        history={this.props.history}
-                        title=""
-                        td={generateDefaults()}
-                        tw={generateDefaults()}
-                        tm={generateDefaults()}
-                    />
-                </MainContainer>
-            </div>
+            <MainContainer>
+                {/* TODO PASS ACTION TO ROCKET FORM AS A PROP */}
+                <RocketForm
+                    handleSubmit={this.handleAddRocket}
+                    history={this.props.history}
+                    title=""
+                    td={generateDefaults()}
+                    tw={generateDefaults()}
+                    tm={generateDefaults()}
+                    newForm
+                />
+            </MainContainer>
         );
     }
 }
