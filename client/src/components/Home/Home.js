@@ -18,7 +18,15 @@ import {
     CtaContainer,
     HomeCtaHeader,
     StyledAssignmentIcon,
+    CtaSectionWrapper,
+    CtaSmallHeader,
+    CtaSection,
+    CtaColumn,
+    CtaText,
+    PreviewSection,
+    BottomHeader,
 } from './HomeStyled';
+import Button from '@material-ui/core/Button';
 
 export default class Home extends Component {
     handleAuthRedirect = e => {
@@ -52,22 +60,24 @@ export default class Home extends Component {
                     <HomeCTA>
                         <div>
                             <HomeCtaHeader>Launch Your Learning</HomeCtaHeader>
-                            <MidSectionWrapper>
-                                <MidColumn>
-                                    <MidHeader>
-                                        Implementation
-                                    </MidHeader>
-                                    <MidSection>
-                                        <MidSectionText>
-                                            Knowledge Rockets are customizable quizzes that you
-                                            create and send to your students on scheduled intervals
-                                            of 2 days, 2 weeks and 2 months after the initial
-                                            lecture. Rocket templates are provided for ease of
-                                            creation.
-                                        </MidSectionText>
-                                    </MidSection>
-                                </MidColumn>
-                            </MidSectionWrapper>
+                            <CtaSectionWrapper>
+                                <CtaColumn>
+                                    <CtaSmallHeader>Join The future of teaching</CtaSmallHeader>
+                                    <CtaSection>
+                                        <CtaText>
+                                            Take the edge off handing out assignments, and improve
+                                            the learning process.
+                                        </CtaText>
+                                    </CtaSection>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={this.handleAuthRedirect}
+                                    >
+                                        BEGIN NOW
+                                    </Button>
+                                </CtaColumn>
+                            </CtaSectionWrapper>
                         </div>
                         <img
                             src="/img/KnowledgeRocket_Logo_Latest_Isolated.svg"
@@ -121,6 +131,10 @@ export default class Home extends Component {
                         </MidColumn>
                     </MidSectionWrapper>
                 </MidContainer>
+                <PreviewSection>
+                <BottomHeader>Our New and Improved Interface</BottomHeader>
+                    <img src='/img/KR_UI_SLIDESHOW.gif' alt='preview of interface'/>
+                </PreviewSection>
                 <FooterSection>
                     <FollowSection>
                         <NavButton onClick={this.handleContact}>CONTACT US</NavButton>
