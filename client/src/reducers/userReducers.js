@@ -134,6 +134,7 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.status = UPDATE_USER;
             StateCopy.authenticated = true;
+            StateCopy.message = 'You successfully updated your credentials';
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
