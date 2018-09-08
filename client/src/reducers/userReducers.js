@@ -122,6 +122,7 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = REFRESHED_USER;
+            StateCopy.message = 'You successfully made a payment!';
             return StateCopy;
         case UPDATING_USER:
             StateCopy.status = UPDATING_USER;
