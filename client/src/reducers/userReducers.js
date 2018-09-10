@@ -33,7 +33,7 @@ import {
     USER_PASSWORD_RESET,
     USER_PASSWORD_RESET_FAILED,
     SNACK_CLEAR,
-    REFRESHED_USER
+    REFRESHED_USER,
 } from '../actions';
 
 const defaultState = {
@@ -97,6 +97,7 @@ export default (state = defaultState, action) => {
             StateCopy = action.payload;
             StateCopy.authenticated = true;
             StateCopy.status = APPEND_ROCKETS;
+            StateCopy.message = 'You successfully set a rocket for your class!';
             return StateCopy;
         case APPENDING_ROCKETS:
             StateCopy.status = APPENDING_ROCKETS;
@@ -121,6 +122,7 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.authenticated = true;
             StateCopy.status = REFRESHED_USER;
+            StateCopy.message = 'You successfully made a payment!';
             return StateCopy;
         case UPDATING_USER:
             StateCopy.status = UPDATING_USER;
@@ -132,6 +134,7 @@ export default (state = defaultState, action) => {
             StateCopy = { ...StateCopy, ...action.payload };
             StateCopy.status = UPDATE_USER;
             StateCopy.authenticated = true;
+            StateCopy.message = 'You successfully updated your credentials';
             return StateCopy;
         case ADD_COHORT:
             StateCopy = { ...StateCopy, ...action.payload };
@@ -209,6 +212,7 @@ export default (state = defaultState, action) => {
             return StateCopy;
         case USER_PASSWORD_RESET:
             StateCopy.status = USER_PASSWORD_RESET;
+            StateCopy.message = 'You successfully reset your password!';
             return StateCopy;
         case USER_PASSWORD_RESET_FAILED:
             StateCopy.status = USER_PASSWORD_RESET_FAILED;

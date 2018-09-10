@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
+// Material Components
 import { Card } from '../../../node_modules/@material-ui/core';
 import Button from '@material-ui/core/Button';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -59,7 +60,7 @@ const SuccessButton = styled(CPCButton)`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-`
+`;
 
 class CheckoutForm extends Component {
     constructor(props) {
@@ -68,8 +69,10 @@ class CheckoutForm extends Component {
             complete: false,
             ccStatus: true,
             transactionStatus: true,
+            open: false,
         };
     }
+
     submit = async ev => {
         let { token } = await this.props.stripe.createToken({ name: 'Name' });
         if (token) {
@@ -78,7 +81,9 @@ class CheckoutForm extends Component {
                     token: token.id,
                     uid: this.props.uid,
                     id: this.props.id,
-                }).then(receivedPackage => {
+                })
+                .then(receivedPackage => {
+                    this.props.actionClick();
                     this.props.refreshUser(receivedPackage.data.user);
                     this.setState({ complete: true });
                 })
@@ -89,6 +94,7 @@ class CheckoutForm extends Component {
             this.setState({ ccStatus: false });
         }
     };
+
     render() {
         if (this.state.complete)
             return (
@@ -101,6 +107,7 @@ class CheckoutForm extends Component {
                     </SuccessWindow>
                 </div>
             );
+
         return (
             <div className="checkout">
                 {this.state.ccStatus ? null : (

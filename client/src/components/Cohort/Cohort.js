@@ -172,7 +172,7 @@ class Cohort extends Component {
             this.props.state.user._id,
             this.props.match.params.id
         );
-        //rocketID, startDate, userID, cohortID
+        this.handleActionClick();
     };
 
     handlePickRocket = rocketID => {
