@@ -135,7 +135,8 @@ class Settings extends Component {
                                 <CloseIcon />
                             </IconButton>,
                         ]}
-                    />;
+                    />
+                    ;
                 </div>
             );
         } else {
@@ -192,13 +193,14 @@ class Settings extends Component {
                                 <CloseIcon />
                             </IconButton>,
                         ]}
-                    />;
+                    />
                 </div>
             );
         }
     }
 }
 
-export default connect(mapStateToProps, { generateBreadCrumbs, updateUser })(
-    withStyles(styles)(Settings)
-);
+export default connect(
+    mapStateToProps,
+    { generateBreadCrumbs, updateUser }
+)(withStyles(styles)(Settings));
