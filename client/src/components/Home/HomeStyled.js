@@ -31,9 +31,9 @@ export const HomeCTA = styled.div`
 `;
 
 export const StyledAssignmentIcon = styled(AssignmentIcon)`
-    color: #3F51B5;
+    color: #3f51b5;
     margin-right: 1rem;
-`
+`;
 
 export const HomeNav = styled.div`
     display: flex;
@@ -109,7 +109,6 @@ export const MidHeader = styled.h3`
     font-weight: 900;
     color: #232323;
     width: 100%;
-    text-align: center;
 `;
 
 export const MidSectionWrapper = styled.div`
@@ -117,7 +116,7 @@ export const MidSectionWrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     max-width: 900px;
     margin: 0 auto;
     padding: 1rem;
@@ -133,7 +132,7 @@ export const CtaSmallHeader = styled(MidHeader)`
     font-weight: 460;
     text-align: left;
     width: 100%;
-`
+`;
 export const CtaText = styled.h3`
     width: 70%;
     font-size: 1rem;
@@ -141,7 +140,7 @@ export const CtaText = styled.h3`
     @media (max-width: 500px) {
         width: 100%;
     }
-`
+`;
 
 export const CtaSection = styled.div`
     margin: 1rem 0;
@@ -150,21 +149,21 @@ export const CtaSection = styled.div`
 `;
 
 export const CtaColumn = styled.div`
-    margin: .5rem 0 0 1.5rem;
-    padding: .5rem 0 0 1rem;
+    margin: 0.5rem 0 0 1.5rem;
+    padding: 0.5rem 0 0 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 80%;
     min-width: 200px;
-    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
     border-radius: 0.5rem;
     border: 0;
     @media (max-width: 500px) {
         width: 100%;
-        margin: .5rem 1.5rem 0 1.5rem;
+        margin: 0.5rem 1.5rem 0 1.5rem;
     }
-`
+`;
 
 export const CtaSectionWrapper = styled.div`
     display: flex;
@@ -173,7 +172,7 @@ export const CtaSectionWrapper = styled.div`
     width: 100%;
     justify-content: flex-start;
     margin: 0 0 2rem 0;
-`
+`;
 
 export const MidColumn = styled.div`
     display: flex;
@@ -197,11 +196,9 @@ export const MidSection = styled.div`
     height: 100%;
 `;
 
-
 export const MidSectionText = styled.p`
-    padding: 1rem;
+    padding: 1rem 0 1rem 0;
     font-size: 1rem;
-    text-align: left;
 `;
 
 export const FooterSection = styled.div`
@@ -269,7 +266,7 @@ export const PreviewSection = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #C4E4FD;
+    background-color: #c4e4fd;
     padding: 1rem;
     img {
         margin: 0 0 2rem 0;
@@ -277,10 +274,10 @@ export const PreviewSection = styled.div`
         border-radius: 0.25rem;
         border: 0;
         box-shadow: 0px 1px 3px 0px rgba(15, 12, 12, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
         @media (max-width: 700px) {
             width: 100%;
             margin: 0 1rem 2rem 1rem;
         }
     }
-`
+`;
