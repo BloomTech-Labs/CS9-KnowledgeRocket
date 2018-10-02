@@ -169,7 +169,6 @@ class Auth extends Component {
         this.props.user.authenticated === false
             ? this.setState({ success: false })
             : this.setState({ success: true });
-        this.props.generateBreadCrumbs(this.props.history.location.pathname);
     }
 
     handleFlip = () => {

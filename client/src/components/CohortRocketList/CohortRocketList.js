@@ -246,6 +246,7 @@ class CohortRocketList extends Component {
                                         <RocketSearch
                                             placeholder="Search Rockets"
                                             onChange={this.handleRocketSearch}
+                                            autoComplete="off"
                                         />
                                         <Button
                                             variant="fab"
@@ -277,7 +278,9 @@ class CohortRocketList extends Component {
                                     }}
                                 >
                                     <RocketAddTop>
-                                        <h1 style={{flexGrow: '3', textAlign: 'center'}}>ADD ROCKETS</h1>
+                                        <h1 style={{ flexGrow: '3', textAlign: 'center' }}>
+                                            ADD ROCKETS
+                                        </h1>
                                         <Button
                                             variant="fab"
                                             color="primary"

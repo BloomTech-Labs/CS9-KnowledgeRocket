@@ -112,6 +112,7 @@ class CohortAdd extends Component {
                         disableUnderline={true}
                         name="title"
                         onChange={this.handleNewInput}
+                        autoComplete="off"
                     />
                     <StyledButton
                         variant="contained"
@@ -126,9 +127,12 @@ class CohortAdd extends Component {
     }
 }
 
-export default connect(mapStateToProps, {
-    generateBreadCrumbs,
-    addCohort,
-    addStudent,
-    appendRocket,
-})(CohortAdd);
+export default connect(
+    mapStateToProps,
+    {
+        generateBreadCrumbs,
+        addCohort,
+        addStudent,
+        appendRocket,
+    }
+)(CohortAdd);

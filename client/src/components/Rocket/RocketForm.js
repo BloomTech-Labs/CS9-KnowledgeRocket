@@ -34,6 +34,7 @@ const RocketFormBase = ({
                             value={values.title}
                             placeholder="Title"
                             onChange={handleChange}
+                            autoComplete="off"
                         />
                         <ErrorText left>{displayError('title')}</ErrorText>
                     </div>
