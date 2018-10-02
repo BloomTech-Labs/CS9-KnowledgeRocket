@@ -217,7 +217,6 @@ class NavBar extends Component {
 
     render() {
         const { classes, theme } = this.props;
-        const { pathName } = this.props.history.location;
 
         return (
             <div className={classes.root}>
