@@ -200,6 +200,7 @@ exports[`<RocketForm /> renders correctly 1`] = `
         htmlFor="title"
       >
         <input
+          autoComplete="off"
           name="title"
           onChange={[Function]}
           placeholder="Title"
