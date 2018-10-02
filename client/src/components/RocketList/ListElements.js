@@ -273,7 +273,9 @@ export const ListCard = props => {
                 {props.add ? (
                     <RocketCardMid del={props.del}>
                         <div>
-                            <RocketCardHeader>{props.title}</RocketCardHeader>
+                            <RocketCardHeader style={{ marginTop: '10px' }}>
+                                {props.title}
+                            </RocketCardHeader>
                             <HorizontalDivider />
                             <div
                                 style={{
@@ -317,7 +319,9 @@ export const ListCard = props => {
                                 width: '100%',
                             }}
                         >
-                            <RocketCardHeader>{props.title}</RocketCardHeader>
+                            <RocketCardHeader style={{ marginTop: '10px' }}>
+                                {props.title}
+                            </RocketCardHeader>
                             <HorizontalDivider style={{ width: '100%' }} />
                             <div
                                 style={{
